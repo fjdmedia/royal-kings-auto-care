@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Agreement — Royal Kings Auto Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --black:        #0A0A0A;
+      --black-soft:   #111111;
+      --black-card:   #161616;
+      --black-border: #1E1E1E;
+      --gold:         #C9A227;
+      --gold-light:   #E2B93B;
+      --gold-dim:     #8A6E1A;
+      --white:        #FFFFFF;
+      --grey:         #AAAAAA;
+      --grey-dark:    #555555;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 72px;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,162,39,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
+    }
+    .nav-logo img {
+      height: 46px; width: 46px; object-fit: contain;
+      border-radius: 50%; border: 1px solid var(--gold-dim);
+      background: var(--white); padding: 2px;
+    }
+    .nav-logo-text {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      font-weight: 700; color: var(--gold); letter-spacing: 0.1em; line-height: 1.2;
+    }
+    .nav-logo-text span {
+      display: block; font-size: 0.62rem; font-weight: 400;
+      color: var(--grey); letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .nav-back {
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--grey); text-decoration: none;
+      transition: color 0.25s; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    /* ── PAGE HEADER ── */
+    .waiver-header {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      border-bottom: 1px solid var(--black-border);
+    }
+    .waiver-header-label {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    }
+    .waiver-header-label::before,
+    .waiver-header-label::after {
+      content: ''; height: 1px; width: 40px;
+      background: linear-gradient(to right, transparent, var(--gold-dim));
+    }
+    .waiver-header-label::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+    .waiver-header h1 {
+      font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.5rem;
+    }
+    .waiver-header h1 .gold { color: var(--gold); }
+    .waiver-header p {
+      font-size: 0.85rem; color: var(--grey); max-width: 500px; margin: 0 auto;
+    }
+
+    /* ── CONTENT WRAP ── */
+    .waiver-wrap {
+      max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem;
+    }
+
+    /* ── AGREEMENT SECTIONS ── */
+    .agreement-section {
+      margin-bottom: 2.5rem;
+    }
+    .agreement-section-title {
+      font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--black-border);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .agreement-section-title::before {
+      content: '◆'; font-size: 0.45rem; color: var(--gold);
+    }
+
+    .agreement-terms { list-style: none; }
+    .agreement-terms li {
+      font-size: 0.84rem; color: var(--grey); padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; gap: 0.75rem; align-items: flex-start; line-height: 1.6;
+    }
+    .agreement-terms li::before {
+      content: '—'; color: var(--gold-dim); flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .agreement-terms li strong { color: var(--white); }
+
+    .service-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;
+    }
+    .service-item {
+      background: var(--black-card); border: 1px solid var(--black-border);
+      padding: 0.9rem 1rem;
+    }
+    .service-item-name {
+      font-size: 0.78rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.2rem; letter-spacing: 0.04em;
+    }
+    .service-item-price { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+    .service-item-desc { font-size: 0.68rem; color: var(--grey-dark); margin-top: 0.25rem; line-height: 1.4; }
+
+    /* ── SIGNATURE FORM ── */
+    .sig-form-card {
+      background: var(--black-card); border: 1px solid var(--black-border);
+      padding: 2.5rem; position: relative; margin-top: 3rem;
+    }
+    .sig-form-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .sig-form-title {
+      font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.06em; margin-bottom: 0.4rem;
+    }
+    .sig-form-sub {
+      font-size: 0.78rem; color: var(--grey); margin-bottom: 2rem; line-height: 1.6;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .form-group label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .form-group input, .form-group select {
+      background: var(--black-soft); border: 1px solid var(--black-border);
+      color: var(--white); padding: 0.85rem 1rem;
+      font-family: 'Montserrat', sans-serif; font-size: 0.88rem;
+      width: 100%; outline: none; appearance: none; transition: border-color 0.25s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold-dim); }
+    .form-group input[readonly] { color: var(--grey-dark); cursor: default; }
+
+    .form-divider { border: none; border-top: 1px solid var(--black-border); margin: 1.5rem 0; }
+
+    /* ── SIGNATURE PAD ── */
+    .sig-pad-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; display: block;
+    }
+    .sig-pad-wrap {
+      position: relative; border: 1px solid var(--black-border);
+      background: #0d0d0d; margin-bottom: 0.5rem;
+    }
+    .sig-pad-wrap.signed { border-color: rgba(201,162,39,0.4); }
+    #sigCanvas {
+      display: block; width: 100%; height: 180px; cursor: crosshair; touch-action: none;
+    }
+    .sig-pad-hint {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 0.75rem; color: var(--grey-dark); letter-spacing: 0.1em;
+      pointer-events: none; transition: opacity 0.2s;
+      text-align: center;
+    }
+    .sig-pad-hint.hidden { opacity: 0; }
+    .sig-actions {
+      display: flex; justify-content: flex-end; margin-bottom: 1.5rem;
+    }
+    .btn-clear {
+      background: none; border: 1px solid var(--black-border);
+      color: var(--grey-dark); font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.4rem 1rem; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-clear:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ── AGREE CHECKBOX ── */
+    .agree-wrap {
+      display: flex; gap: 0.9rem; align-items: flex-start;
+      background: rgba(201,162,39,0.04); border: 1px solid rgba(201,162,39,0.15);
+      padding: 1rem 1.1rem; margin-bottom: 1.5rem; cursor: pointer;
+    }
+    .agree-wrap input[type="checkbox"] { display: none; }
+    .agree-box {
+      width: 18px; height: 18px; border: 1px solid var(--black-border);
+      flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .agree-wrap.checked .agree-box { background: var(--gold); border-color: var(--gold); }
+    .agree-box::after {
+      content: '✓'; font-size: 0.7rem; color: var(--black); opacity: 0; transition: opacity 0.15s;
+    }
+    .agree-wrap.checked .agree-box::after { opacity: 1; }
+    .agree-text { font-size: 0.78rem; color: var(--grey); line-height: 1.6; }
+    .agree-text strong { color: var(--white); }
+
+    /* ── SUBMIT ── */
+    .sig-submit { text-align: center; margin-top: 1rem; }
+    .btn-gold {
+      background: var(--gold); color: var(--black);
+      padding: 1rem 3rem; font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .sig-note {
+      text-align: center; margin-top: 0.75rem;
+      font-size: 0.72rem; color: var(--grey-dark); letter-spacing: 0.05em;
+    }
+
+    /* ── SUCCESS ── */
+    .sig-success {
+      display: none; text-align: center; padding: 3rem 2rem;
+    }
+    .sig-success.visible { display: block; }
+    .sig-success-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+    .sig-success h3 {
+      font-family: 'Cinzel', serif; font-size: 1.4rem;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .sig-success p { color: var(--grey); font-size: 0.9rem; line-height: 1.7; }
+    .sig-success .btn-back {
+      display: inline-block; margin-top: 1.5rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      border: 1px solid var(--gold); padding: 0.6rem 1.6rem; transition: background 0.2s, color 0.2s;
+    }
+    .sig-success .btn-back:hover { background: var(--gold); color: var(--black); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); padding: 2rem; text-align: center;
+      border-top: 1px solid rgba(201,162,39,0.15);
+      font-size: 0.72rem; color: var(--grey-dark);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .waiver-wrap { padding: 2rem 1.25rem 4rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .service-grid { grid-template-columns: 1fr; }
+      .sig-form-card { padding: 1.75rem 1.25rem; }
+      #sigCanvas { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <img src="Logo.jpg" alt="Royal Kings Auto Care" />
+      <div class="nav-logo-text">Royal Kings <span>Auto Care</span></div>
+    </a>
+    <a class="nav-back" href="index.html">&#8592; Back to Site</a>
+  </nav>
+
+  <!-- ── HEADER ── -->
+  <div class="waiver-header">
+    <div class="waiver-header-label">Mobile Detailing</div>
+    <h1>Service <span class="gold">Agreement</span></h1>
+    <p>Please read the terms below carefully before signing. Your signature confirms you have read and agreed to all conditions.</p>
+  </div>
+
+  <div class="waiver-wrap">
+
+    <!-- ── SERVICES REFERENCE ── -->
+    <div class="agreement-section">
+      <div class="agreement-section-title">Paint Correction Services</div>
+      <div class="service-grid">
+        <div class="service-item">
+          <div class="service-item-name">1-Step Polish</div>
+          <div class="service-item-price">$150 – $220</div>
+          <div class="service-item-desc">Removes light swirl marks, minor scratches, and oxidation. Enhances gloss and restores shine.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">2-Step Correction</div>
+          <div class="service-item-price">$250 – $350</div>
+          <div class="service-item-desc">Cutting compound followed by polishing step. Removes moderate swirls, scratches, and imperfections.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">3-Step Correction</div>
+          <div class="service-item-price">$400 – $600</div>
+          <div class="service-item-desc">Multi-stage correction for heavily damaged paint. Aggressive cutting, refining, and finishing polish.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Note on Corrections</div>
+          <div class="service-item-price">Full-day required</div>
+          <div class="service-item-desc">Final pricing depends on paint condition, vehicle size, and time required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agreement-section">
+      <div class="agreement-section-title">Protection Options</div>
+      <div class="service-grid">
+        <div class="service-item">
+          <div class="service-item-name">Spray Ceramic Coating</div>
+          <div class="service-item-price">$100 – $150</div>
+          <div class="service-item-desc">Short-term protection (2–6 months). Enhances gloss and water beading.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">True Ceramic Coating</div>
+          <div class="service-item-price">$400 – $1,000+</div>
+          <div class="service-item-desc">Long-term protection (1–5+ years). Requires proper prep and paint correction for best results.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agreement-section">
+      <div class="agreement-section-title">Add-On Services</div>
+      <div class="service-grid">
+        <div class="service-item">
+          <div class="service-item-name">Clay Bar Treatment</div>
+          <div class="service-item-price">$50 – $100</div>
+          <div class="service-item-desc">Removes embedded contaminants — tar, sap, and fallout.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Iron Remover</div>
+          <div class="service-item-price">$50</div>
+          <div class="service-item-desc">Chemical decontamination for iron particles and brake dust.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Engine Bay Cleaning</div>
+          <div class="service-item-price">$50 – $150</div>
+          <div class="service-item-desc">Removes dirt, grease, and buildup while protecting sensitive areas.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Headlight Restoration</div>
+          <div class="service-item-price">$60 – $120</div>
+          <div class="service-item-desc">Removes oxidation and haziness, restoring clarity and visibility.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Pet Hair Removal</div>
+          <div class="service-item-price">$30 – $80</div>
+          <div class="service-item-desc">Removes stubborn pet hair from carpets and seats.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Stain Extraction</div>
+          <div class="service-item-price">$50 – $150</div>
+          <div class="service-item-desc">Deep extraction to remove stains, spills, and embedded dirt from seats and carpets.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-item-name">Odor Removal</div>
+          <div class="service-item-price">$50 – $100</div>
+          <div class="service-item-desc">Eliminates odors from smoke, pets, and spills.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agreement-section">
+      <div class="agreement-section-title">Booking &amp; Mobile Service Details</div>
+      <ul class="agreement-terms">
+        <li>Photos of the vehicle must be sent before booking to assess condition and confirm accurate pricing.</li>
+        <li>All quoted prices are <strong>estimates</strong> and may change based on actual vehicle condition upon arrival.</li>
+        <li>Large services (paint correction, ceramic coating) require <strong>full-day exclusive bookings</strong>.</li>
+        <li>Before and after photos are taken for <strong>documentation and protection</strong> of both parties.</li>
+        <li>A <strong>travel fee of $20–$50</strong> applies depending on distance.</li>
+        <li>Customer must provide <strong>access to water and electricity</strong> unless otherwise arranged in advance.</li>
+      </ul>
+    </div>
+
+    <!-- ── CUSTOMER AGREEMENT ── -->
+    <div class="agreement-section">
+      <div class="agreement-section-title">Customer Agreement &amp; Consent</div>
+      <ul class="agreement-terms">
+        <li>The vehicle will be <strong>inspected before service begins</strong> and all pre-existing damage will be noted.</li>
+        <li>Royal Kings Auto Care is <strong>not responsible for any pre-existing damage</strong> to the vehicle.</li>
+        <li>Pricing may be adjusted based on vehicle condition upon arrival. Any changes will be communicated before work begins.</li>
+        <li>A <strong>deposit of $50–$100</strong> is required to secure your booking. Amount depends on the service selected.</li>
+        <li>Deposits are <strong>non-refundable</strong> in the event of a cancellation or no-show.</li>
+        <li>The customer is responsible for <strong>removing all personal belongings</strong> from the vehicle prior to service.</li>
+        <li>Royal Kings Auto Care is <strong>not responsible for any items left inside the vehicle</strong>.</li>
+        <li>Service duration may vary depending on vehicle size and actual condition.</li>
+        <li>Before and after photos may be used for <strong>documentation and marketing purposes</strong>. Contact us if you do not consent.</li>
+        <li>The customer agrees to provide <strong>access to water and electricity</strong> for mobile service unless alternate arrangements are made.</li>
+      </ul>
+    </div>
+
+    <!-- ── SIGNATURE FORM ── -->
+    <div class="sig-form-card" id="sigFormCard">
+      <div class="sig-form-title">Sign &amp; Submit</div>
+      <p class="sig-form-sub">By signing below, you confirm you have read and agree to all terms outlined in this service agreement.</p>
+
+      <form id="waiverForm">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+        <input type="hidden" name="subject" value="Signed Waiver — Royal Kings Auto Care" />
+        <input type="hidden" name="from_name" value="Royal Kings Waiver" />
+        <input type="hidden" name="signature_data" id="signatureData" value="" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="w_name">Full Name</label>
+            <input type="text" id="w_name" name="customer_name" placeholder="Your full legal name" required />
+          </div>
+          <div class="form-group">
+            <label for="w_phone">Phone Number</label>
+            <input type="tel" id="w_phone" name="phone" placeholder="(204) 000-0000" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="w_vehicle">Vehicle Make &amp; Model</label>
+            <input type="text" id="w_vehicle" name="vehicle" placeholder="e.g. 2020 Honda Civic" required />
+          </div>
+          <div class="form-group">
+            <label for="w_date">Date</label>
+            <input type="text" id="w_date" name="date_signed" readonly />
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- Signature Canvas -->
+        <span class="sig-pad-label">Draw Your Signature</span>
+        <div class="sig-pad-wrap" id="sigPadWrap">
+          <canvas id="sigCanvas"></canvas>
+          <div class="sig-pad-hint" id="sigHint">Sign here with your mouse or finger</div>
+        </div>
+        <div class="sig-actions">
+          <button type="button" class="btn-clear" id="clearSig">Clear Signature</button>
+        </div>
+
+        <!-- Agree Checkbox -->
+        <label class="agree-wrap" id="agreeWrap">
+          <input type="checkbox" id="agreeCheck" name="agreed" value="Yes — customer confirmed agreement" required />
+          <div class="agree-box"></div>
+          <span class="agree-text">I, <strong id="agreeNamePreview">the undersigned</strong>, have read and fully agree to all terms and conditions outlined in this Royal Kings Auto Care Service Agreement. I understand that my drawn signature and typed name serve as my digital consent.</span>
+        </label>
+
+        <div class="sig-submit">
+          <button type="submit" class="btn-gold" id="waiverSubmitBtn">&#9818; Submit Signed Agreement</button>
+        </div>
+        <p class="sig-note">&#9670; &nbsp; A copy of this agreement will be sent to Royal Kings Auto Care &nbsp; &#9670;</p>
+      </form>
+
+      <div class="sig-success" id="sigSuccess">
+        <span class="sig-success-icon">&#9818;</span>
+        <h3>Agreement Received</h3>
+        <p>Your signed service agreement has been submitted to Royal Kings Auto Care.<br />You're all set — we'll be in touch to confirm your appointment details.</p>
+        <a class="btn-back" href="index.html">&#8592; Return to Site</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 Royal Kings Auto Care &nbsp;&middot;&nbsp; Winnipeg, MB &nbsp;&middot;&nbsp; Premium Mobile Detailing
+  </footer>
+
+  <script>
+    // ── Date auto-fill ──
+    const today = new Date();
+    document.getElementById('w_date').value =
+      today.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // ── Agree name preview ──
+    document.getElementById('w_name').addEventListener('input', function() {
+      const preview = document.getElementById('agreeNamePreview');
+      preview.textContent = this.value.trim() || 'the undersigned';
+    });
+
+    // ── Agree checkbox toggle ──
+    const agreeWrap  = document.getElementById('agreeWrap');
+    const agreeCheck = document.getElementById('agreeCheck');
+    agreeWrap.addEventListener('click', () => {
+      agreeCheck.checked = !agreeCheck.checked;
+      agreeWrap.classList.toggle('checked', agreeCheck.checked);
+    });
+
+    // ── Signature Canvas ──
+    const canvas   = document.getElementById('sigCanvas');
+    const ctx      = canvas.getContext('2d');
+    const hint     = document.getElementById('sigHint');
+    const padWrap  = document.getElementById('sigPadWrap');
+    let drawing    = false;
+    let hasSig     = false;
+
+    function resizeCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      const rect  = canvas.getBoundingClientRect();
+      const saved = hasSig ? canvas.toDataURL() : null;
+      canvas.width  = rect.width  * ratio;
+      canvas.height = rect.height * ratio;
+      ctx.scale(ratio, ratio);
+      ctx.strokeStyle = '#C9A227';
+      ctx.lineWidth   = 2;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      if (saved && hasSig) {
+        const img = new Image();
+        img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+        img.src = saved;
+      }
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      if (e.touches) {
+        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+      }
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      drawing = true;
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+      if (!hasSig) {
+        hasSig = true;
+        hint.classList.add('hidden');
+        padWrap.classList.add('signed');
+      }
+    }
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+    function stopDraw() { drawing = false; }
+
+    canvas.addEventListener('mousedown',  startDraw);
+    canvas.addEventListener('mousemove',  draw);
+    canvas.addEventListener('mouseup',    stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove',  draw,      { passive: false });
+    canvas.addEventListener('touchend',   stopDraw);
+
+    document.getElementById('clearSig').addEventListener('click', () => {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      hasSig = false;
+      hint.classList.remove('hidden');
+      padWrap.classList.remove('signed');
+    });
+
+    // ── Form Submit ──
+    const waiverForm      = document.getElementById('waiverForm');
+    const sigSuccess      = document.getElementById('sigSuccess');
+    const waiverSubmitBtn = document.getElementById('waiverSubmitBtn');
+
+    waiverForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!hasSig) {
+        padWrap.style.borderColor = 'rgba(201,50,50,0.6)';
+        padWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => padWrap.style.borderColor = '', 2000);
+        return;
+      }
+      if (!agreeCheck.checked) {
+        agreeWrap.style.borderColor = 'rgba(201,50,50,0.4)';
+        setTimeout(() => agreeWrap.style.borderColor = '', 2000);
+        return;
+      }
+
+      document.getElementById('signatureData').value = 'Digital signature captured — ' + document.getElementById('w_name').value + ' · ' + document.getElementById('w_date').value;
+
+      waiverSubmitBtn.textContent = 'Submitting…';
+      waiverSubmitBtn.disabled    = true;
+
+      const formData = new FormData(waiverForm);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          waiverForm.style.display  = 'none';
+          sigSuccess.classList.add('visible');
+        } else {
+          waiverSubmitBtn.textContent = '&#9818; Submit Signed Agreement';
+          waiverSubmitBtn.disabled    = false;
+          alert('Submission failed. Please try again or contact us directly.');
+        }
+      })
+      .catch(() => {
+        waiverSubmitBtn.textContent = '&#9818; Submit Signed Agreement';
+        waiverSubmitBtn.disabled    = false;
+        alert('Network error. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
