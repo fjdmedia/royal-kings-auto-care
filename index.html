@@ -706,6 +706,98 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── ADD-ONS ── */
+    .addons-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 2rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .addons-section-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+
+    .addons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .addon-card {
+      background: var(--black-soft);
+      border: 1px solid var(--black-border);
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      user-select: none;
+    }
+    .addon-card:hover { border-color: rgba(201,162,39,0.3); }
+    .addon-card.selected { border-color: var(--gold); background: rgba(201,162,39,0.05); }
+    .addon-card input[type="checkbox"] { display: none; }
+
+    .addon-check {
+      width: 16px; height: 16px;
+      border: 1px solid var(--black-border);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); }
+    .addon-check::after { content: '✓'; font-size: 0.65rem; color: var(--black); opacity: 0; transition: opacity 0.15s; }
+    .addon-card.selected .addon-check::after { opacity: 1; }
+
+    .addon-info { flex: 1; }
+    .addon-name { font-size: 0.8rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; letter-spacing: 0.04em; }
+    .addon-price { font-size: 0.75rem; color: var(--gold); font-weight: 600; margin-bottom: 0.2rem; }
+    .addon-note { font-size: 0.67rem; color: var(--grey-dark); line-height: 1.4; }
+    .addon-full-day {
+      font-size: 0.62rem; color: var(--gold-dim);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      margin-top: 0.3rem; display: block;
+    }
+
+    /* ── ESTIMATE BOX ── */
+    .estimate-box {
+      background: var(--black-soft);
+      border: 1px solid rgba(201,162,39,0.3);
+      padding: 1.25rem 1.5rem;
+      margin: 0.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .estimate-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-dark); }
+    .estimate-total { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); }
+    .estimate-sub { font-size: 0.7rem; color: var(--grey-dark); letter-spacing: 0.04em; margin-top: 0.2rem; }
+
+    /* ── DEPOSIT NOTICE ── */
+    .deposit-notice {
+      background: rgba(201,162,39,0.05);
+      border-left: 2px solid var(--gold-dim);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--grey);
+      letter-spacing: 0.03em;
+      line-height: 1.7;
+    }
+    .deposit-notice strong { color: var(--gold); }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
       section { padding: 4rem 1.25rem; }
@@ -734,6 +826,7 @@
 
       .booking-form { padding: 2rem 1.25rem; }
       .form-row { grid-template-columns: 1fr; }
+      .addons-grid { grid-template-columns: 1fr; }
 
       .contact-cards { flex-direction: column; align-items: center; }
       .contact-card { width: 100%; max-width: 300px; }
@@ -921,6 +1014,87 @@
             </div>
           </div>
 
+          <!-- Add-On Services -->
+          <div class="addons-section-label">Select Add-On Services</div>
+          <div class="addons-grid" id="addonsGrid">
+
+            <label class="addon-card" data-min="50" data-max="100">
+              <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50–$100)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Clay Bar Treatment</div>
+                <div class="addon-price">$50 – $100</div>
+                <div class="addon-note">Final price based on tar buildup — confirmed before service</div>
+              </div>
+            </label>
+
+            <label class="addon-card" data-min="400" data-max="1000">
+              <input type="checkbox" name="addon_ceramic_coat" value="Ceramic Coating ($400–$1,000)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Ceramic Coating</div>
+                <div class="addon-price">$400 – $1,000</div>
+                <div class="addon-note">Based on protection tier &amp; longevity — client selects</div>
+              </div>
+            </label>
+
+            <label class="addon-card" data-min="100" data-max="150">
+              <input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100–$150)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Spray Ceramic Coating</div>
+                <div class="addon-price">$100 – $150</div>
+                <div class="addon-note">Affordable alternative — based on vehicle size</div>
+              </div>
+            </label>
+
+            <label class="addon-card" data-min="50" data-max="50">
+              <input type="checkbox" name="addon_iron_remover" value="Iron Remover ($50)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Iron Remover</div>
+                <div class="addon-price">$50</div>
+                <div class="addon-note">Flat rate</div>
+              </div>
+            </label>
+
+            <label class="addon-card" data-min="50" data-max="200">
+              <input type="checkbox" name="addon_engine_bay" value="Engine Bay Detailing ($50 w/pkg · $100–$200 standalone)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Engine Bay Detailing</div>
+                <div class="addon-price">$50 w/ package &nbsp;·&nbsp; $100–$200 standalone</div>
+                <div class="addon-note">Price confirmed based on scope at booking</div>
+              </div>
+            </label>
+
+            <label class="addon-card" data-min="150" data-max="300">
+              <input type="checkbox" name="addon_buffing" value="Paint Correction / Buffing ($150–$300)" />
+              <div class="addon-check"></div>
+              <div class="addon-info">
+                <div class="addon-name">Paint Correction (Buffing)</div>
+                <div class="addon-price">$150 – $300</div>
+                <div class="addon-note">Based on swirl severity — client confirms</div>
+                <span class="addon-full-day">&#9888; Full-day service &nbsp;&middot;&nbsp; Exclusive booking required</span>
+              </div>
+            </label>
+
+          </div>
+
+          <!-- Estimate Total -->
+          <div class="estimate-box" id="estimateBox">
+            <div>
+              <div class="estimate-label">Estimated Total</div>
+              <div class="estimate-sub" id="estimateSub">Select a package to see your estimate</div>
+            </div>
+            <div class="estimate-total" id="estimateTotal">—</div>
+          </div>
+
+          <!-- Deposit Notice -->
+          <div class="deposit-notice">
+            <strong>&#9670; Deposit Policy:</strong> A <strong>$100 deposit</strong> is required to secure your booking. This is non-refundable in the event of a cancellation. Final pricing will be confirmed with you before your appointment.
+          </div>
+
           <hr class="form-divider" />
 
           <!-- Date & Time -->
@@ -1081,7 +1255,55 @@
       });
     });
 
-    // Booking form submission
+    // ── Add-On Services + Live Estimate ──
+    const addonCards = document.querySelectorAll('#addonsGrid .addon-card');
+    const estimateTotal = document.getElementById('estimateTotal');
+    const estimateSub   = document.getElementById('estimateSub');
+
+    const pkgPrices = { 'Minimal': 110, 'The Standard': 165, 'Premium': 195 };
+    const sizeSurcharges = { 'Coupes & Sedans': 0, 'SUVs & Crossovers': 15, 'Trucks & 7-Seaters': 35 };
+
+    function calcEstimate() {
+      const pkg   = document.getElementById('service').value;
+      const vSize = document.getElementById('vehicle_size').value;
+      const base  = pkgPrices[pkg] || 0;
+      const sur   = sizeSurcharges[vSize] || 0;
+
+      let extMin = 0, extMax = 0;
+      addonCards.forEach(card => {
+        if (card.classList.contains('selected')) {
+          extMin += parseInt(card.dataset.min);
+          extMax += parseInt(card.dataset.max);
+        }
+      });
+
+      const totalMin = base + sur + extMin;
+      const totalMax = base + sur + extMax;
+
+      if (!base && extMin === 0) {
+        estimateTotal.textContent = '—';
+        estimateSub.textContent   = 'Select a package to see your estimate';
+        return;
+      }
+
+      estimateTotal.textContent = totalMin === totalMax ? '$' + totalMin : 'from $' + totalMin;
+      estimateSub.textContent   = pkg
+        ? pkg + (vSize ? ' · ' + vSize : '') + (extMin > 0 ? ' + add-ons' : '') + ' · Final price confirmed before service'
+        : 'Add-ons only · Select a package for full estimate';
+    }
+
+    addonCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('selected');
+        card.querySelector('input[type="checkbox"]').checked = card.classList.contains('selected');
+        calcEstimate();
+      });
+    });
+
+    document.getElementById('service').addEventListener('change', calcEstimate);
+    document.getElementById('vehicle_size').addEventListener('change', calcEstimate);
+
+    // ── Booking form submission
     const bookingForm = document.getElementById('bookingForm');
     const formSuccess = document.getElementById('formSuccess');
 
@@ -1090,6 +1312,22 @@
       const btn = bookingForm.querySelector('button[type="submit"]');
       btn.textContent = 'Sending…';
       btn.disabled = true;
+
+      // Collect selected add-ons and inject into form
+      const selectedAddons = [];
+      addonCards.forEach(card => {
+        if (card.classList.contains('selected')) {
+          selectedAddons.push(card.querySelector('input').value);
+        }
+      });
+      let addonsInput = bookingForm.querySelector('input[name="add_ons"]');
+      if (!addonsInput) {
+        addonsInput = document.createElement('input');
+        addonsInput.type = 'hidden';
+        addonsInput.name = 'add_ons';
+        bookingForm.appendChild(addonsInput);
+      }
+      addonsInput.value = selectedAddons.length > 0 ? selectedAddons.join(' | ') : 'None';
 
       const formData = new FormData(bookingForm);
 
@@ -1100,6 +1338,7 @@
           email:              formData.get('email')              || '',
           phone:              formData.get('phone')              || '',
           service:            formData.get('service')            || '',
+          add_ons:            formData.get('add_ons')            || '',
           vehicle_make_model: formData.get('vehicle_make_model') || '',
           vehicle_size:       formData.get('vehicle_size')       || '',
           preferred_date:     formData.get('preferred_date')     || '',
