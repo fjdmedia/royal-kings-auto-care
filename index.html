@@ -1214,7 +1214,7 @@
     dateInput.setAttribute('min', today);
 
     // ── Vehicle Class Toggle + Dynamic Pricing ──
-    let currentClass    = 'Coupes &amp; Sedans';
+    let currentClass    = 'Coupes & Sedans';
     let currentSurcharge = 0;
 
     const vehicleToggle  = document.getElementById('vehicleToggle');
@@ -1297,9 +1297,11 @@
     }
 
     addonCards.forEach(card => {
-      card.addEventListener('click', () => {
-        card.classList.toggle('selected');
-        card.querySelector('input[type="checkbox"]').checked = card.classList.contains('selected');
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        card.classList.toggle('selected', checkbox.checked);
         calcEstimate();
       });
     });
