@@ -427,6 +427,7 @@
         <input type="hidden" name="access_key" value="9a034c4a-2257-450b-9c7a-f0e4f0e38927" />
         <input type="hidden" name="subject" value="Signed Waiver — Royal Kings Auto Care" />
         <input type="hidden" name="from_name" value="Royal Kings Waiver" />
+        <input type="hidden" name="form_type" value="waiver" />
         <input type="hidden" name="signature_data" id="signatureData" value="" />
 
         <div class="form-row">
@@ -490,6 +491,9 @@
   </footer>
 
   <script>
+    // ── Paste your deployed Google Apps Script Web App URL here ──
+    const GAS_URL = 'YOUR_APPS_SCRIPT_URL';
+
     // ── Date auto-fill ──
     const today = new Date();
     document.getElementById('w_date').value =
@@ -602,12 +606,27 @@
         return;
       }
 
-      document.getElementById('signatureData').value = 'Digital signature captured — ' + document.getElementById('w_name').value + ' · ' + document.getElementById('w_date').value;
+      const sigImageData = canvas.toDataURL('image/png');
+      document.getElementById('signatureData').value = sigImageData;
 
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
 
       const formData = new FormData(waiverForm);
+
+      // Send to Google Apps Script for sheet logging
+      if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
+        const sheetBody = new URLSearchParams({
+          form_type:     'waiver',
+          customer_name: document.getElementById('w_name').value,
+          phone:         document.getElementById('w_phone').value,
+          vehicle:       document.getElementById('w_vehicle').value,
+          date_signed:   document.getElementById('w_date').value,
+          agreed:        'Yes',
+          signature_data: sigImageData
+        });
+        fetch(GAS_URL, { method: 'POST', body: sheetBody }).catch(() => {});
+      }
 
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
