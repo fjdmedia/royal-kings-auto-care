@@ -553,6 +553,9 @@
       <div class="sig-form-title">Sign &amp; Submit</div>
       <p class="sig-form-sub">Select your service, fill in your details, and sign below to confirm your booking agreement.</p>
 
+      <!-- Hidden iframe — absorbs GAS form POST response, bypasses CORS -->
+      <iframe name="gas-sink" style="display:none" aria-hidden="true"></iframe>
+
       <form id="waiverForm">
         <input type="hidden" name="form_type" value="waiver" />
         <input type="hidden" name="signature_data" id="signatureData" value="" />
@@ -1060,9 +1063,14 @@
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
 
-      // Send to Google Apps Script (Sheets logging + Drive folder save)
+      // Send to Google Apps Script via hidden iframe form POST (bypasses CORS)
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
-        const sheetBody = new URLSearchParams({
+        const gasForm = document.createElement('form');
+        gasForm.method = 'POST';
+        gasForm.action = GAS_URL;
+        gasForm.target = 'gas-sink';
+        gasForm.style.display = 'none';
+        const gasFields = {
           form_type:      'waiver',
           customer_name:  pdfData.name,
           phone:          pdfData.phone,
@@ -1073,8 +1081,17 @@
           date_signed:    pdfData.date,
           agreed:         'Yes',
           signature_data: sigImageData
+        };
+        Object.entries(gasFields).forEach(([k, v]) => {
+          const input = document.createElement('input');
+          input.type  = 'hidden';
+          input.name  = k;
+          input.value = v || '';
+          gasForm.appendChild(input);
         });
-        fetch(GAS_URL, { method: 'POST', body: sheetBody, mode: 'no-cors' }).catch(() => {});
+        document.body.appendChild(gasForm);
+        gasForm.submit();
+        document.body.removeChild(gasForm);
       }
 
       // Show success regardless of GAS response (PDF already downloaded)
