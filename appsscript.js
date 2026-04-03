@@ -8,7 +8,7 @@
 //      (the long string after /folders/ in the URL)
 //   3. Paste it below as WAIVER_FOLDER_ID
 
-const WAIVER_FOLDER_ID = 'YOUR_DRIVE_FOLDER_ID';
+const WAIVER_FOLDER_ID = '13QMWsNmxA-6U_mKZIZcz-AhdGhJ0aYU3';
 
 function doPost(e) {
   try {
