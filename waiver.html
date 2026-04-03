@@ -725,7 +725,7 @@
 
         <!-- Agree Checkbox -->
         <div class="agree-wrap" id="agreeWrap">
-          <input type="checkbox" id="agreeCheck" name="agreed" value="Yes — customer confirmed agreement" required />
+          <input type="checkbox" id="agreeCheck" name="agreed" value="Yes — customer confirmed agreement" />
           <div class="agree-box"></div>
           <span class="agree-text">I, <strong id="agreeNamePreview">the undersigned</strong>, have read and fully agree to all terms and conditions outlined in this Royal Kings Auto Care Service Agreement. I understand that my drawn signature and typed name serve as my digital consent.</span>
         </div>
@@ -1055,7 +1055,7 @@
       };
 
       // Auto-generate and download PDF immediately (triggered by user click — most reliable)
-      generatePDF();
+      try { generatePDF(); } catch(err) { console.error('PDF error:', err); }
 
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
