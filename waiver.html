@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -144,6 +145,29 @@
     .service-item-price { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
     .service-item-desc { font-size: 0.68rem; color: var(--grey-dark); margin-top: 0.25rem; line-height: 1.4; }
 
+    /* ── SERVICE-SPECIFIC TERMS (dynamic) ── */
+    .service-terms-callout {
+      display: none;
+      background: rgba(201,162,39,0.05);
+      border: 1px solid rgba(201,162,39,0.25);
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .service-terms-callout.visible { display: block; }
+    .service-terms-callout-title {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .service-terms-callout ul { list-style: none; }
+    .service-terms-callout ul li {
+      font-size: 0.82rem; color: var(--grey); padding: 0.4rem 0;
+      display: flex; gap: 0.7rem; align-items: flex-start; line-height: 1.6;
+    }
+    .service-terms-callout ul li::before {
+      content: '◆'; font-size: 0.35rem; color: var(--gold); flex-shrink: 0; margin-top: 0.35rem;
+    }
+    .service-terms-callout ul li strong { color: var(--white); }
+
     /* ── SIGNATURE FORM ── */
     .sig-form-card {
       background: var(--black-card); border: 1px solid var(--black-border);
@@ -162,6 +186,15 @@
       font-size: 0.78rem; color: var(--grey); margin-bottom: 2rem; line-height: 1.6;
     }
 
+    /* ── FORM SECTION LABEL ── */
+    .form-section-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold-dim);
+      margin: 1.5rem 0 0.75rem; padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--black-border);
+    }
+    .form-section-label:first-child { margin-top: 0; }
+
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
     .form-group label {
@@ -176,6 +209,60 @@
     }
     .form-group input:focus, .form-group select:focus { border-color: var(--gold-dim); }
     .form-group input[readonly] { color: var(--grey-dark); cursor: default; }
+    .form-group select option { background: #1a1a1a; color: var(--white); }
+    .form-group select optgroup { color: var(--gold-dim); font-size: 0.75rem; }
+
+    /* ── ADD-ONS GRID ── */
+    .addons-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.2rem;
+    }
+    .addon-item {
+      background: var(--black-soft); border: 1px solid var(--black-border);
+      padding: 0.7rem 0.8rem; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .addon-item:hover { border-color: var(--gold-dim); }
+    .addon-item.selected { border-color: var(--gold); background: rgba(201,162,39,0.06); }
+    .addon-item input[type="checkbox"] { display: none; }
+    .addon-check {
+      width: 14px; height: 14px; border: 1px solid var(--grey-dark);
+      flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .addon-item.selected .addon-check { background: var(--gold); border-color: var(--gold); }
+    .addon-check::after {
+      content: '✓'; font-size: 0.6rem; color: var(--black); opacity: 0; transition: opacity 0.1s;
+    }
+    .addon-item.selected .addon-check::after { opacity: 1; }
+    .addon-info { flex: 1; }
+    .addon-name { font-size: 0.72rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+    .addon-price { font-size: 0.64rem; color: var(--gold); margin-top: 0.15rem; }
+
+    /* ── SERVICE SUMMARY CARD ── */
+    .service-summary-card {
+      display: none;
+      background: rgba(201,162,39,0.04); border: 1px solid rgba(201,162,39,0.2);
+      padding: 1.2rem 1.4rem; margin-bottom: 1.5rem;
+    }
+    .service-summary-card.visible { display: block; }
+    .service-summary-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem;
+    }
+    .service-summary-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      font-size: 0.78rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .service-summary-row:last-child { border-bottom: none; }
+    .service-summary-row .s-key { color: var(--grey); }
+    .service-summary-row .s-val { color: var(--white); font-weight: 600; text-align: right; max-width: 60%; }
+    .service-summary-total {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 0.8rem; padding-top: 0.8rem;
+      border-top: 1px solid rgba(201,162,39,0.25);
+    }
+    .service-summary-total .s-key { font-size: 0.72rem; font-weight: 700; color: var(--grey); letter-spacing: 0.08em; text-transform: uppercase; }
+    .service-summary-total .s-val { font-size: 0.9rem; font-weight: 700; color: var(--gold); }
 
     .form-divider { border: none; border-top: 1px solid var(--black-border); margin: 1.5rem 0; }
 
@@ -259,13 +346,26 @@
       color: var(--gold); margin-bottom: 0.75rem;
     }
     .sig-success p { color: var(--grey); font-size: 0.9rem; line-height: 1.7; }
-    .sig-success .btn-back {
-      display: inline-block; margin-top: 1.5rem;
+    .sig-success-actions {
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+    }
+    .btn-pdf {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--black);
+      font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      border: none; padding: 0.75rem 1.8rem; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-pdf:hover { background: var(--gold-light); }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 0.5rem;
       font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--gold); text-decoration: none;
-      border: 1px solid var(--gold); padding: 0.6rem 1.6rem; transition: background 0.2s, color 0.2s;
+      border: 1px solid var(--gold); padding: 0.75rem 1.8rem;
+      transition: background 0.2s, color 0.2s;
     }
-    .sig-success .btn-back:hover { background: var(--gold); color: var(--black); }
+    .btn-back:hover { background: var(--gold); color: var(--black); }
 
     /* ── FOOTER ── */
     footer {
@@ -282,6 +382,10 @@
       .service-grid { grid-template-columns: 1fr; }
       .sig-form-card { padding: 1.75rem 1.25rem; }
       #sigCanvas { height: 150px; }
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .addons-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -422,7 +526,6 @@
       </ul>
     </div>
 
-    <!-- ── CUSTOMER AGREEMENT ── -->
     <div class="agreement-section">
       <div class="agreement-section-title">Customer Agreement &amp; Consent</div>
       <ul class="agreement-terms">
@@ -439,10 +542,16 @@
       </ul>
     </div>
 
+    <!-- ── SERVICE-SPECIFIC TERMS (dynamic) ── -->
+    <div class="service-terms-callout" id="serviceTermsCallout">
+      <div class="service-terms-callout-title">&#9670; Additional Terms — Your Selected Service</div>
+      <ul id="serviceTermsList"></ul>
+    </div>
+
     <!-- ── SIGNATURE FORM ── -->
     <div class="sig-form-card" id="sigFormCard">
       <div class="sig-form-title">Sign &amp; Submit</div>
-      <p class="sig-form-sub">By signing below, you confirm you have read and agree to all terms outlined in this service agreement.</p>
+      <p class="sig-form-sub">Select your service, fill in your details, and sign below to confirm your booking agreement.</p>
 
       <form id="waiverForm">
         <input type="hidden" name="access_key" value="9a034c4a-2257-450b-9c7a-f0e4f0e38927" />
@@ -450,7 +559,140 @@
         <input type="hidden" name="from_name" value="Royal Kings Waiver" />
         <input type="hidden" name="form_type" value="waiver" />
         <input type="hidden" name="signature_data" id="signatureData" value="" />
+        <input type="hidden" name="selected_addons" id="selectedAddonsHidden" value="" />
 
+        <!-- ── SERVICE SELECTION ── -->
+        <div class="form-section-label">Service Selection</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="w_service">Primary Service</label>
+            <select id="w_service" name="service" required>
+              <option value="" disabled selected>Select a service...</option>
+              <optgroup label="Full Service Packages">
+                <option value="minimal">Minimal — $110</option>
+                <option value="standard">The Standard — $165</option>
+                <option value="premium">Premium — $195</option>
+              </optgroup>
+              <optgroup label="Paint Correction">
+                <option value="polish-1step">1-Step Polish — $150–$220</option>
+                <option value="correction-2step">2-Step Correction — $250–$350</option>
+                <option value="correction-3step">3-Step Correction — $400–$600</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="w_vehicle_type">Vehicle Type</label>
+            <select id="w_vehicle_type" name="vehicle_type" required>
+              <option value="" disabled selected>Select vehicle type...</option>
+              <option value="coupe-sedan">Coupe / Sedan (+$0)</option>
+              <option value="suv-crossover">SUV / Crossover (+$15)</option>
+              <option value="truck-7seater">Truck / 7-Seater (+$35)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ── ADD-ONS ── -->
+        <div class="form-section-label">Add-On Services <span style="color:var(--grey-dark);font-weight:400;text-transform:none;letter-spacing:0;">(optional — select all that apply)</span></div>
+        <div class="addons-grid">
+          <label class="addon-item" data-key="clay-bar">
+            <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50–$100)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Clay Bar Treatment</div>
+              <div class="addon-price">$50 – $100</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="iron-remover">
+            <input type="checkbox" name="addon_iron_remover" value="Iron Remover ($50)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Iron Remover</div>
+              <div class="addon-price">$50</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="engine-bay">
+            <input type="checkbox" name="addon_engine_bay" value="Engine Bay Cleaning ($50–$150)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Engine Bay Cleaning</div>
+              <div class="addon-price">$50 – $150</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="headlight">
+            <input type="checkbox" name="addon_headlight" value="Headlight Restoration ($60–$120)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Headlight Restoration</div>
+              <div class="addon-price">$60 – $120</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="pet-hair">
+            <input type="checkbox" name="addon_pet_hair" value="Pet Hair Removal ($30–$80)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Pet Hair Removal</div>
+              <div class="addon-price">$30 – $80</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="stain-extraction">
+            <input type="checkbox" name="addon_stain_extraction" value="Stain Extraction ($50–$150)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Stain Extraction</div>
+              <div class="addon-price">$50 – $150</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="odor-removal">
+            <input type="checkbox" name="addon_odor_removal" value="Odor Removal ($50–$100)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Odor Removal</div>
+              <div class="addon-price">$50 – $100</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="spray-ceramic">
+            <input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100–$150)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Spray Ceramic Coating</div>
+              <div class="addon-price">$100 – $150</div>
+            </div>
+          </label>
+          <label class="addon-item" data-key="true-ceramic">
+            <input type="checkbox" name="addon_true_ceramic" value="True Ceramic Coating ($400–$1,000+)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">True Ceramic Coating</div>
+              <div class="addon-price">$400 – $1,000+</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- ── SERVICE SUMMARY ── -->
+        <div class="service-summary-card" id="serviceSummaryCard">
+          <div class="service-summary-label">&#9670; Your Service Summary</div>
+          <div class="service-summary-row">
+            <span class="s-key">Primary Service</span>
+            <span class="s-val" id="summaryService">—</span>
+          </div>
+          <div class="service-summary-row">
+            <span class="s-key">Vehicle Type</span>
+            <span class="s-val" id="summaryVehicleType">—</span>
+          </div>
+          <div class="service-summary-row" id="summaryAddonsRow" style="display:none;">
+            <span class="s-key">Add-Ons</span>
+            <span class="s-val" id="summaryAddons">—</span>
+          </div>
+          <div class="service-summary-total">
+            <span class="s-key">Est. Total</span>
+            <span class="s-val" id="summaryTotal">—</span>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- ── CUSTOMER DETAILS ── -->
+        <div class="form-section-label">Your Details</div>
         <div class="form-row">
           <div class="form-group">
             <label for="w_name">Full Name</label>
@@ -501,7 +743,10 @@
         <span class="sig-success-icon">&#9818;</span>
         <h3>Agreement Received</h3>
         <p>Your signed service agreement has been submitted to Royal Kings Auto Care.<br />You're all set — we'll be in touch to confirm your appointment details.</p>
-        <a class="btn-back" href="index.html">&#8592; Return to Site</a>
+        <div class="sig-success-actions">
+          <button class="btn-pdf" id="downloadPdfBtn">&#8595; Download PDF Copy</button>
+          <a class="btn-back" href="index.html">&#8592; Return to Site</a>
+        </div>
       </div>
     </div>
 
@@ -514,6 +759,59 @@
   <script>
     // ── Paste your deployed Google Apps Script Web App URL here ──
     const GAS_URL = 'YOUR_APPS_SCRIPT_URL';
+
+    // ── Service data ──
+    const SERVICES = {
+      'minimal':          { name: 'Minimal', price: '$110', category: 'Full Service Package', terms: [] },
+      'standard':         { name: 'The Standard', price: '$165', category: 'Full Service Package', terms: [] },
+      'premium':          { name: 'Premium', price: '$195', category: 'Full Service Package', terms: [] },
+      'polish-1step':     { name: '1-Step Polish', price: '$150–$220', category: 'Paint Correction',
+        terms: [
+          'Vehicle exterior must be washed before arrival.',
+          'Vehicle must be <strong>available for full-day service</strong>.',
+          'Final pricing is confirmed after paint inspection on arrival.',
+          'Royal Kings Auto Care is not responsible for pre-existing paint defects beyond the scope of service.'
+        ]
+      },
+      'correction-2step': { name: '2-Step Paint Correction', price: '$250–$350', category: 'Paint Correction',
+        terms: [
+          'Vehicle exterior must be washed before arrival.',
+          'Vehicle must be <strong>available for full-day service</strong>.',
+          'Final pricing is confirmed after paint inspection on arrival.',
+          'Royal Kings Auto Care is not responsible for pre-existing paint defects beyond the scope of service.',
+          'Correction results depend on paint condition, thickness, and previous repairs.'
+        ]
+      },
+      'correction-3step': { name: '3-Step Paint Correction', price: '$400–$600', category: 'Paint Correction',
+        terms: [
+          'Vehicle exterior must be washed before arrival.',
+          'Vehicle must be <strong>available for full-day service (1–2 days)</strong>.',
+          'Final pricing is confirmed after paint inspection on arrival.',
+          'Royal Kings Auto Care is not responsible for pre-existing paint defects beyond the scope of service.',
+          'Correction results depend on paint condition, thickness, and previous repairs.',
+          'Paint thickness readings may be taken before and after correction.'
+        ]
+      }
+    };
+
+    const VEHICLE_TYPES = {
+      'coupe-sedan':   { name: 'Coupe / Sedan', surcharge: '+$0' },
+      'suv-crossover': { name: 'SUV / Crossover', surcharge: '+$15' },
+      'truck-7seater': { name: 'Truck / 7-Seater', surcharge: '+$35' }
+    };
+
+    const ADDON_EXTRA_TERMS = {
+      'spray-ceramic': ['Surface must be clean and properly decontaminated before spray ceramic application.'],
+      'true-ceramic': [
+        'True Ceramic Coating is <strong>highly recommended to be applied after paint correction</strong> for best results.',
+        'Vehicle must be available for <strong>1–2 full days</strong> when coating is included.',
+        'Longevity and performance of the coating depend entirely on proper surface preparation.'
+      ],
+      'engine-bay': ['Engine bay cleaning involves water and chemical use near mechanical components. Customer acknowledges inherent risks.']
+    };
+
+    // ── Store submission data for PDF ──
+    let pdfData = {};
 
     // ── Date auto-fill ──
     const today = new Date();
@@ -533,6 +831,116 @@
       agreeCheck.checked = !agreeCheck.checked;
       agreeWrap.classList.toggle('checked', agreeCheck.checked);
     });
+
+    // ── Add-on toggle ──
+    document.querySelectorAll('.addon-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        const cb = this.querySelector('input[type="checkbox"]');
+        cb.checked = !cb.checked;
+        this.classList.toggle('selected', cb.checked);
+        updateServiceSummary();
+        updateServiceTerms();
+      });
+    });
+
+    // ── Service/vehicle select listeners ──
+    document.getElementById('w_service').addEventListener('change', () => {
+      updateServiceSummary();
+      updateServiceTerms();
+    });
+    document.getElementById('w_vehicle_type').addEventListener('change', () => {
+      updateServiceSummary();
+    });
+
+    function getSelectedAddons() {
+      const addons = [];
+      document.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
+        addons.push(cb.value);
+      });
+      return addons;
+    }
+
+    function getSelectedAddonKeys() {
+      const keys = [];
+      document.querySelectorAll('.addon-item.selected').forEach(item => {
+        keys.push(item.dataset.key);
+      });
+      return keys;
+    }
+
+    function updateServiceSummary() {
+      const serviceKey = document.getElementById('w_service').value;
+      const vehicleKey = document.getElementById('w_vehicle_type').value;
+      const summaryCard = document.getElementById('serviceSummaryCard');
+
+      if (!serviceKey && !vehicleKey) {
+        summaryCard.classList.remove('visible');
+        return;
+      }
+
+      summaryCard.classList.add('visible');
+
+      // Service
+      if (serviceKey && SERVICES[serviceKey]) {
+        const s = SERVICES[serviceKey];
+        document.getElementById('summaryService').textContent = s.name + ' — ' + s.price;
+      } else {
+        document.getElementById('summaryService').textContent = '—';
+      }
+
+      // Vehicle type
+      if (vehicleKey && VEHICLE_TYPES[vehicleKey]) {
+        const v = VEHICLE_TYPES[vehicleKey];
+        document.getElementById('summaryVehicleType').textContent = v.name + ' — ' + v.surcharge;
+      } else {
+        document.getElementById('summaryVehicleType').textContent = '—';
+      }
+
+      // Add-ons
+      const addons = getSelectedAddons();
+      const addonsRow = document.getElementById('summaryAddonsRow');
+      if (addons.length > 0) {
+        addonsRow.style.display = 'flex';
+        document.getElementById('summaryAddons').innerHTML = addons.map(a => {
+          const name = a.split(' (')[0];
+          const price = a.match(/\(([^)]+)\)/)?.[1] || '';
+          return name + (price ? '<br><span style="font-weight:400;font-size:0.7rem;color:var(--gold-dim);">' + price + '</span>' : '');
+        }).join('<br>');
+      } else {
+        addonsRow.style.display = 'none';
+      }
+
+      // Total
+      document.getElementById('summaryTotal').textContent = 'See service pricing above';
+    }
+
+    function updateServiceTerms() {
+      const serviceKey = document.getElementById('w_service').value;
+      const addonKeys = getSelectedAddonKeys();
+      const callout = document.getElementById('serviceTermsCallout');
+      const termsList = document.getElementById('serviceTermsList');
+
+      const allTerms = [];
+
+      if (serviceKey && SERVICES[serviceKey]) {
+        allTerms.push(...SERVICES[serviceKey].terms);
+      }
+
+      addonKeys.forEach(key => {
+        if (ADDON_EXTRA_TERMS[key]) {
+          allTerms.push(...ADDON_EXTRA_TERMS[key]);
+        }
+      });
+
+      if (allTerms.length === 0) {
+        callout.classList.remove('visible');
+        termsList.innerHTML = '';
+        return;
+      }
+
+      callout.classList.add('visible');
+      termsList.innerHTML = allTerms.map(t => `<li>${t}</li>`).join('');
+    }
 
     // ── Signature Canvas ──
     const canvas   = document.getElementById('sigCanvas');
@@ -630,6 +1038,25 @@
       const sigImageData = canvas.toDataURL('image/png');
       document.getElementById('signatureData').value = sigImageData;
 
+      // Collect add-ons for hidden field
+      const addons = getSelectedAddons();
+      document.getElementById('selectedAddonsHidden').value = addons.length > 0 ? addons.join('; ') : 'None';
+
+      // Store data for PDF generation
+      const serviceKey = document.getElementById('w_service').value;
+      const vehicleKey = document.getElementById('w_vehicle_type').value;
+      pdfData = {
+        name:        document.getElementById('w_name').value,
+        phone:       document.getElementById('w_phone').value,
+        vehicle:     document.getElementById('w_vehicle').value,
+        date:        document.getElementById('w_date').value,
+        service:     serviceKey && SERVICES[serviceKey] ? SERVICES[serviceKey].name + ' — ' + SERVICES[serviceKey].price : 'Not specified',
+        serviceCategory: serviceKey && SERVICES[serviceKey] ? SERVICES[serviceKey].category : '',
+        vehicleType: vehicleKey && VEHICLE_TYPES[vehicleKey] ? VEHICLE_TYPES[vehicleKey].name + ' — ' + VEHICLE_TYPES[vehicleKey].surcharge : 'Not specified',
+        addons:      addons.length > 0 ? addons : [],
+        signature:   sigImageData
+      };
+
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
 
@@ -638,13 +1065,16 @@
       // Send to Google Apps Script for sheet logging
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
         const sheetBody = new URLSearchParams({
-          form_type:     'waiver',
-          customer_name: document.getElementById('w_name').value,
-          phone:         document.getElementById('w_phone').value,
-          vehicle:       document.getElementById('w_vehicle').value,
-          date_signed:   document.getElementById('w_date').value,
-          agreed:        'Yes',
-          signature_data: sigImageData
+          form_type:       'waiver',
+          customer_name:   pdfData.name,
+          phone:           pdfData.phone,
+          vehicle:         pdfData.vehicle,
+          service:         pdfData.service,
+          vehicle_type:    pdfData.vehicleType,
+          addons:          document.getElementById('selectedAddonsHidden').value,
+          date_signed:     pdfData.date,
+          agreed:          'Yes',
+          signature_data:  sigImageData
         });
         fetch(GAS_URL, { method: 'POST', body: sheetBody }).catch(() => {});
       }
@@ -659,17 +1089,222 @@
           waiverForm.style.display  = 'none';
           sigSuccess.classList.add('visible');
         } else {
-          waiverSubmitBtn.textContent = '&#9818; Submit Signed Agreement';
+          waiverSubmitBtn.textContent = '♞ Submit Signed Agreement';
           waiverSubmitBtn.disabled    = false;
           alert('Submission failed. Please try again or contact us directly.');
         }
       })
       .catch(() => {
-        waiverSubmitBtn.textContent = '&#9818; Submit Signed Agreement';
+        waiverSubmitBtn.textContent = '♞ Submit Signed Agreement';
         waiverSubmitBtn.disabled    = false;
         alert('Network error. Please try again.');
       });
     });
+
+    // ── PDF Generation ──
+    document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+
+      const W = 612;
+      const margin = 48;
+      const gold = [201, 162, 39];
+      const black = [10, 10, 10];
+      const grey = [120, 120, 120];
+      const white = [255, 255, 255];
+
+      let y = margin;
+
+      // ── Header background ──
+      doc.setFillColor(...black);
+      doc.rect(0, 0, W, 100, 'F');
+
+      // ── Header text ──
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.setTextColor(...gold);
+      doc.text('ROYAL KINGS AUTO CARE', W / 2, y + 16, { align: 'center' });
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(...grey);
+      doc.text('PREMIUM DETAILING SERVICE  ·  WINNIPEG, MB', W / 2, y + 32, { align: 'center' });
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      doc.setTextColor(...white);
+      doc.text('SERVICE AGREEMENT', W / 2, y + 56, { align: 'center' });
+
+      // Gold line under header
+      doc.setDrawColor(...gold);
+      doc.setLineWidth(0.75);
+      doc.line(margin, 100, W - margin, 100);
+
+      y = 124;
+
+      // ── Date right-aligned ──
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...grey);
+      doc.text('Date Signed: ' + pdfData.date, W - margin, y, { align: 'right' });
+
+      // ── Customer Info block ──
+      y += 20;
+      sectionHeader(doc, 'CUSTOMER INFORMATION', margin, y, W, gold, black);
+      y += 18;
+
+      const customerFields = [
+        ['Full Name', pdfData.name],
+        ['Phone Number', pdfData.phone],
+        ['Vehicle', pdfData.vehicle],
+      ];
+
+      customerFields.forEach(([label, val]) => {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...grey);
+        doc.text(label.toUpperCase(), margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(30, 30, 30);
+        doc.text(val || '—', margin + 130, y);
+        y += 18;
+      });
+
+      // ── Service Summary block ──
+      y += 10;
+      sectionHeader(doc, 'SELECTED SERVICE', margin, y, W, gold, black);
+      y += 18;
+
+      const serviceFields = [
+        ['Primary Service', pdfData.service],
+        ['Service Category', pdfData.serviceCategory],
+        ['Vehicle Type', pdfData.vehicleType],
+        ['Add-On Services', pdfData.addons.length > 0 ? pdfData.addons.join('\n') : 'None'],
+      ];
+
+      serviceFields.forEach(([label, val]) => {
+        if (!val) return;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...grey);
+        doc.text(label.toUpperCase(), margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(30, 30, 30);
+        const lines = doc.splitTextToSize(val, W - margin - 130 - margin);
+        doc.text(lines, margin + 130, y);
+        y += lines.length * 14 + 4;
+      });
+
+      // ── Terms block (condensed) ──
+      y += 10;
+      sectionHeader(doc, 'KEY AGREEMENT TERMS', margin, y, W, gold, black);
+      y += 14;
+
+      const terms = [
+        'Vehicle will be inspected before service begins. All pre-existing damage will be noted.',
+        'Royal Kings Auto Care is not responsible for any pre-existing damage.',
+        'A $50 deposit is required to confirm your booking and goes toward your service.',
+        'Cancellations must be made at least 24 hours in advance or the deposit is forfeited.',
+        'All quoted prices are estimates and may change based on vehicle condition on arrival.',
+        'Customer is responsible for removing personal belongings from the vehicle before service.',
+        'Full-day bookings required for paint correction and ceramic coating services.',
+        'Before and after photos taken for documentation — contact us if you do not consent to marketing use.',
+        'Customer must provide access to water and electricity for mobile service.',
+      ];
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(50, 50, 50);
+
+      terms.forEach(term => {
+        if (y > 680) {
+          doc.addPage();
+          y = margin;
+        }
+        const lines = doc.splitTextToSize('• ' + term, W - margin * 2);
+        doc.text(lines, margin, y);
+        y += lines.length * 12 + 3;
+      });
+
+      // ── Signature block ──
+      y += 16;
+      if (y > 580) { doc.addPage(); y = margin; }
+
+      sectionHeader(doc, 'CUSTOMER SIGNATURE', margin, y, W, gold, black);
+      y += 14;
+
+      // Signature image
+      try {
+        const sigImg = pdfData.signature;
+        if (sigImg && sigImg !== 'data:,') {
+          doc.addImage(sigImg, 'PNG', margin, y, 220, 70);
+        }
+      } catch (err) {}
+
+      y += 80;
+
+      // Signature line
+      doc.setDrawColor(...grey);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, margin + 220, y);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...grey);
+      doc.text('Customer Signature', margin, y + 12);
+
+      // Name line
+      doc.line(W / 2, y, W / 2 + 200, y);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(30, 30, 30);
+      doc.text(pdfData.name, W / 2, y - 6);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...grey);
+      doc.text('Printed Name', W / 2, y + 12);
+
+      y += 30;
+      doc.line(margin, y, margin + 220, y);
+      doc.text(pdfData.date, margin, y - 6);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...grey);
+      doc.text('Date', margin, y + 12);
+
+      // ── Footer ──
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setDrawColor(...gold);
+        doc.setLineWidth(0.5);
+        doc.line(margin, 760, W - margin, 760);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...grey);
+        doc.text('Royal Kings Auto Care  ·  Winnipeg, MB  ·  Premium Mobile Detailing', W / 2, 774, { align: 'center' });
+        doc.text('Page ' + i + ' of ' + pageCount, W - margin, 774, { align: 'right' });
+      }
+
+      const safeName = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
+      doc.save('RoyalKings_ServiceAgreement_' + safeName + '.pdf');
+    }
+
+    function sectionHeader(doc, text, x, y, W, gold, black) {
+      doc.setFillColor(245, 245, 245);
+      doc.rect(x, y - 10, W - x * 2, 16, 'F');
+      doc.setDrawColor(...gold);
+      doc.setLineWidth(0.5);
+      doc.line(x, y + 6, W - x, y + 6);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...gold);
+      doc.text(text, x + 4, y + 2);
+    }
   </script>
 </body>
 </html>
