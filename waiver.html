@@ -1310,9 +1310,10 @@
         doc.text('Page ' + i + ' of ' + pages, W - M, 766, { align: 'right' });
       }
 
-      const safe = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
+      const safe    = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
+      const b64     = doc.output('datauristring').split(',').slice(1).join(',');
       doc.save('RoyalKings_ServiceAgreement_' + safe + '.pdf');
-      return doc.output('datauristring').split(',')[1]; // base64 only
+      return b64;
     }
 
     // Gold left-bar accent section header
