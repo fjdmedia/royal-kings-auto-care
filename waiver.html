@@ -1074,7 +1074,7 @@
           agreed:         'Yes',
           signature_data: sigImageData
         });
-        fetch(GAS_URL, { method: 'POST', body: sheetBody }).catch(() => {});
+        fetch(GAS_URL, { method: 'POST', body: sheetBody, mode: 'no-cors' }).catch(() => {});
       }
 
       // Show success regardless of GAS response (PDF already downloaded)
