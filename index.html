@@ -1210,10 +1210,10 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
 
-    // Set minimum date to today
+    // Set minimum date to 24 hours from now
     const dateInput = document.getElementById('preferred_date');
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
+    const minDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    dateInput.setAttribute('min', minDate.toISOString().split('T')[0]);
 
     // ── Vehicle Class Toggle + Dynamic Pricing ──
     let currentClass    = 'Coupes & Sedans';
