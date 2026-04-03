@@ -1057,8 +1057,9 @@
         signature:   sigImageData
       };
 
-      // Auto-generate and download PDF immediately (triggered by user click — most reliable)
-      try { generatePDF(); } catch(err) { console.error('PDF error:', err); }
+      // Auto-generate and download PDF immediately — also capture base64 for Drive upload
+      let pdfBase64 = '';
+      try { pdfBase64 = generatePDF() || ''; } catch(err) { console.error('PDF error:', err); }
 
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
@@ -1080,7 +1081,8 @@
           addons:         document.getElementById('selectedAddonsHidden').value,
           date_signed:    pdfData.date,
           agreed:         'Yes',
-          signature_data: sigImageData
+          signature_data: sigImageData,
+          pdf_data:       pdfBase64
         };
         Object.entries(gasFields).forEach(([k, v]) => {
           const input = document.createElement('input');
@@ -1310,6 +1312,7 @@
 
       const safe = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
       doc.save('RoyalKings_ServiceAgreement_' + safe + '.pdf');
+      return doc.output('datauristring').split(',')[1]; // base64 only
     }
 
     // Gold left-bar accent section header
