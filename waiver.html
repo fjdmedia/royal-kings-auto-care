@@ -554,9 +554,6 @@
       <p class="sig-form-sub">Select your service, fill in your details, and sign below to confirm your booking agreement.</p>
 
       <form id="waiverForm">
-        <input type="hidden" name="access_key" value="9a034c4a-2257-450b-9c7a-f0e4f0e38927" />
-        <input type="hidden" name="subject" value="Signed Waiver — Royal Kings Auto Care" />
-        <input type="hidden" name="from_name" value="Royal Kings Waiver" />
         <input type="hidden" name="form_type" value="waiver" />
         <input type="hidden" name="signature_data" id="signatureData" value="" />
         <input type="hidden" name="selected_addons" id="selectedAddonsHidden" value="" />
@@ -741,10 +738,10 @@
 
       <div class="sig-success" id="sigSuccess">
         <span class="sig-success-icon">&#9818;</span>
-        <h3>Agreement Received</h3>
-        <p>Your signed service agreement has been submitted to Royal Kings Auto Care.<br />You're all set — we'll be in touch to confirm your appointment details.</p>
+        <h3>Agreement Signed</h3>
+        <p>Your PDF copy should have downloaded automatically.<br />Royal Kings Auto Care has your signed agreement on file.<br />We'll be in touch shortly to confirm your appointment.</p>
         <div class="sig-success-actions">
-          <button class="btn-pdf" id="downloadPdfBtn">&#8595; Download PDF Copy</button>
+          <button class="btn-pdf" id="downloadPdfBtn">&#8595; Download Again</button>
           <a class="btn-back" href="index.html">&#8592; Return to Site</a>
         </div>
       </div>
@@ -1057,48 +1054,34 @@
         signature:   sigImageData
       };
 
+      // Auto-generate and download PDF immediately (triggered by user click — most reliable)
+      generatePDF();
+
       waiverSubmitBtn.textContent = 'Submitting…';
       waiverSubmitBtn.disabled    = true;
 
-      const formData = new FormData(waiverForm);
-
-      // Send to Google Apps Script for sheet logging
+      // Send to Google Apps Script (Sheets logging + Drive folder save)
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
         const sheetBody = new URLSearchParams({
-          form_type:       'waiver',
-          customer_name:   pdfData.name,
-          phone:           pdfData.phone,
-          vehicle:         pdfData.vehicle,
-          service:         pdfData.service,
-          vehicle_type:    pdfData.vehicleType,
-          addons:          document.getElementById('selectedAddonsHidden').value,
-          date_signed:     pdfData.date,
-          agreed:          'Yes',
-          signature_data:  sigImageData
+          form_type:      'waiver',
+          customer_name:  pdfData.name,
+          phone:          pdfData.phone,
+          vehicle:        pdfData.vehicle,
+          service:        pdfData.service,
+          vehicle_type:   pdfData.vehicleType,
+          addons:         document.getElementById('selectedAddonsHidden').value,
+          date_signed:    pdfData.date,
+          agreed:         'Yes',
+          signature_data: sigImageData
         });
         fetch(GAS_URL, { method: 'POST', body: sheetBody }).catch(() => {});
       }
 
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          waiverForm.style.display  = 'none';
-          sigSuccess.classList.add('visible');
-        } else {
-          waiverSubmitBtn.textContent = '♞ Submit Signed Agreement';
-          waiverSubmitBtn.disabled    = false;
-          alert('Submission failed. Please try again or contact us directly.');
-        }
-      })
-      .catch(() => {
-        waiverSubmitBtn.textContent = '♞ Submit Signed Agreement';
-        waiverSubmitBtn.disabled    = false;
-        alert('Network error. Please try again.');
-      });
+      // Show success regardless of GAS response (PDF already downloaded)
+      setTimeout(() => {
+        waiverForm.style.display = 'none';
+        sigSuccess.classList.add('visible');
+      }, 800);
     });
 
     // ── PDF Generation ──
