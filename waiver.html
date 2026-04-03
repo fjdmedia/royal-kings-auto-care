@@ -1108,238 +1108,237 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
 
-      const W       = 612;
-      const margin  = 52;
-      const labelX  = margin;
-      const valueX  = margin + 140;
-      const gold    = [201, 162, 39];
-      const ink     = [35, 35, 35];
-      const muted   = [130, 130, 130];
-      const light   = [170, 170, 170];
+      const W      = 612;
+      const M      = 54;
+      const LX     = M;
+      const VX     = M + 148;
+      const gold   = [201, 162, 39];
+      const ink    = [28, 28, 28];
+      const muted  = [140, 140, 140];
+      const subtle = [190, 190, 190];
 
       let y = 0;
 
-      // ── Header band ──
+      // ══ HEADER — fully contained black band ══════════
       doc.setFillColor(10, 10, 10);
-      doc.rect(0, 0, W, 120, 'F');
+      doc.rect(0, 0, W, 152, 'F');
 
-      // Top gold accent
-      doc.setDrawColor(...gold);
-      doc.setLineWidth(2.5);
-      doc.line(0, 0, W, 0);
+      // Solid gold top bar
+      doc.setFillColor(...gold);
+      doc.rect(0, 0, W, 4, 'F');
 
       // Company name
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(21);
+      doc.setFontSize(22);
       doc.setTextColor(...gold);
-      doc.text('ROYAL KINGS AUTO CARE', W / 2, 46, { align: 'center' });
+      doc.text('ROYAL KINGS AUTO CARE', W / 2, 48, { align: 'center' });
 
-      // Subtitle
+      // Tagline
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
-      doc.setTextColor(...light);
-      doc.text('PREMIUM DETAILING SERVICE  ·  WINNIPEG, MB', W / 2, 64, { align: 'center' });
+      doc.setTextColor(170, 170, 170);
+      doc.text('PREMIUM DETAILING SERVICE  ·  WINNIPEG, MB', W / 2, 67, { align: 'center' });
 
-      // Bottom gold rule inside band
-      doc.setDrawColor(...gold);
-      doc.setLineWidth(0.6);
-      doc.line(margin, 96, W - margin, 96);
+      // Inner divider
+      doc.setDrawColor(55, 55, 55);
+      doc.setLineWidth(0.5);
+      doc.line(M, 86, W - M, 86);
 
-      // SERVICE AGREEMENT — inside band, bottom
+      // SERVICE AGREEMENT — inside band
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.setTextColor(220, 220, 220);
-      doc.text('SERVICE AGREEMENT', W / 2, 112, { align: 'center' });
+      doc.setFontSize(13);
+      doc.setTextColor(235, 235, 235);
+      doc.text('SERVICE AGREEMENT', W / 2, 122, { align: 'center' });
 
-      y = 148;
+      // Solid gold bottom bar
+      doc.setFillColor(...gold);
+      doc.rect(0, 148, W, 4, 'F');
 
-      // ── Date ──
+      y = 178;
+
+      // Date
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8.5);
       doc.setTextColor(...muted);
-      doc.text('Date Signed:  ' + pdfData.date, W - margin, y, { align: 'right' });
+      doc.text('Date Signed:  ' + pdfData.date, W - M, y, { align: 'right' });
+      y += 28;
 
-      // ── Customer Information ──
+      // ══ CUSTOMER INFORMATION ════════════════════════
+      y = pdfSection(doc, 'CUSTOMER INFORMATION', M, y, W, gold);
+      pdfRow(doc, 'Full Name',  pdfData.name,    LX, VX, W, M, y, ink, muted); y += 27;
+      pdfRow(doc, 'Phone',      pdfData.phone,   LX, VX, W, M, y, ink, muted); y += 27;
+      pdfRow(doc, 'Vehicle',    pdfData.vehicle, LX, VX, W, M, y, ink, muted); y += 27;
       y += 22;
-      y = pdfSectionHeader(doc, 'CUSTOMER INFORMATION', margin, y, W, gold);
 
-      const customerFields = [
-        ['Full Name',     pdfData.name],
-        ['Phone Number',  pdfData.phone],
-        ['Vehicle',       pdfData.vehicle],
-      ];
+      // ══ SELECTED SERVICE ════════════════════════════
+      y = pdfSection(doc, 'SELECTED SERVICE', M, y, W, gold);
 
-      customerFields.forEach(([label, val]) => {
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...light);
-        doc.text(label.toUpperCase(), labelX, y);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10.5);
-        doc.setTextColor(...ink);
-        doc.text(val || '—', valueX, y);
-        y += 24;
-      });
+      if (pdfData.service)         { pdfRow(doc, 'Primary Service', pdfData.service,         LX, VX, W, M, y, ink, muted); y += 27; }
+      if (pdfData.serviceCategory) { pdfRow(doc, 'Category',        pdfData.serviceCategory, LX, VX, W, M, y, ink, muted); y += 27; }
+      if (pdfData.vehicleType)     { pdfRow(doc, 'Vehicle Type',    pdfData.vehicleType,     LX, VX, W, M, y, ink, muted); y += 27; }
 
-      // ── Selected Service ──
-      y += 18;
-      y = pdfSectionHeader(doc, 'SELECTED SERVICE', margin, y, W, gold);
-
-      const serviceRows = [
-        ['Primary Service',   pdfData.service],
-        ['Service Category',  pdfData.serviceCategory],
-        ['Vehicle Type',      pdfData.vehicleType],
-      ];
-
-      serviceRows.forEach(([label, val]) => {
-        if (!val) return;
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...light);
-        doc.text(label.toUpperCase(), labelX, y);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10.5);
-        doc.setTextColor(...ink);
-        doc.text(val, valueX, y);
-        y += 24;
-      });
-
-      // Add-ons row
+      // Add-ons label
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(7.5);
-      doc.setTextColor(...light);
-      doc.text('ADD-ON SERVICES', labelX, y);
+      doc.setTextColor(...subtle);
+      doc.text('ADD-ON SERVICES', LX, y);
 
       if (pdfData.addons.length === 0) {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10.5);
         doc.setTextColor(...ink);
-        doc.text('None', valueX, y);
-        y += 24;
+        doc.text('None', VX, y);
+        y += 27;
       } else {
-        pdfData.addons.forEach((addon, i) => {
+        pdfData.addons.forEach(addon => {
           const name  = addon.split(' (')[0];
           const price = (addon.match(/\(([^)]+)\)/) || [])[1] || '';
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(10.5);
+          doc.setFontSize(10);
           doc.setTextColor(...ink);
-          doc.text(name, valueX, y);
+          doc.text(name, VX, y);
           if (price) {
-            doc.setFontSize(8);
+            doc.setFontSize(8.5);
             doc.setTextColor(...muted);
-            doc.text(price, valueX + doc.getTextWidth(name) + 5, y);
+            doc.text(price, W - M, y, { align: 'right' });
           }
-          y += 20;
+          y += 19;
         });
-        y += 4;
+        y += 8;
       }
+      y += 22;
 
-      // ── Key Agreement Terms ──
-      y += 18;
-      y = pdfSectionHeader(doc, 'KEY AGREEMENT TERMS', margin, y, W, gold);
+      // ══ TERMS & CONDITIONS ══════════════════════════
+      y = pdfSection(doc, 'TERMS & CONDITIONS', M, y, W, gold);
 
       const terms = [
-        'The vehicle will be inspected before service begins and all pre-existing damage will be noted.',
-        'Royal Kings Auto Care is not responsible for any pre-existing damage to the vehicle.',
-        'A $50 deposit is required to confirm your booking. This deposit goes toward your service.',
-        'Appointments must be rescheduled at least 24 hours in advance or the deposit will be forfeited.',
-        'All quoted prices are estimates and may change based on vehicle condition upon arrival. Any changes will be communicated before work begins.',
-        'The customer is responsible for removing all personal belongings from the vehicle prior to service.',
-        'Large services (paint correction, ceramic coating) require full-day exclusive bookings.',
-        'Before and after photos may be used for documentation and marketing purposes. Contact us if you do not consent.',
-        'Customer must provide access to water and electricity for mobile service unless alternate arrangements are made.',
-        'A travel fee of $20–$50 applies depending on distance from the service location.',
+        'The vehicle will be inspected before service begins. All pre-existing damage will be documented and noted prior to work commencing.',
+        'Royal Kings Auto Care is not liable for any pre-existing damage to the vehicle.',
+        'A non-refundable $50 deposit is required to confirm your booking. This deposit is applied toward the total service cost.',
+        'Cancellations or reschedules must be made at least 24 hours in advance. Failure to do so will result in forfeiture of the deposit.',
+        'All quoted prices are estimates and may be adjusted based on the vehicle\'s actual condition upon arrival. Any changes will be communicated and approved before work begins.',
+        'The customer is responsible for removing all personal belongings from the vehicle prior to service. Royal Kings Auto Care is not responsible for any items left inside.',
+        'Paint correction and ceramic coating services require a full-day exclusive booking. Final pricing is confirmed after paint inspection on arrival.',
+        'Before and after photos are taken for quality assurance and may be used for marketing. Notify us in writing if you do not consent.',
+        'For all mobile services, the customer must provide access to both water and electricity unless alternate arrangements have been confirmed in advance.',
+        'A travel fee between $20 and $50 applies depending on the distance from the service location.',
       ];
 
       doc.setFontSize(9.5);
-
-      terms.forEach(term => {
-        if (y > 670) { doc.addPage(); y = 52; }
+      terms.forEach((term, i) => {
+        if (y > 668) { doc.addPage(); y = M; }
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(...muted);
+        doc.text((i + 1) + '.', M, y);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(...ink);
-        const lines = doc.splitTextToSize('• ' + term, W - margin * 2);
-        doc.text(lines, margin, y);
-        y += lines.length * 14 + 6;
+        const lines = doc.splitTextToSize(term, W - M * 2 - 16);
+        doc.text(lines, M + 16, y);
+        y += lines.length * 14 + 7;
       });
 
-      // ── Signature block ──
-      y += 24;
-      if (y > 590) { doc.addPage(); y = 52; }
-      y = pdfSectionHeader(doc, 'CUSTOMER SIGNATURE', margin, y, W, gold);
+      y += 28;
+
+      // ══ SIGNATURE BLOCK ════════════════════════════
+      if (y > 555) { doc.addPage(); y = M; }
+      y = pdfSection(doc, 'CUSTOMER ACKNOWLEDGEMENT & SIGNATURE', M, y, W, gold);
+
+      // Acknowledgement statement
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...muted);
+      const ack = 'By signing below, I confirm that I have read, understood, and agree to all terms and conditions outlined in this service agreement.';
+      const ackLines = doc.splitTextToSize(ack, W - M * 2);
+      doc.text(ackLines, M, y);
+      y += ackLines.length * 13 + 22;
 
       // Signature image
       try {
         if (pdfData.signature && pdfData.signature !== 'data:,') {
-          doc.addImage(pdfData.signature, 'PNG', margin, y, 210, 72);
+          doc.addImage(pdfData.signature, 'PNG', M, y, 195, 65);
         }
-      } catch (err) {}
+      } catch (e) {}
+      y += 76;
 
-      y += 86;
+      // Row 1: Signature line (left) + Date line (right)
+      doc.setDrawColor(...subtle);
+      doc.setLineWidth(0.6);
+      const col2X = W / 2 + 16;
 
-      // Lines
-      doc.setDrawColor(...light);
-      doc.setLineWidth(0.5);
+      doc.line(M, y, M + 195, y);
+      doc.line(col2X, y, W - M, y);
 
-      // Left — signature line
-      doc.line(margin, y, margin + 210, y);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(...muted);
-      doc.text('Customer Signature', margin, y + 14);
-
-      // Right — printed name
-      const nameX = W / 2 + 20;
-      doc.line(nameX, y, W - margin, y);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(...ink);
-      doc.text(pdfData.name, nameX, y - 8);
+      doc.text(pdfData.date, col2X, y - 7);
+
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
       doc.setTextColor(...muted);
-      doc.text('Printed Name', nameX, y + 14);
+      doc.text('Customer Signature', M, y + 13);
+      doc.text('Date', col2X, y + 13);
 
-      // Date line below
       y += 44;
-      doc.line(margin, y, margin + 210, y);
+
+      // Row 2: Printed name line (left only)
+      doc.setDrawColor(...subtle);
+      doc.line(M, y, M + 195, y);
+
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(...ink);
-      doc.text(pdfData.date, margin, y - 8);
+      doc.text(pdfData.name, M, y - 7);
+
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
       doc.setTextColor(...muted);
-      doc.text('Date', margin, y + 14);
+      doc.text('Printed Name', M, y + 13);
 
-      // ── Footer on every page ──
-      const pageCount = doc.internal.getNumberOfPages();
-      for (let i = 1; i <= pageCount; i++) {
+      // ══ FOOTER ══════════════════════════════════════
+      const pages = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pages; i++) {
         doc.setPage(i);
-        doc.setDrawColor(...gold);
-        doc.setLineWidth(0.5);
-        doc.line(margin, 754, W - margin, 754);
+        doc.setFillColor(...gold);
+        doc.rect(0, 750, W, 2, 'F');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(7.5);
         doc.setTextColor(...muted);
-        doc.text('Royal Kings Auto Care  ·  Winnipeg, MB  ·  Premium Mobile Detailing', W / 2, 768, { align: 'center' });
-        doc.text('Page ' + i + ' of ' + pageCount, W - margin, 768, { align: 'right' });
+        doc.text('Royal Kings Auto Care  ·  Winnipeg, MB  ·  Premium Mobile Detailing', W / 2, 766, { align: 'center' });
+        doc.text('Page ' + i + ' of ' + pages, W - M, 766, { align: 'right' });
       }
 
-      const safeName = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
-      doc.save('RoyalKings_ServiceAgreement_' + safeName + '.pdf');
+      const safe = (pdfData.name || 'customer').replace(/[^a-zA-Z0-9]/g, '_');
+      doc.save('RoyalKings_ServiceAgreement_' + safe + '.pdf');
     }
 
-    function pdfSectionHeader(doc, text, x, y, W, gold) {
-      doc.setFillColor(246, 246, 246);
-      doc.rect(x - 6, y - 13, W - (x - 6) * 2, 20, 'F');
-      doc.setDrawColor(...gold);
-      doc.setLineWidth(0.75);
-      doc.line(x - 6, y + 7, W - (x - 6), y + 7);
+    // Gold left-bar accent section header
+    function pdfSection(doc, text, x, y, W, gold) {
+      doc.setFillColor(...gold);
+      doc.rect(x, y - 12, 3, 18, 'F');
+      doc.setFillColor(248, 248, 248);
+      doc.rect(x + 3, y - 12, W - x * 2 - 3, 18, 'F');
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8.5);
       doc.setTextColor(...gold);
-      doc.text(text, x, y + 2);
+      doc.text(text, x + 10, y + 2);
+      doc.setDrawColor(220, 220, 220);
+      doc.setLineWidth(0.4);
+      doc.line(x, y + 6, W - x, y + 6);
       return y + 22;
+    }
+
+    // Label + value row
+    function pdfRow(doc, label, value, LX, VX, W, M, y, ink, muted) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...muted);
+      doc.text(label.toUpperCase(), LX, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10.5);
+      doc.setTextColor(...ink);
+      const lines = doc.splitTextToSize(value || '—', W - VX - M);
+      doc.text(lines, VX, y);
     }
   </script>
 </body>
