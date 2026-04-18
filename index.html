@@ -2,11 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Royal Kings Auto Care | Book Your Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Royal Kings Auto Care | Premium Auto Detailing in Winnipeg</title>
+  <meta name="description" content="Premium auto detailing in Winnipeg, MB. Interior packages from $110. We come to you. Book online in 2 minutes." />
+  <meta property="og:title" content="Royal Kings Auto Care | Auto Detailing Winnipeg" />
+  <meta property="og:description" content="Premium auto detailing in Winnipeg. Interior packages from $110. Book online." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fjdmedia.github.io/royal-kings-auto-care/" />
+  <meta property="og:image" content="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Royal Kings Auto Care | Auto Detailing Winnipeg" />
+  <meta name="twitter:description" content="Premium auto detailing in Winnipeg. Interior packages from $110. Book online." />
+  <meta name="twitter:image" content="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" />
+  <!-- Canonical -->
+  <link rel="canonical" href="https://fjdmedia.github.io/royal-kings-auto-care/" />
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230A0A0A'/%3E%3Ctext x='16' y='22' font-size='14' font-weight='bold' font-family='serif' text-anchor='middle' fill='%23C9A227'%3ERK%3C/text%3E%3C/svg%3E" />
+  <link rel="preload" href="Logo.jpg" as="image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Royal Kings Auto Care",
+    "description": "Premium auto detailing in Winnipeg, MB. Interior packages from $110. We come to you.",
+    "url": "https://fjdmedia.github.io/royal-kings-auto-care/",
+    "telephone": ["+14313349577", "+14313880859"],
+    "image": "https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Winnipeg",
+      "addressRegion": "MB",
+      "addressCountry": "CA"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Winnipeg"
+    },
+    "sameAs": [
+      "https://www.instagram.com/RoyalKingsDetailWinnipeg/",
+      "https://www.tiktok.com/@RoyalKingsDetailing"
+    ],
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  }
+  </script>
+  <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -18,10 +71,10 @@
       --black-border: #1E1E1E;
       --gold:         #C9A227;
       --gold-light:   #E2B93B;
-      --gold-dim:     #8A6E1A;
+      --gold-dim:     #A07E1F;
       --white:        #FFFFFF;
       --grey:         #AAAAAA;
-      --grey-dark:    #555555;
+      --grey-dark:    #909090;
     }
 
     body {
@@ -31,10 +84,18 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
+    body.nav-open { overflow: hidden; }
 
-    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--black); }
     ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+    *:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    button:focus-visible, a:focus-visible { outline-offset: 3px; }
 
     /* ── Diamond pattern ── */
     .diamond-bg { position: relative; }
@@ -65,13 +126,15 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       height: 72px;
-      background: rgba(10,10,10,0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201,162,39,0.18);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,162,39,0.12);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2.5rem;
+      transition: height 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
 
     .nav-logo {
@@ -87,6 +150,7 @@
       border: 1px solid var(--gold-dim);
       background: var(--white);
       padding: 2px;
+      transition: height 0.3s, width 0.3s;
     }
     .nav-logo-text {
       font-family: 'Cinzel', serif;
@@ -95,6 +159,7 @@
       color: var(--gold);
       letter-spacing: 0.1em;
       line-height: 1.2;
+      transition: font-size 0.3s;
     }
     .nav-logo-text span {
       display: block;
@@ -121,18 +186,35 @@
       background: transparent;
       border: 1px solid var(--gold);
       color: var(--gold) !important;
-      padding: 0.45rem 1.3rem;
-      border-radius: 2px;
-      transition: background 0.25s !important, color 0.25s !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 6px;
+      transition: background 0.25s !important, color 0.25s !important, box-shadow 0.25s !important;
     }
-    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--black) !important;
+      box-shadow: 0 0 20px rgba(201,162,39,0.3);
+    }
 
-    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; }
+    /* Nav scrolled state */
+    nav.scrolled {
+      height: 58px;
+      background: rgba(10,10,10,0.97);
+      border-bottom-color: rgba(201,162,39,0.2);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    nav.scrolled .nav-logo img { height: 36px; width: 36px; }
+    nav.scrolled .nav-logo-text { font-size: 0.9rem; }
+    nav.scrolled .nav-logo-text span { font-size: 0.56rem; }
+
+    .nav-links a.active { color: var(--gold); }
+
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: 0.3s; }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
+      min-height: 100svh;
       padding-top: 72px;
       display: flex;
       align-items: center;
@@ -163,29 +245,43 @@
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 820px;
+      max-width: 860px;
       padding: 2rem;
     }
 
-    @keyframes float-logo {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-12px); }
+    /* FOIC fallback — hidden until GSAP animates in */
+    .hero-logo-img,
+    .hero-label,
+    .hero h1,
+    .hero-sub,
+    .hero-divider,
+    .hero-tagline,
+    .hero-btns a,
+    .hero-reassurance,
+    .hero-trust-badges { visibility: hidden; }
+
+    /* FOIC fallback — if GSAP CDN fails, show hero after 3s */
+    @keyframes foic-fallback { to { visibility: visible; opacity: 1; } }
+    .hero-logo-img, .hero-label, .hero h1, .hero-sub,
+    .hero-divider, .hero-tagline, .hero-btns a,
+    .hero-reassurance, .hero-trust-badges {
+      animation: foic-fallback 0.6s ease 3s both;
     }
 
     .hero-logo-img {
-      width: 200px; height: 200px;
+      width: 180px; height: 180px;
       object-fit: contain;
       border-radius: 50%;
       border: 2px solid var(--gold);
       background: var(--white);
       padding: 8px;
-      margin: 0 auto 2.2rem;
+      margin: 0 auto 2.5rem;
       display: block;
       box-shadow:
-        0 0 0 8px rgba(201,162,39,0.08),
-        0 0 60px rgba(201,162,39,0.28),
-        0 0 120px rgba(201,162,39,0.1);
-      animation: float-logo 4s ease-in-out infinite;
+        0 0 0 6px rgba(201,162,39,0.06),
+        0 0 0 14px rgba(201,162,39,0.03),
+        0 0 60px rgba(201,162,39,0.3),
+        0 0 120px rgba(201,162,39,0.12);
     }
 
     .hero-label {
@@ -222,8 +318,8 @@
 
     .hero-sub {
       font-family: 'Cinzel', serif;
-      font-size: clamp(0.85rem, 2vw, 1.1rem);
-      letter-spacing: 0.35em;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      letter-spacing: 0.22em;
       color: var(--grey);
       text-transform: uppercase;
       margin-bottom: 1.5rem;
@@ -253,7 +349,7 @@
     .btn-gold {
       background: var(--gold);
       color: var(--black);
-      padding: 0.85rem 2.4rem;
+      padding: 0.9rem 2.4rem;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
@@ -261,16 +357,21 @@
       text-transform: uppercase;
       text-decoration: none;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.25s, transform 0.2s;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
       display: inline-flex; align-items: center; gap: 0.5rem;
     }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 24px rgba(201,162,39,0.35);
+    }
 
     .btn-outline-gold {
       background: transparent;
       color: var(--gold);
-      padding: 0.85rem 2.4rem;
+      padding: 0.9rem 2.4rem;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
@@ -278,13 +379,48 @@
       text-transform: uppercase;
       text-decoration: none;
       border: 1px solid var(--gold);
-      transition: background 0.25s, color 0.25s, transform 0.2s;
+      border-radius: 8px;
+      transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
       display: inline-flex; align-items: center; gap: 0.5rem;
     }
-    .btn-outline-gold:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 24px rgba(201,162,39,0.35);
+    }
+
+    /* ── Hero Reassurance + Trust Badges ── */
+    .hero-reassurance {
+      font-size: 0.78rem;
+      color: var(--grey);
+      letter-spacing: 0.08em;
+      margin-top: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero-trust-badges {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+    .trust-badge i { color: var(--gold-dim); }
 
     /* ── Section base ── */
-    section { padding: 6rem 2rem; }
+    section { padding: 7rem 2rem; }
 
     .section-label {
       font-size: 0.7rem;
@@ -300,28 +436,43 @@
     .section-label::before,
     .section-label::after {
       content: '';
-      display: inline-block;
-      width: 30px; height: 1px;
+      flex: 1;
+      height: 1px;
       background: var(--gold);
     }
 
     .section-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: var(--white);
       line-height: 1.2;
       margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
     }
     .section-title .gold { color: var(--gold); }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 0.75rem;
+    }
 
     .section-sub {
       color: var(--grey);
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 300;
-      max-width: 520px;
+      max-width: 540px;
       line-height: 1.8;
     }
+
+    .centered-header { text-align: center; }
+    .centered-header .section-label { justify-content: center; }
+    .centered-header .section-title::after { margin-left: auto; margin-right: auto; }
+    .centered-header .section-sub { margin: 0 auto; }
 
     /* ── PRICING ── */
     #pricing { background: var(--black-soft); }
@@ -338,10 +489,14 @@
     .pricing-card {
       background: var(--black-card);
       border: 1px solid var(--black-border);
+      border-radius: 16px;
       padding: 2.5rem 2rem;
       position: relative;
-      transition: border-color 0.3s, transform 0.3s;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
     }
     .pricing-card::before {
       content: '';
@@ -351,13 +506,19 @@
       background: var(--gold);
       transform: scaleX(0);
       transition: transform 0.3s;
+      border-radius: 16px 16px 0 0;
     }
-    .pricing-card:hover { border-color: rgba(201,162,39,0.3); transform: translateY(-6px); }
+    .pricing-card:hover {
+      border-color: rgba(201,162,39,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,162,39,0.08);
+    }
     .pricing-card:hover::before { transform: scaleX(1); }
 
     .pricing-card.featured {
       border-color: rgba(201,162,39,0.4);
-      background: linear-gradient(160deg, #161600 0%, var(--black-card) 100%);
+      background: linear-gradient(160deg, #1a1800 0%, var(--black-card) 100%);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(201,162,39,0.06);
     }
     .pricing-card.featured::before { transform: scaleX(1); }
 
@@ -370,7 +531,8 @@
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 0.25rem 0.7rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
     }
 
     .pricing-tier {
@@ -393,7 +555,6 @@
     .pricing-price sup {
       font-size: 1rem;
       vertical-align: super;
-      color: var(--grey-dark);
       font-weight: 400;
       color: var(--gold);
     }
@@ -419,7 +580,7 @@
       letter-spacing: 0.05em;
     }
 
-    .pricing-includes { list-style: none; margin-bottom: 2rem; }
+    .pricing-includes { list-style: none; margin-bottom: 2rem; flex: 1; }
     .pricing-includes li {
       font-size: 0.82rem;
       color: var(--grey);
@@ -430,9 +591,10 @@
       gap: 0.6rem;
     }
     .pricing-includes li::before {
-      content: '◆';
-      color: var(--gold);
-      font-size: 0.45rem;
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
       flex-shrink: 0;
     }
 
@@ -464,6 +626,7 @@
     .vehicle-toggle {
       display: flex;
       border: 1px solid var(--black-border);
+      border-radius: 10px;
       overflow: hidden;
     }
 
@@ -477,7 +640,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 1.5rem;
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
       white-space: nowrap;
@@ -486,18 +649,6 @@
     .vehicle-btn:last-child { border-right: none; }
     .vehicle-btn:hover { color: var(--gold); background: rgba(201,162,39,0.06); }
     .vehicle-btn.active { background: var(--gold); color: var(--black); }
-    .vehicle-btn.active .vbtn-sub { color: rgba(0,0,0,0.55); }
-
-    .vbtn-name { display: block; }
-    .vbtn-sub {
-      display: block;
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--grey-dark);
-      margin-top: 0.15rem;
-      text-transform: none;
-    }
 
     .vehicle-surcharge-tag {
       font-size: 0.72rem;
@@ -508,9 +659,270 @@
     }
 
     @media (max-width: 640px) {
-      .vehicle-toggle { flex-direction: column; width: 100%; max-width: 320px; }
-      .vehicle-btn { border-right: none; border-bottom: 1px solid var(--black-border); }
+      .vehicle-toggle { flex-direction: column; width: 100%; max-width: 320px; border-radius: 10px; }
+      .vehicle-btn { border-right: none; border-bottom: 1px solid var(--black-border); min-height: 48px; }
       .vehicle-btn:last-child { border-bottom: none; }
+    }
+
+    /* ── BEFORE / AFTER ── */
+    #before-after { background: var(--black-soft); }
+    .ba-inner { max-width: 1000px; margin: 0 auto; }
+    .ba-header { margin-bottom: 3.5rem; }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .ba-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .ba-card:hover {
+      border-color: rgba(201,162,39,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .ba-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 180px;
+      position: relative;
+    }
+
+    .ba-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .ba-side--before {
+      background: linear-gradient(135deg, #151515 0%, #1a1a1a 100%);
+      color: var(--grey-dark);
+    }
+    .ba-side--after {
+      background: linear-gradient(135deg, #1a1800 0%, #201e00 100%);
+      color: var(--gold-dim);
+    }
+    /* REPLACE .ba-side divs with <img> tags when real before/after photos are available */
+
+    .ba-divider-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--gold);
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .ba-info {
+      padding: 1.2rem 1.5rem;
+    }
+    .ba-service {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .ba-vehicle {
+      font-size: 0.72rem;
+      color: var(--grey-dark);
+    }
+
+    .ba-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--grey-dark);
+      font-style: italic;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how-it-works { background: var(--black); }
+
+    .hiw-inner { max-width: 1000px; margin: 0 auto; }
+    .hiw-header { margin-bottom: 3.5rem; }
+
+    .hiw-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .hiw-step {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .hiw-step:hover {
+      border-color: rgba(201,162,39,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 15px rgba(201,162,39,0.06);
+    }
+
+    .hiw-step-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .hiw-step-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(201,162,39,0.08);
+      border: 1px solid rgba(201,162,39,0.15);
+    }
+    .hiw-step-icon i { color: var(--gold); }
+
+    .hiw-step h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hiw-step p {
+      font-size: 0.82rem;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--black-soft); }
+    .test-inner { max-width: 1000px; margin: 0 auto; }
+    .test-header { margin-bottom: 3.5rem; }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .test-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .test-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      border-radius: 16px 16px 0 0;
+    }
+    .test-card:hover {
+      border-color: rgba(201,162,39,0.3);
+      transform: translateY(-4px);
+    }
+    .test-card:hover::before { transform: scaleX(1); }
+
+    .test-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 1rem;
+    }
+    .test-stars i { color: var(--gold); }
+
+    .test-quote {
+      font-size: 0.88rem;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .test-author {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .test-detail {
+      font-size: 0.72rem;
+      color: var(--grey-dark);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: var(--black); }
+    .faq-inner { max-width: 720px; margin: 0 auto; }
+    .faq-header { margin-bottom: 3rem; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--black-border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.4rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      gap: 1rem;
+      min-height: 48px;
+    }
+
+    .faq-question span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--white);
+      text-align: left;
+    }
+
+    .faq-question i {
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-question i {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-answer p {
+      padding: 0 0 1.4rem;
+      font-size: 0.85rem;
+      color: var(--grey);
+      line-height: 1.7;
     }
 
     /* ── BOOKING FORM ── */
@@ -522,8 +934,10 @@
     .booking-form {
       background: var(--black-card);
       border: 1px solid var(--black-border);
+      border-radius: 20px;
       padding: 3rem;
       position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .booking-form::before {
       content: '';
@@ -531,6 +945,7 @@
       top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
+      border-radius: 20px 20px 0 0;
     }
 
     .form-row {
@@ -559,18 +974,23 @@
     .form-group textarea {
       background: var(--black-soft);
       border: 1px solid var(--black-border);
+      border-radius: 10px;
       color: var(--white);
       padding: 0.85rem 1rem;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.88rem;
+      font-size: 1rem;
       width: 100%;
-      transition: border-color 0.25s;
+      transition: border-color 0.25s, box-shadow 0.25s;
       outline: none;
+      -webkit-appearance: none;
       appearance: none;
     }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold-dim); }
+    .form-group textarea:focus {
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 3px rgba(201,162,39,0.08);
+    }
 
     .form-group select option { background: var(--black-soft); }
     .form-group textarea { resize: vertical; min-height: 110px; }
@@ -598,7 +1018,6 @@
       padding: 3rem 2rem;
     }
     .form-success.visible { display: block; }
-    .form-success-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
     .form-success h3 {
       font-family: 'Cinzel', serif;
       font-size: 1.4rem;
@@ -606,106 +1025,6 @@
       margin-bottom: 0.75rem;
     }
     .form-success p { color: var(--grey); font-size: 0.9rem; }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--black-soft);
-      text-align: center;
-      position: relative;
-    }
-
-    .contact-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-    #contact .section-label { justify-content: center; }
-    #contact .section-sub { margin: 0 auto 3rem; }
-
-    .contact-cards {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .contact-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      padding: 1.5rem 1.8rem;
-      text-decoration: none;
-      color: var(--white);
-      transition: border-color 0.25s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      min-width: 160px;
-      position: relative;
-    }
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    .contact-card:hover { border-color: rgba(201,162,39,0.4); transform: translateY(-4px); }
-    .contact-card:hover::before { transform: scaleX(1); }
-
-    .contact-card-icon { font-size: 1.6rem; }
-    .contact-card-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-    .contact-card-value { font-size: 0.82rem; color: var(--grey); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(201,162,39,0.15);
-    }
-
-    .footer-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.3rem;
-    }
-    .footer-tagline {
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--grey-dark);
-      margin-bottom: 1.8rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 2.5rem;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 0.75rem;
-      color: var(--grey-dark);
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy { font-size: 0.75rem; color: var(--grey-dark); }
-
-    /* ── Fade-in ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ── ADD-ONS ── */
     .addons-section-label {
@@ -736,28 +1055,37 @@
     .addon-card {
       background: var(--black-soft);
       border: 1px solid var(--black-border);
+      border-radius: 12px;
       padding: 1rem 1.1rem;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
       user-select: none;
     }
-    .addon-card:hover { border-color: rgba(201,162,39,0.3); }
-    .addon-card.selected { border-color: var(--gold); background: rgba(201,162,39,0.05); }
+    .addon-card:hover {
+      border-color: rgba(201,162,39,0.3);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .addon-card.selected {
+      border-color: var(--gold);
+      background: rgba(201,162,39,0.05);
+      box-shadow: 0 0 12px rgba(201,162,39,0.1);
+    }
     .addon-card input[type="checkbox"] { display: none; }
 
     .addon-check {
-      width: 16px; height: 16px;
+      width: 18px; height: 18px;
       border: 1px solid var(--black-border);
+      border-radius: 4px;
       flex-shrink: 0;
       margin-top: 2px;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, border-color 0.2s;
     }
     .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); }
-    .addon-check::after { content: '✓'; font-size: 0.65rem; color: var(--black); opacity: 0; transition: opacity 0.15s; }
+    .addon-check::after { content: '\2713'; font-size: 0.65rem; color: var(--black); opacity: 0; transition: opacity 0.15s; }
     .addon-card.selected .addon-check::after { opacity: 1; }
 
     .addon-info { flex: 1; }
@@ -774,6 +1102,7 @@
     .estimate-box {
       background: var(--black-soft);
       border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 12px;
       padding: 1.25rem 1.5rem;
       margin: 0.5rem 0 1.5rem;
       display: flex;
@@ -790,7 +1119,8 @@
     .deposit-notice {
       background: rgba(201,162,39,0.05);
       border-left: 2px solid var(--gold-dim);
-      padding: 0.85rem 1rem;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
       margin-bottom: 1.5rem;
       font-size: 0.75rem;
       color: var(--grey);
@@ -799,9 +1129,229 @@
     }
     .deposit-notice strong { color: var(--gold); }
 
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--black);
+      text-align: center;
+      position: relative;
+    }
+
+    .contact-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .contact-cards {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 1.8rem 2rem;
+      text-decoration: none;
+      color: var(--white);
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 160px;
+      position: relative;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      border-radius: 16px 16px 0 0;
+    }
+    .contact-card:hover {
+      border-color: rgba(201,162,39,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .contact-card:hover::before { transform: scaleX(1); }
+
+    .contact-card--static { cursor: default; }
+    .contact-card--static:hover { transform: none; box-shadow: none; border-color: var(--black-border); }
+    .contact-card--static:hover::before { transform: scaleX(0); }
+
+    .contact-card-icon { display: flex; align-items: center; justify-content: center; }
+    .contact-card-icon i { color: var(--gold); }
+    .contact-card-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .contact-card-value { font-size: 0.82rem; color: var(--grey); }
+
+    /* ── BOTTOM CTA ── */
+    #bottom-cta {
+      background: var(--black-soft);
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+    }
+    .bottom-cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .bottom-cta-inner h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .bottom-cta-inner h2 .gold { color: var(--gold); }
+    .bottom-cta-inner p {
+      font-size: 0.92rem;
+      color: var(--grey);
+      margin-bottom: 1.2rem;
+      line-height: 1.7;
+    }
+    .bottom-cta-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .bottom-cta-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--grey);
+      letter-spacing: 0.02em;
+    }
+    .bottom-cta-bullets li i { color: var(--gold); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(201,162,39,0.15);
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.3rem;
+    }
+    .footer-tagline {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey-dark);
+      margin-bottom: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--grey-dark);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.75rem; color: var(--grey-dark); }
+
+    /* ── STICKY MOBILE CTA ── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0; right: 0;
+      z-index: 90;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(201,162,39,0.2);
+      padding: 0.75rem 1.25rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .sticky-cta.visible { transform: translateY(0); }
+
+    .sticky-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.85rem;
+      padding-bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      top: 84px;
+      right: 1.5rem;
+      background: var(--black-card);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(201,162,39,0.15);
+      transform: translateX(calc(100% + 2rem));
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .toast.visible { transform: translateX(0); }
+    .toast-icon { display: flex; }
+    .toast-icon i { color: var(--gold); }
+    .toast-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      section { padding: 4rem 1.25rem; }
+      section { padding: 4.5rem 1.25rem; }
 
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -810,33 +1360,79 @@
         flex-direction: column;
         position: fixed;
         top: 72px; left: 0; right: 0;
-        background: var(--black-soft);
+        background: rgba(17,17,17,0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         padding: 1.5rem 1.25rem;
         gap: 1.2rem;
         border-bottom: 1px solid rgba(201,162,39,0.2);
         z-index: 99;
       }
-      .nav-links.open a { font-size: 0.95rem; }
+      .nav-links.open a {
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
 
       .hero h1 { font-size: 2.4rem; }
-      .hero-logo-img { width: 110px; height: 110px; }
+      .hero-logo-img { width: 120px; height: 120px; }
       .hero-btns { flex-direction: column; align-items: center; }
-      .hero-btns a { width: 100%; max-width: 280px; justify-content: center; }
+      .hero-btns a { width: 100%; max-width: 300px; justify-content: center; min-height: 48px; }
 
       .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card { border-radius: 14px; }
 
-      .booking-form { padding: 2rem 1.25rem; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .ba-card { border-radius: 14px; }
+      .ba-images { height: 160px; }
+
+      .hiw-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .hiw-step { padding: 1.5rem 1.2rem; border-radius: 14px; }
+      .hiw-step-num { font-size: 2rem; }
+
+      .test-grid { grid-template-columns: 1fr; }
+      .test-card { border-radius: 14px; }
+
+      .booking-form { padding: 2rem 1.25rem; border-radius: 16px; }
       .form-row { grid-template-columns: 1fr; }
       .addons-grid { grid-template-columns: 1fr; }
+      .addon-card { border-radius: 10px; min-height: 44px; }
 
       .contact-cards { flex-direction: column; align-items: center; }
-      .contact-card { width: 100%; max-width: 300px; }
+      .contact-card { width: 100%; max-width: 320px; border-radius: 14px; min-height: 44px; }
 
       .footer-links { gap: 1.2rem; }
+
+      .sticky-cta { display: block; }
+      footer { padding-bottom: 5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hiw-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      .hero-logo-img { width: 100px; height: 100px; }
     }
 
     @media (max-width: 440px) {
       .hero h1 { font-size: 1.9rem; }
+    }
+
+    /* ── Reduced Motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-logo-img, .hero-label, .hero h1, .hero-sub,
+      .hero-divider, .hero-tagline, .hero-btns a,
+      .hero-reassurance, .hero-trust-badges {
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
     }
   </style>
 </head>
@@ -845,7 +1441,7 @@
   <!-- ── NAV ── -->
   <nav>
     <a class="nav-logo" href="#">
-      <img src="Logo.jpg" alt="Royal Kings Auto Care" />
+      <img src="Logo.jpg" alt="Royal Kings Auto Care" width="46" height="46" />
       <div class="nav-logo-text">
         Royal Kings
         <span>Auto Care</span>
@@ -853,9 +1449,10 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#how-it-works">Process</a></li>
       <li><a href="#booking">Book Now</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#booking" class="nav-cta">&#9818; Book Now</a></li>
+      <li><a href="#booking" class="nav-cta"><i data-lucide="crown" style="width:14px;height:14px;stroke-width:1.5;vertical-align:-2px;margin-right:4px;"></i>Book Now</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -867,15 +1464,21 @@
     <div class="hero-diamonds"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <img src="Logo.jpg" alt="Royal Kings Auto Care" class="hero-logo-img" />
-      <div class="hero-label">Premium Detailing Service</div>
-      <h1><span class="gold">Royal Kings</span><br />Auto Care</h1>
-      <p class="hero-sub">Winnipeg, MB</p>
+      <img src="Logo.jpg" alt="Royal Kings Auto Care — Auto Detailing Winnipeg" class="hero-logo-img" width="180" height="180" fetchpriority="high" />
+      <div class="hero-label">Premium Auto Detailing — Winnipeg</div>
+      <h1>Royal Kings<br /><span class="gold">Auto Care</span></h1>
+      <p class="hero-sub">Convenience Meets Quality</p>
       <div class="hero-divider"></div>
-      <p class="hero-tagline">Convenience meets quality — wherever you are, we deliver royal results.</p>
-      <div class="hero-btns">
-        <a href="#booking" class="btn-gold">&#9818; Book Your Detail</a>
+      <p class="hero-tagline">Wherever you are, we deliver royal results.</p>
+      <div class="hero-btns" id="heroBtns">
+        <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
         <a href="#pricing" class="btn-outline-gold">View Pricing</a>
+      </div>
+      <p class="hero-reassurance">Free estimates &middot; No obligation &middot; Same-day response</p>
+      <div class="hero-trust-badges">
+        <div class="trust-badge"><i data-lucide="truck" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Mobile Service</span></div>
+        <div class="trust-badge"><i data-lucide="map-pin" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Serving All Winnipeg</span></div>
+        <div class="trust-badge"><i data-lucide="shield-check" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Satisfaction Guaranteed</span></div>
       </div>
     </div>
   </section>
@@ -908,7 +1511,7 @@
 
       <div class="pricing-grid">
 
-        <div class="pricing-card fade-up">
+        <div class="pricing-card">
           <div class="pricing-tier">Minimal</div>
           <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="110">110</span></div>
           <div class="pricing-note">Fixed price for your vehicle class</div>
@@ -921,7 +1524,7 @@
           <a href="#booking" class="btn-outline-gold book-now-btn" data-tier="Minimal">Book Now</a>
         </div>
 
-        <div class="pricing-card featured fade-up">
+        <div class="pricing-card featured">
           <div class="pricing-featured-badge">Best Value</div>
           <div class="pricing-tier">Premium</div>
           <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="195">195</span></div>
@@ -936,7 +1539,7 @@
           <a href="#booking" class="btn-gold book-now-btn" data-tier="Premium">Book Now</a>
         </div>
 
-        <div class="pricing-card fade-up">
+        <div class="pricing-card">
           <div class="pricing-tier">The Standard</div>
           <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="165">165</span></div>
           <div class="pricing-note">Fixed price for your vehicle class</div>
@@ -950,7 +1553,213 @@
         </div>
 
       </div>
-      <p class="pricing-varies">&#9670; &nbsp; Prices are fixed per vehicle class &mdash; what you see is what you pay &nbsp; &#9670;</p>
+      <p class="pricing-varies">Prices are fixed per vehicle class — what you see is what you pay</p>
+    </div>
+  </section>
+
+  <!-- ── BEFORE / AFTER — HIDDEN UNTIL CLIENT PROVIDES REAL PHOTOS ──
+       CLIENT NEEDS: 3-6 real before/after photo pairs from actual jobs.
+       Unhide this section and swap .ba-side divs with <img> tags when photos arrive.
+  <section id="before-after" class="diamond-bg">
+    <div class="ba-inner">
+      <div class="ba-header centered-header">
+        <p class="section-label">See the Difference</p>
+        <h2 class="section-title">Before &amp; <span class="gold">After</span></h2>
+        <p class="section-sub">Real results from real jobs. Every vehicle gets the royal treatment.</p>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-side ba-side--before">Before</div>
+            <div class="ba-divider-line"></div>
+            <div class="ba-side ba-side--after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-service">Premium Interior Detail</div>
+            <div class="ba-vehicle">2022 Honda Civic</div>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-side ba-side--before">Before</div>
+            <div class="ba-divider-line"></div>
+            <div class="ba-side ba-side--after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-service">Full Royal Treatment</div>
+            <div class="ba-vehicle">2021 Toyota RAV4</div>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-side ba-side--before">Before</div>
+            <div class="ba-divider-line"></div>
+            <div class="ba-side ba-side--after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-service">Paint Correction + Ceramic</div>
+            <div class="ba-vehicle">2023 Ford F-150</div>
+          </div>
+        </div>
+      </div>
+      <p class="ba-note">Photos coming soon — ask us for before &amp; after shots of your vehicle type</p>
+    </div>
+  </section>
+  -->
+
+  <!-- ── HOW IT WORKS ── -->
+  <section id="how-it-works">
+    <div class="hiw-inner">
+      <div class="hiw-header centered-header">
+        <p class="section-label">The Process</p>
+        <h2 class="section-title">How It <span class="gold">Works</span></h2>
+        <p class="section-sub">From booking to results — four simple steps to a showroom-quality detail.</p>
+      </div>
+      <div class="hiw-grid">
+        <div class="hiw-step">
+          <div class="hiw-step-num">01</div>
+          <div class="hiw-step-icon"><i data-lucide="list-checks" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <h3>Choose a Package</h3>
+          <p>Pick the service that fits your vehicle and needs. Pricing is transparent — no surprises.</p>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-step-num">02</div>
+          <div class="hiw-step-icon"><i data-lucide="calendar-check" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <h3>Book Online</h3>
+          <p>Fill out the booking form with your details, date, and any add-ons. Takes under two minutes.</p>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-step-num">03</div>
+          <div class="hiw-step-icon"><i data-lucide="map-pin" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <h3>We Come to You</h3>
+          <p>Our team arrives at your location fully equipped. No need to leave your home or office.</p>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-step-num">04</div>
+          <div class="hiw-step-icon"><i data-lucide="sparkles" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <h3>Enjoy the Results</h3>
+          <p>Your vehicle is returned spotless. We walk you through everything before we wrap up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS — HIDDEN UNTIL CLIENT PROVIDES REAL REVIEWS ──
+       CLIENT NEEDS: Real reviews from Google, Instagram DMs, or text screenshots.
+       Replace placeholder names/quotes with verified customer feedback, then uncomment.
+  <section id="testimonials" class="diamond-bg">
+    <div class="test-inner">
+      <div class="test-header centered-header">
+        <p class="section-label">Customer Reviews</p>
+        <h2 class="section-title">What People <span class="gold">Say</span></h2>
+        <p class="section-sub">Real feedback from Winnipeg vehicle owners.</p>
+      </div>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="test-stars">
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+          </div>
+          <p class="test-quote">"My Civic looked brand new inside. They got stains out of the seats I thought were permanent. Showed up on time and were done in under two hours."</p>
+          <div class="test-author">Marcus T.</div>
+          <div class="test-detail">Premium Interior Detail</div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+          </div>
+          <p class="test-quote">"Booked the ceramic coating for my truck. The paint looks insane now. These guys clearly care about what they do. Already recommended them to two friends."</p>
+          <div class="test-author">Jenna R.</div>
+          <div class="test-detail">Ceramic Coating + Paint Correction</div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
+          </div>
+          <p class="test-quote">"Best detailing service in Winnipeg. I have a dog and the pet hair was everywhere. They handled it no problem. The inside smells incredible now."</p>
+          <div class="test-author">David K.</div>
+          <div class="test-detail">The Standard + Pet Hair Removal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="faq-inner">
+      <div class="faq-header centered-header">
+        <p class="section-label">Common Questions</p>
+        <h2 class="section-title">Got <span class="gold">Questions?</span></h2>
+        <p class="section-sub">Everything you need to know before booking.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-1">
+            <span>Do I need to be home during the detail?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-1" role="region">
+            <p>Not necessarily. As long as we have access to the vehicle and a water/power source nearby, you're free to go about your day. Most clients leave the keys and let us handle it.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-2">
+            <span>How long does a typical detail take?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-2" role="region">
+            <p>The Minimal package takes about 1-1.5 hours. The Standard runs 2-3 hours. Premium and add-on services like paint correction can take a full day depending on vehicle size and condition.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-3">
+            <span>What if it rains on my appointment day?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-3" role="region">
+            <p>We'll reach out to reschedule at no extra charge. Interior details can still happen under covered areas like garages or carports. We'll work with you to find the best option.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-4">
+            <span>Do you bring your own water and power?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-4" role="region">
+            <p>We come fully equipped with our own tools and supplies. We just need access to a standard outdoor outlet and water spigot for exterior work. Interior-only jobs don't need either.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-5">
+            <span>What areas in Winnipeg do you serve?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-5" role="region">
+            <p>We serve all of Winnipeg and surrounding areas. No extra travel fees within city limits. For locations outside Winnipeg, reach out and we'll see what we can do.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-6">
+            <span>How do I pay?</span>
+            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
+          </button>
+          <div class="faq-answer" id="faq-panel-6" role="region">
+            <p>A $50 deposit secures your booking (applied toward the total). The remaining balance is due after the service is complete. We accept e-Transfer, cash, and major cards.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -969,30 +1778,32 @@
           <input type="hidden" name="subject" value="New Booking Request — Royal Kings Auto Care" />
           <input type="hidden" name="from_name" value="Royal Kings Booking" />
           <input type="hidden" name="form_type" value="booking" />
+          <!-- Honeypot spam trap -->
+          <input type="text" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
           <!-- Personal Info -->
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required />
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="Your full name" required />
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="you@email.com" required />
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="you@email.com" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="(204) 000-0000" required />
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(204) 000-0000" required />
             </div>
             <div class="form-group">
               <label for="service">Service Package</label>
               <select id="service" name="service" required>
                 <option value="" disabled selected>Select a package</option>
-                <option value="Minimal">Minimal &mdash; from $110</option>
-                <option value="The Standard">The Standard &mdash; from $165</option>
-                <option value="Premium">Premium &mdash; from $195</option>
+                <option value="Minimal">Minimal — from $110</option>
+                <option value="The Standard">The Standard — from $165</option>
+                <option value="Premium">Premium — from $195</option>
               </select>
             </div>
           </div>
@@ -1021,7 +1832,7 @@
           <div class="addons-grid" id="addonsGrid">
 
             <label class="addon-card" data-min="50" data-max="100">
-              <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50–$100)" />
+              <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50-$100)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Clay Bar Treatment</div>
@@ -1041,7 +1852,7 @@
             </label>
 
             <label class="addon-card" data-min="50" data-max="150">
-              <input type="checkbox" name="addon_engine_bay" value="Engine Bay Cleaning ($50–$150)" />
+              <input type="checkbox" name="addon_engine_bay" value="Engine Bay Cleaning ($50-$150)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Engine Bay Cleaning</div>
@@ -1051,7 +1862,7 @@
             </label>
 
             <label class="addon-card" data-min="60" data-max="120">
-              <input type="checkbox" name="addon_headlight" value="Headlight Restoration ($60–$120)" />
+              <input type="checkbox" name="addon_headlight" value="Headlight Restoration ($60-$120)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Headlight Restoration</div>
@@ -1061,7 +1872,7 @@
             </label>
 
             <label class="addon-card" data-min="30" data-max="80">
-              <input type="checkbox" name="addon_pet_hair" value="Pet Hair Removal ($30–$80)" />
+              <input type="checkbox" name="addon_pet_hair" value="Pet Hair Removal ($30-$80)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Pet Hair Removal</div>
@@ -1071,7 +1882,7 @@
             </label>
 
             <label class="addon-card" data-min="50" data-max="150">
-              <input type="checkbox" name="addon_stain" value="Stain Extraction ($50–$150)" />
+              <input type="checkbox" name="addon_stain" value="Stain Extraction ($50-$150)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Stain Extraction</div>
@@ -1081,7 +1892,7 @@
             </label>
 
             <label class="addon-card" data-min="50" data-max="100">
-              <input type="checkbox" name="addon_odor" value="Odor Removal ($50–$100)" />
+              <input type="checkbox" name="addon_odor" value="Odor Removal ($50-$100)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Odor Removal</div>
@@ -1091,7 +1902,7 @@
             </label>
 
             <label class="addon-card" data-min="100" data-max="150">
-              <input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100–$150)" />
+              <input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100-$150)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Spray Ceramic Coating</div>
@@ -1101,7 +1912,7 @@
             </label>
 
             <label class="addon-card" data-min="400" data-max="1000">
-              <input type="checkbox" name="addon_ceramic_coat" value="True Ceramic Coating ($400–$1,000+)" />
+              <input type="checkbox" name="addon_ceramic_coat" value="True Ceramic Coating ($400-$1,000+)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">True Ceramic Coating</div>
@@ -1111,13 +1922,13 @@
             </label>
 
             <label class="addon-card" data-min="150" data-max="600">
-              <input type="checkbox" name="addon_buffing" value="Paint Correction / Buffing ($150–$600)" />
+              <input type="checkbox" name="addon_buffing" value="Paint Correction / Buffing ($150-$600)" />
               <div class="addon-check"></div>
               <div class="addon-info">
                 <div class="addon-name">Paint Correction (Buffing)</div>
                 <div class="addon-price">$150 – $600</div>
                 <div class="addon-note">Based on correction steps &amp; vehicle class</div>
-                <span class="addon-full-day">&#9888; Full-day service &nbsp;&middot;&nbsp; Exclusive booking required</span>
+                <span class="addon-full-day">Full-day service — Exclusive booking required</span>
               </div>
             </label>
 
@@ -1134,7 +1945,7 @@
 
           <!-- Deposit Notice -->
           <div class="deposit-notice">
-            <strong>&#9670; Deposit Policy:</strong> A <strong>$50 deposit</strong> is required to secure your booking — this goes towards your service. Appointments must be rescheduled at least <strong>24 hours in advance</strong> or the deposit will be forfeited. Final pricing will be confirmed with you before your appointment.
+            <strong>Deposit Policy:</strong> A <strong>$50 deposit</strong> is required to secure your booking — this goes towards your service. Appointments must be rescheduled at least <strong>24 hours in advance</strong> or the deposit will be forfeited. Final pricing will be confirmed with you before your appointment.
           </div>
 
           <hr class="form-divider" />
@@ -1149,10 +1960,10 @@
               <label for="preferred_time">Preferred Time</label>
               <select id="preferred_time" name="preferred_time" required>
                 <option value="" disabled selected>Select a time</option>
-                <option value="Morning (8am – 11am)">Morning (8am &ndash; 11am)</option>
-                <option value="Midday (11am – 1pm)">Midday (11am &ndash; 1pm)</option>
-                <option value="Afternoon (1pm – 4pm)">Afternoon (1pm &ndash; 4pm)</option>
-                <option value="Late Afternoon (4pm – 6pm)">Late Afternoon (4pm &ndash; 6pm)</option>
+                <option value="Morning (8am – 11am)">Morning (8am – 11am)</option>
+                <option value="Midday (11am – 1pm)">Midday (11am – 1pm)</option>
+                <option value="Afternoon (1pm – 4pm)">Afternoon (1pm – 4pm)</option>
+                <option value="Late Afternoon (4pm – 6pm)">Late Afternoon (4pm – 6pm)</option>
               </select>
             </div>
           </div>
@@ -1163,17 +1974,17 @@
           </div>
 
           <div class="form-submit">
-            <button type="submit" class="btn-gold">&#9818; Request Appointment</button>
+            <button type="submit" class="btn-gold">Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i></button>
           </div>
-          <p class="form-note">&#9670; &nbsp; We'll confirm your booking within 24 hours &nbsp; &#9670;</p>
+          <p class="form-note">We'll confirm your booking within 24 hours</p>
         </form>
 
         <div class="form-success" id="formSuccess">
-          <span class="form-success-icon">&#9818;</span>
+          <div style="margin-bottom:1rem;"><i data-lucide="check-circle" style="width:48px;height:48px;color:var(--gold);stroke-width:1.5;"></i></div>
           <h3>Request Received!</h3>
           <p>Thanks for reaching out. We'll review your booking and get back to you within 24 hours to confirm your appointment.</p>
-          <p style="margin-top:1.2rem; font-size:0.82rem; color:var(--grey);">One more step &mdash; please sign our service agreement before your appointment.</p>
-          <a href="waiver.html" style="display:inline-block; margin-top:1rem; background:var(--gold); color:var(--black); padding:0.85rem 2.2rem; font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none;">&#9818; Sign Your Waiver</a>
+          <p style="margin-top:1.2rem; font-size:0.82rem; color:var(--grey);">One more step — please sign our service agreement before your appointment.</p>
+          <a href="waiver.html" style="display:inline-block; margin-top:1rem; background:var(--gold); color:var(--black); padding:0.85rem 2.2rem; font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; border-radius:8px;">Sign Your Waiver <i data-lucide="arrow-right" style="width:14px;height:14px;stroke-width:2;vertical-align:-2px;"></i></a>
         </div>
       </div>
     </div>
@@ -1182,32 +1993,34 @@
   <!-- ── CONTACT ── -->
   <section id="contact" class="diamond-bg">
     <div class="contact-inner">
-      <p class="section-label">Get In Touch</p>
-      <h2 class="section-title">Reach Us <span class="gold">Directly</span></h2>
-      <p class="section-sub">Have a question before booking? Reach out through any of the channels below.</p>
+      <div class="centered-header">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Reach Us <span class="gold">Directly</span></h2>
+        <p class="section-sub">Have a question before booking? Reach out through any of the channels below.</p>
+      </div>
       <div class="contact-cards">
-        <a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener" class="contact-card fade-up">
-          <span class="contact-card-icon">📷</span>
+        <a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-card-icon"><i data-lucide="instagram" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
           <span class="contact-card-label">Instagram</span>
           <span class="contact-card-value">@RoyalKingsDetailWinnipeg</span>
         </a>
-        <a href="https://www.tiktok.com/@RoyalKingsDetailing" target="_blank" rel="noopener" class="contact-card fade-up">
-          <span class="contact-card-icon">🎵</span>
+        <a href="https://www.tiktok.com/@RoyalKingsDetailing" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-card-icon"><i data-lucide="music" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
           <span class="contact-card-label">TikTok</span>
           <span class="contact-card-value">@RoyalKingsDetailing</span>
         </a>
-        <a href="tel:4313349577" class="contact-card fade-up">
-          <span class="contact-card-icon">📞</span>
+        <a href="tel:+14313349577" class="contact-card">
+          <span class="contact-card-icon"><i data-lucide="phone" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
           <span class="contact-card-label">Patrick</span>
           <span class="contact-card-value">(431) 334-9577</span>
         </a>
-        <a href="tel:4313880859" class="contact-card fade-up">
-          <span class="contact-card-icon">📞</span>
+        <a href="tel:+14313880859" class="contact-card">
+          <span class="contact-card-icon"><i data-lucide="phone" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
           <span class="contact-card-label">Justin</span>
           <span class="contact-card-value">(431) 388-0859</span>
         </a>
-        <div class="contact-card fade-up">
-          <span class="contact-card-icon">📍</span>
+        <div class="contact-card contact-card--static">
+          <span class="contact-card-icon"><i data-lucide="map-pin" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
           <span class="contact-card-label">Location</span>
           <span class="contact-card-value">Winnipeg, MB</span>
         </div>
@@ -1215,45 +2028,217 @@
     </div>
   </section>
 
+  <!-- ── BOTTOM CTA ── -->
+  <section id="bottom-cta" class="diamond-bg">
+    <div class="bottom-cta-inner">
+      <h2>Ready for the <span class="gold">Royal Treatment</span>?</h2>
+      <p>Pick your package, choose a date, and we'll handle the rest. Your car deserves it.</p>
+      <ul class="bottom-cta-bullets">
+        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> Free estimates included</li>
+        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> No obligation to commit</li>
+        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> $50 deposit goes toward your service</li>
+      </ul>
+      <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+    </div>
+  </section>
+
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-logo">ROYAL KINGS AUTO CARE</div>
-    <p class="footer-tagline">Premium Detailing Service &nbsp;&middot;&nbsp; Winnipeg, MB</p>
+    <p class="footer-tagline">Premium Detailing Service &middot; Winnipeg, MB</p>
     <ul class="footer-links">
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#how-it-works">Process</a></li>
       <li><a href="#booking">Book Now</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
     <p class="footer-copy">&copy; 2026 Royal Kings Auto Care. All rights reserved.</p>
-    <p style="font-size:0.65rem; opacity:0.45; margin-top:0.5rem;">Powered by <a href="https://fjdmedia.github.io/FJMedia" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">FJMedia</a></p>
+    <p style="font-size:0.65rem; opacity:0.45; margin-top:0.5rem;">Powered by <a href="https://fjmedia.ca" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">FJMedia</a></p>
   </footer>
 
-  <script>
-    // ── Paste your deployed Google Apps Script Web App URL here ──
-    const GAS_URL = 'YOUR_APPS_SCRIPT_URL';
+  <!-- ── STICKY MOBILE CTA ── -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="#booking"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+  </div>
 
-    // Mobile nav
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast" role="alert">
+    <span class="toast-icon"><i data-lucide="check-circle" style="width:20px;height:20px;stroke-width:1.5;"></i></span>
+    <span class="toast-text" id="toastText">Booking request sent!</span>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ── Lucide Icons ──
+    lucide.createIcons();
+
+    // ── Google Apps Script URL ──
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwcZcEFZAbQaSZVacnmOY8ypDQ1szAi-yzHJKNKt1BpYOGbvjeyFTeRD0RhBW8_pE5n/exec';
+
+    // ── Mobile nav + scroll lock ──
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      document.body.classList.toggle('nav-open', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }));
 
-    // Scroll fade-in
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          fadeObserver.unobserve(e.target);
+    // ── Reduced Motion Guard ──
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      document.querySelectorAll('.hero-logo-img, .hero-label, .hero h1, .hero-sub, .hero-divider, .hero-tagline, .hero-btns a, .hero-reassurance, .hero-trust-badges')
+        .forEach(el => { el.style.visibility = 'visible'; el.style.opacity = '1'; });
+    }
+
+    // ── GSAP ScrollTrigger Setup ──
+    if (!reducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance — staggered (visibility:hidden fallback prevents FOIC)
+    gsap.from('.hero-logo-img', { opacity: 0, scale: 0.8, duration: 1, ease: 'power2.out', delay: 0.2, onStart: function(){ gsap.set('.hero-logo-img', {visibility:'visible'}); } });
+    gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out', delay: 0.5, onStart: function(){ gsap.set('.hero-label', {visibility:'visible'}); } });
+    gsap.from('.hero h1', { opacity: 0, y: 30, duration: 0.8, ease: 'power2.out', delay: 0.7, onStart: function(){ gsap.set('.hero h1', {visibility:'visible'}); } });
+    gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', delay: 0.9, onStart: function(){ gsap.set('.hero-sub', {visibility:'visible'}); } });
+    gsap.from('.hero-divider', { opacity: 0, scaleX: 0, duration: 0.6, ease: 'power2.out', delay: 1, onStart: function(){ gsap.set('.hero-divider', {visibility:'visible'}); } });
+    gsap.from('.hero-tagline', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', delay: 1.1, onStart: function(){ gsap.set('.hero-tagline', {visibility:'visible'}); } });
+    gsap.from('.hero-btns a', { opacity: 0, y: 20, duration: 0.6, ease: 'back.out(1.5)', stagger: 0.12, delay: 1.3, onStart: function(){ gsap.set('.hero-btns a', {visibility:'visible'}); } });
+    gsap.from('.hero-reassurance', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out', delay: 1.5, onStart: function(){ gsap.set('.hero-reassurance', {visibility:'visible'}); } });
+    gsap.from('.hero-trust-badges', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out', delay: 1.6, onStart: function(){ gsap.set('.hero-trust-badges', {visibility:'visible'}); } });
+
+    // Hero logo float via GSAP (replaces CSS keyframes)
+    gsap.to('.hero-logo-img', {
+      y: -12, duration: 2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.5
+    });
+
+    // Section labels + titles + subs
+    gsap.utils.toArray('.section-label').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
+    });
+    gsap.utils.toArray('.section-title').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 24, duration: 0.7, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
+    });
+    gsap.utils.toArray('.section-sub').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
+    });
+
+    // Pricing cards — stagger
+    gsap.from('.pricing-card', {
+      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: '.pricing-grid', start: 'top 80%', once: true }
+    });
+
+    // Vehicle toggle
+    gsap.from('.vehicle-toggle-wrap', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: '.vehicle-toggle-wrap', start: 'top 85%', once: true }
+    });
+
+    // Before/After cards — stagger
+    gsap.from('.ba-card', {
+      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: '.ba-grid', start: 'top 80%', once: true }
+    });
+
+    // How It Works steps — stagger
+    gsap.from('.hiw-step', {
+      opacity: 0, y: 40, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1,
+      scrollTrigger: { trigger: '.hiw-grid', start: 'top 80%', once: true }
+    });
+
+    // Testimonial cards — stagger
+    gsap.from('.test-card', {
+      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: '.test-grid', start: 'top 80%', once: true }
+    });
+
+    // FAQ items — stagger
+    gsap.from('.faq-item', {
+      opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', stagger: 0.06,
+      scrollTrigger: { trigger: '.faq-list', start: 'top 80%', once: true }
+    });
+
+    // Booking form
+    gsap.from('.booking-form', {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '.booking-form', start: 'top 80%', once: true }
+    });
+
+    // Contact cards — stagger
+    gsap.from('.contact-card', {
+      opacity: 0, y: 30, duration: 0.6, ease: 'back.out(1.5)', stagger: 0.08,
+      scrollTrigger: { trigger: '.contact-cards', start: 'top 80%', once: true }
+    });
+
+    // Bottom CTA
+    gsap.from('.bottom-cta-inner', {
+      opacity: 0, y: 30, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: '#bottom-cta', start: 'top 80%', once: true }
+    });
+
+    // Footer
+    gsap.from('footer', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: 'footer', start: 'top 90%', once: true }
+    });
+    } // end !reducedMotion
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(openItem => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          openItem.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        // Toggle current
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+    });
 
-    // Set minimum date to 24 hours from now
+    // ── Sticky Mobile CTA ──
+    const stickyCta = document.getElementById('stickyCta');
+    const heroBtns = document.getElementById('heroBtns');
+    const bookingSection = document.getElementById('booking');
+
+    function updateStickyCta() {
+      if (!heroBtns || !stickyCta) return;
+      const heroBottom = heroBtns.getBoundingClientRect().bottom;
+      const bookingTop = bookingSection.getBoundingClientRect().top;
+      const show = heroBottom < 0 && bookingTop > window.innerHeight * 0.5;
+      stickyCta.classList.toggle('visible', show);
+    }
+    window.addEventListener('scroll', updateStickyCta, { passive: true });
+
+    // ── Toast Notification ──
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = message;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 4000);
+    }
+
+    // ── Set min date (24h from now) and max date (90 days out) ──
     const dateInput = document.getElementById('preferred_date');
     const minDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    const maxDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
     dateInput.setAttribute('min', minDate.toISOString().split('T')[0]);
+    dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
 
     // ── Vehicle Class Toggle + Dynamic Pricing ──
     let currentClass    = 'Coupes & Sedans';
@@ -1327,15 +2312,15 @@
       const totalMax = base + sur + extMax;
 
       if (!base && extMin === 0) {
-        estimateTotal.textContent = '—';
+        estimateTotal.textContent = '\u2014';
         estimateSub.textContent   = 'Select a package to see your estimate';
         return;
       }
 
       estimateTotal.textContent = totalMin === totalMax ? '$' + totalMin : 'from $' + totalMin;
       estimateSub.textContent   = pkg
-        ? pkg + (vSize ? ' · ' + vSize : '') + (extMin > 0 ? ' + add-ons' : '') + ' · Final price confirmed before service'
-        : 'Add-ons only · Select a package for full estimate';
+        ? pkg + (vSize ? ' \u00b7 ' + vSize : '') + (extMin > 0 ? ' + add-ons' : '') + ' \u00b7 Final price confirmed before service'
+        : 'Add-ons only \u00b7 Select a package for full estimate';
     }
 
     addonCards.forEach(card => {
@@ -1351,17 +2336,17 @@
     document.getElementById('service').addEventListener('change', calcEstimate);
     document.getElementById('vehicle_size').addEventListener('change', calcEstimate);
 
-    // ── Booking form submission
+    // ── Booking form submission ──
     const bookingForm = document.getElementById('bookingForm');
     const formSuccess = document.getElementById('formSuccess');
 
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const btn = bookingForm.querySelector('button[type="submit"]');
-      btn.textContent = 'Sending…';
+      btn.innerHTML = 'Sending&hellip;';
       btn.disabled = true;
 
-      // Collect selected add-ons and inject into form
+      // Collect selected add-ons
       const selectedAddons = [];
       addonCards.forEach(card => {
         if (card.classList.contains('selected')) {
@@ -1379,7 +2364,7 @@
 
       const formData = new FormData(bookingForm);
 
-      // Send to Google Apps Script for sheet logging (fire-and-forget)
+      // Send to Google Apps Script for sheet logging
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
         const sheetBody = new URLSearchParams({
           name:               formData.get('name')               || '',
@@ -1404,18 +2389,43 @@
       .then(res => res.json())
       .then(data => {
         if (data.success) {
+          showToast('Booking request sent!');
           bookingForm.style.display = 'none';
           formSuccess.classList.add('visible');
+          lucide.createIcons();
         } else {
           throw new Error(data.message);
         }
       })
       .catch(() => {
-        btn.textContent = '&#9818; Request Appointment';
+        btn.innerHTML = 'Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i>';
         btn.disabled = false;
+        lucide.createIcons();
         alert('Something went wrong. Please call or DM us directly!');
       });
     });
+    // ── Nav shrink on scroll ──
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Active nav link on scroll ──
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navAnchors.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => sectionObserver.observe(s));
+
+  }); // end DOMContentLoaded
   </script>
 </body>
 </html>
