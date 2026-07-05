@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fjdmedia.github.io/royal-kings-auto-care/sitemap.xml

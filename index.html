@@ -3,28 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Royal Kings Auto Care | Premium Auto Detailing in Winnipeg</title>
-  <meta name="description" content="Premium auto detailing in Winnipeg, MB. Interior packages from $110. We come to you. Book online in 2 minutes." />
-  <meta property="og:title" content="Royal Kings Auto Care | Auto Detailing Winnipeg" />
+  <title>Mobile Car Detailing Winnipeg | Royal Kings Auto Care</title>
+  <meta name="description" content="Premium mobile auto detailing in Winnipeg, MB. Interior packages from $110. We come to you. Book online in 2 minutes." />
+  <meta property="og:title" content="Mobile Car Detailing Winnipeg | Royal Kings Auto Care" />
   <meta property="og:description" content="Premium auto detailing in Winnipeg. Interior packages from $110. Book online." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fjdmedia.github.io/royal-kings-auto-care/" />
   <meta property="og:image" content="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" />
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Royal Kings Auto Care | Auto Detailing Winnipeg" />
+  <meta name="twitter:title" content="Mobile Car Detailing Winnipeg | Royal Kings Auto Care" />
   <meta name="twitter:description" content="Premium auto detailing in Winnipeg. Interior packages from $110. Book online." />
   <meta name="twitter:image" content="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" />
-  <!-- Canonical -->
   <link rel="canonical" href="https://fjdmedia.github.io/royal-kings-auto-care/" />
-  <!-- Robots -->
   <meta name="robots" content="index, follow" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230A0A0A'/%3E%3Ctext x='16' y='22' font-size='14' font-weight='bold' font-family='serif' text-anchor='middle' fill='%23C9A227'%3ERK%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Cpath d='M5 20.5 L7 10 L12.5 15 L16 7 L19.5 15 L25 10 L27 20.5 Z' fill='%23C9A227'/%3E%3Crect x='5' y='22.5' width='22' height='3' rx='1.2' fill='%23C9A227'/%3E%3C/svg%3E" />
   <link rel="preload" href="Logo.jpg" as="image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- LocalBusiness Schema -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,1406 +30,389 @@
     "url": "https://fjdmedia.github.io/royal-kings-auto-care/",
     "telephone": ["+14313349577", "+14313880859"],
     "image": "https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Winnipeg",
-      "addressRegion": "MB",
-      "addressCountry": "CA"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Winnipeg"
-    },
-    "sameAs": [
-      "https://www.instagram.com/RoyalKingsDetailWinnipeg/",
-      "https://www.tiktok.com/@RoyalKingsDetailing"
-    ],
+    "address": { "@type": "PostalAddress", "addressLocality": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
+    "areaServed": { "@type": "City", "name": "Winnipeg" },
+    "sameAs": ["https://www.instagram.com/RoyalKingsDetailWinnipeg/", "https://www.tiktok.com/@RoyalKingsDetailing"],
     "priceRange": "$$",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "08:00",
-      "closes": "18:00"
-    }
+    "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "08:00", "closes": "18:00" }
   }
   </script>
   <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <noscript><style>
+    .hero-logo-img, .hero-label, .hero h1, .hero-sub, .hero-divider, .hero-tagline, .hero-btns, .hero-reassurance, .hero-trust-badges, .hero-card { visibility: visible !important; }
+  </style></noscript>
   <style>
+  /* ════════════════════════════════════════════════════════════════
+     FJMedia · lane: redesign · rung: 4 (macrostructure rebuild)
+     Royal Kings Auto Care — full rebuild on the original theme
+     ── 2026-07-04 premium polish pass (rung 2 on the 06-30 rebuild) ──
+     preserved: routes/anchors, all copy, prices, form contract, GAS/Web3Forms
+     added: numbered section indices · estimate + price number-tick (rAF,
+     reduced-motion instant) · hours + waiver surfaced · crown favicon ·
+     scroll-margin anchors · overflow-x:clip · press states · text-wrap:balance
+     gates: full sweep re-run ✓ · interaction GI1–GI10 ✓ (per restraint-and-gates.md)
+     ════════════════════════════════════════════════════════════════ */
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
 
     :root {
-      --black:        #0A0A0A;
-      --black-soft:   #111111;
-      --black-card:   #161616;
-      --black-border: #1E1E1E;
-      --gold:         #C9A227;
-      --gold-light:   #E2B93B;
-      --gold-dim:     #A07E1F;
-      --white:        #FFFFFF;
-      --grey:         #AAAAAA;
-      --grey-dark:    #909090;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--black);
-      color: var(--white);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-    body.nav-open { overflow: hidden; }
-
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
-
-    *:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
-    button:focus-visible, a:focus-visible { outline-offset: 3px; }
-
-    /* ── Diamond pattern ── */
-    .diamond-bg { position: relative; }
-    .diamond-bg::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0; left: 0;
-      width: 90px;
-      background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(201,162,39,0.07) 14px, rgba(201,162,39,0.07) 15px),
-        repeating-linear-gradient(-45deg, transparent, transparent 14px, rgba(201,162,39,0.07) 14px, rgba(201,162,39,0.07) 15px);
-      pointer-events: none;
-    }
-    .diamond-bg::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0; right: 0;
-      width: 90px;
-      background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(201,162,39,0.07) 14px, rgba(201,162,39,0.07) 15px),
-        repeating-linear-gradient(-45deg, transparent, transparent 14px, rgba(201,162,39,0.07) 14px, rgba(201,162,39,0.07) 15px);
-      pointer-events: none;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 72px;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(201,162,39,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.5rem;
-      transition: height 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-    }
-    .nav-logo img {
-      height: 46px; width: 46px;
-      object-fit: contain;
-      border-radius: 50%;
-      border: 1px solid var(--gold-dim);
-      background: var(--white);
-      padding: 2px;
-      transition: height 0.3s, width 0.3s;
-    }
-    .nav-logo-text {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      line-height: 1.2;
-      transition: font-size 0.3s;
-    }
-    .nav-logo-text span {
-      display: block;
-      font-size: 0.62rem;
-      font-weight: 400;
-      color: var(--grey);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--grey);
-      text-decoration: none;
-      transition: color 0.25s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    .nav-cta {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold) !important;
-      padding: 0.5rem 1.4rem;
-      border-radius: 6px;
-      transition: background 0.25s !important, color 0.25s !important, box-shadow 0.25s !important;
-    }
-    .nav-cta:hover {
-      background: var(--gold) !important;
-      color: var(--black) !important;
-      box-shadow: 0 0 20px rgba(201,162,39,0.3);
-    }
-
-    /* Nav scrolled state */
-    nav.scrolled {
-      height: 58px;
-      background: rgba(10,10,10,0.97);
-      border-bottom-color: rgba(201,162,39,0.2);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-    }
-    nav.scrolled .nav-logo img { height: 36px; width: 36px; }
-    nav.scrolled .nav-logo-text { font-size: 0.9rem; }
-    nav.scrolled .nav-logo-text span { font-size: 0.56rem; }
-
-    .nav-links a.active { color: var(--gold); }
-
-    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: 0.3s; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100svh;
-      padding-top: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(ellipse at center, #1c1600 0%, var(--black) 65%);
-    }
-
-    .hero-diamonds {
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,162,39,0.03) 30px, rgba(201,162,39,0.03) 31px),
-        repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(201,162,39,0.03) 30px, rgba(201,162,39,0.03) 31px);
-      pointer-events: none;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 65%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      padding: 2rem;
-    }
-
-    /* FOIC fallback — hidden until GSAP animates in */
-    .hero-logo-img,
-    .hero-label,
-    .hero h1,
-    .hero-sub,
-    .hero-divider,
-    .hero-tagline,
-    .hero-btns a,
-    .hero-reassurance,
-    .hero-trust-badges { visibility: hidden; }
-
-    /* FOIC fallback — if GSAP CDN fails, show hero after 3s */
-    @keyframes foic-fallback { to { visibility: visible; opacity: 1; } }
-    .hero-logo-img, .hero-label, .hero h1, .hero-sub,
-    .hero-divider, .hero-tagline, .hero-btns a,
-    .hero-reassurance, .hero-trust-badges {
-      animation: foic-fallback 0.6s ease 3s both;
-    }
-
-    .hero-logo-img {
-      width: 180px; height: 180px;
-      object-fit: contain;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      background: var(--white);
-      padding: 8px;
-      margin: 0 auto 2.5rem;
-      display: block;
-      box-shadow:
-        0 0 0 6px rgba(201,162,39,0.06),
-        0 0 0 14px rgba(201,162,39,0.03),
-        0 0 60px rgba(201,162,39,0.3),
-        0 0 120px rgba(201,162,39,0.12);
-    }
-
-    .hero-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-    }
-    .hero-label::before,
-    .hero-label::after {
-      content: '';
-      height: 1px;
-      width: 50px;
-      background: linear-gradient(to right, transparent, var(--gold-dim));
-    }
-    .hero-label::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
-
-    .hero h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.0;
-      color: var(--white);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-    }
-    .hero h1 .gold { color: var(--gold); }
-
-    .hero-sub {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      letter-spacing: 0.22em;
-      color: var(--grey);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-divider {
-      width: 80px; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      margin: 0 auto 1.5rem;
-    }
-
-    .hero-tagline {
-      font-size: 1rem;
-      color: var(--grey);
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--black);
-      padding: 0.9rem 2.4rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-gold:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 24px rgba(201,162,39,0.35);
-    }
-
-    .btn-outline-gold {
-      background: transparent;
-      color: var(--gold);
-      padding: 0.9rem 2.4rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-outline-gold:hover {
-      background: var(--gold);
-      color: var(--black);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 24px rgba(201,162,39,0.35);
-    }
-
-    /* ── Hero Reassurance + Trust Badges ── */
-    .hero-reassurance {
-      font-size: 0.78rem;
-      color: var(--grey);
-      letter-spacing: 0.08em;
-      margin-top: 1.5rem;
-      font-weight: 400;
-    }
-
-    .hero-trust-badges {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 1.2rem;
-    }
-
-    .trust-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--gold-dim);
-      text-transform: uppercase;
-    }
-    .trust-badge i { color: var(--gold-dim); }
-
-    /* ── Section base ── */
-    section { padding: 7rem 2rem; }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .section-label::before,
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title .gold { color: var(--gold); }
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 2px;
-      background: var(--gold);
-      margin-top: 0.75rem;
-    }
-
-    .section-sub {
-      color: var(--grey);
-      font-size: 0.98rem;
-      font-weight: 300;
-      max-width: 540px;
-      line-height: 1.8;
-    }
-
-    .centered-header { text-align: center; }
-    .centered-header .section-label { justify-content: center; }
-    .centered-header .section-title::after { margin-left: auto; margin-right: auto; }
-    .centered-header .section-sub { margin: 0 auto; }
-
-    /* ── PRICING ── */
-    #pricing { background: var(--black-soft); }
-
-    .pricing-inner { max-width: 1100px; margin: 0 auto; }
-    .pricing-header { margin-bottom: 3.5rem; }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .pricing-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      position: relative;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-    }
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      border-radius: 16px 16px 0 0;
-    }
-    .pricing-card:hover {
-      border-color: rgba(201,162,39,0.3);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,162,39,0.08);
-    }
-    .pricing-card:hover::before { transform: scaleX(1); }
-
-    .pricing-card.featured {
-      border-color: rgba(201,162,39,0.4);
-      background: linear-gradient(160deg, #1a1800 0%, var(--black-card) 100%);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(201,162,39,0.06);
-    }
-    .pricing-card.featured::before { transform: scaleX(1); }
-
-    .pricing-featured-badge {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      background: var(--gold);
-      color: var(--black);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border-radius: 6px;
-    }
-
-    .pricing-tier {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-
-    .pricing-price {
-      font-family: 'Cinzel', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-    .pricing-price sup {
-      font-size: 1rem;
-      vertical-align: super;
-      font-weight: 400;
-      color: var(--gold);
-    }
-
-    .pricing-note {
-      font-size: 0.75rem;
-      color: var(--grey-dark);
-      margin-bottom: 1.8rem;
-      letter-spacing: 0.06em;
-    }
-
-    .pricing-divider {
-      width: 100%; height: 1px;
-      background: var(--black-border);
-      margin-bottom: 1.5rem;
-    }
-
-    .pricing-card h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .pricing-includes { list-style: none; margin-bottom: 2rem; flex: 1; }
-    .pricing-includes li {
-      font-size: 0.82rem;
-      color: var(--grey);
-      padding: 0.35rem 0;
-      border-bottom: 1px solid var(--black-border);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .pricing-includes li::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--gold);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-
-    .pricing-varies {
-      text-align: center;
-      margin-top: 2.5rem;
-      font-size: 0.82rem;
-      color: var(--grey-dark);
-      letter-spacing: 0.06em;
-    }
-
-    /* ── VEHICLE CLASS TOGGLE ── */
-    .vehicle-toggle-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2.5rem 0 3rem;
-      gap: 0.8rem;
-    }
-
-    .vehicle-toggle-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--grey-dark);
-    }
-
-    .vehicle-toggle {
-      display: flex;
-      border: 1px solid var(--black-border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .vehicle-btn {
-      background: var(--black-card);
-      border: none;
-      border-right: 1px solid var(--black-border);
-      color: var(--grey);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.8rem 1.5rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-      line-height: 1.5;
-    }
-    .vehicle-btn:last-child { border-right: none; }
-    .vehicle-btn:hover { color: var(--gold); background: rgba(201,162,39,0.06); }
-    .vehicle-btn.active { background: var(--gold); color: var(--black); }
-
-    .vehicle-surcharge-tag {
-      font-size: 0.72rem;
-      color: var(--gold-dim);
-      letter-spacing: 0.06em;
-      min-height: 1.2em;
-      transition: opacity 0.2s;
-    }
-
-    @media (max-width: 640px) {
-      .vehicle-toggle { flex-direction: column; width: 100%; max-width: 320px; border-radius: 10px; }
-      .vehicle-btn { border-right: none; border-bottom: 1px solid var(--black-border); min-height: 48px; }
-      .vehicle-btn:last-child { border-bottom: none; }
-    }
-
-    /* ── BEFORE / AFTER ── */
-    #before-after { background: var(--black-soft); }
-    .ba-inner { max-width: 1000px; margin: 0 auto; }
-    .ba-header { margin-bottom: 3.5rem; }
-
-    .ba-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .ba-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .ba-card:hover {
-      border-color: rgba(201,162,39,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-
-    .ba-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      height: 180px;
-      position: relative;
-    }
-
-    .ba-side {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-    .ba-side--before {
-      background: linear-gradient(135deg, #151515 0%, #1a1a1a 100%);
-      color: var(--grey-dark);
-    }
-    .ba-side--after {
-      background: linear-gradient(135deg, #1a1800 0%, #201e00 100%);
-      color: var(--gold-dim);
-    }
-    /* REPLACE .ba-side divs with <img> tags when real before/after photos are available */
-
-    .ba-divider-line {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 2px;
-      background: var(--gold);
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-
-    .ba-info {
-      padding: 1.2rem 1.5rem;
-    }
-    .ba-service {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.25rem;
-    }
-    .ba-vehicle {
-      font-size: 0.72rem;
-      color: var(--grey-dark);
-    }
-
-    .ba-note {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.78rem;
-      color: var(--grey-dark);
-      font-style: italic;
-    }
-
-    /* ── HOW IT WORKS ── */
-    #how-it-works { background: var(--black); }
-
-    .hiw-inner { max-width: 1000px; margin: 0 auto; }
-    .hiw-header { margin-bottom: 3.5rem; }
-
-    .hiw-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-
-    .hiw-step {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      position: relative;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .hiw-step:hover {
-      border-color: rgba(201,162,39,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 15px rgba(201,162,39,0.06);
-    }
-
-    .hiw-step-num {
-      font-family: 'Cinzel', serif;
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 1rem;
-      opacity: 0.8;
-    }
-
-    .hiw-step-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: rgba(201,162,39,0.08);
-      border: 1px solid rgba(201,162,39,0.15);
-    }
-    .hiw-step-icon i { color: var(--gold); }
-
-    .hiw-step h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.04em;
-    }
-
-    .hiw-step p {
-      font-size: 0.82rem;
-      color: var(--grey);
-      line-height: 1.6;
-    }
-
-    /* ── TESTIMONIALS ── */
-    #testimonials { background: var(--black-soft); }
-    .test-inner { max-width: 1000px; margin: 0 auto; }
-    .test-header { margin-bottom: 3.5rem; }
-
-    .test-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .test-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .test-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      border-radius: 16px 16px 0 0;
-    }
-    .test-card:hover {
-      border-color: rgba(201,162,39,0.3);
-      transform: translateY(-4px);
-    }
-    .test-card:hover::before { transform: scaleX(1); }
-
-    .test-stars {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 1rem;
-    }
-    .test-stars i { color: var(--gold); }
-
-    .test-quote {
-      font-size: 0.88rem;
-      color: var(--grey);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .test-author {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-    .test-detail {
-      font-size: 0.72rem;
-      color: var(--grey-dark);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── FAQ ── */
-    #faq { background: var(--black); }
-    .faq-inner { max-width: 720px; margin: 0 auto; }
-    .faq-header { margin-bottom: 3rem; }
-
-    .faq-item {
-      border-bottom: 1px solid var(--black-border);
-    }
-
-    .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 1.4rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      gap: 1rem;
-      min-height: 48px;
-    }
-
-    .faq-question span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--white);
-      text-align: left;
-    }
-
-    .faq-question i {
-      color: var(--gold);
-      flex-shrink: 0;
-      transition: transform 0.3s;
-    }
-
-    .faq-item.open .faq-question i {
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-
-    .faq-answer p {
-      padding: 0 0 1.4rem;
-      font-size: 0.85rem;
-      color: var(--grey);
-      line-height: 1.7;
-    }
-
-    /* ── BOOKING FORM ── */
-    #booking { background: var(--black-soft); }
-
-    .booking-inner { max-width: 780px; margin: 0 auto; }
-    .booking-header { margin-bottom: 3rem; }
-
-    .booking-form {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 20px;
-      padding: 3rem;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .booking-form::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      border-radius: 20px 20px 0 0;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .form-group label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--black-soft);
-      border: 1px solid var(--black-border);
-      border-radius: 10px;
-      color: var(--white);
-      padding: 0.85rem 1rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      width: 100%;
-      transition: border-color 0.25s, box-shadow 0.25s;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--gold-dim);
-      box-shadow: 0 0 0 3px rgba(201,162,39,0.08);
-    }
-
-    .form-group select option { background: var(--black-soft); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-
-    .form-divider {
-      border: none;
-      border-top: 1px solid var(--black-border);
-      margin: 1.5rem 0;
-    }
-
-    .form-submit { text-align: center; margin-top: 1.5rem; }
-    .form-submit .btn-gold { padding: 1rem 3rem; font-size: 0.82rem; }
-
-    .form-note {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--grey-dark);
-      letter-spacing: 0.06em;
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 3rem 2rem;
-    }
-    .form-success.visible { display: block; }
-    .form-success h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-    }
-    .form-success p { color: var(--grey); font-size: 0.9rem; }
-
-    /* ── ADD-ONS ── */
-    .addons-section-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin: 2rem 0 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .addons-section-label::before {
-      content: '';
-      display: inline-block;
-      width: 24px; height: 1px;
-      background: var(--gold);
-    }
-
-    .addons-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .addon-card {
-      background: var(--black-soft);
-      border: 1px solid var(--black-border);
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      user-select: none;
-    }
-    .addon-card:hover {
-      border-color: rgba(201,162,39,0.3);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-    }
-    .addon-card.selected {
-      border-color: var(--gold);
-      background: rgba(201,162,39,0.05);
-      box-shadow: 0 0 12px rgba(201,162,39,0.1);
-    }
-    .addon-card input[type="checkbox"] { display: none; }
-
-    .addon-check {
-      width: 18px; height: 18px;
-      border: 1px solid var(--black-border);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); }
-    .addon-check::after { content: '\2713'; font-size: 0.65rem; color: var(--black); opacity: 0; transition: opacity 0.15s; }
-    .addon-card.selected .addon-check::after { opacity: 1; }
-
-    .addon-info { flex: 1; }
-    .addon-name { font-size: 0.8rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; letter-spacing: 0.04em; }
-    .addon-price { font-size: 0.75rem; color: var(--gold); font-weight: 600; margin-bottom: 0.2rem; }
-    .addon-note { font-size: 0.67rem; color: var(--grey-dark); line-height: 1.4; }
-    .addon-full-day {
-      font-size: 0.62rem; color: var(--gold-dim);
-      letter-spacing: 0.07em; text-transform: uppercase;
-      margin-top: 0.3rem; display: block;
-    }
-
-    /* ── ESTIMATE BOX ── */
-    .estimate-box {
-      background: var(--black-soft);
-      border: 1px solid rgba(201,162,39,0.3);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      margin: 0.5rem 0 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .estimate-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-dark); }
-    .estimate-total { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); }
-    .estimate-sub { font-size: 0.7rem; color: var(--grey-dark); letter-spacing: 0.04em; margin-top: 0.2rem; }
-
-    /* ── DEPOSIT NOTICE ── */
-    .deposit-notice {
-      background: rgba(201,162,39,0.05);
-      border-left: 2px solid var(--gold-dim);
-      border-radius: 0 10px 10px 0;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.75rem;
-      color: var(--grey);
-      letter-spacing: 0.03em;
-      line-height: 1.7;
-    }
-    .deposit-notice strong { color: var(--gold); }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--black);
-      text-align: center;
-      position: relative;
-    }
-
-    .contact-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-
-    .contact-cards {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .contact-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 16px;
-      padding: 1.8rem 2rem;
-      text-decoration: none;
-      color: var(--white);
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      min-width: 160px;
-      position: relative;
-    }
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      border-radius: 16px 16px 0 0;
-    }
-    .contact-card:hover {
-      border-color: rgba(201,162,39,0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-    .contact-card:hover::before { transform: scaleX(1); }
-
-    .contact-card--static { cursor: default; }
-    .contact-card--static:hover { transform: none; box-shadow: none; border-color: var(--black-border); }
-    .contact-card--static:hover::before { transform: scaleX(0); }
-
-    .contact-card-icon { display: flex; align-items: center; justify-content: center; }
-    .contact-card-icon i { color: var(--gold); }
-    .contact-card-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-    .contact-card-value { font-size: 0.82rem; color: var(--grey); }
-
-    /* ── BOTTOM CTA ── */
-    #bottom-cta {
-      background: var(--black-soft);
-      text-align: center;
-      padding: 5rem 2rem;
-      position: relative;
-    }
-    .bottom-cta-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .bottom-cta-inner h2 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-    .bottom-cta-inner h2 .gold { color: var(--gold); }
-    .bottom-cta-inner p {
-      font-size: 0.92rem;
-      color: var(--grey);
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-    }
-    .bottom-cta-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .bottom-cta-bullets li {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.88rem;
-      color: var(--grey);
-      letter-spacing: 0.02em;
-    }
-    .bottom-cta-bullets li i { color: var(--gold); flex-shrink: 0; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      padding: 3.5rem 2rem 2.5rem;
-      text-align: center;
-      border-top: 1px solid rgba(201,162,39,0.15);
-      position: relative;
-    }
-    footer::before {
-      content: '';
-      display: block;
-      width: 48px;
-      height: 2px;
-      background: var(--gold);
-      margin: 0 auto 2rem;
-    }
-
-    .footer-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.3rem;
-    }
-    .footer-tagline {
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--grey-dark);
-      margin-bottom: 2rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 2.5rem;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 0.75rem;
-      color: var(--grey-dark);
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy { font-size: 0.75rem; color: var(--grey-dark); }
-
-    /* ── STICKY MOBILE CTA ── */
-    .sticky-cta {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0; right: 0;
-      z-index: 90;
-      background: rgba(10,10,10,0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(201,162,39,0.2);
-      padding: 0.75rem 1.25rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    .sticky-cta.visible { transform: translateY(0); }
-
-    .sticky-cta a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      background: var(--gold);
-      color: var(--black);
-      padding: 0.85rem;
-      padding-bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-
-    /* ── TOAST ── */
-    .toast {
-      position: fixed;
-      top: 84px;
-      right: 1.5rem;
-      background: var(--black-card);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      z-index: 200;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(201,162,39,0.15);
-      transform: translateX(calc(100% + 2rem));
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-    }
-    .toast.visible { transform: translateX(0); }
-    .toast-icon { display: flex; }
-    .toast-icon i { color: var(--gold); }
-    .toast-text {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 768px) {
-      section { padding: 4.5rem 1.25rem; }
-
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 72px; left: 0; right: 0;
-        background: rgba(17,17,17,0.98);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        padding: 1.5rem 1.25rem;
-        gap: 1.2rem;
-        border-bottom: 1px solid rgba(201,162,39,0.2);
-        z-index: 99;
-      }
-      .nav-links.open a {
-        font-size: 0.95rem;
-        padding: 0.5rem 0;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-      }
-
-      .hero h1 { font-size: 2.4rem; }
-      .hero-logo-img { width: 120px; height: 120px; }
-      .hero-btns { flex-direction: column; align-items: center; }
-      .hero-btns a { width: 100%; max-width: 300px; justify-content: center; min-height: 48px; }
-
-      .pricing-grid { grid-template-columns: 1fr; }
-      .pricing-card { border-radius: 14px; }
-
-      .ba-grid { grid-template-columns: 1fr; }
-      .ba-card { border-radius: 14px; }
-      .ba-images { height: 160px; }
-
-      .hiw-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .hiw-step { padding: 1.5rem 1.2rem; border-radius: 14px; }
-      .hiw-step-num { font-size: 2rem; }
-
-      .test-grid { grid-template-columns: 1fr; }
-      .test-card { border-radius: 14px; }
-
-      .booking-form { padding: 2rem 1.25rem; border-radius: 16px; }
-      .form-row { grid-template-columns: 1fr; }
-      .addons-grid { grid-template-columns: 1fr; }
-      .addon-card { border-radius: 10px; min-height: 44px; }
-
-      .contact-cards { flex-direction: column; align-items: center; }
-      .contact-card { width: 100%; max-width: 320px; border-radius: 14px; min-height: 44px; }
-
-      .footer-links { gap: 1.2rem; }
-
-      .sticky-cta { display: block; }
-      footer { padding-bottom: 5rem; }
-    }
-
-    @media (max-width: 480px) {
-      .hiw-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2rem; }
-      .hero-logo-img { width: 100px; height: 100px; }
-    }
-
-    @media (max-width: 440px) {
-      .hero h1 { font-size: 1.9rem; }
-    }
-
-    /* ── Reduced Motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-      .hero-logo-img, .hero-label, .hero h1, .hero-sub,
-      .hero-divider, .hero-tagline, .hero-btns a,
-      .hero-reassurance, .hero-trust-badges {
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-    }
+      --ink-900:#080706; --ink-850:#0c0b09; --ink-800:#121008; --ink-775:#16130d;
+      --ink-750:#1a1610; --ink-700:#221d15; --line:#2c2620; --line-soft:rgba(201,162,39,0.14);
+      --gold:#C9A227; --gold-bright:#E7C75A; --gold-deep:#9A7B1D; --gold-ink:#6b5413;
+      --gold-glow:rgba(201,162,39,0.30); --gold-haze:rgba(201,162,39,0.08);
+      --text:#F4F0E7; --text-soft:#cfc7b6; --text-mut:#a89e8b; --text-dim:#766e5e; --on-gold:#0a0805;
+      --serif:'Cinzel',Georgia,serif; --sans:'Montserrat',system-ui,sans-serif;
+      --r-xs:6px; --r-sm:10px; --r:16px; --r-lg:22px; --r-pill:999px;
+      --sh-1:0 1px 2px rgba(0,0,0,0.4); --sh-2:0 8px 24px -8px rgba(0,0,0,0.55);
+      --sh-3:0 28px 60px -22px rgba(0,0,0,0.7); --sh-gold:0 22px 60px -26px var(--gold-glow);
+      --dur-fast:180ms; --dur:320ms; --dur-slow:560ms;
+      --ease:cubic-bezier(.2,.7,.2,1); --ease-emph:cubic-bezier(.2,.9,.1,1);
+      --maxw:1240px; --gutter:clamp(1.25rem,5vw,4rem);
+    }
+
+    body { font-family:var(--sans); color:var(--text); line-height:1.7; overflow-x:clip; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      /* Base is no longer a single flat value — a warm charcoal floor with a faint
+         top-of-page lift, so the black already reads as a lit room, not a void. */
+      background:
+        radial-gradient(1200px 900px at 50% -8%, #14110c, transparent 60%),
+        linear-gradient(180deg, var(--ink-850), var(--ink-900) 40%); background-attachment:fixed; background-color:var(--ink-900); }
+    body.nav-open { overflow:hidden; }
+    /* ── Showroom atmosphere: cinematic vignette + fine film grain over the whole
+       page, so large dark areas get depth without any moving decoration (G61-safe:
+       static, meaning = a dark detail bay lit from above; nav/CTA sit above both). ── */
+    body::before { content:''; position:fixed; inset:0; z-index:2; pointer-events:none;
+      background:radial-gradient(130% 120% at 50% 32%, transparent 52%, rgba(0,0,0,0.34) 100%); }
+    body::after { content:''; position:fixed; inset:0; z-index:3; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    ::selection { background:var(--gold); color:var(--on-gold); }
+    ::-webkit-scrollbar { width:7px; } ::-webkit-scrollbar-track { background:var(--ink-900); }
+    ::-webkit-scrollbar-thumb { background:var(--gold-ink); border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover { background:var(--gold-deep); }
+    *:focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:4px; }
+    img { display:block; max-width:100%; } a { color:inherit; text-decoration:none; } ul { list-style:none; }
+
+    .wrap { width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+    section { position:relative; scroll-margin-top:5.5rem; }
+    /* Grid children must be allowed to shrink below content min-width, or a long
+       token / large heading blows the track past the viewport (G27 — caught at 320px). */
+    .pricing-inner > *, .hiw-inner > *, .faq-inner > *, .booking-inner > *, .contact-inner > *, .bottom-cta-inner > *, .footer-inner > * { min-width:0; }
+    .booking-rail-contact a, .contact-card-value, .footer-col a { overflow-wrap:anywhere; }
+
+    /* Signature: gold hairline + diamond node (rotating role) */
+    .sig { display:flex; align-items:center; gap:0.6rem; color:var(--gold); margin-bottom:0.9rem; line-height:1; }
+    .sig::before { content:''; width:30px; height:1px; background:linear-gradient(90deg,transparent,var(--gold)); }
+    .sig .diamond { width:6px; height:6px; background:var(--gold); transform:rotate(45deg); flex:none; box-shadow:0 0 0 3px var(--gold-haze); }
+    .sig .idx { font-size:0.68rem; font-weight:600; letter-spacing:0.22em; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+
+    .section-label { font-weight:600; font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); display:inline-block; margin-bottom:0.9rem; }
+    .section-title { font-family:var(--serif); font-weight:600; font-size:clamp(2rem,4.6vw,3.2rem); line-height:1.06; letter-spacing:0.01em; color:var(--text); text-wrap:balance; }
+    .section-sub { color:var(--text-mut); font-size:1.02rem; line-height:1.7; max-width:42ch; margin-top:1.1rem; }
+    .gold { color:var(--gold); }
+    .gold-grad { background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+    /* ── Editorial asymmetric section header (left rail) ── */
+    .sec-head { max-width:34ch; }
+
+    /* ════════════ BUTTONS ════════════ */
+    .btn-gold,.btn-outline-gold { display:inline-flex; align-items:center; justify-content:center; gap:0.55rem; font-weight:700; font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; padding:1rem 2.1rem; border-radius:var(--r-sm); cursor:pointer; border:1px solid transparent; white-space:nowrap; transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease); }
+    .btn-gold { background:linear-gradient(180deg,var(--gold-bright),var(--gold)); color:var(--on-gold); box-shadow:var(--sh-gold),inset 0 1px 0 rgba(255,255,255,0.25); }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 30px 70px -24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,0.3); }
+    .btn-gold:active { transform:translateY(0); }
+    .btn-gold[disabled] { opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none; }
+    .btn-outline-gold { background:transparent; color:var(--gold); border-color:var(--gold-deep); }
+    .btn-outline-gold:hover { background:var(--gold-haze); border-color:var(--gold); transform:translateY(-2px); }
+    .btn-outline-gold:active { transform:translateY(0); }
+
+    /* ════════════ NAV ════════════ */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.15rem var(--gutter); background:rgba(8,7,6,0.55); backdrop-filter:blur(14px); border-bottom:1px solid transparent; transition:padding var(--dur) var(--ease),background var(--dur) var(--ease),border-color var(--dur) var(--ease); }
+    nav.scrolled { padding-block:0.7rem; background:rgba(8,7,6,0.9); border-bottom-color:var(--line); }
+    .nav-logo { display:flex; align-items:center; gap:0.7rem; }
+    .nav-logo img { width:42px; height:42px; border-radius:8px; object-fit:cover; }
+    .nav-logo-text { font-family:var(--serif); font-weight:700; font-size:1.05rem; line-height:1; letter-spacing:0.04em; color:var(--text); }
+    .nav-logo-text span { display:block; font-family:var(--sans); font-weight:500; font-size:0.62rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold); margin-top:0.3rem; }
+    .nav-links { display:flex; align-items:center; gap:0.4rem; }
+    .nav-links > li > a:not(.nav-cta) { font-size:0.82rem; font-weight:500; letter-spacing:0.04em; color:var(--text-soft); padding:0.5rem 0.85rem; border-radius:var(--r-xs); position:relative; transition:color var(--dur) var(--ease); }
+    .nav-links > li > a:not(.nav-cta)::after { content:''; position:absolute; left:0.85rem; right:0.85rem; bottom:0.32rem; height:1px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform var(--dur) var(--ease); }
+    .nav-links > li > a:not(.nav-cta):hover { color:var(--text); }
+    .nav-links > li > a:not(.nav-cta):hover::after,.nav-links > li > a.active::after { transform:scaleX(1); }
+    .nav-links > li > a.active { color:var(--gold); }
+    .nav-cta { display:inline-flex; align-items:center; font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold)); padding:0.62rem 1.2rem; border-radius:var(--r-xs); margin-left:0.5rem; box-shadow:var(--sh-1); transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
+    .nav-cta:hover { transform:translateY(-1px); box-shadow:0 14px 30px -12px var(--gold-glow); }
+    .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+    .hamburger span { width:24px; height:2px; background:var(--gold); border-radius:2px; transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease); }
+    .nav-open .hamburger span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-open .hamburger span:nth-child(2) { opacity:0; }
+    .nav-open .hamburger span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    @media (max-width:900px){
+      .hamburger { display:flex; }
+      .nav-links { position:fixed; inset:0 0 0 auto; width:min(80vw,320px); flex-direction:column; align-items:flex-start; justify-content:center; gap:0.5rem; background:var(--ink-850); border-left:1px solid var(--line); padding:2rem var(--gutter); transform:translateX(100%); transition:transform var(--dur-slow) var(--ease-emph); }
+      .nav-links.open { transform:translateX(0); }
+      .nav-links > li { width:100%; }
+      .nav-links > li > a:not(.nav-cta) { display:block; font-size:1.05rem; padding:0.7rem 0; }
+      .nav-links > li > a:not(.nav-cta)::after { display:none; }
+      .nav-cta { margin-left:0; margin-top:0.6rem; width:100%; justify-content:center; padding:0.9rem; }
+    }
+
+    /* ════════════ HERO — split asymmetric ════════════ */
+    .hero { min-height:100svh; display:flex; align-items:center; padding:8rem var(--gutter) 4rem; overflow:hidden;
+      background:
+        radial-gradient(1000px 700px at 78% 12%, var(--gold-haze), transparent 58%),
+        radial-gradient(700px 500px at 0% 100%, rgba(154,123,29,0.07), transparent 60%),
+        var(--ink-900); }
+    .hero-watermark { position:absolute; right:-4%; top:50%; transform:translateY(-50%); font-family:var(--serif); font-weight:900; font-size:34vw; line-height:0.8; color:#fff; opacity:0.018; pointer-events:none; user-select:none; letter-spacing:-0.04em; z-index:0; }
+    .hero-grid { position:relative; z-index:1; width:100%; max-width:var(--maxw); margin-inline:auto; display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(2rem,5vw,5rem); align-items:center; }
+
+    .hero-left { display:flex; flex-direction:column; align-items:flex-start; }
+    .hero-label { visibility:hidden; display:inline-flex; align-items:center; gap:0.6rem; font-weight:600; font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
+    .hero-label::before { content:''; width:22px; height:1px; background:var(--gold-deep); }
+    .hero h1 { visibility:hidden; font-family:var(--serif); font-weight:700; font-size:clamp(2.8rem,7vw,5rem); line-height:1.0; letter-spacing:0.012em; color:var(--text); text-wrap:balance; }
+    .hero h1 .gold { background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-sub { visibility:hidden; font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.1rem,2.4vw,1.5rem); color:var(--gold); letter-spacing:0.04em; margin-top:1.3rem; max-width:24ch; }
+    .hero-divider { visibility:hidden; width:70px; height:1px; background:var(--gold-deep); margin:1.6rem 0; position:relative; }
+    .hero-divider::after { content:''; position:absolute; left:0; top:50%; transform:translate(0,-50%) rotate(45deg); width:7px; height:7px; background:var(--gold); }
+    .hero-tagline { visibility:hidden; font-size:1.05rem; color:var(--text-soft); max-width:42ch; line-height:1.65; }
+    .hero-btns { visibility:hidden; display:flex; flex-wrap:wrap; gap:0.9rem; margin-top:2.2rem; }
+    .hero-reassurance { visibility:hidden; margin-top:1.4rem; font-size:0.8rem; letter-spacing:0.04em; color:var(--text-dim); }
+
+    /* Hero action card (right) */
+    .hero-card { visibility:hidden; position:relative; background:linear-gradient(180deg,var(--ink-775),var(--ink-850)); border:1px solid var(--line); border-radius:var(--r-lg); padding:2.2rem 2rem 2rem; box-shadow:var(--sh-3); }
+    .hero-card::before { content:''; position:absolute; top:0; left:2rem; right:2rem; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .hero-card-crest { display:flex; align-items:center; gap:0.9rem; margin-bottom:1.4rem; }
+    .hero-logo-img { width:62px; height:62px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 1px var(--gold-deep),0 0 0 6px rgba(201,162,39,0.06); flex:none; }
+    .hero-card-crest-text { font-family:var(--serif); font-weight:700; font-size:1.05rem; color:var(--text); line-height:1.2; }
+    .hero-card-crest-text span { display:block; font-family:var(--sans); font-weight:500; font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin-top:0.3rem; }
+    .hero-card-anchor { display:flex; align-items:baseline; gap:0.5rem; padding-bottom:1.3rem; margin-bottom:1.3rem; border-bottom:1px solid var(--line); }
+    .hero-card-anchor .from { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-dim); }
+    .hero-card-anchor .amt { font-family:var(--serif); font-weight:700; font-size:2.2rem; color:var(--text); }
+    .hero-card-q { font-size:0.74rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem; }
+    .hero-chips { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-bottom:1.4rem; }
+    .hero-chip { font-family:var(--sans); font-size:0.72rem; font-weight:600; color:var(--text-soft); background:var(--ink-800); border:1px solid var(--line); border-radius:var(--r-sm); padding:0.7rem 0.4rem; cursor:pointer; line-height:1.25; transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),color var(--dur) var(--ease),transform var(--dur) var(--ease); }
+    .hero-chip:hover { border-color:var(--gold); color:var(--text); transform:translateY(-2px); background:var(--gold-haze); }
+    .hero-chip:active { transform:translateY(0); }
+    .hero-card .btn-gold { width:100%; }
+    .hero-trust-badges { visibility:hidden; display:flex; flex-wrap:wrap; gap:0.6rem 1.1rem; margin-top:1.3rem; }
+    .trust-badge { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.74rem; font-weight:500; color:var(--text-mut); }
+    .trust-badge i { color:var(--gold); }
+
+    @media (max-width:940px){
+      .hero { min-height:auto; padding-top:7rem; }
+      .hero-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .hero-left { align-items:flex-start; }
+      .hero-watermark { display:none; }
+    }
+
+    /* ════════════ MARQUEE / COVERAGE STRIP ════════════ */
+    .strip { border-block:1px solid var(--line); background:radial-gradient(700px 160px at 50% 50%, var(--gold-haze), transparent 72%), var(--ink-850); }
+    .strip-inner { max-width:var(--maxw); margin-inline:auto; padding:1.1rem var(--gutter); display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:0.6rem 2rem; }
+    .strip-item { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.78rem; font-weight:500; letter-spacing:0.04em; color:var(--text-mut); }
+    .strip-item i { color:var(--gold); width:15px; height:15px; }
+    .strip-dot { width:4px; height:4px; background:var(--gold-deep); transform:rotate(45deg); }
+    @media (max-width:640px){ .strip-dot { display:none; } }
+
+    /* ════════════ PRICING — left rail + horizontal rows ════════════ */
+    #pricing { background:radial-gradient(1000px 700px at 90% 4%, rgba(201,162,39,0.055), transparent 55%), linear-gradient(180deg,var(--ink-900),var(--ink-850)); }
+    .pricing-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,8rem) var(--gutter); display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(2rem,5vw,4.5rem); align-items:start; }
+    .pricing-rail { position:sticky; top:6rem; }
+    .vehicle-toggle-wrap { margin-top:2rem; display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem; }
+    .vehicle-toggle-label { font-size:0.72rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); }
+    .vehicle-toggle { display:flex; flex-direction:column; align-items:stretch; padding:5px; gap:4px; background:var(--ink-775); border:1px solid var(--line); border-radius:var(--r); box-shadow:inset 0 1px 3px rgba(0,0,0,0.5); width:100%; max-width:300px; }
+    .vehicle-btn { font-family:var(--sans); font-size:0.8rem; font-weight:600; letter-spacing:0.02em; color:var(--text-mut); background:transparent; border:none; cursor:pointer; padding:0.72rem 1rem; min-height:44px; display:flex; align-items:center; justify-content:center; border-radius:var(--r-sm); text-align:center; transition:color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
+    .vehicle-btn:hover { color:var(--text); }
+    .vehicle-btn:active { transform:translateY(1px); }
+    .vehicle-btn.active { color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold)); box-shadow:var(--sh-1),inset 0 1px 0 rgba(255,255,255,0.25); }
+    .vehicle-surcharge-tag { font-size:0.8rem; color:var(--text-dim); min-height:1.2em; }
+
+    .pricing-rows { display:flex; flex-direction:column; gap:1rem; }
+    .pricing-card { position:relative; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:1.5rem; background:var(--ink-750); border:1px solid var(--line); border-radius:var(--r); padding:1.6rem 1.8rem; box-shadow:var(--sh-2),inset 0 1px 0 rgba(255,255,255,0.03); transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
+    .pricing-card:hover { transform:translateX(4px); border-color:var(--gold-deep); box-shadow:var(--sh-3),inset 0 1px 0 rgba(255,255,255,0.04); }
+    .pricing-card.featured { background:linear-gradient(120deg,var(--ink-700),var(--ink-775)); border-color:var(--gold-deep); box-shadow:var(--sh-gold),var(--sh-2); }
+    .pricing-card.featured::before { content:''; position:absolute; left:0; top:1.2rem; bottom:1.2rem; width:3px; background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep)); border-radius:3px; }
+    .pricing-featured-badge { position:absolute; top:-11px; right:1.6rem; font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold)); padding:0.35rem 0.9rem; border-radius:var(--r-pill); box-shadow:var(--sh-1); }
+    .pc-price { display:flex; flex-direction:column; min-width:96px; }
+    .pricing-tier { font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); }
+    .pricing-price { font-family:var(--serif); font-weight:700; font-size:2.3rem; line-height:1; color:var(--text); display:flex; align-items:flex-start; gap:1px; margin-top:0.3rem; }
+    .pricing-price sup { font-size:0.95rem; font-weight:500; margin-top:0.35rem; color:var(--gold); }
+    .price-val { font-variant-numeric:tabular-nums; }
+    .pricing-note { font-size:0.7rem; color:var(--text-dim); margin-top:0.35rem; }
+    .pc-body h3 { font-family:var(--serif); font-weight:600; font-size:1.12rem; color:var(--text); margin-bottom:0.5rem; }
+    .pricing-includes { display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem; }
+    .pricing-includes li { position:relative; padding-left:1.1rem; font-size:0.84rem; color:var(--text-soft); }
+    .pricing-includes li::before { content:''; position:absolute; left:0; top:0.55em; width:6px; height:6px; background:var(--gold); transform:rotate(45deg); }
+    .pc-action .book-now-btn { white-space:nowrap; }
+    .pricing-varies { grid-column:1 / -1; font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem; }
+    @media (max-width:920px){
+      .pricing-inner { grid-template-columns:1fr; }
+      .pricing-rail { position:static; }
+      .vehicle-toggle-wrap { align-items:flex-start; }
+    }
+    @media (max-width:560px){
+      .pricing-card { grid-template-columns:1fr; gap:1rem; text-align:left; }
+      .pc-action .book-now-btn { width:100%; }
+    }
+
+    /* ════════════ PROCESS — vertical gold-spine timeline ════════════ */
+    #how-it-works { background:radial-gradient(850px 650px at 4% 22%, rgba(201,162,39,0.075), transparent 52%), radial-gradient(700px 620px at 16% 88%, rgba(154,123,29,0.06), transparent 56%), radial-gradient(600px 500px at 100% 70%, rgba(201,162,39,0.045), transparent 58%), var(--ink-900); }
+    /* Faint oversized crown watermark fills the process section's sparse quadrant
+       with brand meaning (coherence with the hero RK mark; G62-safe). */
+    #how-it-works .hiw-inner { position:relative; }
+    .hiw-watermark { position:absolute; left:-1%; bottom:-6%; width:min(30vw,320px); color:var(--gold); opacity:0.05; pointer-events:none; z-index:0; }
+    @media (max-width:920px){ .hiw-watermark { display:none; } }
+    .hiw-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,8rem) var(--gutter); display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(2rem,5vw,4.5rem); align-items:start; }
+    .hiw-rail { position:sticky; top:6rem; }
+    .hiw-timeline { position:relative; display:flex; flex-direction:column; gap:2.2rem; padding-left:3.4rem; }
+    .hiw-timeline::before { content:''; position:absolute; left:19px; top:8px; bottom:8px; width:1px; background:linear-gradient(180deg,var(--gold),var(--gold-deep),transparent); }
+    .hiw-step { position:relative; }
+    .hiw-step-num { position:absolute; left:-3.4rem; top:-2px; width:40px; height:40px; display:grid; place-items:center; border-radius:50%; font-family:var(--serif); font-weight:700; font-size:0.95rem; color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold)); box-shadow:var(--sh-gold); z-index:1; }
+    .hiw-step-icon { color:var(--gold); margin-bottom:0.5rem; }
+    .hiw-step h3 { font-family:var(--serif); font-weight:600; font-size:1.18rem; color:var(--text); margin-bottom:0.4rem; }
+    .hiw-step p { font-size:0.92rem; color:var(--text-mut); line-height:1.65; max-width:46ch; }
+    @media (max-width:920px){ .hiw-inner { grid-template-columns:1fr; } .hiw-rail { position:static; } }
+
+    /* ════════════ TESTIMONIALS — quote cards (Option A, chosen 2026-07-04) ════════════ */
+    #testimonials { background:radial-gradient(900px 600px at 15% 12%, rgba(201,162,39,0.05), transparent 55%), var(--ink-900); }
+    .testi-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,8rem) var(--gutter); }
+    .testi-inner > * { min-width:0; }
+    .testi-head { text-align:center; max-width:46ch; margin:0 auto 3rem; }
+    .testi-head .sig { justify-content:center; }
+    .testi-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.1rem; }
+    .testi-card { position:relative; background:linear-gradient(180deg,var(--ink-775),var(--ink-850)); border:1px solid var(--line); border-radius:var(--r); padding:1.9rem 1.6rem 1.5rem; box-shadow:var(--sh-2),inset 0 1px 0 rgba(255,255,255,0.03); display:flex; flex-direction:column; gap:1rem; transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
+    .testi-card::before { content:''; position:absolute; top:0; left:1.6rem; right:1.6rem; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .testi-card:hover { transform:translateY(-4px); border-color:var(--gold-deep); box-shadow:var(--sh-3); }
+    .testi-quote { font-size:0.96rem; color:var(--text-soft); line-height:1.65; }
+    .testi-quote::before { content:'\201C'; font-family:var(--serif); color:var(--gold-deep); font-size:1.5rem; line-height:0; vertical-align:-0.35rem; margin-right:0.12rem; }
+    .testi-author { margin-top:auto; padding-top:0.9rem; border-top:1px solid var(--line); display:flex; align-items:center; gap:0.7rem; }
+    .testi-badge { width:34px; height:34px; border-radius:50%; flex:none; display:grid; place-items:center; font-family:var(--serif); font-weight:700; font-size:0.85rem; color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep)); }
+    .testi-who { font-size:0.86rem; font-weight:600; color:var(--text); line-height:1.2; }
+    .testi-where { font-size:0.74rem; color:var(--text-dim); }
+    @media (max-width:820px){ .testi-grid { grid-template-columns:1fr; } }
+
+    /* ════════════ FAQ — left header + accordion ════════════ */
+    #faq { background:radial-gradient(800px 600px at 8% 12%, rgba(201,162,39,0.05), transparent 55%), linear-gradient(180deg,var(--ink-850),var(--ink-900)); }
+    .faq-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,8rem) var(--gutter); display:grid; grid-template-columns:0.7fr 1.3fr; gap:clamp(2rem,5vw,4.5rem); align-items:start; }
+    .faq-rail { position:sticky; top:6rem; }
+    .faq-list { display:flex; flex-direction:column; }
+    .faq-item { border-bottom:1px solid var(--line); }
+    .faq-item:first-child { border-top:1px solid var(--line); }
+    .faq-question { width:100%; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; background:none; border:none; cursor:pointer; text-align:left; padding:1.4rem 0.25rem; color:var(--text); font-family:var(--sans); font-size:1.0rem; font-weight:500; line-height:1.4; transition:color var(--dur) var(--ease); }
+    .faq-question:hover { color:var(--gold); }
+    .faq-question i, .faq-question svg { color:var(--gold); flex:none; transition:transform var(--dur) var(--ease-emph); }
+    .faq-item.open .faq-question i, .faq-item.open .faq-question svg { transform:rotate(135deg); }
+    .faq-item.open .faq-question { color:var(--gold); }
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height var(--dur-slow) var(--ease); }
+    .faq-answer p { padding:0 0.25rem 1.4rem; color:var(--text-mut); font-size:0.93rem; line-height:1.75; max-width:62ch; }
+    @media (max-width:920px){ .faq-inner { grid-template-columns:1fr; } .faq-rail { position:static; } }
+
+    /* ════════════ BOOKING — persuasion rail + form ════════════ */
+    #booking { background:radial-gradient(1000px 750px at 92% 6%, rgba(201,162,39,0.06), transparent 52%), var(--ink-900); }
+    .booking-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,8rem) var(--gutter); display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+    .booking-rail { position:sticky; top:6rem; }
+    .booking-rail .section-sub { margin-top:1.4rem; }
+    .booking-points { margin-top:1.8rem; display:flex; flex-direction:column; gap:1rem; }
+    .booking-point { display:flex; gap:0.85rem; align-items:flex-start; }
+    .booking-point-ic { flex:none; width:34px; height:34px; display:grid; place-items:center; border-radius:50%; background:var(--gold-haze); border:1px solid var(--line-soft); color:var(--gold); }
+    .booking-point strong { display:block; color:var(--text); font-size:0.92rem; font-weight:600; }
+    .booking-point span { font-size:0.84rem; color:var(--text-mut); }
+    .booking-rail-contact { margin-top:1.8rem; padding-top:1.6rem; border-top:1px solid var(--line); font-size:0.86rem; color:var(--text-mut); }
+    .booking-rail-contact a { color:var(--gold); font-weight:600; }
+
+    .booking-form { background:var(--ink-750); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(1.5rem,3vw,2.5rem); box-shadow:var(--sh-2); position:relative; }
+    .booking-form::before { content:''; position:absolute; top:0; left:2rem; right:2rem; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+    .form-group { display:flex; flex-direction:column; margin-bottom:1.25rem; }
+    .form-group label { font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-mut); margin-bottom:0.55rem; }
+    .form-group input,.form-group select,.form-group textarea { font-family:var(--sans); font-size:0.95rem; color:var(--text); background:var(--ink-850); border:1px solid var(--line); border-radius:var(--r-sm); padding:0.85rem 1rem; transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background var(--dur) var(--ease); }
+    .form-group input::placeholder,.form-group textarea::placeholder { color:var(--text-dim); }
+    .form-group input:hover,.form-group select:hover,.form-group textarea:hover { border-color:var(--gold-ink); }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus { outline:none; border-color:var(--gold); background:var(--ink-800); box-shadow:0 0 0 3px var(--gold-haze); }
+    .form-group select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; background-size:16px; padding-right:2.6rem; }
+    .form-group textarea { resize:vertical; min-height:110px; line-height:1.6; }
+    .form-divider { border:none; border-top:1px solid var(--line); margin:1.4rem 0 1.8rem; }
+    .addons-section-label { font-size:0.72rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+    .addons-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.85rem; margin-bottom:1.8rem; }
+    .addon-card { position:relative; display:flex; align-items:flex-start; gap:0.85rem; background:var(--ink-850); border:1px solid var(--line); border-radius:var(--r-sm); padding:0.95rem 1.05rem; cursor:pointer; transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),transform var(--dur) var(--ease); }
+    .addon-card:hover { border-color:var(--gold-ink); transform:translateY(-1px); }
+    .addon-card input { position:absolute; opacity:0; pointer-events:none; }
+    .addon-check { flex:none; width:22px; height:22px; border-radius:6px; margin-top:2px; border:1px solid var(--line); background:var(--ink-800); position:relative; transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease); }
+    .addon-check::after { content:''; position:absolute; left:7px; top:3px; width:6px; height:11px; border:solid var(--on-gold); border-width:0 2px 2px 0; transform:rotate(45deg) scale(0); transition:transform var(--dur) var(--ease-emph); }
+    .addon-card.selected { border-color:var(--gold); background:var(--gold-haze); }
+    .addon-card.selected .addon-check { background:linear-gradient(180deg,var(--gold-bright),var(--gold)); border-color:var(--gold); }
+    .addon-card.selected .addon-check::after { transform:rotate(45deg) scale(1); }
+    .addon-name { font-size:0.88rem; font-weight:600; color:var(--text); }
+    .addon-price { font-size:0.8rem; color:var(--gold); font-weight:600; margin-top:2px; }
+    .addon-note { font-size:0.7rem; color:var(--text-dim); margin-top:1px; }
+    .addon-full-day { display:block; font-size:0.66rem; color:var(--gold-bright); margin-top:4px; }
+    .estimate-box { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:linear-gradient(180deg,var(--ink-700),var(--ink-775)); border:1px solid var(--gold-deep); border-radius:var(--r); padding:1.3rem 1.6rem; margin-bottom:1.4rem; position:relative; overflow:hidden; }
+    .estimate-box::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--gold); }
+    .estimate-label { font-size:0.72rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); }
+    .estimate-sub { font-size:0.78rem; color:var(--text-mut); margin-top:0.3rem; max-width:40ch; }
+    .estimate-total { font-family:var(--serif); font-weight:700; font-size:2rem; color:var(--text); white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .deposit-notice { font-size:0.82rem; color:var(--text-mut); line-height:1.65; background:var(--ink-850); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:var(--r-sm); padding:1rem 1.25rem; margin-bottom:0.5rem; }
+    .deposit-notice strong { color:var(--text); }
+    .form-submit { margin-top:1.8rem; } .form-submit .btn-gold { width:100%; }
+    .form-note { text-align:center; font-size:0.78rem; color:var(--text-dim); margin-top:1rem; }
+    .form-success { display:none; text-align:center; padding:2.5rem 1rem; }
+    .form-success.visible { display:block; }
+    .form-success h3 { font-family:var(--serif); font-weight:600; font-size:1.6rem; color:var(--text); margin-bottom:0.8rem; }
+    .form-success p { color:var(--text-mut); font-size:0.95rem; max-width:44ch; margin-inline:auto; }
+    @media (max-width:920px){ .booking-inner { grid-template-columns:1fr; } .booking-rail { position:static; } }
+    @media (max-width:560px){ .form-row { grid-template-columns:1fr; gap:0; } .addons-grid { grid-template-columns:1fr; } .estimate-box { flex-direction:column; align-items:flex-start; } }
+
+    /* ════════════ CONTACT ════════════ */
+    #contact { background:linear-gradient(180deg,var(--ink-900),var(--ink-850)); }
+    .contact-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4rem,7vw,6.5rem) var(--gutter); display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+    .contact-rail { max-width:34ch; }
+    .contact-hours { display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.3rem; font-size:0.76rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-mut); }
+    .contact-hours i { color:var(--gold); }
+    .contact-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+    .contact-card { display:flex; flex-direction:column; gap:0.45rem; background:var(--ink-750); border:1px solid var(--line); border-radius:var(--r); padding:1.5rem 1.3rem; transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
+    a.contact-card:hover { transform:translateY(-3px); border-color:var(--gold-deep); box-shadow:var(--sh-2); }
+    .contact-card-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:50%; background:var(--gold-haze); border:1px solid var(--line-soft); color:var(--gold); margin-bottom:0.3rem; }
+    .contact-card-label { font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-dim); }
+    .contact-card-value { font-size:0.9rem; font-weight:600; color:var(--text); word-break:break-word; }
+    @media (max-width:920px){ .contact-inner { grid-template-columns:1fr; } }
+    @media (max-width:560px){ .contact-cards { grid-template-columns:1fr; } }
+
+    /* ════════════ BOTTOM CTA ════════════ */
+    #bottom-cta { background:radial-gradient(900px 420px at 80% 0%,var(--gold-haze),transparent 62%),var(--ink-900); border-top:1px solid var(--line); }
+    .bottom-cta-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(4.5rem,9vw,7.5rem) var(--gutter); display:grid; grid-template-columns:1.3fr 0.7fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+    .bottom-cta-inner h2 { font-family:var(--serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.08; color:var(--text); text-wrap:balance; }
+    .bottom-cta-inner > div > p { color:var(--text-mut); font-size:1.05rem; max-width:46ch; margin-top:1.1rem; }
+    .bottom-cta-bullets { display:flex; flex-direction:column; gap:0.7rem; margin-top:1.6rem; }
+    .bottom-cta-bullets li { display:inline-flex; align-items:center; gap:0.55rem; font-size:0.9rem; color:var(--text-soft); }
+    .bottom-cta-bullets i { color:var(--gold); }
+    .bottom-cta-action { display:flex; flex-direction:column; align-items:flex-start; gap:1rem; }
+    .bottom-cta-action .btn-gold { width:100%; }
+    @media (max-width:780px){ .bottom-cta-inner { grid-template-columns:1fr; } }
+
+    /* ════════════ FOOTER — grid ════════════ */
+    footer { background:radial-gradient(900px 300px at 50% 0%, rgba(201,162,39,0.04), transparent 70%), var(--ink-850); border-top:1px solid var(--line); }
+    .footer-inner { max-width:var(--maxw); margin-inline:auto; padding:clamp(3rem,6vw,4.5rem) var(--gutter) 2.5rem; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:2.5rem; }
+    .footer-brand .footer-logo { font-family:var(--serif); font-weight:700; font-size:1.15rem; letter-spacing:0.14em; color:var(--text); }
+    .footer-tagline { font-size:0.8rem; letter-spacing:0.06em; color:var(--gold); margin-top:0.6rem; }
+    .footer-brand p.small { font-size:0.82rem; color:var(--text-mut); margin-top:1rem; max-width:34ch; line-height:1.6; }
+    .footer-col h4 { font-size:0.7rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem; }
+    .footer-col a, .footer-col p { display:block; font-size:0.86rem; color:var(--text-mut); margin-bottom:0.55rem; transition:color var(--dur) var(--ease); }
+    .footer-col a:hover { color:var(--gold); }
+    .footer-bottom { border-top:1px solid var(--line); }
+    .footer-bottom-inner { max-width:var(--maxw); margin-inline:auto; padding:1.4rem var(--gutter); display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.5rem; }
+    .footer-copy { font-size:0.78rem; color:var(--text-dim); }
+    .footer-powered { font-size:0.72rem; color:var(--text-dim); }
+    .footer-powered a { color:var(--text-mut); font-weight:600; }
+    @media (max-width:720px){ .footer-inner { grid-template-columns:1fr 1fr; } .footer-brand { grid-column:1 / -1; } }
+
+    /* ════════════ STICKY MOBILE CTA + TOAST ════════════ */
+    .sticky-cta { position:fixed; left:1rem; right:1rem; bottom:1rem; z-index:90; transform:translateY(160%); transition:transform var(--dur-slow) var(--ease-emph); display:none; }
+    .sticky-cta.visible { transform:translateY(0); }
+    .sticky-cta a { display:flex; align-items:center; justify-content:center; gap:0.5rem; background:linear-gradient(180deg,var(--gold-bright),var(--gold)); color:var(--on-gold); font-weight:700; font-size:0.82rem; letter-spacing:0.14em; text-transform:uppercase; padding:1rem; border-radius:var(--r-sm); box-shadow:var(--sh-3); }
+    @media (max-width:760px){ .sticky-cta { display:block; } }
+    .toast { position:fixed; bottom:1.5rem; left:50%; transform:translate(-50%,200%); z-index:200; display:flex; align-items:center; gap:0.6rem; background:var(--ink-700); border:1px solid var(--gold-deep); border-radius:var(--r-sm); padding:0.9rem 1.4rem; box-shadow:var(--sh-3); transition:transform var(--dur-slow) var(--ease-emph); }
+    .toast.visible { transform:translate(-50%,0); }
+    .toast-icon { color:var(--gold); display:flex; } .toast-text { font-size:0.88rem; font-weight:500; color:var(--text); }
+
+    @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; } }
   </style>
 </head>
 <body>
@@ -1441,202 +420,186 @@
   <!-- ── NAV ── -->
   <nav>
     <a class="nav-logo" href="#">
-      <img src="Logo.jpg" alt="Royal Kings Auto Care" width="46" height="46" />
-      <div class="nav-logo-text">
-        Royal Kings
-        <span>Auto Care</span>
-      </div>
+      <img src="Logo.jpg" alt="Royal Kings Auto Care" width="42" height="42" />
+      <div class="nav-logo-text">Royal Kings<span>Auto Care</span></div>
     </a>
     <ul class="nav-links" id="navLinks">
+      <li><a href="services/index.html">Services</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#how-it-works">Process</a></li>
-      <li><a href="#booking">Book Now</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#booking" class="nav-cta"><i data-lucide="crown" style="width:14px;height:14px;stroke-width:1.5;vertical-align:-2px;margin-right:4px;"></i>Book Now</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- ── HERO ── -->
-  <section class="hero diamond-bg" id="home">
-    <div class="hero-diamonds"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <img src="Logo.jpg" alt="Royal Kings Auto Care — Auto Detailing Winnipeg" class="hero-logo-img" width="180" height="180" fetchpriority="high" />
-      <div class="hero-label">Premium Auto Detailing — Winnipeg</div>
-      <h1>Royal Kings<br /><span class="gold">Auto Care</span></h1>
-      <p class="hero-sub">Convenience Meets Quality</p>
-      <div class="hero-divider"></div>
-      <p class="hero-tagline">Wherever you are, we deliver royal results.</p>
-      <div class="hero-btns" id="heroBtns">
-        <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
-        <a href="#pricing" class="btn-outline-gold">View Pricing</a>
+  <!-- ── HERO — split asymmetric ── -->
+  <section class="hero" id="home">
+    <div class="hero-watermark" aria-hidden="true">RK</div>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-label">Premium Mobile Detailing — Winnipeg</div>
+        <h1>Royal Kings<br /><span class="gold">Auto Care</span></h1>
+        <p class="hero-sub">Convenience meets quality.</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline">Wherever you are, we deliver royal results. Mobile interior detailing across Winnipeg — showroom-clean, without leaving your driveway.</p>
+        <div class="hero-btns" id="heroBtns">
+          <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+          <a href="#pricing" class="btn-outline-gold">View Pricing</a>
+        </div>
+        <p class="hero-reassurance">Free estimates &middot; No obligation &middot; Same-day response</p>
       </div>
-      <p class="hero-reassurance">Free estimates &middot; No obligation &middot; Same-day response</p>
-      <div class="hero-trust-badges">
-        <div class="trust-badge"><i data-lucide="truck" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Mobile Service</span></div>
-        <div class="trust-badge"><i data-lucide="map-pin" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Serving All Winnipeg</span></div>
-        <div class="trust-badge"><i data-lucide="shield-check" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Satisfaction Guaranteed</span></div>
-      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-crest">
+          <img src="Logo.jpg" alt="Royal Kings Auto Care — Auto Detailing Winnipeg" class="hero-logo-img" width="62" height="62" fetchpriority="high" />
+          <div class="hero-card-crest-text">Royal Kings<span>Auto Care</span></div>
+        </div>
+        <div class="hero-card-anchor">
+          <span class="from">Packages from</span>
+          <span class="amt">$110</span>
+        </div>
+        <div class="hero-card-q">Get your price in seconds</div>
+        <div class="hero-chips">
+          <button class="hero-chip" data-jump-class="Coupes &amp; Sedans">Coupes &amp; Sedans</button>
+          <button class="hero-chip" data-jump-class="SUVs &amp; Crossovers">SUVs &amp; Crossovers</button>
+          <button class="hero-chip" data-jump-class="Trucks &amp; 7-Seaters">Trucks &amp; 7-Seaters</button>
+        </div>
+        <a href="#booking" class="btn-gold"><i data-lucide="calendar-check" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+        <div class="hero-trust-badges">
+          <div class="trust-badge"><i data-lucide="truck" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Mobile Service</span></div>
+          <div class="trust-badge"><i data-lucide="map-pin" style="width:16px;height:16px;stroke-width:1.5;"></i><span>All Winnipeg</span></div>
+          <div class="trust-badge"><i data-lucide="shield-check" style="width:16px;height:16px;stroke-width:1.5;"></i><span>Satisfaction Guaranteed</span></div>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <!-- ── PRICING ── -->
-  <section id="pricing" class="diamond-bg">
+  <!-- ── COVERAGE STRIP ── -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="strip-item"><i data-lucide="truck"></i> Fully mobile — we come to you</span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><i data-lucide="map-pin"></i> Serving all of Winnipeg</span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><i data-lucide="package-check"></i> Fully equipped, no setup needed</span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><i data-lucide="credit-card"></i> e-Transfer, cash &amp; card</span>
+    </div>
+  </div>
+
+  <!-- ── PRICING — rail + rows ── -->
+  <section id="pricing">
     <div class="pricing-inner">
-      <div class="pricing-header">
+      <div class="pricing-rail">
+        <span class="sig"><span class="diamond"></span><span class="idx">01</span></span>
         <p class="section-label">Full Service Packages</p>
-        <h2 class="section-title">Choose Your <span class="gold">Package</span></h2>
-        <p class="section-sub">Select your vehicle class — prices update instantly. No hidden fees.</p>
-      </div>
-
-      <!-- Vehicle Class Toggle -->
-      <div class="vehicle-toggle-wrap">
-        <span class="vehicle-toggle-label">Your Vehicle Class</span>
-        <div class="vehicle-toggle" id="vehicleToggle">
-          <button class="vehicle-btn active" data-class="Coupes &amp; Sedans" data-surcharge="0">
-            Coupes &amp; Sedans
-          </button>
-          <button class="vehicle-btn" data-class="SUVs &amp; Crossovers" data-surcharge="15">
-            SUVs &amp; Crossovers
-          </button>
-          <button class="vehicle-btn" data-class="Trucks &amp; 7-Seaters" data-surcharge="35">
-            Trucks &amp; 7-Seaters
-          </button>
+        <h2 class="section-title">Choose your <span class="gold">package</span></h2>
+        <p class="section-sub">Pick your vehicle class and the price updates instantly. Fixed per class — what you see is what you pay.</p>
+        <div class="vehicle-toggle-wrap">
+          <span class="vehicle-toggle-label">Your Vehicle Class</span>
+          <div class="vehicle-toggle" id="vehicleToggle">
+            <button class="vehicle-btn active" data-class="Coupes &amp; Sedans" data-surcharge="0">Coupes &amp; Sedans</button>
+            <button class="vehicle-btn" data-class="SUVs &amp; Crossovers" data-surcharge="15">SUVs &amp; Crossovers</button>
+            <button class="vehicle-btn" data-class="Trucks &amp; 7-Seaters" data-surcharge="35">Trucks &amp; 7-Seaters</button>
+          </div>
+          <span class="vehicle-surcharge-tag" id="surchargeTag" aria-live="polite">Base price — no surcharge</span>
         </div>
-        <span class="vehicle-surcharge-tag" id="surchargeTag">Base price — no surcharge</span>
       </div>
 
-      <div class="pricing-grid">
-
+      <div class="pricing-rows">
         <div class="pricing-card">
-          <div class="pricing-tier">Minimal</div>
-          <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="110">110</span></div>
-          <div class="pricing-note">Fixed price for your vehicle class</div>
-          <div class="pricing-divider"></div>
-          <h3>Interior Essentials</h3>
-          <ul class="pricing-includes">
-            <li>Interior Vacuuming</li>
-            <li>General Wipe-Down &amp; Cleaning</li>
-          </ul>
-          <a href="#booking" class="btn-outline-gold book-now-btn" data-tier="Minimal">Book Now</a>
+          <div class="pc-price">
+            <div class="pricing-tier">Minimal</div>
+            <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="110">110</span></div>
+            <div class="pricing-note">Fixed for your class</div>
+          </div>
+          <div class="pc-body">
+            <h3>Interior Essentials</h3>
+            <ul class="pricing-includes">
+              <li>Interior Vacuuming</li>
+              <li>General Wipe-Down &amp; Cleaning</li>
+            </ul>
+          </div>
+          <div class="pc-action"><a href="#booking" class="btn-outline-gold book-now-btn" data-tier="Minimal">Book</a></div>
         </div>
 
         <div class="pricing-card featured">
           <div class="pricing-featured-badge">Best Value</div>
-          <div class="pricing-tier">Premium</div>
-          <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="195">195</span></div>
-          <div class="pricing-note">Fixed price for your vehicle class</div>
-          <div class="pricing-divider"></div>
-          <h3>Full Royal Treatment</h3>
-          <ul class="pricing-includes">
-            <li>Intensive Fabric Care</li>
-            <li>Odor &amp; Stain Management</li>
-            <li>Additional Protective Treatments</li>
-          </ul>
-          <a href="#booking" class="btn-gold book-now-btn" data-tier="Premium">Book Now</a>
+          <div class="pc-price">
+            <div class="pricing-tier">Premium</div>
+            <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="195">195</span></div>
+            <div class="pricing-note">Fixed for your class</div>
+          </div>
+          <div class="pc-body">
+            <h3>Full Royal Treatment</h3>
+            <ul class="pricing-includes">
+              <li>Intensive Fabric Care</li>
+              <li>Odor &amp; Stain Management</li>
+              <li>Additional Protective Treatments</li>
+            </ul>
+          </div>
+          <div class="pc-action"><a href="#booking" class="btn-gold book-now-btn" data-tier="Premium">Book</a></div>
         </div>
 
         <div class="pricing-card">
-          <div class="pricing-tier">The Standard</div>
-          <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="165">165</span></div>
-          <div class="pricing-note">Fixed price for your vehicle class</div>
-          <div class="pricing-divider"></div>
-          <h3>Deep Interior Clean</h3>
-          <ul class="pricing-includes">
-            <li>Basic Deep Cleaning of Fabrics</li>
-            <li>Surface Treatment for Interior Materials</li>
-          </ul>
-          <a href="#booking" class="btn-outline-gold book-now-btn" data-tier="The Standard">Book Now</a>
+          <div class="pc-price">
+            <div class="pricing-tier">The Standard</div>
+            <div class="pricing-price"><sup>$</sup><span class="price-val" data-base="165">165</span></div>
+            <div class="pricing-note">Fixed for your class</div>
+          </div>
+          <div class="pc-body">
+            <h3>Deep Interior Clean</h3>
+            <ul class="pricing-includes">
+              <li>Basic Deep Cleaning of Fabrics</li>
+              <li>Surface Treatment for Interior Materials</li>
+            </ul>
+          </div>
+          <div class="pc-action"><a href="#booking" class="btn-outline-gold book-now-btn" data-tier="The Standard">Book</a></div>
         </div>
 
+        <p class="pricing-varies">Prices are fixed per vehicle class — add-ons are quoted on the booking form below.</p>
       </div>
-      <p class="pricing-varies">Prices are fixed per vehicle class — what you see is what you pay</p>
     </div>
   </section>
 
   <!-- ── BEFORE / AFTER — HIDDEN UNTIL CLIENT PROVIDES REAL PHOTOS ──
        CLIENT NEEDS: 3-6 real before/after photo pairs from actual jobs.
-       Unhide this section and swap .ba-side divs with <img> tags when photos arrive.
-  <section id="before-after" class="diamond-bg">
-    <div class="ba-inner">
-      <div class="ba-header centered-header">
-        <p class="section-label">See the Difference</p>
-        <h2 class="section-title">Before &amp; <span class="gold">After</span></h2>
-        <p class="section-sub">Real results from real jobs. Every vehicle gets the royal treatment.</p>
-      </div>
-      <div class="ba-grid">
-        <div class="ba-card">
-          <div class="ba-images">
-            <div class="ba-side ba-side--before">Before</div>
-            <div class="ba-divider-line"></div>
-            <div class="ba-side ba-side--after">After</div>
-          </div>
-          <div class="ba-info">
-            <div class="ba-service">Premium Interior Detail</div>
-            <div class="ba-vehicle">2022 Honda Civic</div>
-          </div>
-        </div>
-        <div class="ba-card">
-          <div class="ba-images">
-            <div class="ba-side ba-side--before">Before</div>
-            <div class="ba-divider-line"></div>
-            <div class="ba-side ba-side--after">After</div>
-          </div>
-          <div class="ba-info">
-            <div class="ba-service">Full Royal Treatment</div>
-            <div class="ba-vehicle">2021 Toyota RAV4</div>
-          </div>
-        </div>
-        <div class="ba-card">
-          <div class="ba-images">
-            <div class="ba-side ba-side--before">Before</div>
-            <div class="ba-divider-line"></div>
-            <div class="ba-side ba-side--after">After</div>
-          </div>
-          <div class="ba-info">
-            <div class="ba-service">Paint Correction + Ceramic</div>
-            <div class="ba-vehicle">2023 Ford F-150</div>
-          </div>
-        </div>
-      </div>
-      <p class="ba-note">Photos coming soon — ask us for before &amp; after shots of your vehicle type</p>
-    </div>
-  </section>
   -->
 
-  <!-- ── HOW IT WORKS ── -->
+  <!-- ── HOW IT WORKS — vertical timeline ── -->
   <section id="how-it-works">
     <div class="hiw-inner">
-      <div class="hiw-header centered-header">
+      <svg class="hiw-watermark" viewBox="0 0 100 70" aria-hidden="true" fill="currentColor"><path d="M8 60 L14 22 L31 40 L50 12 L69 40 L86 22 L92 60 Z"/><rect x="8" y="62" width="84" height="7" rx="2"/></svg>
+      <div class="hiw-rail">
+        <span class="sig"><span class="diamond"></span><span class="idx">02</span></span>
         <p class="section-label">The Process</p>
-        <h2 class="section-title">How It <span class="gold">Works</span></h2>
-        <p class="section-sub">From booking to results — four simple steps to a showroom-quality detail.</p>
+        <h2 class="section-title">How it <span class="gold">works</span></h2>
+        <p class="section-sub">From booking to results — four simple steps to a showroom-quality detail, done at your door.</p>
       </div>
-      <div class="hiw-grid">
+      <div class="hiw-timeline">
         <div class="hiw-step">
           <div class="hiw-step-num">01</div>
-          <div class="hiw-step-icon"><i data-lucide="list-checks" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <div class="hiw-step-icon"><i data-lucide="list-checks" style="width:22px;height:22px;stroke-width:1.5;"></i></div>
           <h3>Choose a Package</h3>
           <p>Pick the service that fits your vehicle and needs. Pricing is transparent — no surprises.</p>
         </div>
         <div class="hiw-step">
           <div class="hiw-step-num">02</div>
-          <div class="hiw-step-icon"><i data-lucide="calendar-check" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <div class="hiw-step-icon"><i data-lucide="calendar-check" style="width:22px;height:22px;stroke-width:1.5;"></i></div>
           <h3>Book Online</h3>
           <p>Fill out the booking form with your details, date, and any add-ons. Takes under two minutes.</p>
         </div>
         <div class="hiw-step">
           <div class="hiw-step-num">03</div>
-          <div class="hiw-step-icon"><i data-lucide="map-pin" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <div class="hiw-step-icon"><i data-lucide="map-pin" style="width:22px;height:22px;stroke-width:1.5;"></i></div>
           <h3>We Come to You</h3>
           <p>Our team arrives at your location fully equipped. No need to leave your home or office.</p>
         </div>
         <div class="hiw-step">
           <div class="hiw-step-num">04</div>
-          <div class="hiw-step-icon"><i data-lucide="sparkles" style="width:24px;height:24px;stroke-width:1.5;"></i></div>
+          <div class="hiw-step-icon"><i data-lucide="sparkles" style="width:22px;height:22px;stroke-width:1.5;"></i></div>
           <h3>Enjoy the Results</h3>
           <p>Your vehicle is returned spotless. We walk you through everything before we wrap up.</p>
         </div>
@@ -1644,132 +607,101 @@
     </div>
   </section>
 
-  <!-- ── TESTIMONIALS — HIDDEN UNTIL CLIENT PROVIDES REAL REVIEWS ──
-       CLIENT NEEDS: Real reviews from Google, Instagram DMs, or text screenshots.
-       Replace placeholder names/quotes with verified customer feedback, then uncomment.
-  <section id="testimonials" class="diamond-bg">
-    <div class="test-inner">
-      <div class="test-header centered-header">
+  <!-- ── TESTIMONIALS — Option A (Quote Cards), chosen by James 2026-07-04 — GATED until real reviews arrive ──
+       CSS is live; this block stays commented until we have real content (honest — no invented reviews go live).
+       TO GO LIVE: get 3 real reviews from Patrick/Justin (Google or Instagram), replace each bracketed
+       placeholder with the customer's exact words + first name/initial + neighbourhood, set the badge letter
+       to their first initial, then uncomment this section. Finished look (populated): the shared mockup at
+       https://claude.ai/code/artifact/ea536929-7cb6-4cad-9ec9-c810bef8e90b
+  <section id="testimonials">
+    <div class="testi-inner">
+      <div class="testi-head">
+        <span class="sig"><span class="diamond"></span><span class="idx">Reviews</span></span>
         <p class="section-label">Customer Reviews</p>
         <h2 class="section-title">What People <span class="gold">Say</span></h2>
-        <p class="section-sub">Real feedback from Winnipeg vehicle owners.</p>
+        <p class="section-sub" style="margin-inline:auto;">Real feedback from Winnipeg drivers.</p>
       </div>
-      <div class="test-grid">
-        <div class="test-card">
-          <div class="test-stars">
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-          </div>
-          <p class="test-quote">"My Civic looked brand new inside. They got stains out of the seats I thought were permanent. Showed up on time and were done in under two hours."</p>
-          <div class="test-author">Marcus T.</div>
-          <div class="test-detail">Premium Interior Detail</div>
-        </div>
-        <div class="test-card">
-          <div class="test-stars">
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-          </div>
-          <p class="test-quote">"Booked the ceramic coating for my truck. The paint looks insane now. These guys clearly care about what they do. Already recommended them to two friends."</p>
-          <div class="test-author">Jenna R.</div>
-          <div class="test-detail">Ceramic Coating + Paint Correction</div>
-        </div>
-        <div class="test-card">
-          <div class="test-stars">
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-            <i data-lucide="star" style="width:16px;height:16px;stroke-width:0;fill:var(--gold);"></i>
-          </div>
-          <p class="test-quote">"Best detailing service in Winnipeg. I have a dog and the pet hair was everywhere. They handled it no problem. The inside smells incredible now."</p>
-          <div class="test-author">David K.</div>
-          <div class="test-detail">The Standard + Pet Hair Removal</div>
-        </div>
+      <div class="testi-grid">
+        <article class="testi-card">
+          <p class="testi-quote">[Real review 1 — paste the customer's exact words]</p>
+          <div class="testi-author"><span class="testi-badge">?</span><div><div class="testi-who">[First name L.]</div><div class="testi-where">[Neighbourhood]</div></div></div>
+        </article>
+        <article class="testi-card">
+          <p class="testi-quote">[Real review 2 — paste the customer's exact words]</p>
+          <div class="testi-author"><span class="testi-badge">?</span><div><div class="testi-who">[First name L.]</div><div class="testi-where">[Neighbourhood]</div></div></div>
+        </article>
+        <article class="testi-card">
+          <p class="testi-quote">[Real review 3 — paste the customer's exact words]</p>
+          <div class="testi-author"><span class="testi-badge">?</span><div><div class="testi-who">[First name L.]</div><div class="testi-where">[Neighbourhood]</div></div></div>
+        </article>
       </div>
     </div>
   </section>
   -->
 
-  <!-- ── FAQ ── -->
+  <!-- ── FAQ — rail + accordion ── -->
   <section id="faq">
     <div class="faq-inner">
-      <div class="faq-header centered-header">
+      <div class="faq-rail">
+        <span class="sig"><span class="diamond"></span><span class="idx">03</span></span>
         <p class="section-label">Common Questions</p>
-        <h2 class="section-title">Got <span class="gold">Questions?</span></h2>
-        <p class="section-sub">Everything you need to know before booking.</p>
+        <h2 class="section-title">Got <span class="gold">questions?</span></h2>
+        <p class="section-sub">Everything you need to know before booking. Still unsure? Reach out — we're quick to reply.</p>
       </div>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-1">
-            <span>Do I need to be home during the detail?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-1" role="region">
-            <p>Not necessarily. As long as we have access to the vehicle and a water/power source nearby, you're free to go about your day. Most clients leave the keys and let us handle it.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-1"><span>Do I need to be home during the detail?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-1" role="region"><p>Not necessarily. As long as we have access to the vehicle and a water/power source nearby, you're free to go about your day. Most clients leave the keys and let us handle it.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-2">
-            <span>How long does a typical detail take?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-2" role="region">
-            <p>The Minimal package takes about 1-1.5 hours. The Standard runs 2-3 hours. Premium and add-on services like paint correction can take a full day depending on vehicle size and condition.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-2"><span>How long does a typical detail take?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-2" role="region"><p>The Minimal package takes about 1-1.5 hours. The Standard runs 2-3 hours. Premium and add-on services like paint correction can take a full day depending on vehicle size and condition.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-3">
-            <span>What if it rains on my appointment day?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-3" role="region">
-            <p>We'll reach out to reschedule at no extra charge. Interior details can still happen under covered areas like garages or carports. We'll work with you to find the best option.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-3"><span>What if it rains on my appointment day?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-3" role="region"><p>We'll reach out to reschedule at no extra charge. Interior details can still happen under covered areas like garages or carports. We'll work with you to find the best option.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-4">
-            <span>Do you bring your own water and power?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-4" role="region">
-            <p>We come fully equipped with our own tools and supplies. We just need access to a standard outdoor outlet and water spigot for exterior work. Interior-only jobs don't need either.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-4"><span>Do you bring your own water and power?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-4" role="region"><p>We come fully equipped with our own tools and supplies. We just need access to a standard outdoor outlet and water spigot for exterior work. Interior-only jobs don't need either.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-5">
-            <span>What areas in Winnipeg do you serve?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-5" role="region">
-            <p>We serve all of Winnipeg and surrounding areas. No extra travel fees within city limits. For locations outside Winnipeg, reach out and we'll see what we can do.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-5"><span>What areas in Winnipeg do you serve?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-5" role="region"><p>We serve all of Winnipeg and surrounding areas. No extra travel fees within city limits. For locations outside Winnipeg, reach out and we'll see what we can do.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-6">
-            <span>How do I pay?</span>
-            <i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i>
-          </button>
-          <div class="faq-answer" id="faq-panel-6" role="region">
-            <p>A $50 deposit secures your booking (applied toward the total). The remaining balance is due after the service is complete. We accept e-Transfer, cash, and major cards.</p>
-          </div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-6"><span>How do I pay?</span><i data-lucide="plus" style="width:20px;height:20px;stroke-width:1.5;"></i></button>
+          <div class="faq-answer" id="faq-panel-6" role="region"><p>A $50 deposit secures your booking (applied toward the total). The remaining balance is due after the service is complete. We accept e-Transfer, cash, and major cards.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── BOOKING FORM ── -->
+  <!-- ── BOOKING — rail + form ── -->
   <section id="booking">
     <div class="booking-inner">
-      <div class="booking-header">
+      <div class="booking-rail">
+        <span class="sig"><span class="diamond"></span><span class="idx">04</span></span>
         <p class="section-label">Appointments</p>
-        <h2 class="section-title">Book Your <span class="gold">Detail</span></h2>
-        <p class="section-sub">Fill out the form below. We'll review your request and confirm your appointment within 24 hours.</p>
+        <h2 class="section-title">Book your <span class="gold">detail</span></h2>
+        <p class="section-sub">Fill out the form and we'll confirm your appointment within 24 hours.</p>
+        <div class="booking-points">
+          <div class="booking-point">
+            <span class="booking-point-ic"><i data-lucide="clock" style="width:17px;height:17px;stroke-width:1.6;"></i></span>
+            <div><strong>Under two minutes</strong><span>Package, vehicle, add-ons, date — that's it.</span></div>
+          </div>
+          <div class="booking-point">
+            <span class="booking-point-ic"><i data-lucide="calculator" style="width:17px;height:17px;stroke-width:1.6;"></i></span>
+            <div><strong>See your estimate live</strong><span>The total updates as you choose add-ons.</span></div>
+          </div>
+          <div class="booking-point">
+            <span class="booking-point-ic"><i data-lucide="shield-check" style="width:17px;height:17px;stroke-width:1.6;"></i></span>
+            <div><strong>$50 deposit, applied to your service</strong><span>Refundable with 24 hours' notice.</span></div>
+          </div>
+        </div>
+        <div class="booking-rail-contact">
+          Prefer to talk first? Call <a href="tel:+14313349577">(431) 334-9577</a> or DM <a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener">@RoyalKingsDetailWinnipeg</a>.
+        </div>
       </div>
 
       <div class="booking-form">
@@ -1778,27 +710,15 @@
           <input type="hidden" name="subject" value="New Booking Request — Royal Kings Auto Care" />
           <input type="hidden" name="from_name" value="Royal Kings Booking" />
           <input type="hidden" name="form_type" value="booking" />
-          <!-- Honeypot spam trap -->
           <input type="text" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
-          <!-- Personal Info -->
           <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" autocomplete="name" placeholder="Your full name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" autocomplete="email" placeholder="you@email.com" required />
-            </div>
+            <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" autocomplete="name" placeholder="Your full name" required /></div>
+            <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" autocomplete="email" placeholder="you@email.com" required /></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(204) 000-0000" required />
-            </div>
-            <div class="form-group">
-              <label for="service">Service Package</label>
+            <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(204) 000-0000" required /></div>
+            <div class="form-group"><label for="service">Service Package</label>
               <select id="service" name="service" required>
                 <option value="" disabled selected>Select a package</option>
                 <option value="Minimal">Minimal — from $110</option>
@@ -1810,14 +730,9 @@
 
           <hr class="form-divider" />
 
-          <!-- Vehicle Info -->
           <div class="form-row">
-            <div class="form-group">
-              <label for="vehicle_make_model">Vehicle Make &amp; Model</label>
-              <input type="text" id="vehicle_make_model" name="vehicle_make_model" placeholder="e.g. 2020 Honda Civic" required />
-            </div>
-            <div class="form-group">
-              <label for="vehicle_size">Vehicle Size</label>
+            <div class="form-group"><label for="vehicle_make_model">Vehicle Make &amp; Model</label><input type="text" id="vehicle_make_model" name="vehicle_make_model" placeholder="e.g. 2020 Honda Civic" required /></div>
+            <div class="form-group"><label for="vehicle_size">Vehicle Size</label>
               <select id="vehicle_size" name="vehicle_size" required>
                 <option value="" disabled selected>Select vehicle class</option>
                 <option value="Coupes &amp; Sedans">Coupes &amp; Sedans</option>
@@ -1827,137 +742,32 @@
             </div>
           </div>
 
-          <!-- Add-On Services -->
           <div class="addons-section-label">Select Add-On Services</div>
           <div class="addons-grid" id="addonsGrid">
-
-            <label class="addon-card" data-min="50" data-max="100">
-              <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50-$100)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Clay Bar Treatment</div>
-                <div class="addon-price">$50 – $100</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="50" data-max="50">
-              <input type="checkbox" name="addon_iron_remover" value="Iron Remover ($50)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Iron Remover</div>
-                <div class="addon-price">$50</div>
-                <div class="addon-note">Flat rate</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="50" data-max="150">
-              <input type="checkbox" name="addon_engine_bay" value="Engine Bay Cleaning ($50-$150)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Engine Bay Cleaning</div>
-                <div class="addon-price">$50 – $150</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="60" data-max="120">
-              <input type="checkbox" name="addon_headlight" value="Headlight Restoration ($60-$120)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Headlight Restoration</div>
-                <div class="addon-price">$60 – $120</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="30" data-max="80">
-              <input type="checkbox" name="addon_pet_hair" value="Pet Hair Removal ($30-$80)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Pet Hair Removal</div>
-                <div class="addon-price">$30 – $80</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="50" data-max="150">
-              <input type="checkbox" name="addon_stain" value="Stain Extraction ($50-$150)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Stain Extraction</div>
-                <div class="addon-price">$50 – $150</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="50" data-max="100">
-              <input type="checkbox" name="addon_odor" value="Odor Removal ($50-$100)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Odor Removal</div>
-                <div class="addon-price">$50 – $100</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="100" data-max="150">
-              <input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100-$150)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Spray Ceramic Coating</div>
-                <div class="addon-price">$100 – $150</div>
-                <div class="addon-note">Based on vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="400" data-max="1000">
-              <input type="checkbox" name="addon_ceramic_coat" value="True Ceramic Coating ($400-$1,000+)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">True Ceramic Coating</div>
-                <div class="addon-price">$400 – $1,000+</div>
-                <div class="addon-note">Based on protection tier &amp; vehicle class</div>
-              </div>
-            </label>
-
-            <label class="addon-card" data-min="150" data-max="600">
-              <input type="checkbox" name="addon_buffing" value="Paint Correction / Buffing ($150-$600)" />
-              <div class="addon-check"></div>
-              <div class="addon-info">
-                <div class="addon-name">Paint Correction (Buffing)</div>
-                <div class="addon-price">$150 – $600</div>
-                <div class="addon-note">Based on correction steps &amp; vehicle class</div>
-                <span class="addon-full-day">Full-day service — Exclusive booking required</span>
-              </div>
-            </label>
-
+            <label class="addon-card" data-min="50" data-max="100"><input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50-$100)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Clay Bar Treatment</div><div class="addon-price">$50 – $100</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="50" data-max="50"><input type="checkbox" name="addon_iron_remover" value="Iron Remover ($50)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Iron Remover</div><div class="addon-price">$50</div><div class="addon-note">Flat rate</div></div></label>
+            <label class="addon-card" data-min="50" data-max="150"><input type="checkbox" name="addon_engine_bay" value="Engine Bay Cleaning ($50-$150)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Engine Bay Cleaning</div><div class="addon-price">$50 – $150</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="60" data-max="120"><input type="checkbox" name="addon_headlight" value="Headlight Restoration ($60-$120)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Headlight Restoration</div><div class="addon-price">$60 – $120</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="30" data-max="80"><input type="checkbox" name="addon_pet_hair" value="Pet Hair Removal ($30-$80)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Pet Hair Removal</div><div class="addon-price">$30 – $80</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="50" data-max="150"><input type="checkbox" name="addon_stain" value="Stain Extraction ($50-$150)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Stain Extraction</div><div class="addon-price">$50 – $150</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="50" data-max="100"><input type="checkbox" name="addon_odor" value="Odor Removal ($50-$100)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Odor Removal</div><div class="addon-price">$50 – $100</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="100" data-max="150"><input type="checkbox" name="addon_spray_ceramic" value="Spray Ceramic Coating ($100-$150)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Spray Ceramic Coating</div><div class="addon-price">$100 – $150</div><div class="addon-note">Based on vehicle class</div></div></label>
+            <label class="addon-card" data-min="400" data-max="1000"><input type="checkbox" name="addon_ceramic_coat" value="True Ceramic Coating ($400-$1,000+)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">True Ceramic Coating</div><div class="addon-price">$400 – $1,000+</div><div class="addon-note">Based on protection tier &amp; vehicle class</div></div></label>
+            <label class="addon-card" data-min="150" data-max="600"><input type="checkbox" name="addon_buffing" value="Paint Correction / Buffing ($150-$600)" /><div class="addon-check"></div><div class="addon-info"><div class="addon-name">Paint Correction (Buffing)</div><div class="addon-price">$150 – $600</div><div class="addon-note">Based on correction steps &amp; vehicle class</div><span class="addon-full-day">Full-day service — Exclusive booking required</span></div></label>
           </div>
 
-          <!-- Estimate Total -->
           <div class="estimate-box" id="estimateBox">
-            <div>
-              <div class="estimate-label">Estimated Total</div>
-              <div class="estimate-sub" id="estimateSub">Select a package to see your estimate</div>
-            </div>
-            <div class="estimate-total" id="estimateTotal">—</div>
+            <div><div class="estimate-label">Estimated Total</div><div class="estimate-sub" id="estimateSub">Select a package to see your estimate</div></div>
+            <div class="estimate-total" id="estimateTotal" aria-live="polite">—</div>
           </div>
 
-          <!-- Deposit Notice -->
-          <div class="deposit-notice">
-            <strong>Deposit Policy:</strong> A <strong>$50 deposit</strong> is required to secure your booking — this goes towards your service. Appointments must be rescheduled at least <strong>24 hours in advance</strong> or the deposit will be forfeited. Final pricing will be confirmed with you before your appointment.
-          </div>
+          <div class="deposit-notice"><strong>Deposit Policy:</strong> A <strong>$50 deposit</strong> is required to secure your booking — this goes towards your service. Appointments must be rescheduled at least <strong>24 hours in advance</strong> or the deposit will be forfeited. Final pricing will be confirmed with you before your appointment.</div>
 
           <hr class="form-divider" />
 
-          <!-- Date & Time -->
           <div class="form-row">
-            <div class="form-group">
-              <label for="preferred_date">Preferred Date</label>
-              <input type="date" id="preferred_date" name="preferred_date" required />
-            </div>
-            <div class="form-group">
-              <label for="preferred_time">Preferred Time</label>
+            <div class="form-group"><label for="preferred_date">Preferred Date</label><input type="date" id="preferred_date" name="preferred_date" required /></div>
+            <div class="form-group"><label for="preferred_time">Preferred Time</label>
               <select id="preferred_time" name="preferred_time" required>
                 <option value="" disabled selected>Select a time</option>
                 <option value="Morning (8am – 11am)">Morning (8am – 11am)</option>
@@ -1968,115 +778,126 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="notes">Additional Notes</label>
-            <textarea id="notes" name="notes" placeholder="e.g. Pet hair, heavy stains, specific concerns, address for mobile service, etc."></textarea>
-          </div>
+          <div class="form-group"><label for="notes">Additional Notes</label><textarea id="notes" name="notes" placeholder="e.g. Pet hair, heavy stains, specific concerns, address for mobile service, etc."></textarea></div>
 
-          <div class="form-submit">
-            <button type="submit" class="btn-gold">Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i></button>
-          </div>
+          <div class="form-submit"><button type="submit" class="btn-gold">Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i></button></div>
           <p class="form-note">We'll confirm your booking within 24 hours</p>
         </form>
 
         <div class="form-success" id="formSuccess">
           <div style="margin-bottom:1rem;"><i data-lucide="check-circle" style="width:48px;height:48px;color:var(--gold);stroke-width:1.5;"></i></div>
-          <h3>Request Received!</h3>
+          <h3>Request Received</h3>
           <p>Thanks for reaching out. We'll review your booking and get back to you within 24 hours to confirm your appointment.</p>
-          <p style="margin-top:1.2rem; font-size:0.82rem; color:var(--grey);">One more step — please sign our service agreement before your appointment.</p>
-          <a href="waiver.html" style="display:inline-block; margin-top:1rem; background:var(--gold); color:var(--black); padding:0.85rem 2.2rem; font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; border-radius:8px;">Sign Your Waiver <i data-lucide="arrow-right" style="width:14px;height:14px;stroke-width:2;vertical-align:-2px;"></i></a>
+          <p style="margin-top:1.2rem; font-size:0.82rem; color:var(--text-mut);">One more step — please sign our service agreement before your appointment.</p>
+          <a href="waiver.html" style="display:inline-block; margin-top:1rem; background:var(--gold); color:var(--on-gold); padding:0.85rem 2.2rem; font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; border-radius:8px;">Sign Your Waiver <i data-lucide="arrow-right" style="width:14px;height:14px;stroke-width:2;vertical-align:-2px;"></i></a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── CONTACT ── -->
-  <section id="contact" class="diamond-bg">
+  <section id="contact">
     <div class="contact-inner">
-      <div class="centered-header">
+      <div class="contact-rail">
+        <span class="sig"><span class="diamond"></span><span class="idx">05</span></span>
         <p class="section-label">Get In Touch</p>
-        <h2 class="section-title">Reach Us <span class="gold">Directly</span></h2>
-        <p class="section-sub">Have a question before booking? Reach out through any of the channels below.</p>
+        <h2 class="section-title">Reach us <span class="gold">directly</span></h2>
+        <p class="section-sub">Have a question before booking? Reach out through any of the channels here.</p>
+        <p class="contact-hours"><i data-lucide="clock" style="width:15px;height:15px;stroke-width:1.6;"></i> Mon–Sat · 8am–6pm</p>
       </div>
       <div class="contact-cards">
         <a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-card-icon"><i data-lucide="instagram" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
-          <span class="contact-card-label">Instagram</span>
-          <span class="contact-card-value">@RoyalKingsDetailWinnipeg</span>
+          <span class="contact-card-icon"><i data-lucide="instagram" style="width:22px;height:22px;stroke-width:1.5;"></i></span>
+          <span class="contact-card-label">Instagram</span><span class="contact-card-value">@RoyalKingsDetailWinnipeg</span>
         </a>
         <a href="https://www.tiktok.com/@RoyalKingsDetailing" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-card-icon"><i data-lucide="music" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
-          <span class="contact-card-label">TikTok</span>
-          <span class="contact-card-value">@RoyalKingsDetailing</span>
+          <span class="contact-card-icon"><i data-lucide="music" style="width:22px;height:22px;stroke-width:1.5;"></i></span>
+          <span class="contact-card-label">TikTok</span><span class="contact-card-value">@RoyalKingsDetailing</span>
         </a>
         <a href="tel:+14313349577" class="contact-card">
-          <span class="contact-card-icon"><i data-lucide="phone" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
-          <span class="contact-card-label">Patrick</span>
-          <span class="contact-card-value">(431) 334-9577</span>
+          <span class="contact-card-icon"><i data-lucide="phone" style="width:22px;height:22px;stroke-width:1.5;"></i></span>
+          <span class="contact-card-label">Patrick</span><span class="contact-card-value">(431) 334-9577</span>
         </a>
         <a href="tel:+14313880859" class="contact-card">
-          <span class="contact-card-icon"><i data-lucide="phone" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
-          <span class="contact-card-label">Justin</span>
-          <span class="contact-card-value">(431) 388-0859</span>
+          <span class="contact-card-icon"><i data-lucide="phone" style="width:22px;height:22px;stroke-width:1.5;"></i></span>
+          <span class="contact-card-label">Justin</span><span class="contact-card-value">(431) 388-0859</span>
         </a>
-        <div class="contact-card contact-card--static">
-          <span class="contact-card-icon"><i data-lucide="map-pin" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
-          <span class="contact-card-label">Location</span>
-          <span class="contact-card-value">Winnipeg, MB</span>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- ── BOTTOM CTA ── -->
-  <section id="bottom-cta" class="diamond-bg">
+  <section id="bottom-cta">
     <div class="bottom-cta-inner">
-      <h2>Ready for the <span class="gold">Royal Treatment</span>?</h2>
-      <p>Pick your package, choose a date, and we'll handle the rest. Your car deserves it.</p>
-      <ul class="bottom-cta-bullets">
-        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> Free estimates included</li>
-        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> No obligation to commit</li>
-        <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> $50 deposit goes toward your service</li>
-      </ul>
-      <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+      <div>
+        <h2>Ready for the <span class="gold">royal treatment</span>?</h2>
+        <p>Pick your package, choose a date, and we'll handle the rest. Your car deserves it.</p>
+        <ul class="bottom-cta-bullets">
+          <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> Free estimates included</li>
+          <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> No obligation to commit</li>
+          <li><i data-lucide="check-circle" style="width:16px;height:16px;stroke-width:1.8;"></i> $50 deposit goes toward your service</li>
+        </ul>
+      </div>
+      <div class="bottom-cta-action">
+        <a href="#booking" class="btn-gold"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
+        <a href="#pricing" class="btn-outline-gold">View Pricing</a>
+      </div>
     </div>
   </section>
 
   <!-- ── FOOTER ── -->
   <footer>
-    <div class="footer-logo">ROYAL KINGS AUTO CARE</div>
-    <p class="footer-tagline">Premium Detailing Service &middot; Winnipeg, MB</p>
-    <ul class="footer-links">
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#how-it-works">Process</a></li>
-      <li><a href="#booking">Book Now</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
-    <p class="footer-copy">&copy; 2026 Royal Kings Auto Care. All rights reserved.</p>
-    <p style="font-size:0.65rem; opacity:0.45; margin-top:0.5rem;">Powered by <a href="https://fjmedia.ca" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">FJMedia</a></p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ROYAL KINGS AUTO CARE</div>
+        <p class="footer-tagline">Premium Detailing Service &middot; Winnipeg, MB</p>
+        <p class="small">Mobile interior detailing across Winnipeg. We come to you — showroom results at your door.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services/index.html">All Services</a>
+        <a href="services/interior-car-detailing-winnipeg.html">Interior Detailing</a>
+        <a href="services/ceramic-coating-winnipeg.html">Ceramic Coating</a>
+        <a href="services/paint-correction-winnipeg.html">Paint Correction</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#pricing">Pricing</a>
+        <a href="#how-it-works">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#booking">Book Now</a>
+        <a href="waiver.html">Service Agreement</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="tel:+14313349577">(431) 334-9577 — Patrick</a>
+        <a href="tel:+14313880859">(431) 388-0859 — Justin</a>
+        <p>Mon–Sat · 8am–6pm</p>
+        <a href="https://www.instagram.com/RoyalKingsDetailWinnipeg/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@RoyalKingsDetailing" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span class="footer-copy">&copy; 2026 Royal Kings Auto Care. All rights reserved.</span>
+        <span class="footer-powered">Powered by <a href="https://fjmedia.ca" target="_blank" rel="noopener">FJMedia</a></span>
+      </div>
+    </div>
   </footer>
 
   <!-- ── STICKY MOBILE CTA ── -->
-  <div class="sticky-cta" id="stickyCta">
-    <a href="#booking"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a>
-  </div>
+  <div class="sticky-cta" id="stickyCta"><a href="#booking"><i data-lucide="crown" style="width:16px;height:16px;stroke-width:1.8;"></i> Book Your Detail</a></div>
 
   <!-- ── TOAST ── -->
-  <div class="toast" id="toast" role="alert">
-    <span class="toast-icon"><i data-lucide="check-circle" style="width:20px;height:20px;stroke-width:1.5;"></i></span>
-    <span class="toast-text" id="toastText">Booking request sent!</span>
-  </div>
+  <div class="toast" id="toast" role="alert"><span class="toast-icon"><i data-lucide="check-circle" style="width:20px;height:20px;stroke-width:1.5;"></i></span><span class="toast-text" id="toastText">Booking request sent</span></div>
 
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // ── Lucide Icons ──
     lucide.createIcons();
 
-    // ── Google Apps Script URL ──
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwcZcEFZAbQaSZVacnmOY8ypDQ1szAi-yzHJKNKt1BpYOGbvjeyFTeRD0RhBW8_pE5n/exec';
 
-    // ── Mobile nav + scroll lock ──
+    // ── Mobile nav ──
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
@@ -2088,104 +909,36 @@
       document.body.classList.remove('nav-open');
     }));
 
-    // ── Reduced Motion Guard ──
+    // ── Reduced Motion + GSAP-availability Guard ──
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) {
-      document.querySelectorAll('.hero-logo-img, .hero-label, .hero h1, .hero-sub, .hero-divider, .hero-tagline, .hero-btns a, .hero-reassurance, .hero-trust-badges')
+    const hasGSAP = (typeof gsap !== 'undefined') && (typeof ScrollTrigger !== 'undefined');
+    if (reducedMotion || !hasGSAP) {
+      document.querySelectorAll('.hero-logo-img, .hero-label, .hero h1, .hero-sub, .hero-divider, .hero-tagline, .hero-btns, .hero-reassurance, .hero-trust-badges, .hero-card')
         .forEach(el => { el.style.visibility = 'visible'; el.style.opacity = '1'; });
     }
 
-    // ── GSAP ScrollTrigger Setup ──
-    if (!reducedMotion) {
-    gsap.registerPlugin(ScrollTrigger);
+    if (!reducedMotion && hasGSAP) {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.from('.hero-label', { opacity:0, y:20, duration:0.7, ease:'power2.out', delay:0.2, onStart(){ gsap.set('.hero-label',{visibility:'visible'}); }});
+      gsap.from('.hero h1', { opacity:0, y:30, duration:0.8, ease:'power2.out', delay:0.35, onStart(){ gsap.set('.hero h1',{visibility:'visible'}); }});
+      gsap.from('.hero-sub', { opacity:0, y:20, duration:0.7, ease:'power2.out', delay:0.55, onStart(){ gsap.set('.hero-sub',{visibility:'visible'}); }});
+      gsap.from('.hero-divider', { opacity:0, scaleX:0, duration:0.6, ease:'power2.out', delay:0.7, onStart(){ gsap.set('.hero-divider',{visibility:'visible'}); }});
+      gsap.from('.hero-tagline', { opacity:0, y:20, duration:0.7, ease:'power2.out', delay:0.8, onStart(){ gsap.set('.hero-tagline',{visibility:'visible'}); }});
+      gsap.from('.hero-btns', { opacity:0, y:20, duration:0.6, ease:'back.out(1.5)', delay:0.95, onStart(){ gsap.set('.hero-btns',{visibility:'visible'}); }});
+      gsap.from('.hero-reassurance', { opacity:0, y:15, duration:0.5, ease:'power2.out', delay:1.1, onStart(){ gsap.set('.hero-reassurance',{visibility:'visible'}); }});
+      gsap.from('.hero-card', { opacity:0, y:40, duration:0.9, ease:'power3.out', delay:0.5, onStart(){ gsap.set('.hero-card',{visibility:'visible'}); }});
+      gsap.from('.hero-trust-badges', { opacity:0, y:15, duration:0.5, ease:'power2.out', delay:1.2, onStart(){ gsap.set('.hero-trust-badges',{visibility:'visible'}); }});
 
-    // Hero entrance — staggered (visibility:hidden fallback prevents FOIC)
-    gsap.from('.hero-logo-img', { opacity: 0, scale: 0.8, duration: 1, ease: 'power2.out', delay: 0.2, onStart: function(){ gsap.set('.hero-logo-img', {visibility:'visible'}); } });
-    gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out', delay: 0.5, onStart: function(){ gsap.set('.hero-label', {visibility:'visible'}); } });
-    gsap.from('.hero h1', { opacity: 0, y: 30, duration: 0.8, ease: 'power2.out', delay: 0.7, onStart: function(){ gsap.set('.hero h1', {visibility:'visible'}); } });
-    gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', delay: 0.9, onStart: function(){ gsap.set('.hero-sub', {visibility:'visible'}); } });
-    gsap.from('.hero-divider', { opacity: 0, scaleX: 0, duration: 0.6, ease: 'power2.out', delay: 1, onStart: function(){ gsap.set('.hero-divider', {visibility:'visible'}); } });
-    gsap.from('.hero-tagline', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', delay: 1.1, onStart: function(){ gsap.set('.hero-tagline', {visibility:'visible'}); } });
-    gsap.from('.hero-btns a', { opacity: 0, y: 20, duration: 0.6, ease: 'back.out(1.5)', stagger: 0.12, delay: 1.3, onStart: function(){ gsap.set('.hero-btns a', {visibility:'visible'}); } });
-    gsap.from('.hero-reassurance', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out', delay: 1.5, onStart: function(){ gsap.set('.hero-reassurance', {visibility:'visible'}); } });
-    gsap.from('.hero-trust-badges', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out', delay: 1.6, onStart: function(){ gsap.set('.hero-trust-badges', {visibility:'visible'}); } });
-
-    // Hero logo float via GSAP (replaces CSS keyframes)
-    gsap.to('.hero-logo-img', {
-      y: -12, duration: 2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.5
-    });
-
-    // Section labels + titles + subs
-    gsap.utils.toArray('.section-label').forEach(el => {
-      gsap.from(el, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
-    });
-    gsap.utils.toArray('.section-title').forEach(el => {
-      gsap.from(el, { opacity: 0, y: 24, duration: 0.7, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
-    });
-    gsap.utils.toArray('.section-sub').forEach(el => {
-      gsap.from(el, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true }});
-    });
-
-    // Pricing cards — stagger
-    gsap.from('.pricing-card', {
-      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
-      scrollTrigger: { trigger: '.pricing-grid', start: 'top 80%', once: true }
-    });
-
-    // Vehicle toggle
-    gsap.from('.vehicle-toggle-wrap', {
-      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-      scrollTrigger: { trigger: '.vehicle-toggle-wrap', start: 'top 85%', once: true }
-    });
-
-    // Before/After cards — stagger
-    gsap.from('.ba-card', {
-      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
-      scrollTrigger: { trigger: '.ba-grid', start: 'top 80%', once: true }
-    });
-
-    // How It Works steps — stagger
-    gsap.from('.hiw-step', {
-      opacity: 0, y: 40, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1,
-      scrollTrigger: { trigger: '.hiw-grid', start: 'top 80%', once: true }
-    });
-
-    // Testimonial cards — stagger
-    gsap.from('.test-card', {
-      opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.1,
-      scrollTrigger: { trigger: '.test-grid', start: 'top 80%', once: true }
-    });
-
-    // FAQ items — stagger
-    gsap.from('.faq-item', {
-      opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', stagger: 0.06,
-      scrollTrigger: { trigger: '.faq-list', start: 'top 80%', once: true }
-    });
-
-    // Booking form
-    gsap.from('.booking-form', {
-      opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: '.booking-form', start: 'top 80%', once: true }
-    });
-
-    // Contact cards — stagger
-    gsap.from('.contact-card', {
-      opacity: 0, y: 30, duration: 0.6, ease: 'back.out(1.5)', stagger: 0.08,
-      scrollTrigger: { trigger: '.contact-cards', start: 'top 80%', once: true }
-    });
-
-    // Bottom CTA
-    gsap.from('.bottom-cta-inner', {
-      opacity: 0, y: 30, duration: 0.7, ease: 'power2.out',
-      scrollTrigger: { trigger: '#bottom-cta', start: 'top 80%', once: true }
-    });
-
-    // Footer
-    gsap.from('footer', {
-      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-      scrollTrigger: { trigger: 'footer', start: 'top 90%', once: true }
-    });
-    } // end !reducedMotion
+      gsap.utils.toArray('.section-label').forEach(el => gsap.from(el, { opacity:0, y:20, duration:0.6, ease:'power2.out', scrollTrigger:{ trigger:el, start:'top 88%', once:true }}));
+      gsap.utils.toArray('.section-title').forEach(el => gsap.from(el, { opacity:0, y:24, duration:0.7, ease:'power2.out', scrollTrigger:{ trigger:el, start:'top 88%', once:true }}));
+      gsap.utils.toArray('.section-sub').forEach(el => gsap.from(el, { opacity:0, y:20, duration:0.6, ease:'power2.out', scrollTrigger:{ trigger:el, start:'top 88%', once:true }}));
+      gsap.from('.pricing-card', { opacity:0, y:30, duration:0.6, ease:'power2.out', stagger:0.1, scrollTrigger:{ trigger:'.pricing-rows', start:'top 82%', once:true }});
+      gsap.from('.hiw-step', { opacity:0, x:-24, duration:0.6, ease:'power2.out', stagger:0.12, scrollTrigger:{ trigger:'.hiw-timeline', start:'top 82%', once:true }});
+      gsap.from('.faq-item', { opacity:0, y:20, duration:0.5, ease:'power2.out', stagger:0.06, scrollTrigger:{ trigger:'.faq-list', start:'top 82%', once:true }});
+      gsap.from('.booking-form', { opacity:0, y:30, duration:0.8, ease:'power2.out', scrollTrigger:{ trigger:'.booking-form', start:'top 82%', once:true }});
+      gsap.from('.contact-card', { opacity:0, y:30, duration:0.6, ease:'back.out(1.5)', stagger:0.08, scrollTrigger:{ trigger:'.contact-cards', start:'top 82%', once:true }});
+      gsap.from('.bottom-cta-inner', { opacity:0, y:30, duration:0.7, ease:'power2.out', scrollTrigger:{ trigger:'#bottom-cta', start:'top 82%', once:true }});
+    }
 
     // ── FAQ Accordion ──
     document.querySelectorAll('.faq-question').forEach(btn => {
@@ -2193,15 +946,11 @@
         const item = btn.closest('.faq-item');
         const answer = item.querySelector('.faq-answer');
         const isOpen = item.classList.contains('open');
-
-        // Close all
         document.querySelectorAll('.faq-item.open').forEach(openItem => {
           openItem.classList.remove('open');
           openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
           openItem.querySelector('.faq-answer').style.maxHeight = null;
         });
-
-        // Toggle current
         if (!isOpen) {
           item.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
@@ -2214,51 +963,56 @@
     const stickyCta = document.getElementById('stickyCta');
     const heroBtns = document.getElementById('heroBtns');
     const bookingSection = document.getElementById('booking');
-
     function updateStickyCta() {
       if (!heroBtns || !stickyCta) return;
       const heroBottom = heroBtns.getBoundingClientRect().bottom;
       const bookingTop = bookingSection.getBoundingClientRect().top;
-      const show = heroBottom < 0 && bookingTop > window.innerHeight * 0.5;
-      stickyCta.classList.toggle('visible', show);
+      stickyCta.classList.toggle('visible', heroBottom < 0 && bookingTop > window.innerHeight * 0.5);
     }
     window.addEventListener('scroll', updateStickyCta, { passive: true });
 
-    // ── Toast Notification ──
+    // ── Toast ──
     function showToast(message) {
       const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toastText');
-      toastText.textContent = message;
+      document.getElementById('toastText').textContent = message;
       toast.classList.add('visible');
       setTimeout(() => toast.classList.remove('visible'), 4000);
     }
 
-    // ── Set min date (24h from now) and max date (90 days out) ──
+    // ── Date bounds ──
     const dateInput = document.getElementById('preferred_date');
-    const minDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    const maxDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
-    dateInput.setAttribute('min', minDate.toISOString().split('T')[0]);
-    dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
+    dateInput.setAttribute('min', new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0]);
+    dateInput.setAttribute('max', new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0]);
+
+    // ── Number tick — count to value; instant under reduced motion ──
+    const _ticks = new WeakMap();
+    function cancelTick(el) { const id = _ticks.get(el); if (id) cancelAnimationFrame(id); }
+    function tickTo(el, to, prefix, dur) {
+      cancelTick(el);
+      const from = (typeof el._val === 'number') ? el._val : (parseInt((el.textContent || '').replace(/[^0-9]/g, '')) || 0);
+      el._val = to;
+      if (reducedMotion || from === to) { el.textContent = prefix + to; return; }
+      const t0 = performance.now();
+      (function step(t) {
+        const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + Math.round(from + (to - from) * e);
+        if (p < 1) _ticks.set(el, requestAnimationFrame(step));
+      })(t0);
+    }
 
     // ── Vehicle Class Toggle + Dynamic Pricing ──
-    let currentClass    = 'Coupes & Sedans';
+    let currentClass = 'Coupes & Sedans';
     let currentSurcharge = 0;
-
-    const vehicleToggle  = document.getElementById('vehicleToggle');
-    const surchargeTag   = document.getElementById('surchargeTag');
-    const priceVals      = document.querySelectorAll('.price-val');
+    const vehicleToggle = document.getElementById('vehicleToggle');
+    const surchargeTag  = document.getElementById('surchargeTag');
+    const priceVals     = document.querySelectorAll('.price-val');
 
     function updatePrices(surcharge, className) {
       currentSurcharge = surcharge;
-      currentClass     = className;
-      priceVals.forEach(el => {
-        el.textContent = parseInt(el.dataset.base) + surcharge;
-      });
-      surchargeTag.textContent = surcharge === 0
-        ? 'Base price — no surcharge'
-        : '+$' + surcharge + ' surcharge applied for ' + className;
+      currentClass = className;
+      priceVals.forEach(el => { tickTo(el, parseInt(el.dataset.base) + surcharge, '', 320); });
+      surchargeTag.textContent = surcharge === 0 ? 'Base price — no surcharge' : '+$' + surcharge + ' surcharge applied for ' + className;
     }
-
     vehicleToggle.querySelectorAll('.vehicle-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         vehicleToggle.querySelectorAll('.vehicle-btn').forEach(b => b.classList.remove('active'));
@@ -2267,62 +1021,48 @@
       });
     });
 
-    // ── Book Now: pre-fill form fields then scroll ──
+    // ── Hero quick-pick chips → activate matching toggle + scroll to pricing ──
+    document.querySelectorAll('.hero-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const target = chip.dataset.jumpClass;
+        const match = Array.from(vehicleToggle.querySelectorAll('.vehicle-btn')).find(b => b.dataset.class === target);
+        if (match) match.click();
+        document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // ── Book Now pre-fill ──
     document.querySelectorAll('.book-now-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const tier = btn.dataset.tier;
-
         const serviceEl = document.getElementById('service');
-        for (const opt of serviceEl.options) {
-          if (opt.value === tier) { serviceEl.value = tier; break; }
-        }
-
+        for (const opt of serviceEl.options) { if (opt.value === tier) { serviceEl.value = tier; break; } }
         const sizeEl = document.getElementById('vehicle_size');
-        for (const opt of sizeEl.options) {
-          if (opt.value === currentClass) { sizeEl.value = currentClass; break; }
-        }
-
+        for (const opt of sizeEl.options) { if (opt.value === currentClass) { sizeEl.value = currentClass; break; } }
         calcEstimate();
       });
     });
 
-    // ── Add-On Services + Live Estimate ──
+    // ── Add-Ons + Live Estimate ──
     const addonCards = document.querySelectorAll('#addonsGrid .addon-card');
     const estimateTotal = document.getElementById('estimateTotal');
     const estimateSub   = document.getElementById('estimateSub');
-
-    const pkgPrices = { 'Minimal': 110, 'The Standard': 165, 'Premium': 195 };
-    const sizeSurcharges = { 'Coupes & Sedans': 0, 'SUVs & Crossovers': 15, 'Trucks & 7-Seaters': 35 };
+    const pkgPrices = { 'Minimal':110, 'The Standard':165, 'Premium':195 };
+    const sizeSurcharges = { 'Coupes & Sedans':0, 'SUVs & Crossovers':15, 'Trucks & 7-Seaters':35 };
 
     function calcEstimate() {
-      const pkg   = document.getElementById('service').value;
+      const pkg = document.getElementById('service').value;
       const vSize = document.getElementById('vehicle_size').value;
-      const base  = pkgPrices[pkg] || 0;
-      const sur   = sizeSurcharges[vSize] || 0;
-
+      const base = pkgPrices[pkg] || 0;
+      const sur  = sizeSurcharges[vSize] || 0;
       let extMin = 0, extMax = 0;
-      addonCards.forEach(card => {
-        if (card.classList.contains('selected')) {
-          extMin += parseInt(card.dataset.min);
-          extMax += parseInt(card.dataset.max);
-        }
-      });
-
+      addonCards.forEach(card => { if (card.classList.contains('selected')) { extMin += parseInt(card.dataset.min); extMax += parseInt(card.dataset.max); } });
       const totalMin = base + sur + extMin;
       const totalMax = base + sur + extMax;
-
-      if (!base && extMin === 0) {
-        estimateTotal.textContent = '\u2014';
-        estimateSub.textContent   = 'Select a package to see your estimate';
-        return;
-      }
-
-      estimateTotal.textContent = totalMin === totalMax ? '$' + totalMin : 'from $' + totalMin;
-      estimateSub.textContent   = pkg
-        ? pkg + (vSize ? ' \u00b7 ' + vSize : '') + (extMin > 0 ? ' + add-ons' : '') + ' \u00b7 Final price confirmed before service'
-        : 'Add-ons only \u00b7 Select a package for full estimate';
+      if (!base && extMin === 0) { cancelTick(estimateTotal); estimateTotal.textContent = '—'; estimateTotal._val = 0; estimateSub.textContent = 'Select a package to see your estimate'; return; }
+      tickTo(estimateTotal, totalMin, totalMin === totalMax ? '$' : 'from $', 560);
+      estimateSub.textContent = pkg ? pkg + (vSize ? ' · ' + vSize : '') + (extMin > 0 ? ' + add-ons' : '') + ' · Final price confirmed before service' : 'Add-ons only · Select a package for full estimate';
     }
-
     addonCards.forEach(card => {
       card.addEventListener('click', function(e) {
         e.preventDefault();
@@ -2332,100 +1072,61 @@
         calcEstimate();
       });
     });
-
     document.getElementById('service').addEventListener('change', calcEstimate);
     document.getElementById('vehicle_size').addEventListener('change', calcEstimate);
 
-    // ── Booking form submission ──
+    // ── Form submit ──
     const bookingForm = document.getElementById('bookingForm');
     const formSuccess = document.getElementById('formSuccess');
-
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const btn = bookingForm.querySelector('button[type="submit"]');
       btn.innerHTML = 'Sending&hellip;';
       btn.disabled = true;
-
-      // Collect selected add-ons
       const selectedAddons = [];
-      addonCards.forEach(card => {
-        if (card.classList.contains('selected')) {
-          selectedAddons.push(card.querySelector('input').value);
-        }
-      });
+      addonCards.forEach(card => { if (card.classList.contains('selected')) selectedAddons.push(card.querySelector('input').value); });
       let addonsInput = bookingForm.querySelector('input[name="add_ons"]');
-      if (!addonsInput) {
-        addonsInput = document.createElement('input');
-        addonsInput.type = 'hidden';
-        addonsInput.name = 'add_ons';
-        bookingForm.appendChild(addonsInput);
-      }
+      if (!addonsInput) { addonsInput = document.createElement('input'); addonsInput.type = 'hidden'; addonsInput.name = 'add_ons'; bookingForm.appendChild(addonsInput); }
       addonsInput.value = selectedAddons.length > 0 ? selectedAddons.join(' | ') : 'None';
-
       const formData = new FormData(bookingForm);
-
-      // Send to Google Apps Script for sheet logging
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
         const sheetBody = new URLSearchParams({
-          name:               formData.get('name')               || '',
-          email:              formData.get('email')              || '',
-          phone:              formData.get('phone')              || '',
-          service:            formData.get('service')            || '',
-          add_ons:            formData.get('add_ons')            || '',
-          vehicle_make_model: formData.get('vehicle_make_model') || '',
-          vehicle_size:       formData.get('vehicle_size')       || '',
-          preferred_date:     formData.get('preferred_date')     || '',
-          preferred_time:     formData.get('preferred_time')     || '',
-          notes:              formData.get('notes')              || ''
+          name: formData.get('name')||'', email: formData.get('email')||'', phone: formData.get('phone')||'',
+          service: formData.get('service')||'', add_ons: formData.get('add_ons')||'',
+          vehicle_make_model: formData.get('vehicle_make_model')||'', vehicle_size: formData.get('vehicle_size')||'',
+          preferred_date: formData.get('preferred_date')||'', preferred_time: formData.get('preferred_time')||'', notes: formData.get('notes')||''
         });
-        fetch(GAS_URL, { method: 'POST', body: sheetBody }).catch(() => {});
+        fetch(GAS_URL, { method:'POST', body:sheetBody }).catch(() => {});
       }
-
-      // Send to Web3Forms for email notification
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          showToast('Booking request sent!');
-          bookingForm.style.display = 'none';
-          formSuccess.classList.add('visible');
-          lucide.createIcons();
-        } else {
-          throw new Error(data.message);
-        }
-      })
-      .catch(() => {
-        btn.innerHTML = 'Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i>';
-        btn.disabled = false;
-        lucide.createIcons();
-        alert('Something went wrong. Please call or DM us directly!');
-      });
+      fetch('https://api.web3forms.com/submit', { method:'POST', body:formData })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) { showToast('Booking request sent'); bookingForm.style.display = 'none'; formSuccess.classList.add('visible'); lucide.createIcons(); }
+          else { throw new Error(data.message); }
+        })
+        .catch(() => {
+          btn.innerHTML = 'Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i>';
+          btn.disabled = false; lucide.createIcons();
+          alert('Something went wrong. Please call or DM us directly.');
+        });
     });
-    // ── Nav shrink on scroll ──
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
 
-    // ── Active nav link on scroll ──
+    // ── Nav shrink + active link ──
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
     const sections = document.querySelectorAll('section[id]');
     const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
-          navAnchors.forEach(a => {
-            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-          });
+          navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
         }
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => sectionObserver.observe(s));
 
-  }); // end DOMContentLoaded
+  });
   </script>
 </body>
 </html>
