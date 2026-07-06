@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://royalkingsdetailingwpg.ca/sitemap.xml
+Sitemap: https://www.royalkingsdetailingwpg.ca/sitemap.xml
