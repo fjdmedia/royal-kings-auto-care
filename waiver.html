@@ -737,6 +737,7 @@
         <div class="sig-submit">
           <button type="submit" class="btn-gold" id="waiverSubmitBtn">&#9818; Submit Signed Agreement</button>
         </div>
+        <p id="waiverError" role="alert" style="display:none; color:#e0685e; font-size:0.85rem; text-align:center; margin-top:0.85rem; font-weight:600;"></p>
         <p class="sig-note">&#9670; &nbsp; A copy of this agreement will be sent to Royal Kings Auto Care &nbsp; &#9670;</p>
       </form>
 
@@ -1023,18 +1024,24 @@
 
     waiverForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      const waiverError = document.getElementById('waiverError');
+      const showErr = (msg) => { waiverError.textContent = msg; waiverError.style.display = 'block'; };
 
       if (!hasSig) {
+        showErr('Please draw your signature in the box above before submitting.');
         padWrap.style.borderColor = 'rgba(201,50,50,0.6)';
         padWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => padWrap.style.borderColor = '', 2000);
         return;
       }
       if (!agreeCheck.checked) {
+        showErr('Please check the box to agree to the terms before submitting.');
         agreeWrap.style.borderColor = 'rgba(201,50,50,0.4)';
+        agreeWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => agreeWrap.style.borderColor = '', 2000);
         return;
       }
+      waiverError.style.display = 'none';   // all checks passed
 
       const sigImageData = canvas.toDataURL('image/png');
       document.getElementById('signatureData').value = sigImageData;

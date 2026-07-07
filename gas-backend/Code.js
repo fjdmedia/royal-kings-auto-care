@@ -16,17 +16,22 @@ function doPost(e) {
     const ss     = SpreadsheetApp.getActiveSpreadsheet();
     const type   = params.form_type || 'booking';
 
+    const out = { success: true };
+
     if (type === 'waiver') {
       logWaiver(ss, params);
-      saveWaiverRecord(params);
-      notifyWaiver(params);
+      const pdfFile = saveWaiverPdf_(params);   // the customer's actual signed PDF
+      if (!pdfFile) saveWaiverRecord(params);    // fallback: text summary Doc if no PDF came through
+      notifyWaiver(params, pdfFile);             // email James, with the PDF attached
+      out.pdfSaved = !!pdfFile;
+      if (pdfFile) out.fileId = pdfFile.getId();
     } else {
       logBooking(ss, params);
       notifyBooking(params);
     }
 
     return ContentService
-      .createTextOutput(JSON.stringify({ success: true }))
+      .createTextOutput(JSON.stringify(out))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
@@ -45,11 +50,12 @@ function authorizeMe() {
 }
 
 // ── Email notifications (replaces Web3Forms) ─────────────────────────────────
-function sendNotify_(subject, body, replyTo) {
+function sendNotify_(subject, body, replyTo, attachments) {
   if (!NOTIFY_EMAILS) return;
   try {
     const opts = { name: 'Royal Kings Auto Care' };
     if (replyTo) opts.replyTo = replyTo;
+    if (attachments && attachments.length) opts.attachments = attachments;
     MailApp.sendEmail(NOTIFY_EMAILS, subject, body, opts);
   } catch (err) {
     // swallow — logging already succeeded; never fail the request over email
@@ -77,7 +83,7 @@ function notifyBooking(p) {
   sendNotify_('New Booking — ' + name + ' (' + (p.service || 'detail') + ')', lines.join('\n'), p.email || null);
 }
 
-function notifyWaiver(p) {
+function notifyWaiver(p, pdfFile) {
   const name = p.customer_name || 'Someone';
   const lines = [
     'Signed waiver received — Royal Kings Auto Care',
@@ -91,9 +97,12 @@ function notifyWaiver(p) {
     'Date signed:  ' + (p.date_signed || '—'),
     'Agreed:       ' + (p.agreed || '—'),
     '',
-    'Logged to the Waivers sheet. Signed record saved to the Drive folder.'
+    pdfFile
+      ? 'The signed PDF is attached, and a copy is saved in the "' + WAIVER_FOLDER_NAME + '" Drive folder.'
+      : 'Logged to the Waivers sheet. (No signed PDF was received; a text summary was saved to the Drive folder.)'
   ];
-  sendNotify_('Signed Waiver — ' + name, lines.join('\n'));
+  const attachments = pdfFile ? [pdfFile.getBlob()] : null;
+  sendNotify_('Signed Waiver — ' + name, lines.join('\n'), null, attachments);
 }
 
 // ── Log booking to the bound sheet ───────────────────────────────────────────
@@ -154,6 +163,24 @@ function logWaiver(ss, p) {
 function getOrCreateWaiverFolder_() {
   const it = DriveApp.getFoldersByName(WAIVER_FOLDER_NAME);
   return it.hasNext() ? it.next() : DriveApp.createFolder(WAIVER_FOLDER_NAME);
+}
+
+// ── Save the customer's ACTUAL signed PDF (base64 from the form) to Drive ─────
+// Returns the Drive File (for the email attachment), or null if no PDF came through.
+function saveWaiverPdf_(p) {
+  if (!p.pdf_data) return null;
+  try {
+    let b64 = p.pdf_data;
+    const comma = b64.indexOf(',');
+    if (comma > -1) b64 = b64.substring(comma + 1);   // strip any "data:...;base64," prefix
+    const bytes = Utilities.base64Decode(b64);
+    const date  = p.date_signed || new Date().toLocaleDateString('en-CA', { timeZone: 'America/Winnipeg' });
+    const fname = 'Signed Waiver — ' + (p.customer_name || 'Customer') + ' — ' + date + '.pdf';
+    const blob  = Utilities.newBlob(bytes, 'application/pdf', fname);
+    return getOrCreateWaiverFolder_().createFile(blob);
+  } catch (err) {
+    return null;   // never fail the request over PDF storage
+  }
 }
 
 function saveWaiverRecord(p) {
