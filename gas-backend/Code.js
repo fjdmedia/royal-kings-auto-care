@@ -7,7 +7,7 @@
 // dropdown, click Run, and approve the permissions once. That grants the sheet,
 // email, and Drive access the web app needs.
 
-const NOTIFY_EMAILS = 'diazcjames@gmail.com';      // booking + waiver alerts go here
+const NOTIFY_EMAILS = 'diazcjames@gmail.com,royalkingsautocare@gmail.com';   // booking + waiver alerts (comma-separated: FJMedia + client)
 const WAIVER_FOLDER_NAME = 'Royal Kings — Signed Waivers';
 
 function doPost(e) {
