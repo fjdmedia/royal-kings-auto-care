@@ -1,0 +1,8 @@
+# Keep non-web / backend files out of the public Vercel deploy.
+# The Apps Script backend source is version-controlled here but must NOT be
+# served at the web root (it's server-side logic, not a page).
+gas-backend/
+appsscript.js
+generate_waiver_pdf.py
+*.py
+Service Agreement - Royal Kings Auto Care.pdf

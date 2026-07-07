@@ -48,7 +48,7 @@
      FJMedia · lane: redesign · rung: 4 (macrostructure rebuild)
      Royal Kings Auto Care — full rebuild on the original theme
      ── 2026-07-04 premium polish pass (rung 2 on the 06-30 rebuild) ──
-     preserved: routes/anchors, all copy, prices, form contract, GAS/Web3Forms
+     preserved: routes/anchors, all copy, prices, form contract, GAS-only (Apps Script, no Web3Forms)
      added: numbered section indices · estimate + price number-tick (rAF,
      reduced-motion instant) · hours + waiver surfaced · crown favicon ·
      scroll-margin anchors · overflow-x:clip · press states · text-wrap:balance
@@ -705,10 +705,8 @@
       </div>
 
       <div class="booking-form">
+        <iframe name="gas-sink" style="display:none" aria-hidden="true"></iframe>
         <form id="bookingForm">
-          <input type="hidden" name="access_key" value="9a034c4a-2257-450b-9c7a-f0e4f0e38927" />
-          <input type="hidden" name="subject" value="New Booking Request — Royal Kings Auto Care" />
-          <input type="hidden" name="from_name" value="Royal Kings Booking" />
           <input type="hidden" name="form_type" value="booking" />
           <input type="text" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
@@ -895,7 +893,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     lucide.createIcons();
 
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwcZcEFZAbQaSZVacnmOY8ypDQ1szAi-yzHJKNKt1BpYOGbvjeyFTeRD0RhBW8_pE5n/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzHEbSavkYrqL3sA9y5oqHXQbK24IQJahz_wYbQODO4rY-LSDJ_w9IyGslmgINtVLLf7g/exec';
 
     // ── Mobile nav ──
     const hamburger = document.getElementById('hamburger');
@@ -1088,27 +1086,19 @@
       let addonsInput = bookingForm.querySelector('input[name="add_ons"]');
       if (!addonsInput) { addonsInput = document.createElement('input'); addonsInput.type = 'hidden'; addonsInput.name = 'add_ons'; bookingForm.appendChild(addonsInput); }
       addonsInput.value = selectedAddons.length > 0 ? selectedAddons.join(' | ') : 'None';
-      const formData = new FormData(bookingForm);
+      // Send to Google Apps Script via hidden iframe form POST (bypasses CORS, no third-party vendor)
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
-        const sheetBody = new URLSearchParams({
-          name: formData.get('name')||'', email: formData.get('email')||'', phone: formData.get('phone')||'',
-          service: formData.get('service')||'', add_ons: formData.get('add_ons')||'',
-          vehicle_make_model: formData.get('vehicle_make_model')||'', vehicle_size: formData.get('vehicle_size')||'',
-          preferred_date: formData.get('preferred_date')||'', preferred_time: formData.get('preferred_time')||'', notes: formData.get('notes')||''
-        });
-        fetch(GAS_URL, { method:'POST', body:sheetBody }).catch(() => {});
+        bookingForm.method = 'POST';
+        bookingForm.action = GAS_URL;
+        bookingForm.target = 'gas-sink';
+        bookingForm.submit();
       }
-      fetch('https://api.web3forms.com/submit', { method:'POST', body:formData })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) { showToast('Booking request sent'); bookingForm.style.display = 'none'; formSuccess.classList.add('visible'); lucide.createIcons(); }
-          else { throw new Error(data.message); }
-        })
-        .catch(() => {
-          btn.innerHTML = 'Book My Detail <i data-lucide="arrow-right" style="width:16px;height:16px;stroke-width:2;"></i>';
-          btn.disabled = false; lucide.createIcons();
-          alert('Something went wrong. Please call or DM us directly.');
-        });
+      showToast('Booking request sent');
+      setTimeout(() => {
+        bookingForm.style.display = 'none';
+        formSuccess.classList.add('visible');
+        lucide.createIcons();
+      }, 600);
     });
 
     // ── Nav shrink + active link ──
