@@ -1086,6 +1086,19 @@
       let addonsInput = bookingForm.querySelector('input[name="add_ons"]');
       if (!addonsInput) { addonsInput = document.createElement('input'); addonsInput.type = 'hidden'; addonsInput.name = 'add_ons'; bookingForm.appendChild(addonsInput); }
       addonsInput.value = selectedAddons.length > 0 ? selectedAddons.join(' | ') : 'None';
+
+      // Carry the customer's details to the waiver page so they don't re-type them
+      try {
+        sessionStorage.setItem('rk_booking', JSON.stringify({
+          name:         (document.getElementById('name').value         || ''),
+          phone:        (document.getElementById('phone').value        || ''),
+          email:        (document.getElementById('email').value        || ''),
+          vehicle:      (document.getElementById('vehicle_make_model').value || ''),
+          service:      (document.getElementById('service').value      || ''),
+          vehicle_size: (document.getElementById('vehicle_size').value  || '')
+        }));
+      } catch (err) { /* private mode / storage disabled — waiver just starts blank */ }
+
       // Send to Google Apps Script via hidden iframe form POST (bypasses CORS, no third-party vendor)
       if (GAS_URL !== 'YOUR_APPS_SCRIPT_URL') {
         bookingForm.method = 'POST';

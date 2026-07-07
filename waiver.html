@@ -1352,6 +1352,39 @@
       const lines = doc.splitTextToSize(value || '—', W - VX - M);
       doc.text(lines, VX, y);
     }
+
+    // ── Seamless handoff: pre-fill from the homepage booking form ──
+    // If the customer came straight from booking, carry their details over so
+    // they only review + sign here instead of re-typing everything.
+    (function prefillFromBooking() {
+      let b;
+      try { b = JSON.parse(sessionStorage.getItem('rk_booking') || 'null'); } catch (e) { return; }
+      if (!b) return;
+      const setText = (id, v) => { const el = document.getElementById(id); if (el && v) el.value = v; };
+      setText('w_name',    b.name);
+      setText('w_phone',   b.phone);
+      setText('w_vehicle', b.vehicle);
+
+      const SERVICE_MAP = { 'Minimal': 'minimal', 'The Standard': 'standard', 'Premium': 'premium' };
+      const svc = SERVICE_MAP[b.service];
+      const sEl = document.getElementById('w_service');
+      if (svc && sEl && [...sEl.options].some(o => o.value === svc)) {
+        sEl.value = svc;
+        sEl.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      const VTYPE_MAP = { 'Coupes & Sedans': 'coupe-sedan', 'SUVs & Crossovers': 'suv-crossover', 'Trucks & 7-Seaters': 'truck-7seater' };
+      const vt = VTYPE_MAP[b.vehicle_size];
+      const vEl = document.getElementById('w_vehicle_type');
+      if (vt && vEl && [...vEl.options].some(o => o.value === vt)) {
+        vEl.value = vt;
+        vEl.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      // Refresh the consent-line name preview
+      const nEl = document.getElementById('w_name');
+      if (nEl) nEl.dispatchEvent(new Event('input', { bubbles: true }));
+    })();
   </script>
 </body>
 </html>
