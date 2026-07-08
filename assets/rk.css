@@ -82,7 +82,7 @@ nav.site-nav.scrolled { padding-block:0.7rem; background:rgba(8,7,6,0.9); border
 .nav-links > li > a.active { color:var(--gold); }
 .nav-cta { display:inline-flex; align-items:center; font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-gold); background:linear-gradient(180deg,var(--gold-bright),var(--gold)); padding:0.62rem 1.2rem; border-radius:var(--r-xs); margin-left:0.5rem; box-shadow:var(--sh-1); transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease); }
 .nav-cta:hover { transform:translateY(-1px); box-shadow:0 14px 30px -12px var(--gold-glow); }
-.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+.hamburger { display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; min-width:44px; min-height:44px; padding:6px; }
 .hamburger span { width:24px; height:2px; background:var(--gold); border-radius:2px; transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease); }
 .nav-open .hamburger span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
 .nav-open .hamburger span:nth-child(2) { opacity:0; }

@@ -13,6 +13,14 @@ const WAIVER_FOLDER_NAME = 'Royal Kings — Signed Waivers';
 function doPost(e) {
   try {
     const params = e.parameter;
+
+    // Honeypot: humans never fill the hidden 'botcheck' field — bots do. Silently accept + drop
+    // (returning success avoids tipping the bot off to retry).
+    if (params.botcheck) {
+      return ContentService.createTextOutput(JSON.stringify({ success: true }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     const ss     = SpreadsheetApp.getActiveSpreadsheet();
     const type   = params.form_type || 'booking';
 
