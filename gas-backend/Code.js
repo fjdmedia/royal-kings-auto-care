@@ -50,59 +50,77 @@ function authorizeMe() {
 }
 
 // ── Email notifications (replaces Web3Forms) ─────────────────────────────────
-function sendNotify_(subject, body, replyTo, attachments) {
+function sendNotify_(subject, body, replyTo, attachments, htmlBody) {
   if (!NOTIFY_EMAILS) return;
   try {
     const opts = { name: 'Royal Kings Auto Care' };
     if (replyTo) opts.replyTo = replyTo;
     if (attachments && attachments.length) opts.attachments = attachments;
+    if (htmlBody) opts.htmlBody = htmlBody;
     MailApp.sendEmail(NOTIFY_EMAILS, subject, body, opts);
   } catch (err) {
-    // swallow — logging already succeeded; never fail the request over email
+    console.error('sendNotify_ failed: ' + err);   // surfaces in the GAS execution log
   }
+}
+
+// Branded, email-client-safe HTML (inline styles + tables). rows = [[label, value], ...]
+function buildEmailHtml_(heading, intro, rows, note) {
+  const rowsHtml = rows.map(function (r) {
+    return '<tr>' +
+      '<td style="padding:9px 14px;font:600 11px/1.4 Arial,Helvetica,sans-serif;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;vertical-align:top;border-bottom:1px solid #f0f0f0;">' + r[0] + '</td>' +
+      '<td style="padding:9px 14px;font:400 14px/1.5 Arial,Helvetica,sans-serif;color:#1c1c1c;border-bottom:1px solid #f0f0f0;">' + (r[1] ? String(r[1]) : '&mdash;') + '</td>' +
+    '</tr>';
+  }).join('');
+  return '<div style="background:#f4f4f5;padding:24px 12px;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e6e6e6;">' +
+      '<tr><td style="background:#0a0a0a;padding:26px 28px;text-align:center;border-top:3px solid #C9A227;">' +
+        '<div style="font:700 20px/1.2 Georgia,\'Times New Roman\',serif;color:#C9A227;letter-spacing:0.08em;">ROYAL KINGS AUTO CARE</div>' +
+        '<div style="font:400 11px/1.4 Arial,Helvetica,sans-serif;color:#9a9a9a;letter-spacing:0.14em;margin-top:7px;">PREMIUM AUTO DETAILING &middot; WINNIPEG, MB</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:24px 28px 6px;">' +
+        '<div style="font:700 17px/1.3 Georgia,serif;color:#0a0a0a;">' + heading + '</div>' +
+        (intro ? '<div style="font:400 13px/1.55 Arial,Helvetica,sans-serif;color:#6a6a6a;margin-top:5px;">' + intro + '</div>' : '') +
+      '</td></tr>' +
+      '<tr><td style="padding:8px 14px 16px;">' +
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">' + rowsHtml + '</table>' +
+      '</td></tr>' +
+      (note ? '<tr><td style="padding:0 28px 20px;"><div style="font:400 12px/1.55 Arial,Helvetica,sans-serif;color:#8a8a8a;background:#faf8f2;border-left:3px solid #C9A227;padding:11px 14px;border-radius:0 6px 6px 0;">' + note + '</div></td></tr>' : '') +
+      '<tr><td style="background:#0a0a0a;padding:16px 28px;text-align:center;border-top:2px solid #C9A227;">' +
+        '<div style="font:400 11px/1.5 Arial,Helvetica,sans-serif;color:#8a8a8a;">Royal Kings Auto Care &middot; Winnipeg, MB &middot; royalkingsdetailingwpg.ca</div>' +
+      '</td></tr>' +
+    '</table></div>';
 }
 
 function notifyBooking(p) {
   const name = p.name || 'Someone';
-  const lines = [
-    'New booking request — Royal Kings Auto Care',
-    '',
-    'Name:     ' + (p.name || '—'),
-    'Email:    ' + (p.email || '—'),
-    'Phone:    ' + (p.phone || '—'),
-    'Service:  ' + (p.service || '—'),
-    'Add-ons:  ' + (p.add_ons || 'None'),
-    'Vehicle:  ' + (p.vehicle_make_model || '—'),
-    'Size:     ' + (p.vehicle_size || '—'),
-    'Date:     ' + (p.preferred_date || '—'),
-    'Time:     ' + (p.preferred_time || '—'),
-    'Notes:    ' + (p.notes || '—'),
-    '',
-    'Logged to the Bookings sheet. Reply to this email to reach the customer.'
+  const rows = [
+    ['Name', p.name], ['Email', p.email], ['Phone', p.phone],
+    ['Service', p.service], ['Add-ons', p.add_ons || 'None'],
+    ['Vehicle', p.vehicle_make_model], ['Vehicle size', p.vehicle_size],
+    ['Preferred date', p.preferred_date], ['Preferred time', p.preferred_time],
+    ['Notes', p.notes]
   ];
-  sendNotify_('New Booking — ' + name + ' (' + (p.service || 'detail') + ')', lines.join('\n'), p.email || null);
+  const text = rows.map(function (r) { return r[0] + ': ' + (r[1] || '—'); }).join('\n');
+  const html = buildEmailHtml_('New Booking Request',
+    'A customer just requested a detail through your website.', rows,
+    'Reply to this email to reach the customer directly.');
+  sendNotify_('New Booking — ' + name + ' (' + (p.service || 'detail') + ')', text, p.email || null, null, html);
 }
 
 function notifyWaiver(p, pdfFile) {
   const name = p.customer_name || 'Someone';
-  const lines = [
-    'Signed waiver received — Royal Kings Auto Care',
-    '',
-    'Name:         ' + (p.customer_name || '—'),
-    'Phone:        ' + (p.phone || '—'),
-    'Vehicle:      ' + (p.vehicle || '—'),
-    'Service:      ' + (p.service || '—'),
-    'Vehicle type: ' + (p.vehicle_type || '—'),
-    'Add-ons:      ' + (p.addons || 'None'),
-    'Date signed:  ' + (p.date_signed || '—'),
-    'Agreed:       ' + (p.agreed || '—'),
-    '',
-    pdfFile
-      ? 'The signed PDF is attached, and a copy is saved in the "' + WAIVER_FOLDER_NAME + '" Drive folder.'
-      : 'Logged to the Waivers sheet. (No signed PDF was received; a text summary was saved to the Drive folder.)'
+  const rows = [
+    ['Name', p.customer_name], ['Phone', p.phone], ['Vehicle', p.vehicle],
+    ['Service', p.service], ['Vehicle type', p.vehicle_type],
+    ['Add-ons', p.addons || 'None'], ['Date signed', p.date_signed], ['Agreed', p.agreed]
   ];
+  const text = rows.map(function (r) { return r[0] + ': ' + (r[1] || '—'); }).join('\n');
+  const note = pdfFile
+    ? 'The signed PDF is attached, and a copy is saved in your &ldquo;' + WAIVER_FOLDER_NAME + '&rdquo; Drive folder.'
+    : 'Logged to the Waivers sheet. (No signed PDF was received; a text summary was saved to Drive.)';
+  const html = buildEmailHtml_('Signed Waiver Received', name + ' signed the service agreement.', rows, note);
   const attachments = pdfFile ? [pdfFile.getBlob()] : null;
-  sendNotify_('Signed Waiver — ' + name, lines.join('\n'), null, attachments);
+  sendNotify_('Signed Waiver — ' + name, text, null, attachments, html);
 }
 
 // ── Log booking to the bound sheet ───────────────────────────────────────────
