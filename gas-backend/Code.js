@@ -63,12 +63,25 @@ function sendNotify_(subject, body, replyTo, attachments, htmlBody) {
   }
 }
 
+// Escape user-supplied text before putting it in HTML — prevents tag/entity mangling + injection.
+function escapeHtml_(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Neutralize spreadsheet formula injection — a leading = + - @ (or tab/CR) makes Sheets run it as a formula.
+function sanitizeCell_(v) {
+  const s = (v == null) ? '' : String(v);
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
+
 // Branded, email-client-safe HTML (inline styles + tables). rows = [[label, value], ...]
 function buildEmailHtml_(heading, intro, rows, note) {
   const rowsHtml = rows.map(function (r) {
     return '<tr>' +
       '<td style="padding:9px 14px;font:600 11px/1.4 Arial,Helvetica,sans-serif;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;vertical-align:top;border-bottom:1px solid #f0f0f0;">' + r[0] + '</td>' +
-      '<td style="padding:9px 14px;font:400 14px/1.5 Arial,Helvetica,sans-serif;color:#1c1c1c;border-bottom:1px solid #f0f0f0;">' + (r[1] ? String(r[1]) : '&mdash;') + '</td>' +
+      '<td style="padding:9px 14px;font:400 14px/1.5 Arial,Helvetica,sans-serif;color:#1c1c1c;border-bottom:1px solid #f0f0f0;">' + (r[1] ? escapeHtml_(r[1]) : '&mdash;') + '</td>' +
     '</tr>';
   }).join('');
   return '<div style="background:#f4f4f5;padding:24px 12px;">' +
@@ -78,8 +91,8 @@ function buildEmailHtml_(heading, intro, rows, note) {
         '<div style="font:400 11px/1.4 Arial,Helvetica,sans-serif;color:#9a9a9a;letter-spacing:0.14em;margin-top:7px;">PREMIUM AUTO DETAILING &middot; WINNIPEG, MB</div>' +
       '</td></tr>' +
       '<tr><td style="padding:24px 28px 6px;">' +
-        '<div style="font:700 17px/1.3 Georgia,serif;color:#0a0a0a;">' + heading + '</div>' +
-        (intro ? '<div style="font:400 13px/1.55 Arial,Helvetica,sans-serif;color:#6a6a6a;margin-top:5px;">' + intro + '</div>' : '') +
+        '<div style="font:700 17px/1.3 Georgia,serif;color:#0a0a0a;">' + escapeHtml_(heading) + '</div>' +
+        (intro ? '<div style="font:400 13px/1.55 Arial,Helvetica,sans-serif;color:#6a6a6a;margin-top:5px;">' + escapeHtml_(intro) + '</div>' : '') +
       '</td></tr>' +
       '<tr><td style="padding:8px 14px 16px;">' +
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">' + rowsHtml + '</table>' +
@@ -137,16 +150,16 @@ function logBooking(ss, p) {
   }
   sheet.appendRow([
     new Date().toLocaleString('en-CA', { timeZone: 'America/Winnipeg' }),
-    p.name               || '',
-    p.email              || '',
-    p.phone              || '',
-    p.service            || '',
-    p.add_ons            || '',
-    p.vehicle_make_model || '',
-    p.vehicle_size       || '',
-    p.preferred_date     || '',
-    p.preferred_time     || '',
-    p.notes              || ''
+    sanitizeCell_(p.name),
+    sanitizeCell_(p.email),
+    sanitizeCell_(p.phone),
+    sanitizeCell_(p.service),
+    sanitizeCell_(p.add_ons),
+    sanitizeCell_(p.vehicle_make_model),
+    sanitizeCell_(p.vehicle_size),
+    sanitizeCell_(p.preferred_date),
+    sanitizeCell_(p.preferred_time),
+    sanitizeCell_(p.notes)
   ]);
 }
 
@@ -165,14 +178,14 @@ function logWaiver(ss, p) {
   }
   sheet.appendRow([
     new Date().toLocaleString('en-CA', { timeZone: 'America/Winnipeg' }),
-    p.customer_name  || '',
-    p.phone          || '',
-    p.vehicle        || '',
-    p.service        || '',
-    p.vehicle_type   || '',
-    p.addons         || 'None',
-    p.date_signed    || '',
-    p.agreed         || '',
+    sanitizeCell_(p.customer_name),
+    sanitizeCell_(p.phone),
+    sanitizeCell_(p.vehicle),
+    sanitizeCell_(p.service),
+    sanitizeCell_(p.vehicle_type),
+    sanitizeCell_(p.addons || 'None'),
+    sanitizeCell_(p.date_signed),
+    sanitizeCell_(p.agreed),
     p.signature_data ? '[captured]' : ''
   ]);
 }
