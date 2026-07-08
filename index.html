@@ -1089,13 +1089,16 @@
 
       // Carry the customer's details to the waiver page so they don't re-type them
       try {
+        const pickedAddons = [];
+        addonCards.forEach(c => { if (c.classList.contains('selected')) { const inp = c.querySelector('input'); if (inp && inp.name) pickedAddons.push(inp.name); } });
         sessionStorage.setItem('rk_booking', JSON.stringify({
           name:         (document.getElementById('name').value         || ''),
           phone:        (document.getElementById('phone').value        || ''),
           email:        (document.getElementById('email').value        || ''),
           vehicle:      (document.getElementById('vehicle_make_model').value || ''),
           service:      (document.getElementById('service').value      || ''),
-          vehicle_size: (document.getElementById('vehicle_size').value  || '')
+          vehicle_size: (document.getElementById('vehicle_size').value  || ''),
+          addons:       pickedAddons
         }));
       } catch (err) { /* private mode / storage disabled — waiver just starts blank */ }
 

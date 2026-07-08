@@ -1381,6 +1381,26 @@
         vEl.dispatchEvent(new Event('change', { bubbles: true }));
       }
 
+      // Carry over the add-ons they picked on the booking form (names differ slightly between forms)
+      const ADDON_MAP = {
+        addon_clay_bar: 'clay-bar', addon_iron_remover: 'iron-remover',
+        addon_engine_bay: 'engine-bay', addon_headlight: 'headlight',
+        addon_pet_hair: 'pet-hair', addon_stain: 'stain-extraction',
+        addon_odor: 'odor-removal', addon_spray_ceramic: 'spray-ceramic',
+        addon_ceramic_coat: 'true-ceramic'
+      };
+      if (Array.isArray(b.addons)) {
+        b.addons.forEach(nm => {
+          const key = ADDON_MAP[nm];
+          if (!key) return;
+          const item = document.querySelector('.addon-item[data-key="' + key + '"]');
+          const cb = item && item.querySelector('input[type="checkbox"]');
+          if (cb && !cb.checked) { cb.checked = true; item.classList.add('selected'); }
+        });
+        updateServiceSummary();
+        updateServiceTerms();
+      }
+
       // Refresh the consent-line name preview
       const nEl = document.getElementById('w_name');
       if (nEl) nEl.dispatchEvent(new Event('input', { bubbles: true }));
