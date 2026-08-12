@@ -78,6 +78,8 @@ export const localBusinessSchema = () => ({
   '@type': 'AutoDetailing',
   '@id': `${SITE.origin}/#business`,
   name: SITE.name,
+  alternateName: `${SITE.name} — ${SITE.serviceTitle}`,
+  slogan: SITE.tagline,
   description: `${SITE.category} in ${SITE.city}, ${SITE.region}. Interior packages from ${money(priceFrom)}. We come to you.`,
   url: `${SITE.origin}/`,
   image: `${SITE.origin}${SITE.logo}`,
@@ -172,7 +174,8 @@ const footerMarkup = () => `
     <div class="foot-grid">
       <div class="foot-brand">
         <b>${esc(SITE.name)}</b>
-        <p>${esc(SITE.category)} in ${SITE.city}. We come to you — showroom results without leaving your driveway.</p>
+        <span class="foot-svc">${esc(SITE.serviceTitle)} · ${SITE.city}, ${SITE.region}</span>
+        <p class="foot-slogan">${esc(SITE.tagline)}</p>
       </div>
       <div>
         <h3>Services</h3>

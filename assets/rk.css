@@ -717,6 +717,22 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .sent .btn { margin-top: var(--s-6); }
 .sent-mark { width: 44px; height: 44px; margin: 0 auto var(--s-5); border: 1px solid var(--gold); border-radius: var(--r-pill); display: grid; place-items: center; color: var(--gold); }
 
+/* ── Pullquote — the brand's own slogan, given display treatment ──── */
+.pq { border-top: var(--stroke); border-bottom: var(--stroke); padding-block: clamp(2.5rem, 5vw, 4rem); text-align: center; }
+.pq p {
+  font-family: var(--display); font-size: clamp(1.5rem, 1rem + 2.1vw, 2.6rem);
+  font-weight: 700; line-height: 1.2; letter-spacing: var(--tr-display);
+  font-stretch: 106%; text-wrap: balance; max-width: 34ch; margin-inline: auto;
+}
+.pq cite {
+  display: block; margin-top: var(--s-5); font-family: var(--mono); font-style: normal;
+  font-size: var(--fs-mono); letter-spacing: var(--tr-mono-wide); text-transform: uppercase; color: var(--text-3);
+}
+
+/* Footer lockup */
+.foot-svc { display: block; margin-top: var(--s-3); font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
+.foot-slogan { color: var(--text-2); font-size: var(--fs-sm); margin-top: var(--s-4); max-width: 36ch; }
+
 /* ── Contact tiles ───────────────────────────────────────────────── */
 .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
 @media (max-width: 620px) { .tiles { grid-template-columns: minmax(0, 1fr); } }

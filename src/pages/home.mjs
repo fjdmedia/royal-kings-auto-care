@@ -12,7 +12,7 @@ const body = `
 
     <p class="hero-crumb">
       <span class="dot" aria-hidden="true"></span>
-      ${esc(SITE.category)} — ${SITE.city}, ${SITE.region}
+      ${esc(SITE.serviceTitle)} — ${SITE.city}, ${SITE.region}
       <span class="sep" aria-hidden="true">/</span>
       <span>${esc(CONTACT.hours)}</span>
     </p>

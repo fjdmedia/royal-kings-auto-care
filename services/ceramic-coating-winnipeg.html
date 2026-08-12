@@ -34,7 +34,7 @@
        already loaded and inert, so applying one is a single attribute; only
        a theme that needs extra fonts requests them, and only when active. */
     (function () {
-      var FONTS = {"classic":"https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"};
+      var FONTS = {"warm":"https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap","classic":"https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"};
       try {
         var t = localStorage.getItem('rk_theme');
         if (!t || t === 'modern' || !["modern","warm","classic"].includes(t)) return;
@@ -69,7 +69,7 @@
         <a href="/contact">Contact</a>
       
     <div class="theme-sw " role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" title="Archivo · classic warm palette · sentence case">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" data-theme-fonts="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap" title="Derived from the logo — Playfair, gold gradient + chrome, pure black">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
     </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
@@ -94,7 +94,7 @@
   <div class="drawer-foot">
     
     <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" title="Archivo · classic warm palette · sentence case">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" data-theme-fonts="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap" title="Derived from the logo — Playfair, gold gradient + chrome, pure black">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
     </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
@@ -361,7 +361,8 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <b>Royal Kings Auto Care</b>
-        <p>Premium Auto Detailing in Winnipeg. We come to you — showroom results without leaving your driveway.</p>
+        <span class="foot-svc">Premium Detailing Service · Winnipeg, MB</span>
+        <p class="foot-slogan">Convenience meets quality — wherever you are, we deliver royal results.</p>
       </div>
       <div>
         <h3>Services</h3>

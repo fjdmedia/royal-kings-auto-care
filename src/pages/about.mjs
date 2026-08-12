@@ -72,6 +72,15 @@ const body = `
   </div>
 </section>
 
+<section class="sec sec-tight" aria-label="Our promise">
+  <div class="wrap">
+    <blockquote class="pq">
+      <p>${esc(SITE.tagline)}</p>
+      <cite>${esc(SITE.serviceTitle)} · ${esc(SITE.name)}</cite>
+    </blockquote>
+  </div>
+</section>
+
 <section class="sec band" aria-labelledby="how-h">
   <div class="wrap">
     ${secHead({
