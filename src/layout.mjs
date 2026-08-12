@@ -48,23 +48,26 @@ const head = ({ title, description, path, schema = [], noindex = false }) => `
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
-${THEME_SWITCHER ? `  <link rel="stylesheet" href="/assets/rk-classic.css">
+${THEME_SWITCHER ? `
+${THEMES.filter(t => t.sheet).map(t => `  <link rel="stylesheet" href="${t.sheet}">`).join('\n')}
   <script>
     /* Runs before first paint — no flash of the other theme.
-       The classic theme needs two fonts v3 does not, so they are requested
-       only when it is actually active. */
+       Generated from THEMES in src/data.mjs: every theme's stylesheet is
+       already loaded and inert, so applying one is a single attribute; only
+       a theme that needs extra fonts requests them, and only when active. */
     (function () {
+      var FONTS = ${JSON.stringify(Object.fromEntries(THEMES.filter(t => t.fonts).map(t => [t.id, t.fonts])))};
       try {
         var t = localStorage.getItem('rk_theme');
-        if (t === 'classic') {
-          document.documentElement.setAttribute('data-theme', 'classic');
+        if (!t || t === 'modern' || !${JSON.stringify(THEMES.map(x => x.id))}.includes(t)) return;
+        document.documentElement.setAttribute('data-theme', t);
+        if (FONTS[t]) {
           var l = document.createElement('link');
-          l.rel = 'stylesheet';
-          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
-          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          l.rel = 'stylesheet'; l.href = FONTS[t];
+          l.setAttribute('data-theme-fonts', t);
           document.head.appendChild(l);
         }
-      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+      } catch (e) { /* private mode — the default theme needs nothing */ }
     })();
   </script>` : ''}
 ${schema.map(s => `  <script type="application/ld+json">${JSON.stringify(s)}</script>`).join('\n')}`;
@@ -119,7 +122,7 @@ export const faqSchema = faqs => ({
 
 const themeSwitch = (cls = '') => THEME_SWITCHER ? `
     <div class="theme-sw ${cls}" role="group" aria-label="Preview theme">
-      ${THEMES.map(t => `<button type="button" class="theme-sw-btn" data-theme-set="${t.id}" title="${esc(t.note)}">${esc(t.label)}</button>`).join('')}
+      ${THEMES.map(t => `<button type="button" class="theme-sw-btn" data-theme-set="${t.id}"${t.fonts ? ` data-theme-fonts="${t.fonts}"` : ''} title="${esc(t.note)}">${esc(t.label)}</button>`).join('')}
     </div>` : '';
 
 /* ── Nav ─────────────────────────────────────────────────────────── */
@@ -221,7 +224,9 @@ const dockMarkup = () => `
    theme decide: v3 renders <em> as plain inherited colour, classic renders it
    as the gold gradient. Same markup, two answers. */
 const accentTail = html => {
-  const m = /<br class="br-desk">/.exec(html);
+  /* Matches the deliberate break whether or not it carries the desktop-only
+     class — section titles use a plain <br>, heroes and CTAs use br-desk. */
+  const m = /<br(?: class="br-desk")?>/.exec(html);
   if (!m) return html;
   const head = html.slice(0, m.index + m[0].length);
   const tail = html.slice(m.index + m[0].length);

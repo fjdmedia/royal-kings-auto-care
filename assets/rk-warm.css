@@ -1,0 +1,126 @@
+/* ════════════════════════════════════════════════════════════════════
+   Royal Kings — WARM theme
+   The classic palette, the modern type.
+
+   The gap between v3 and classic is really two separate decisions that
+   happened to move together: the COLOUR went cool, and the TYPE went
+   engineered. This theme takes the first back and keeps the second —
+   the combination neither of the other two lets you see.
+
+   It is not a mechanical crossbreed. Warm ground + cream text changes
+   what the type wants, so three things are decided differently here:
+
+     1. Sentence case below the hero. All-caps blocks read shouty on a
+        warm cream-on-brown page; on v3's cool graphite they read
+        engineered. Only the hero stays uppercase, for impact.
+     2. Less width on the display face. font-stretch 116% is right
+        against cold graphite and heavy against warm brown, so it comes
+        down to 108%.
+     3. The heading accent is SOLID gold — v3 has none (headlines stay
+        white), classic uses a gradient. Three positions, not two.
+
+   Scoped under [data-theme="warm"]; inert until that is set. Uses the
+   fonts v3 already loads, so it costs nothing extra to preview.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root[data-theme='warm'] {
+  /* The classic ladder, given one more step of depth. The original ran
+     quite flat between its surfaces; these keep the same warmth and
+     separate a little further so cards read off the page. */
+  --void:       #0A0806;
+  --carbon:     #0F0C09;
+  --graphite:   #14100B;
+  --graphite-2: #1A150E;
+  --steel:      #221C13;
+  --steel-2:    #2B2418;
+  --edge:       #322A1E;
+  --edge-2:     #453B29;
+  --edge-gold:  rgba(201, 162, 39, 0.28);
+
+  --gold:      #C9A227;
+  --gold-hi:   #E7C75A;
+  --gold-lo:   #9A7B1D;
+  --gold-ink:  #0A0805;
+  --gold-veil: rgba(201, 162, 39, 0.10);
+  --gold-wash: rgba(201, 162, 39, 0.055);
+
+  /* Cream, from the original. Pure white on a warm ground reads cold and
+     fights the gold; cream lets the two sit in the same family. */
+  --text:   #F4F0E7;
+  --text-2: #CFC7B6;
+  --text-3: #A89E8B;
+  --text-4: #7E7461;
+
+  /* Between the two: 4–12px. Hard enough to read engineered, soft enough
+     not to look machined against a warm palette. */
+  --r-xs: 3px; --r-sm: 6px; --r-md: 12px; --r-pill: 999px;
+
+  --sh-inset: inset 0 1px 0 rgba(255, 240, 210, 0.045);
+  --sh-lift:  0 20px 50px -28px rgba(0, 0, 0, 0.9);
+  --sh-panel: 0 40px 84px -44px rgba(0, 0, 0, 1);
+}
+
+/* ── Type ────────────────────────────────────────────────────────────
+   Same Archivo/JetBrains stack as v3 — only the treatment changes. */
+:root[data-theme='warm'] .hero-h1 {
+  font-stretch: 108%;
+  letter-spacing: -0.038em;
+}
+
+/* Sentence case below the hero. */
+:root[data-theme='warm'] .cta h2 {
+  text-transform: none;
+  font-stretch: 106%;
+  letter-spacing: -0.024em;
+}
+:root[data-theme='warm'] .sec-head h2 {
+  font-stretch: 106%;
+  letter-spacing: -0.022em;
+}
+:root[data-theme='warm'] h2[style*='text-transform'] {
+  text-transform: none !important;
+  font-stretch: 106% !important;
+}
+
+/* The heading accent: solid gold, no gradient. */
+:root[data-theme='warm'] :is(.hero-h1, .sec-head h2, .cta h2) em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+/* Numerals stay wide — a price is the one place extra width earns itself. */
+:root[data-theme='warm'] .pkg-price,
+:root[data-theme='warm'] .spec-v { font-stretch: 110%; }
+
+/* ── Surfaces ────────────────────────────────────────────────────────
+   Warm room light, from a lamp above and slightly forward. */
+:root[data-theme='warm'] body {
+  background:
+    radial-gradient(1100px 820px at 50% -6%, #191309, transparent 62%),
+    linear-gradient(180deg, var(--carbon), var(--void) 44%);
+  background-attachment: fixed;
+  background-color: var(--void);
+}
+:root[data-theme='warm'] .hero-bg {
+  background:
+    radial-gradient(72% 56% at 76% 6%, rgba(201, 162, 39, 0.11), transparent 62%),
+    radial-gradient(56% 44% at 8% 96%, rgba(120, 82, 30, 0.10), transparent 64%),
+    linear-gradient(180deg, var(--carbon) 0%, var(--void) 74%);
+}
+:root[data-theme='warm'] .plate {
+  background-image:
+    linear-gradient(116deg, transparent 30%, rgba(255, 238, 200, 0.055) 46%, rgba(255, 238, 200, 0.012) 56%, transparent 70%),
+    radial-gradient(118% 88% at 16% 0%, rgba(201, 162, 39, 0.12), transparent 58%),
+    linear-gradient(168deg, var(--steel) 0%, var(--void) 88%);
+}
+:root[data-theme='warm'] .card,
+:root[data-theme='warm'] .pkg {
+  background: linear-gradient(164deg, var(--graphite-2), var(--graphite) 70%);
+}
+:root[data-theme='warm'] .pkg-featured {
+  background: linear-gradient(146deg, var(--steel), var(--graphite) 68%);
+}
+
+/* The grain is tuned for a cool page; warm it slightly so it does not
+   grey the surfaces. */
+:root[data-theme='warm'] body::after { opacity: 0.036; mix-blend-mode: soft-light; }

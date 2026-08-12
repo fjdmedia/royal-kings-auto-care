@@ -271,30 +271,32 @@
   }
 
   /* ── Theme switcher (review tool) ──────────────────────────────────
-     The <head> script already applied the stored theme before paint; this
-     only handles clicks and keeps every copy of the control in sync. */
+     The <head> script already applied the stored theme before paint. This
+     handles clicks and keeps every copy of the control in sync. Theme ids and
+     their font URLs come from the markup, so adding a theme is a data edit. */
   var themeBtns = $$('.theme-sw-btn');
   if (themeBtns.length) {
-    var FONTS = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
-    var loadClassicFonts = function () {
-      if (document.querySelector('link[data-classic-fonts]')) return;
+    var themeFonts = {};
+    themeBtns.forEach(function (b) {
+      var f = b.getAttribute('data-theme-fonts');
+      if (f) themeFonts[b.getAttribute('data-theme-set')] = f;
+    });
+    var loadFonts = function (id) {
+      if (!themeFonts[id]) return;
+      if (document.querySelector('link[data-theme-fonts="' + id + '"]')) return;
       var l = document.createElement('link');
-      l.rel = 'stylesheet'; l.href = FONTS; l.setAttribute('data-classic-fonts', '');
+      l.rel = 'stylesheet'; l.href = themeFonts[id];
+      l.setAttribute('data-theme-fonts', id);
       document.head.appendChild(l);
     };
     var paintTheme = function (id) {
-      if (id === 'classic') {
-        loadClassicFonts();
-        document.documentElement.setAttribute('data-theme', 'classic');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
+      if (id && id !== 'modern') { loadFonts(id); document.documentElement.setAttribute('data-theme', id); }
+      else { document.documentElement.removeAttribute('data-theme'); }
       themeBtns.forEach(function (b) {
         b.setAttribute('aria-pressed', b.getAttribute('data-theme-set') === id ? 'true' : 'false');
       });
     };
-    var current = document.documentElement.getAttribute('data-theme') === 'classic' ? 'classic' : 'modern';
-    paintTheme(current);
+    paintTheme(document.documentElement.getAttribute('data-theme') || 'modern');
     themeBtns.forEach(function (b) {
       b.addEventListener('click', function () {
         var id = b.getAttribute('data-theme-set');

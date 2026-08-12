@@ -237,9 +237,17 @@ export const NAV = [
    markup changes. Do that before merging to main.                     */
 export const THEME_SWITCHER = true;
 
+/* Three points on one line, coolest to warmest. `sheet` is loaded on every
+   page and stays inert until its attribute is set; `fonts` is requested only
+   when that theme is actually active, so nobody pays for Cinzel to look at v3.
+   `modern` is the default and needs neither. */
 export const THEMES = [
-  { id: 'modern',  label: 'V3',      note: 'Archivo · graphite · hard edges' },
-  { id: 'classic', label: 'Classic', note: 'Cinzel · warm black · soft edges' },
+  { id: 'modern',  label: 'V3',      note: 'Archivo · cool graphite · hard edges' },
+  { id: 'warm',    label: 'Warm',    note: 'Archivo · classic warm palette · sentence case',
+    sheet: '/assets/rk-warm.css' },
+  { id: 'classic', label: 'Classic', note: 'Cinzel · warm palette · soft edges',
+    sheet: '/assets/rk-classic.css',
+    fonts: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap' },
 ];
 
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbzHEbSavkYrqL3sA9y5oqHXQbK24IQJahz_wYbQODO4rY-LSDJ_w9IyGslmgINtVLLf7g/exec';

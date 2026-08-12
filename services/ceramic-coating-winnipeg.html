@@ -25,23 +25,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+
+  <link rel="stylesheet" href="/assets/rk-warm.css">
   <link rel="stylesheet" href="/assets/rk-classic.css">
   <script>
     /* Runs before first paint — no flash of the other theme.
-       The classic theme needs two fonts v3 does not, so they are requested
-       only when it is actually active. */
+       Generated from THEMES in src/data.mjs: every theme's stylesheet is
+       already loaded and inert, so applying one is a single attribute; only
+       a theme that needs extra fonts requests them, and only when active. */
     (function () {
+      var FONTS = {"classic":"https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"};
       try {
         var t = localStorage.getItem('rk_theme');
-        if (t === 'classic') {
-          document.documentElement.setAttribute('data-theme', 'classic');
+        if (!t || t === 'modern' || !["modern","warm","classic"].includes(t)) return;
+        document.documentElement.setAttribute('data-theme', t);
+        if (FONTS[t]) {
           var l = document.createElement('link');
-          l.rel = 'stylesheet';
-          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
-          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          l.rel = 'stylesheet'; l.href = FONTS[t];
+          l.setAttribute('data-theme-fonts', t);
           document.head.appendChild(l);
         }
-      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+      } catch (e) { /* private mode — the default theme needs nothing */ }
     })();
   </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Ceramic Coating Winnipeg","description":"Ceramic coating in Winnipeg — spray ceramic sealant and true bonded ceramic coating, applied over decontaminated and corrected paint at the customer’s location.","serviceType":"Ceramic Coating","url":"https://www.royalkingsdetailingwpg.ca/services/ceramic-coating-winnipeg","provider":{"@id":"https://www.royalkingsdetailingwpg.ca/#business"},"areaServed":{"@type":"City","name":"Winnipeg"},"offers":{"@type":"Offer","priceCurrency":"CAD","availability":"https://schema.org/InStock","priceSpecification":{"@type":"PriceSpecification","minPrice":100,"priceCurrency":"CAD"}}}</script>
@@ -65,7 +69,7 @@
         <a href="/contact">Contact</a>
       
     <div class="theme-sw " role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" title="Archivo · classic warm palette · sentence case">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
     </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
@@ -90,7 +94,7 @@
   <div class="drawer-foot">
     
     <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" title="Archivo · classic warm palette · sentence case">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
     </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
@@ -171,7 +175,7 @@
   <div class="sec-head">
     <span class="kicker">01 — Side by side</span>
     <div class="sec-head-row">
-      <h2><span id="cmp-h">Spray ceramic<br>or true ceramic.</span></h2>
+      <h2><span id="cmp-h">Spray ceramic<br><em>or true ceramic.</em></span></h2>
       <span class="sec-head-meta">Same job, different commitment</span>
     </div>
     
@@ -231,7 +235,7 @@
   <div class="sec-head">
     <span class="kicker">02 — Why the range</span>
     <div class="sec-head-row">
-      <h2><span id="pr-h">The price moves<br>with the prep.</span></h2>
+      <h2><span id="pr-h">The price moves<br><em>with the prep.</em></span></h2>
       
     </div>
     
