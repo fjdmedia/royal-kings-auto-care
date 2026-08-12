@@ -125,7 +125,7 @@ const navMarkup = current => {
     <a class="brand" href="/"><img src="${SITE.logo}" width="34" height="34" alt=""><span class="brand-txt"><b>Royal Kings</b><span>Auto Care</span></span></a>
     <button class="nav-toggle" type="button" id="navClose">${icon('close')}<span class="vh">Close menu</span></button>
   </div>
-  <nav aria-label="Mobile">
+  <nav aria-label="Menu">
         ${drawerLinks}
   </nav>
   <div class="drawer-foot">
