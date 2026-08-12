@@ -25,6 +25,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+  <link rel="stylesheet" href="/assets/rk-classic.css">
+  <script>
+    /* Runs before first paint — no flash of the other theme.
+       The classic theme needs two fonts v3 does not, so they are requested
+       only when it is actually active. */
+    (function () {
+      try {
+        var t = localStorage.getItem('rk_theme');
+        if (t === 'classic') {
+          document.documentElement.setAttribute('data-theme', 'classic');
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          document.head.appendChild(l);
+        }
+      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+    })();
+  </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Paint Correction Winnipeg","description":"Paint correction in Winnipeg — multi-stage machine polishing that removes swirl marks, wash marks, water-spot etching and oxidation from automotive clear coat.","serviceType":"Paint Correction","url":"https://www.royalkingsdetailingwpg.ca/services/paint-correction-winnipeg","provider":{"@id":"https://www.royalkingsdetailingwpg.ca/#business"},"areaServed":{"@type":"City","name":"Winnipeg"},"offers":{"@type":"Offer","priceCurrency":"CAD","availability":"https://schema.org/InStock","priceSpecification":{"@type":"PriceSpecification","minPrice":150,"priceCurrency":"CAD"}}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.royalkingsdetailingwpg.ca/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.royalkingsdetailingwpg.ca/services"},{"@type":"ListItem","position":3,"name":"Paint Correction","item":"https://www.royalkingsdetailingwpg.ca/services/paint-correction-winnipeg"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I know if my paint needs correcting?","acceptedAnswer":{"@type":"Answer","text":"Park in direct sun or hold a phone torch a foot from the panel at night. If you see a fine web of circular scratches radiating out from the light, that is swirling, and it is what correction removes. If the panel looks clean under a hard light, save your money."}},{"@type":"Question","name":"Why is paint correction a full-day booking?","acceptedAnswer":{"@type":"Answer","text":"Because it is measured in panels, not in hours of spraying. Each panel is washed, decontaminated, machine-polished in passes, then wiped and inspected under light. Rushing it is how you get holograms and burnt edges. We take one correction booking per day and that day is yours."}},{"@type":"Question","name":"What makes the price range so wide?","acceptedAnswer":{"@type":"Answer","text":"The number of correction steps. Lightly swirled paint may need one polishing stage. Heavily marred paint needs a cutting stage before the polishing stage, which roughly doubles the work. Vehicle size then multiplies it. We look at the panels first and quote the actual job."}},{"@type":"Question","name":"Should I coat the car after correcting it?","acceptedAnswer":{"@type":"Answer","text":"That is the right order and the reason to do both in one visit — you have just spent a day making the clear coat perfect, and a coating is what keeps it that way. Correcting and then leaving it bare means you start collecting swirls again on the next wash."}},{"@type":"Question","name":"Can you correct paint in a Winnipeg winter?","acceptedAnswer":{"@type":"Answer","text":"Not well, and not outdoors. Polishing needs a controlled surface temperature and somewhere the car can stay clean and dry. Book correction from late spring through fall, or in a heated garage."}}]}</script>
@@ -44,6 +63,10 @@
         <a href="/about">About</a>
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
+      
+    <div class="theme-sw " role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="drawer">
@@ -65,6 +88,10 @@
         <a href="/contact">Contact</a>
   </nav>
   <div class="drawer-foot">
+    
+    <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
   </div>
@@ -81,7 +108,7 @@
       <span aria-current="page">Paint Correction</span>
     </nav>
 
-    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Paint correction<br class="br-desk">in Winnipeg</h1>
+    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Paint correction<br class="br-desk"><em>in Winnipeg</em></h1>
 
     <div class="hero-row">
       <p class="hero-sub">Machine polishing that cuts swirls, wash marks and oxidation out of the clear coat. One booking per day, because it cannot be rushed.</p>
@@ -303,7 +330,7 @@
 <section class="sec cta" aria-labelledby="cta-h">
   <div class="wrap cta-inner">
     <div>
-      <h2 id="cta-h">Run the torch test.<br class="br-desk">Then call us.</h2>
+      <h2 id="cta-h">Run the torch test.<br class="br-desk"><em>Then call us.</em></h2>
       <p>Photograph a panel under a hard light and add it to your booking notes. If the paint does not need correcting, we will say so. No travel fee inside Winnipeg city limits.</p>
     </div>
     <div class="cta-act">

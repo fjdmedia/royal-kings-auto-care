@@ -1,4 +1,4 @@
-import { SITE, CONTACT, NAV, TERMS, SERVICES, primaryPhone, priceFrom, money } from './data.mjs';
+import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, primaryPhone, priceFrom, money } from './data.mjs';
 
 /* Inline SVG only. No icon CDN — a whole library downloaded to draw
    twelve glyphs is a render-blocking dependency and a FOUC source. */
@@ -48,6 +48,25 @@ const head = ({ title, description, path, schema = [], noindex = false }) => `
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+${THEME_SWITCHER ? `  <link rel="stylesheet" href="/assets/rk-classic.css">
+  <script>
+    /* Runs before first paint — no flash of the other theme.
+       The classic theme needs two fonts v3 does not, so they are requested
+       only when it is actually active. */
+    (function () {
+      try {
+        var t = localStorage.getItem('rk_theme');
+        if (t === 'classic') {
+          document.documentElement.setAttribute('data-theme', 'classic');
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          document.head.appendChild(l);
+        }
+      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+    })();
+  </script>` : ''}
 ${schema.map(s => `  <script type="application/ld+json">${JSON.stringify(s)}</script>`).join('\n')}`;
 
 /* ── Schema ──────────────────────────────────────────────────────── */
@@ -97,6 +116,12 @@ export const faqSchema = faqs => ({
   })),
 });
 
+
+const themeSwitch = (cls = '') => THEME_SWITCHER ? `
+    <div class="theme-sw ${cls}" role="group" aria-label="Preview theme">
+      ${THEMES.map(t => `<button type="button" class="theme-sw-btn" data-theme-set="${t.id}" title="${esc(t.note)}">${esc(t.label)}</button>`).join('')}
+    </div>` : '';
+
 /* ── Nav ─────────────────────────────────────────────────────────── */
 const navMarkup = current => {
   const links = NAV.map(l =>
@@ -112,6 +137,7 @@ const navMarkup = current => {
     </a>
     <nav class="nav-links" aria-label="Primary">
         ${links}
+      ${themeSwitch()}
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="drawer">
@@ -129,6 +155,7 @@ const navMarkup = current => {
         ${drawerLinks}
   </nav>
   <div class="drawer-foot">
+    ${themeSwitch('theme-sw-wide')}
     <a class="btn btn-primary" href="/book">Book a detail ${icon('right')}</a>
     <a class="drawer-call" href="tel:${primaryPhone.tel}">${icon('phone')} ${primaryPhone.phone} — ${primaryPhone.name}</a>
   </div>
@@ -186,8 +213,29 @@ const dockMarkup = () => `
   <a class="btn btn-primary" href="/book">Book a detail</a>
 </div>`;
 
+
+/* The original set the second line of every heading in gold ("Choose your
+   PACKAGE", "Reach us DIRECTLY"). v3 deliberately does not — it keeps
+   headlines white so the one gold CTA owns the viewport. Rather than write
+   the accent into 20 title strings, mark it structurally here and let each
+   theme decide: v3 renders <em> as plain inherited colour, classic renders it
+   as the gold gradient. Same markup, two answers. */
+const accentTail = html => {
+  const m = /<br class="br-desk">/.exec(html);
+  if (!m) return html;
+  const head = html.slice(0, m.index + m[0].length);
+  const tail = html.slice(m.index + m[0].length);
+  if (!tail.trim() || tail.includes('<em')) return html;
+  const close = tail.lastIndexOf('</span>');
+  return close === -1
+    ? `${head}<em>${tail}</em>`
+    : `${head}<em>${tail.slice(0, close)}</em>${tail.slice(close)}`;
+};
+
 /* ── Page shell ──────────────────────────────────────────────────── */
 export function page({ title, description, path, body, schema = [], noindex = false, dock = true }) {
+  body = body.replace(/(<h1[^>]*class="hero-h1"[^>]*>)([\s\S]*?)(<\/h1>)/g,
+    (_, open, inner, close) => open + accentTail(inner) + close);
   return `<!DOCTYPE html>
 <html lang="en-CA">
 <head>
@@ -213,7 +261,7 @@ export const secHead = ({ index, kicker, title, meta, lede }) => `
   <div class="sec-head">
     <span class="kicker">${index ? `${index} — ` : ''}${esc(kicker)}</span>
     <div class="sec-head-row">
-      <h2>${title}</h2>
+      <h2>${accentTail(title)}</h2>
       ${meta ? `<span class="sec-head-meta">${esc(meta)}</span>` : ''}
     </div>
     ${lede ? `<p class="sec-lede">${lede}</p>` : ''}
@@ -223,7 +271,7 @@ export const ctaBand = ({ heading, body, primary = { href: '/book', label: 'Book
 <section class="sec cta" aria-labelledby="cta-h">
   <div class="wrap cta-inner">
     <div>
-      <h2 id="cta-h">${heading}</h2>
+      <h2 id="cta-h">${accentTail(heading)}</h2>
       <p>${body}</p>
     </div>
     <div class="cta-act">

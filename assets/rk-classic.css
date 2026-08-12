@@ -1,0 +1,188 @@
+/* ════════════════════════════════════════════════════════════════════
+   Royal Kings — CLASSIC theme
+   The original site's look, carried onto the v3 layout and IA.
+
+   This file changes THEME only: palette, type, radii, surface warmth.
+   It never touches structure, spacing rhythm or component layout — the
+   redesign's macrostructure is the same underneath both themes, which is
+   the point of being able to flip between them.
+
+   Everything is scoped under [data-theme="classic"] on <html>, so the
+   file is inert until the switcher (or localStorage) sets that attribute.
+   Delete THEME_SWITCHER in src/data.mjs to stop shipping it entirely.
+
+   Source of the values: the pre-v3 index.html :root block.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root[data-theme='classic'] {
+  /* Warm brown-black, lit from above — the original's "detail bay" floor.
+     The v3 ladder is cool so gold reads as the only warm value; here the
+     whole page is warm and gold sits inside it rather than against it. */
+  --void:       #080706;
+  --carbon:     #0C0B09;
+  --graphite:   #121008;
+  --graphite-2: #16130D;
+  --steel:      #1A1610;
+  --steel-2:    #221D15;
+  --edge:       #2C2620;
+  --edge-2:     #3B3325;
+  --edge-gold:  rgba(201, 162, 39, 0.26);
+
+  --gold:      #C9A227;
+  --gold-hi:   #E7C75A;
+  --gold-lo:   #9A7B1D;
+  --gold-ink:  #0A0805;
+  --gold-veil: rgba(201, 162, 39, 0.10);
+  --gold-wash: rgba(201, 162, 39, 0.06);
+
+  /* Cream, not white — the original's text never went pure. */
+  --text:   #F4F0E7;
+  --text-2: #CFC7B6;
+  --text-3: #A89E8B;
+  --text-4: #766E5E;
+
+  --display: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --sans:    'Montserrat', system-ui, -apple-system, sans-serif;
+  /* No mono in the original — labels were tracked Montserrat. */
+  --mono:    'Montserrat', system-ui, sans-serif;
+
+  /* Soft edges. The v3 2–6px reads engineered; 10–22px reads boutique. */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 16px; --r-pill: 999px;
+
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --sh-lift:  0 22px 60px -26px rgba(201, 162, 39, 0.30);
+  --sh-panel: 0 28px 60px -22px rgba(0, 0, 0, 0.7);
+}
+
+/* ── Type treatment ──────────────────────────────────────────────────
+   Cinzel is a Roman inscription face: no true lowercase, positive
+   tracking, and it collapses if you squeeze it. So the v3 display
+   treatment (uppercase + font-stretch + negative tracking) is undone
+   rather than inherited. */
+:root[data-theme='classic'] .hero-h1 {
+  text-transform: none;
+  font-stretch: normal;
+  font-weight: 600;
+  letter-spacing: 0.012em;
+  line-height: 1.06;
+  font-size: clamp(2.4rem, 1.3rem + 4.9vw, 5rem);
+}
+:root[data-theme='classic'] .sec-head h2,
+:root[data-theme='classic'] .cta h2 {
+  font-stretch: normal;
+  font-weight: 600;
+  letter-spacing: 0.012em;
+  line-height: 1.08;
+  text-transform: none;
+}
+:root[data-theme='classic'] .cta h2 { font-size: clamp(1.8rem, 1.25rem + 2.3vw, 2.9rem); }
+
+/* Section statements that v3 sets in caps read as shouting in a serif. */
+:root[data-theme='classic'] h2[style*='text-transform'] {
+  text-transform: none !important;
+  font-stretch: normal !important;
+  letter-spacing: 0.012em !important;
+}
+
+/* Numerals: Cinzel's figures are the original's price look. */
+:root[data-theme='classic'] .pkg-price,
+:root[data-theme='classic'] .spec-v,
+:root[data-theme='classic'] .step-n,
+:root[data-theme='classic'] .estimate-v {
+  font-stretch: normal;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+:root[data-theme='classic'] .spec-v small { font-family: var(--sans); }
+
+/* Labels were tracked uppercase Montserrat, a touch heavier than a mono. */
+:root[data-theme='classic'] .kicker,
+:root[data-theme='classic'] .sec-head-meta,
+:root[data-theme='classic'] .pkg-name,
+:root[data-theme='classic'] .pkg-meta,
+:root[data-theme='classic'] .spec-k,
+:root[data-theme='classic'] .tile-k,
+:root[data-theme='classic'] .field label,
+:root[data-theme='classic'] .foot h3,
+:root[data-theme='classic'] .crumb,
+:root[data-theme='classic'] .hero-crumb,
+:root[data-theme='classic'] .foot-bar {
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+/* Long single-line strings: Montserrat is much wider than the v3 mono at the
+   same tracking, so these get less of it or they wrap. */
+:root[data-theme='classic'] .hero-fine,
+:root[data-theme='classic'] .seg-note,
+:root[data-theme='classic'] .mrow-basis,
+:root[data-theme='classic'] .addon-basis {
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+:root[data-theme='classic'] .btn { font-weight: 700; letter-spacing: 0.16em; }
+:root[data-theme='classic'] .brand-txt b {
+  font-family: var(--display); font-stretch: normal; font-weight: 600; letter-spacing: 0.02em;
+}
+
+/* ── Surfaces ────────────────────────────────────────────────────────
+   The original leaned on a gold hairline and a warm gradient rather than
+   the v3 tonal step, so cards get their edge back. */
+:root[data-theme='classic'] .card,
+:root[data-theme='classic'] .pkg,
+:root[data-theme='classic'] .tile,
+:root[data-theme='classic'] .addon {
+  border-color: var(--edge);
+  background: linear-gradient(160deg, var(--graphite-2), var(--void) 78%);
+}
+:root[data-theme='classic'] .pkg-featured {
+  border-color: var(--edge-gold);
+  background: linear-gradient(150deg, var(--steel), var(--graphite) 70%);
+}
+:root[data-theme='classic'] .plate {
+  background-image:
+    linear-gradient(116deg, transparent 30%, rgba(255, 236, 190, 0.05) 46%, transparent 70%),
+    radial-gradient(118% 88% at 16% 0%, rgba(201, 162, 39, 0.14), transparent 58%),
+    linear-gradient(168deg, var(--steel-2) 0%, var(--void) 88%);
+}
+
+/* Warmer room light. */
+:root[data-theme='classic'] body {
+  background:
+    radial-gradient(1200px 900px at 50% -8%, #14110C, transparent 60%),
+    linear-gradient(180deg, var(--carbon), var(--void) 40%);
+  background-attachment: fixed;
+  background-color: var(--void);
+}
+:root[data-theme='classic'] .hero-bg {
+  background:
+    radial-gradient(74% 58% at 78% 8%, rgba(201, 162, 39, 0.13), transparent 60%),
+    linear-gradient(180deg, var(--carbon) 0%, var(--void) 72%);
+}
+
+/* The gold gradient headline accent the original used — DISPLAY TYPE ONLY.
+   A gradient that fades toward --gold-lo is illegible at label sizes and has
+   no single contrast value to measure, so it stays out of UI text. */
+:root[data-theme='classic'] :is(.hero-h1, .sec-head h2, .cta h2) em,
+:root[data-theme='classic'] :is(h1, h2, .hero-h1, .sec-head h2, .cta h2) .gold {
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold-lo) 92%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Everywhere else gold stays a solid, measurable colour. */
+:root[data-theme='classic'] .gold { color: var(--gold); }
+
+/* Segmented control: the original filled the active pill solid gold. */
+:root[data-theme='classic'] .seg-btn[aria-pressed='true'] {
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  color: var(--gold-ink); box-shadow: none;
+}
+:root[data-theme='classic'] .seg-btn[aria-pressed='true'] .seg-s { color: var(--gold-ink); }
+
+/* The v3 bracket notch is a v3 idea. The original's mark was a hairline
+   with a diamond node, so the signature changes with the theme. */
+:root[data-theme='classic'] .bkt::before,
+:root[data-theme='classic'] .bkt-br::after {
+  width: 30px; height: 0; border-left: 0; border-bottom: 0;
+  border-top: 1px solid var(--gold);
+}
+:root[data-theme='classic'] .bkt-br::after { border-top: 0; border-bottom: 1px solid var(--gold); width: 30px; }

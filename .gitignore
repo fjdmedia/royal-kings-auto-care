@@ -6,6 +6,7 @@ localhost-*.png
 # The generator IS the site source — it must be tracked.
 !build.mjs
 !src/**/*.mjs
+!serve.mjs
 
 # Internal FJMedia working files. These must never reach the repo: anything
 # committed here is publicly fetchable off the Vercel deployment.

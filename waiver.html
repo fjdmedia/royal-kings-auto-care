@@ -7,6 +7,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>
+    /* Follows the theme chosen elsewhere on the site. Runs before paint. */
+    (function () {
+      try {
+        if (localStorage.getItem('rk_theme') === 'classic') {
+          document.documentElement.setAttribute('data-theme', 'classic');
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+          document.head.appendChild(l);
+        }
+      } catch (e) { /* private mode */ }
+    })();
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     /* v3 display treatment — wide, tight, uppercase, matching the site. */
@@ -30,6 +44,34 @@
       --white:        #EAEBEF;
       --grey:         #B2B7C2;
       --grey-dark:    #868C99;
+    }
+
+    /* ── Classic theme ──────────────────────────────────────────────
+       Restores the pre-v3 values. Token NAMES are unchanged, so none of
+       this page's 380 lines of CSS and none of its signature/PDF
+       JavaScript had to know a theme exists. ── */
+    :root[data-theme='classic'] {
+      --black:        #0A0A0A;
+      --black-soft:   #111111;
+      --black-card:   #161616;
+      --black-border: #1E1E1E;
+      --gold-light:   #E2B93B;
+      --white:        #FFFFFF;
+      --grey:         #AAAAAA;
+      /* was #555 in the original and measured 3.0:1 — held at the v3 value,
+         which is the accessible one. Never regress a fix to match a look. */
+      --grey-dark:    #868C99;
+    }
+    :root[data-theme='classic'] body,
+    :root[data-theme='classic'] input,
+    :root[data-theme='classic'] select,
+    :root[data-theme='classic'] textarea,
+    :root[data-theme='classic'] button { font-family: 'Montserrat', sans-serif; }
+    :root[data-theme='classic'] h1,
+    :root[data-theme='classic'] h2,
+    :root[data-theme='classic'] h3 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-stretch: normal; letter-spacing: 0.012em; text-transform: none;
     }
 
     body {

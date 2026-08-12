@@ -25,6 +25,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+  <link rel="stylesheet" href="/assets/rk-classic.css">
+  <script>
+    /* Runs before first paint — no flash of the other theme.
+       The classic theme needs two fonts v3 does not, so they are requested
+       only when it is actually active. */
+    (function () {
+      try {
+        var t = localStorage.getItem('rk_theme');
+        if (t === 'classic') {
+          document.documentElement.setAttribute('data-theme', 'classic');
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          document.head.appendChild(l);
+        }
+      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+    })();
+  </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.royalkingsdetailingwpg.ca/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://www.royalkingsdetailingwpg.ca/faq"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to be home during the detail?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. As long as we have access to the vehicle and a water/power source nearby, you’re free to go about your day. Most clients leave the keys and let us handle it."}},{"@type":"Question","name":"How long does a typical detail take?","acceptedAnswer":{"@type":"Answer","text":"The Minimal package takes about 1-1.5 hours. The Standard runs 2-3 hours. Premium and add-on services like paint correction can take a full day depending on vehicle size and condition."}},{"@type":"Question","name":"What if it rains on my appointment day?","acceptedAnswer":{"@type":"Answer","text":"We’ll reach out to reschedule at no extra charge. Interior details can still happen under covered areas like garages or carports. We’ll work with you to find the best option."}},{"@type":"Question","name":"How far ahead do I need to book?","acceptedAnswer":{"@type":"Answer","text":"The form takes dates from tomorrow onward and up to 90 days out. We confirm your slot inside 24 hours. Paint correction needs a full day set aside, so it usually books further ahead than a package."}},{"@type":"Question","name":"Can I change or cancel my appointment?","acceptedAnswer":{"@type":"Answer","text":"Yes — reschedule at least 24 hours ahead and the deposit carries to the new date. Applied to your total. Refundable with 24 hours’ notice."}},{"@type":"Question","name":"Do you bring your own water and power?","acceptedAnswer":{"@type":"Answer","text":"We come fully equipped with our own tools and supplies. We just need access to a standard outdoor outlet and water spigot for exterior work. Interior-only jobs don’t need either."}},{"@type":"Question","name":"Where should the car be parked?","acceptedAnswer":{"@type":"Answer","text":"Anywhere we can walk around it — a driveway, a garage, a parking spot at your work. For exterior work we need room to move and access to an outdoor tap and outlet. Underground parkades usually do not work for exterior jobs."}},{"@type":"Question","name":"Do I need to empty the car first?","acceptedAnswer":{"@type":"Answer","text":"It helps. We will work around belongings, but anything loose in the footwells or the trunk slows the job down and we would rather spend that time on the carpet. Take valuables out — we would rather you did not have to think about it."}},{"@type":"Question","name":"What happens at the end?","acceptedAnswer":{"@type":"Answer","text":"We walk the car with you before we pack up. If something got missed or is not right, we deal with it there — not on a callback the next day."}},{"@type":"Question","name":"How do I pay?","acceptedAnswer":{"@type":"Answer","text":"A $50–$100 deposit secures your booking (applied toward the total). The remaining balance is due after the service is complete. We accept e-Transfer, cash, and major cards."}},{"@type":"Question","name":"Why does the price change with the vehicle?","acceptedAnswer":{"@type":"Answer","text":"Because the work does. Bigger vehicles have more carpet, more seats and more glass. The surcharges are Coupes & Sedans +$0, SUVs & Crossovers +$15, Trucks & 7-Seaters +$35."}},{"@type":"Question","name":"Are the add-on ranges real, or does everyone pay the top?","acceptedAnswer":{"@type":"Answer","text":"They are real. A flat-rate add-on is flat. A range moves with vehicle size or how bad the problem is, and we confirm the exact figure with you after looking at the car and before starting. Nothing gets added at the end."}},{"@type":"Question","name":"Do you charge for travel?","acceptedAnswer":{"@type":"Answer","text":"No. No travel fee inside Winnipeg city limits. For locations outside Winnipeg, reach out and we will see what we can do."}},{"@type":"Question","name":"What areas in Winnipeg do you serve?","acceptedAnswer":{"@type":"Answer","text":"We serve all of Winnipeg and surrounding areas. No extra travel fees within city limits. For locations outside Winnipeg, reach out and we’ll see what we can do."}},{"@type":"Question","name":"Do you do fleet or multiple vehicles?","acceptedAnswer":{"@type":"Answer","text":"Yes. If you have more than one vehicle at the same address, call rather than filling the form in twice — it is easier to schedule properly and we can look at the timing across all of them."}},{"@type":"Question","name":"Can you detail in winter?","acceptedAnswer":{"@type":"Answer","text":"Interior work, yes, year-round. Exterior decontamination, correction and coating need temperature and a dry surface, so those run late spring through fall unless you have a heated garage."}}]}</script>
 </head>
@@ -43,6 +62,10 @@
         <a href="/about">About</a>
         <a href="/faq" aria-current="page">FAQ</a>
         <a href="/contact">Contact</a>
+      
+    <div class="theme-sw " role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="drawer">
@@ -64,6 +87,10 @@
         <a href="/contact">Contact</a>
   </nav>
   <div class="drawer-foot">
+    
+    <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
   </div>
@@ -77,7 +104,7 @@
       <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">FAQ</span>
     </nav>
 
-    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Questions,<br class="br-desk">answered properly.</h1>
+    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Questions,<br class="br-desk"><em>answered properly.</em></h1>
 
     <div class="hero-row">
       <p class="hero-sub">
@@ -257,7 +284,7 @@
 <section class="sec cta" aria-labelledby="cta-h">
   <div class="wrap cta-inner">
     <div>
-      <h2 id="cta-h">Still not sure?<br class="br-desk">Ask us directly.</h2>
+      <h2 id="cta-h">Still not sure?<br class="br-desk"><em>Ask us directly.</em></h2>
       <p>Call, text, or DM — whichever is easiest. Both of us answer our own phones, Mon–Sat, 8am–6pm.</p>
     </div>
     <div class="cta-act">

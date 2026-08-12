@@ -270,6 +270,40 @@
     });
   }
 
+  /* ── Theme switcher (review tool) ──────────────────────────────────
+     The <head> script already applied the stored theme before paint; this
+     only handles clicks and keeps every copy of the control in sync. */
+  var themeBtns = $$('.theme-sw-btn');
+  if (themeBtns.length) {
+    var FONTS = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+    var loadClassicFonts = function () {
+      if (document.querySelector('link[data-classic-fonts]')) return;
+      var l = document.createElement('link');
+      l.rel = 'stylesheet'; l.href = FONTS; l.setAttribute('data-classic-fonts', '');
+      document.head.appendChild(l);
+    };
+    var paintTheme = function (id) {
+      if (id === 'classic') {
+        loadClassicFonts();
+        document.documentElement.setAttribute('data-theme', 'classic');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      themeBtns.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-theme-set') === id ? 'true' : 'false');
+      });
+    };
+    var current = document.documentElement.getAttribute('data-theme') === 'classic' ? 'classic' : 'modern';
+    paintTheme(current);
+    themeBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-theme-set');
+        paintTheme(id);
+        try { localStorage.setItem('rk_theme', id); } catch (e) { /* private mode */ }
+      });
+    });
+  }
+
   /* ── Before / after sliders ───────────────────────────────────── */
   $$('.ba-stage').forEach(function (stage) {
     var range = $('.ba-range', stage);

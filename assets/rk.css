@@ -335,6 +335,24 @@ h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; font-weight: 7
   .nav-toggle { display: inline-flex; }
 }
 
+/* ── Theme switcher (REVIEW TOOL — remove before launch) ──────────────
+   Shipped only while THEME_SWITCHER is true in src/data.mjs. */
+.theme-sw { display: inline-flex; border: var(--stroke); border-radius: var(--r-sm); overflow: hidden; margin-left: var(--s-3); flex: none; }
+.theme-sw-btn {
+  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: var(--s-2) var(--s-3); min-height: 30px; color: var(--text-3); background: var(--graphite);
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-std), color var(--dur-fast) var(--ease-std);
+}
+.theme-sw-btn + .theme-sw-btn { border-left: var(--stroke); }
+.theme-sw-btn:hover { color: var(--text); background: var(--steel); }
+.theme-sw-btn[aria-pressed='true'] { color: var(--gold); background: var(--steel-2); }
+.theme-sw-btn:focus-visible { outline-offset: -3px; }
+.theme-sw-wide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 var(--s-3); }
+.theme-sw-wide .theme-sw-btn { min-height: 44px; }
+/* The nav runs out of room before the drawer breakpoint does. */
+@media (max-width: 1140px) and (min-width: 941px) { .nav-links .theme-sw { display: none; } }
+
 /* ── Hero ────────────────────────────────────────────────────────── */
 /* A composition of horizontal bands separated by hairlines, not a
    headline floating in space. Never 100vh (restraint #29 / G46). */
@@ -361,7 +379,7 @@ h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; font-weight: 7
   margin-block: clamp(2rem, 4vw, 3.5rem) 0;
   overflow-wrap: anywhere;
 }
-.hero-h1 em { font-style: normal; color: var(--gold); }
+.hero-h1 em, .sec-head h2 em, .cta h2 em { font-style: normal; color: inherit; }
 
 /* 1.25fr 1fr — the lead column carries the sentence, the support column
    carries the action. Never 1fr 1fr (rubric axis 7). */

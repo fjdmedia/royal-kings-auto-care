@@ -25,6 +25,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+  <link rel="stylesheet" href="/assets/rk-classic.css">
+  <script>
+    /* Runs before first paint — no flash of the other theme.
+       The classic theme needs two fonts v3 does not, so they are requested
+       only when it is actually active. */
+    (function () {
+      try {
+        var t = localStorage.getItem('rk_theme');
+        if (t === 'classic') {
+          document.documentElement.setAttribute('data-theme', 'classic');
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
+          l.setAttribute('data-classic-fonts', '');   /* rk.js checks this before adding its own */
+          document.head.appendChild(l);
+        }
+      } catch (e) { /* private mode — v3 is the default, nothing to do */ }
+    })();
+  </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Ceramic Coating Winnipeg","description":"Ceramic coating in Winnipeg — spray ceramic sealant and true bonded ceramic coating, applied over decontaminated and corrected paint at the customer’s location.","serviceType":"Ceramic Coating","url":"https://www.royalkingsdetailingwpg.ca/services/ceramic-coating-winnipeg","provider":{"@id":"https://www.royalkingsdetailingwpg.ca/#business"},"areaServed":{"@type":"City","name":"Winnipeg"},"offers":{"@type":"Offer","priceCurrency":"CAD","availability":"https://schema.org/InStock","priceSpecification":{"@type":"PriceSpecification","minPrice":100,"priceCurrency":"CAD"}}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.royalkingsdetailingwpg.ca/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.royalkingsdetailingwpg.ca/services"},{"@type":"ListItem","position":3,"name":"Ceramic Coating","item":"https://www.royalkingsdetailingwpg.ca/services/ceramic-coating-winnipeg"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you apply ceramic coating at my location in Winnipeg?","acceptedAnswer":{"@type":"Answer","text":"Yes. Spray ceramic fits inside a normal visit. True ceramic needs a full day and a surface that stays dry while it cures, so it works best in a garage or under cover — we will talk through your space when you book."}},{"@type":"Question","name":"Which one do I actually need?","acceptedAnswer":{"@type":"Answer","text":"If you wash the car regularly and you are happy re-doing protection every season, spray ceramic is the honest answer and it costs a fraction as much. True ceramic earns its price on a vehicle you intend to keep for years, or on new paint you want to protect from day one."}},{"@type":"Question","name":"Does a coating mean I never have to wash the car?","acceptedAnswer":{"@type":"Answer","text":"No. It means dirt has a much harder time bonding and comes off far easier when you do wash. Anyone telling you a coating replaces washing is selling something."}},{"@type":"Question","name":"Does my paint need correcting first?","acceptedAnswer":{"@type":"Answer","text":"A coating seals in whatever is underneath it, including swirl marks. If the paint is swirled and you want it gone, correction comes first — otherwise you are locking the defects in for the life of the coating. We will tell you honestly whether yours needs it."}},{"@type":"Question","name":"Is ceramic coating worth it with Winnipeg winters?","acceptedAnswer":{"@type":"Answer","text":"The winter case is the strongest case. Road salt and brine are the harshest thing your paint meets all year, and a coating gives them a sacrificial layer to sit on instead of the clear coat. Coat in the fall, before the first salt truck."}}]}</script>
@@ -44,6 +63,10 @@
         <a href="/about">About</a>
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
+      
+    <div class="theme-sw " role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="drawer">
@@ -65,6 +88,10 @@
         <a href="/contact">Contact</a>
   </nav>
   <div class="drawer-foot">
+    
+    <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
+      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="classic" title="Cinzel · warm black · soft edges">Classic</button>
+    </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
   </div>
@@ -81,7 +108,7 @@
       <span aria-current="page">Ceramic Coating</span>
     </nav>
 
-    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Ceramic coating<br class="br-desk">in Winnipeg</h1>
+    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Ceramic coating<br class="br-desk"><em>in Winnipeg</em></h1>
 
     <div class="hero-row">
       <p class="hero-sub">Gloss, and a layer road salt has to get through before it reaches your paint. Two products at very different prices — here is which one you actually need.</p>
@@ -312,7 +339,7 @@
 <section class="sec cta" aria-labelledby="cta-h">
   <div class="wrap cta-inner">
     <div>
-      <h2 id="cta-h">Ask us which one<br class="br-desk">your car needs.</h2>
+      <h2 id="cta-h">Ask us which one<br class="br-desk"><em>your car needs.</em></h2>
       <p>Send a photo of the paint with your booking and we will tell you straight — including when the answer is the cheaper one. No travel fee inside Winnipeg city limits.</p>
     </div>
     <div class="cta-act">

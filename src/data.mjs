@@ -227,6 +227,21 @@ export const NAV = [
   { href: '/contact',   label: 'Contact'  },
 ];
 
+/* ── Theme switcher ───────────────────────────────────────────
+   A REVIEW TOOL, not a customer feature. It ships the nav toggle that
+   flips between the v3 system and the classic (original) palette and
+   type, so the two can be compared on the real pages.
+
+   Set this to false and rebuild — the toggle disappears from all 13
+   pages, the classic stylesheet stops loading, and nothing else in the
+   markup changes. Do that before merging to main.                     */
+export const THEME_SWITCHER = true;
+
+export const THEMES = [
+  { id: 'modern',  label: 'V3',      note: 'Archivo · graphite · hard edges' },
+  { id: 'classic', label: 'Classic', note: 'Cinzel · warm black · soft edges' },
+];
+
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbzHEbSavkYrqL3sA9y5oqHXQbK24IQJahz_wYbQODO4rY-LSDJ_w9IyGslmgINtVLLf7g/exec';
 
 /* ── Derived helpers ─────────────────────────────────────────── */
