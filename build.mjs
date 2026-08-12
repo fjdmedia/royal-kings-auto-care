@@ -10,6 +10,8 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, SERVICES } from './src/data.mjs';
+import { scanGallery } from './src/gallery-scan.mjs';
+import { setGallery, GALLERY } from './src/gallery-data.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 
@@ -30,12 +32,13 @@ const PAGES = [
     url: `/services/${s.slug}`,
     sitemap: { priority: '0.8', freq: 'monthly' },
   })),
-  /* Built, wired, and deliberately NOT in the nav or the sitemap: the
-     gallery holds a before/after slider and a work grid that have no real
-     photographs yet. It ships noindex until Patrick and Justin supply them
-     (shot list in PHOTOS.md). Publishing an empty gallery is worse than
-     not having one. */
-  { mod: './src/pages/gallery.mjs',       out: 'gallery.html',        url: '/gallery',   sitemap: null },
+  /* The gallery publishes ITSELF. While assets/Gallery/ is empty it stays
+     noindex, out of the nav and out of the sitemap, because an empty
+     gallery is worse than none. The moment a before/after pair or a work
+     shot lands in that folder, this page indexes, joins the nav and enters
+     the sitemap on the next build — no flags to remember to flip. */
+  { mod: './src/pages/gallery.mjs',       out: 'gallery.html',        url: '/gallery',
+    sitemap: () => GALLERY.hasPhotos ? { priority: '0.8', freq: 'monthly' } : null },
 ];
 
 /* Assertions that have caught real bugs before: a title over 60 chars is
@@ -94,6 +97,21 @@ const vercel = {
 };
 
 async function run() {
+  const g = await scanGallery(ROOT);
+  setGallery(g);
+  if (g.pairs.length || g.shots.length || Object.keys(g.services).length) {
+    console.log(`  gallery: ${g.pairs.length} before/after pair(s) · ${g.shots.length} work shot(s) · ${Object.keys(g.services).length} service header(s)`);
+  } else {
+    console.log('  gallery: no photos in assets/Gallery/ yet — the section and page stay hidden');
+  }
+  g.notes.forEach(n => console.log(n));
+  if (g.missing.length) {
+    throw new Error(
+      'These photos have no caption yet, so their alt text would be a guess:\n' +
+      g.missing.map(k => `  - ${k}`).join('\n') +
+      `\n\nOpen each image, then describe what is actually in the frame in:\n  ${g.capPath}\n` +
+      'Alt text has to be true, not just present — that is the whole point of the file.');
+  }
   let count = 0;
   const problems = [];
   for (const p of PAGES) {
@@ -106,11 +124,13 @@ async function run() {
     count++;
   }
 
-  await writeFile(join(ROOT, 'sitemap.xml'), sitemap(PAGES.filter(p => p.sitemap)), 'utf8');
+  const indexed = PAGES.map(p => ({ ...p, sitemap: typeof p.sitemap === 'function' ? p.sitemap() : p.sitemap }))
+    .filter(p => p.sitemap);
+  await writeFile(join(ROOT, 'sitemap.xml'), sitemap(indexed), 'utf8');
   await writeFile(join(ROOT, 'robots.txt'), robots, 'utf8');
   await writeFile(join(ROOT, 'vercel.json'), JSON.stringify(vercel, null, 2) + '\n', 'utf8');
 
-  console.log(`\n  ${count} pages · sitemap (${PAGES.filter(p => p.sitemap).length} indexed + waiver) · robots · vercel.json`);
+  console.log(`\n  ${count} pages · sitemap (${indexed.length} indexed + waiver) · robots · vercel.json`);
   if (problems.length) throw new Error(problems.join('\n'));
 }
 

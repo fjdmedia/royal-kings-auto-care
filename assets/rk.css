@@ -605,8 +605,13 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 /* ── Before / after slider ───────────────────────────────────────── */
 .ba-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: var(--stroke); border-radius: var(--r-xs); }
 .ba-stage > .ba-before, .ba-stage img, .ba-stage .plate { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; border-radius: 0; }
-.ba-after { position: absolute; inset: 0; width: var(--pos, 50%); overflow: hidden; }
-.ba-after > * { width: 100vw; max-width: none; }
+/* The overlay is clipped, not resized. A width-based clip has to stretch the
+   inner image to compensate, which means the two halves never line up on a
+   real photograph — flat test colours hide it, a car does not. clip-path
+   keeps both images identical in size and position, so the seam is exact.
+   inset() clips from the LEFT edge, so the after image occupies everything
+   to the RIGHT of the handle, matching the labels. */
+.ba-after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos, 50%)); }
 .ba-line { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 1px; background: var(--gold); pointer-events: none; }
 .ba-grip {
   position: absolute; top: 50%; left: var(--pos, 50%); width: 40px; height: 40px;
@@ -623,6 +628,14 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
   border: var(--stroke); border-radius: var(--r-xs);
 }
 .ba-stage::after { content: 'After'; left: auto; right: var(--s-4); color: var(--gold); border-color: var(--edge-gold); }
+
+/* Gallery layout */
+.ba-list { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+.work-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
+@media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .work-grid { grid-template-columns: minmax(0, 1fr); } }
+.work-tile { aspect-ratio: 4 / 3; }
+.work-tile img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ── Accordion (FAQ) ─────────────────────────────────────────────── */
 .acc { border-top: var(--stroke); }

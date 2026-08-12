@@ -52,7 +52,9 @@ once it is stretched across a wide band.
 | 5 | Swirled paint under a hard light | Same panel, same light position, both shots |
 | 6 | Yellowed headlight | One headlight filling the frame |
 
-Filenames: `ba-01-before.jpg` / `ba-01-after.jpg`, and so on.
+Filenames: any two files sharing a name, one ending `-before` and one
+ending `-after` — `civic-interior-before.jpg` / `civic-interior-after.jpg`.
+Case and extension do not matter. Drop them in `assets/Gallery/`.
 
 ### 2. Finished work grid — `/gallery`
 
@@ -60,7 +62,8 @@ Filenames: `ba-01-before.jpg` / `ba-01-after.jpg`, and so on.
 interior detail shots (a clean dash, a stitched seat, a vent, a beading hood).
 Close-ups carry more than wide shots here.
 
-Filenames: `work-01.jpg` … `work-10.jpg`
+Filenames: anything, as long as it does not end `-before` or `-after`.
+Drop them in `assets/Gallery/` and they become work-grid shots.
 
 ### 3. Patrick and Justin — `/about` and the homepage
 
@@ -73,7 +76,7 @@ Filenames: `work-01.jpg` … `work-10.jpg`
 These do more for trust than anything else on the site. They do not need to be
 posed — mid-work is better than a posed headshot.
 
-Filenames: `team-both.jpg`, `team-patrick.jpg`, `team-justin.jpg`
+Filenames: `team-both.jpg`, `team-patrick.jpg`, `team-justin.jpg` (see note below — these are not auto-wired yet)
 
 ### 4. Service page headers — `/services/*`
 
@@ -86,7 +89,8 @@ Filenames: `team-both.jpg`, `team-patrick.jpg`, `team-justin.jpg`
 | Ceramic coating | Water beading tight and high on a coated panel |
 | Paint correction | A polisher on a panel, or a half-corrected panel showing the cut line |
 
-Filenames: `svc-interior.jpg`, `svc-exterior.jpg`, `svc-ceramic.jpg`, `svc-correction.jpg`
+Drop these in `assets/Gallery/Services/`. The filename just has to contain
+the service word: `interior`, `exterior`, `ceramic` or `paint`.
 
 ### 5. Hero / homepage band
 
@@ -99,20 +103,42 @@ Filename: `hero.jpg`
 
 ## Dropping them in
 
-1. Put the files in `assets/work/`.
-2. **Open each one before writing its caption.** Alt text has to describe what
-   is actually in the frame, not what the folder is called.
-3. Fill the `PAIRS` and `SHOTS` arrays at the top of `src/pages/gallery.mjs`.
-4. For the other slots, replace `<span class="plate …"></span>` with
-   `<span class="plate …"><img src="/assets/work/<file>" alt="<real description>"
-   width="…" height="…" loading="lazy"></span>` — the plate already crops and
-   covers, so no other change is needed.
-5. Publish the gallery: remove `noindex: true` from `gallery.mjs`, add
-   `{ href: '/gallery', label: 'Our work' }` to `NAV` in `src/data.mjs`, and give
-   the page a `sitemap` entry in `build.mjs`.
-6. `node build.mjs`
+**This is the whole workflow:**
 
----
+1. Put the files in `assets/Gallery/` (or `assets/Gallery/Services/` for the
+   service headers).
+2. Run `node build.mjs`.
+3. It will stop and tell you which photos need a caption. Open each image,
+   write what is actually in the frame into `assets/Gallery/captions.json`.
+4. Run `node build.mjs` again.
+
+That is it. There is no page to edit and no flag to flip. Once a single
+before/after pair or work shot is in the folder:
+
+- the before/after section appears on the homepage
+- `/gallery` fills itself, drops `noindex`, joins the navigation and enters
+  the sitemap
+- the service pages pick up their headers
+
+Empty the folder again and all of that disappears just as cleanly.
+
+**Why it makes you write captions.** Alt text has to describe what is really
+in the frame — that is what a screen reader announces and what Google reads.
+Generating it from a filename is how a customer's truck ends up captioned as
+"a car". The build refuses rather than guessing, and it names exactly which
+files it is waiting on.
+
+**What the build also tells you**, without being asked:
+
+- a pair missing its other half
+- a before/after pair whose two halves are different shapes (the slider
+  would crop one of them)
+- anything too low-resolution to sit full-width
+- a Services image whose name does not say which service it belongs to
+
+**Not auto-wired yet:** the team photos and the wide hero shot. Those slot
+into specific places on `/about` and the homepage rather than a grid, so
+send them over and I will place them.
 
 ## Also worth collecting (not photos)
 

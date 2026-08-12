@@ -1,4 +1,5 @@
 import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, primaryPhone, priceFrom, money } from './data.mjs';
+import { GALLERY } from './gallery-data.mjs';
 
 /* Inline SVG only. No icon CDN — a whole library downloaded to draw
    twelve glyphs is a render-blocking dependency and a FOUC source. */
@@ -129,9 +130,14 @@ const themeSwitch = (cls = '') => THEME_SWITCHER ? `
 
 /* ── Nav ─────────────────────────────────────────────────────────── */
 const navMarkup = current => {
-  const links = NAV.map(l =>
+  /* /gallery joins the nav the moment assets/Gallery/ has something in it,
+     and leaves again if it is emptied. Nothing to remember to switch on. */
+  const nav = GALLERY.hasPhotos
+    ? [NAV[0], { href: '/gallery', label: 'Our work' }, ...NAV.slice(1)]
+    : NAV;
+  const links = nav.map(l =>
     `<a href="${l.href}"${current === l.href ? ' aria-current="page"' : ''}>${l.label}</a>`).join('\n        ');
-  const drawerLinks = NAV.map(l =>
+  const drawerLinks = nav.map(l =>
     `<a href="${l.href}"${current === l.href ? ' aria-current="page"' : ''}>${l.label}</a>`).join('\n        ');
   return `
 <header class="nav" id="nav">
@@ -187,6 +193,7 @@ const footerMarkup = () => `
       <div>
         <h3>Explore</h3>
         <ul class="foot-list">
+          ${GALLERY.hasPhotos ? '<li><a href="/gallery">Our work</a></li>' : ''}
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/faq">FAQ</a></li>

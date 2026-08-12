@@ -1,6 +1,7 @@
 import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, priceFrom, money, primaryPhone } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
-import { packageBlock, addonMatrix, faqAccordion } from '../components.mjs';
+import { packageBlock, addonMatrix, faqAccordion, beforeAfter } from '../components.mjs';
+import { GALLERY } from '../gallery-data.mjs';
 
 const teaserFaqs = FAQS.slice(0, 4);
 
@@ -109,11 +110,27 @@ const body = `
   </div>
 </section>
 
+<!-- ── Before / after — only rendered when real pairs exist ── -->
+${GALLERY.pairs.length ? `
+<section class="sec band" aria-labelledby="ba-h">
+  <div class="wrap">
+    ${secHead({
+      index: '03',
+      kicker: 'Proof',
+      title: '<span id="ba-h">Same car.<br class="br-desk">Same parking spot.</span>',
+      meta: 'Drag the handle',
+      lede: 'Shot from one spot before we started and after we finished. No staging, no different lighting, no other car.',
+    })}
+    <div class="ba-list">${GALLERY.pairs.slice(0, 2).map(p => beforeAfter(p)).join('')}</div>
+    ${GALLERY.pairs.length > 2 ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}
+  </div>
+</section>` : ''}
+
 <!-- ── Services ── -->
 <section class="sec" aria-labelledby="svc-h">
   <div class="wrap">
     ${secHead({
-      index: '03',
+      index: '04',
       kicker: 'What we do',
       title: '<span id="svc-h">Four services,<br>one visit.</span>',
       meta: 'Interior · Exterior · Coating · Correction',
@@ -134,7 +151,7 @@ const body = `
 <section class="sec band" aria-labelledby="proc-h">
   <div class="wrap">
     ${secHead({
-      index: '04',
+      index: '05',
       kicker: 'How it runs',
       title: '<span id="proc-h">Four steps,<br>and one of them is us driving.</span>',
       meta: 'Book → confirm → we arrive',
@@ -156,7 +173,7 @@ const body = `
     <div class="plate plate-tall bkt bkt-br" role="img" aria-label="Photograph of Patrick and Justin — coming soon"></div>
     <div>
       ${secHead({
-        index: '05',
+        index: '06',
         kicker: 'Who shows up',
         title: '<span id="who-h">Two people.<br>Both of them show up.</span>',
       })}
@@ -184,7 +201,7 @@ const body = `
   <div class="wrap split split-offer" style="align-items:start">
     <div>
       ${secHead({
-        index: '06',
+        index: '07',
         kicker: 'Before you book',
         title: '<span id="faq-h">The questions<br>we get asked most.</span>',
       })}

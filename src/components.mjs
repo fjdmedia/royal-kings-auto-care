@@ -202,3 +202,30 @@ export const reassure = () => `
 
 export const callLine = () => `
   <a class="hero-call" href="tel:${primaryPhone.tel}">${icon('phone')} ${primaryPhone.phone} — ${primaryPhone.name}</a>`;
+
+/* ── Before / after slider ────────────────────────────────────────────
+   One <input type=range> drives the reveal, which means it is keyboard
+   operable and screen-reader announced for free — a div with drag handlers
+   is neither. Both photos carry their own true alt text (G51b). */
+export const beforeAfter = p => `
+  <figure class="ba">
+    <div class="ba-stage">
+      <img class="ba-before" src="${p.before}" alt="${esc(p.altBefore)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
+      <div class="ba-after" style="--pos:50%">
+        <img src="${p.after}" alt="${esc(p.altAfter)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
+      </div>
+      <span class="ba-line" aria-hidden="true"></span><span class="ba-grip" aria-hidden="true"></span>
+      <input class="ba-range" type="range" min="0" max="100" value="50" step="1"
+             aria-label="Reveal the after photo — ${esc(p.altAfter)}">
+    </div>
+    <figcaption>${esc(p.altAfter)}</figcaption>
+  </figure>`;
+
+/* Work grid — real photographs only; the grid does not exist without them. */
+export const workGrid = shots => `
+  <div class="work-grid">
+    ${shots.map(s => `
+    <figure class="plate work-tile">
+      <img src="${s.src}" alt="${esc(s.alt)}" width="${s.w}" height="${s.h}" loading="lazy" decoding="async">
+    </figure>`).join('')}
+  </div>`;
