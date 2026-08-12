@@ -6,14 +6,32 @@
 
    Run:  node build.mjs
 */
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, readFile, cp } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, SERVICES } from './src/data.mjs';
 import { scanGallery } from './src/gallery-scan.mjs';
 import { setGallery, GALLERY } from './src/gallery-data.mjs';
+import { setBase } from './src/site-base.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
+
+/* node build.mjs                                       -> the real site, at the root
+   node build.mjs --base=preview/x --out=<abs dir>       -> a staged preview
+
+   NOTE: --base takes NO leading slash. Git Bash on Windows rewrites any
+   argument that looks like a Unix absolute path into a Windows one, so
+   `--base=/preview/x` silently arrives as `C:/Program Files/Git/preview/x`.
+   Taking it without the slash and adding it here sidesteps the mangling
+   entirely instead of relying on MSYS_NO_PATHCONV being set. */
+const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').split('=').slice(1).join('=');
+const rawBase = arg('base').replace(/^\/+|\/+$/g, '');
+const BASE_PREFIX = rawBase ? '/' + rawBase : '';
+if (/^[a-zA-Z]:/.test(arg('base'))) {
+  throw new Error(`--base was path-mangled by the shell ("${arg('base')}"). Pass it without a leading slash: --base=preview/royal-kings`);
+}
+const OUT = arg('out') || ROOT;
+setBase(BASE_PREFIX);
 
 /* out = the file written; url = the clean URL Vercel serves it at
    (vercel.json sets cleanUrls, so foo.html is reachable as /foo and
@@ -57,6 +75,44 @@ function assertSeo(html, url) {
   if (errs.length) throw new Error(`SEO assertions failed for ${url}:\n  - ${errs.join('\n  - ')}`);
 }
 
+/* G64b, made mechanical. A staged build must contain NO internal path that
+   still resolves against the server root — not in markup, and not in a JS
+   navigation string, which is the half no screenshot and no HTML link
+   checker can see. */
+function assertRebased(html, url, base) {
+  if (!base) return;
+  const bad = [];
+  for (const a of html.match(/\b(?:href|src|action)="\/[^"]*"/g) || []) {
+    if (!a.includes(`="${base}/`)) bad.push(a);
+  }
+  for (const j of html.match(/location\.(?:href|assign)\s*[=(]\s*['"]\/[^'"]*/g) || []) bad.push(j);
+  if (!/<meta name="robots" content="noindex/.test(html)) bad.push('page is not noindex');
+  if (bad.length) {
+    throw new Error(`${url} is not fully rebased under "${base}":\n      - ${[...new Set(bad)].join('\n      - ')}`);
+  }
+}
+
+/* fjmedia.ca has no cleanUrls rule, and adding one would change routing for
+   the whole agency site just to stage a preview. So a staged build links to
+   explicit .html files instead — plain static serving, no host config, no
+   blast radius. The real deploy keeps its clean URLs via its own vercel.json.
+   The map is built from PAGES, not guessed, and applied longest-first so
+   /services never clobbers /services/ceramic-coating-winnipeg. */
+function linkify(html) {
+  if (!BASE_PREFIX) return html;
+  const map = PAGES
+    .filter(p => p.url !== '/')
+    .map(p => [p.url, '/' + p.out])
+    .concat([['/waiver', '/waiver.html']])
+    .sort((a, b) => b[0].length - a[0].length);
+  for (const [clean, file] of map) {
+    html = html.split(`"${BASE_PREFIX}${clean}"`).join(`"${BASE_PREFIX}${file}"`);
+    html = html.split(`"${BASE_PREFIX}${clean}?`).join(`"${BASE_PREFIX}${file}?`);
+    html = html.split(`"${BASE_PREFIX}${clean}#`).join(`"${BASE_PREFIX}${file}#`);
+  }
+  return html.split('/services/index.html').join('/services/');
+}
+
 const sitemap = urls => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
@@ -97,6 +153,7 @@ const vercel = {
 };
 
 async function run() {
+  if (BASE_PREFIX) console.log(`  staging a PREVIEW build under ${BASE_PREFIX} -> ${OUT}`);
   const g = await scanGallery(ROOT);
   setGallery(g);
   if (g.pairs.length || g.shots.length || Object.keys(g.services).length) {
@@ -115,9 +172,11 @@ async function run() {
   let count = 0;
   const problems = [];
   for (const p of PAGES) {
-    const html = (await import(p.mod)).default;
+    let html = (await import(p.mod)).default;
+    html = linkify(html);
     try { assertSeo(html, p.url); } catch (e) { problems.push(e.message); }
-    const dest = join(ROOT, p.out);
+    try { assertRebased(html, p.url, BASE_PREFIX); } catch (e) { problems.push(e.message); }
+    const dest = join(OUT, p.out);
     await mkdir(dirname(dest), { recursive: true });
     await writeFile(dest, html, 'utf8');
     console.log(`  ${p.out.padEnd(44)} → ${p.url}`);
@@ -126,11 +185,42 @@ async function run() {
 
   const indexed = PAGES.map(p => ({ ...p, sitemap: typeof p.sitemap === 'function' ? p.sitemap() : p.sitemap }))
     .filter(p => p.sitemap);
-  await writeFile(join(ROOT, 'sitemap.xml'), sitemap(indexed), 'utf8');
-  await writeFile(join(ROOT, 'robots.txt'), robots, 'utf8');
-  await writeFile(join(ROOT, 'vercel.json'), JSON.stringify(vercel, null, 2) + '\n', 'utf8');
+  /* A staged preview publishes no sitemap: it would list the LIVE client
+     domain from inside the agency site, which is confusing at best. Only the
+     real deploy gets one. */
+  if (!BASE_PREFIX) await writeFile(join(OUT, 'sitemap.xml'), sitemap(indexed), 'utf8');
+  if (!BASE_PREFIX) await writeFile(join(ROOT, 'robots.txt'), robots, 'utf8');
+  /* A preview is a self-contained copy inside another site, so it needs the
+     assets carried across too — HTML alone renders as unstyled text, which is
+     exactly the failure the deploy playbook says a 200 will happily hide. */
+  if (BASE_PREFIX) {
+    await mkdir(join(OUT, 'assets'), { recursive: true });
+    for (const f of ['rk.css', 'rk.js', 'rk-warm.css', 'rk-classic.css']) {
+      await cp(join(ROOT, 'assets', f), join(OUT, 'assets', f));
+    }
+    await cp(join(ROOT, 'assets', 'Gallery'), join(OUT, 'assets', 'Gallery'), { recursive: true });
+    await cp(join(ROOT, 'Logo.jpg'), join(OUT, 'Logo.jpg'));
 
-  console.log(`\n  ${count} pages · sitemap (${indexed.length} indexed + waiver) · robots · vercel.json`);
+    /* waiver.html is hand-maintained rather than generated, so it gets the
+       same rebase treatment applied to its own paths. Its only local refs
+       are "/" and "Logo.jpg". */
+    let w = await readFile(join(ROOT, 'waiver.html'), 'utf8');
+    w = w.replace(/\bhref="\/"/g, `href="${BASE_PREFIX}/"`)
+         .replace(/\b(href|src)="Logo\.jpg"/g, `$1="${BASE_PREFIX}/Logo.jpg"`);
+    if (!/<meta name="robots"/.test(w)) {
+      w = w.replace('</title>', '</title><meta name="robots" content="noindex, nofollow">');
+    }
+    await writeFile(join(OUT, 'waiver.html'), w, 'utf8');
+    console.log('  assets + waiver.html copied into the preview');
+  }
+
+  /* robots.txt and vercel.json belong to the real deploy only — a preview
+     lives inside another site that has its own. */
+  if (!BASE_PREFIX) await writeFile(join(ROOT, 'vercel.json'), JSON.stringify(vercel, null, 2) + '\n', 'utf8');
+
+  console.log(BASE_PREFIX
+    ? `\n  ${count} pages staged · noindex · no sitemap · no robots.txt`
+    : `\n  ${count} pages · sitemap (${indexed.length} indexed + waiver) · robots · vercel.json`);
   if (problems.length) throw new Error(problems.join('\n'));
 }
 

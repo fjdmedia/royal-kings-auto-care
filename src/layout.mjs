@@ -1,5 +1,6 @@
 import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, primaryPhone, priceFrom, money } from './data.mjs';
 import { GALLERY } from './gallery-data.mjs';
+import { BASE } from './site-base.mjs';
 
 /* Inline SVG only. No icon CDN — a whole library downloaded to draw
    twelve glyphs is a render-blocking dependency and a FOUC source. */
@@ -248,15 +249,30 @@ const accentTail = html => {
 };
 
 /* ── Page shell ──────────────────────────────────────────────────── */
+/* Rewrites every internal root-absolute path to sit under BASE.prefix.
+   Deliberately one function over the finished HTML rather than a helper
+   threaded through 12 page files: a helper only protects the paths someone
+   remembered to wrap, and the ones that get forgotten are the ones that
+   break. Absolute URLs, anchors, tel:, mailto: and data: are left alone. */
+function rebase(html) {
+  const b = BASE.prefix;
+  if (!b) return html;
+  return html
+    .replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${b}/`)
+    .replace(/\b(href|src|action)="\/"/g, `$1="${b}/"`)
+    // A preview is never indexable, whatever the page asked for.
+    .replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex, nofollow">');
+}
+
 export function page({ title, description, path, body, schema = [], noindex = false, dock = true }) {
   body = body.replace(/(<h1[^>]*class="hero-h1"[^>]*>)([\s\S]*?)(<\/h1>)/g,
     (_, open, inner, close) => open + accentTail(inner) + close);
-  return `<!DOCTYPE html>
+  return rebase(`<!DOCTYPE html>
 <html lang="en-CA">
 <head>
 ${head({ title, description, path, schema, noindex })}
 </head>
-<body>
+<body${BASE.prefix ? ` data-site-base="${BASE.prefix}" data-waiver="${BASE.prefix}/waiver.html"` : ''}>
 <a class="btn btn-ghost vh" href="#main">Skip to content</a>
 ${navMarkup(path)}
 <main id="main">
@@ -268,7 +284,7 @@ ${dock ? dockMarkup() : ''}
 <script src="/assets/rk.js" defer></script>
 </body>
 </html>
-`;
+`);
 }
 
 /* ── Shared section helpers ──────────────────────────────────────── */

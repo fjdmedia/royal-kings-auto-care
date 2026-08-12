@@ -5,6 +5,15 @@
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Set when the build is staged under a subdirectory. Every in-JS
+     navigation has to go through this or it lands one root too high — the
+     failure mode no screenshot can see, because it only happens after a
+     real customer submits the form. */
+  var BASE = document.body.getAttribute('data-site-base') || '';
+  /* The staged preview is served as plain files, so its waiver URL carries a
+     .html extension the live clean-URL deploy does not. Emitted as data
+     rather than assembled here, so JS never guesses the host's routing. */
+  var WAIVER_URL = document.body.getAttribute('data-waiver') || (BASE + '/waiver');
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -266,7 +275,7 @@
         form.style.display = 'none';
         if (sent) sent.setAttribute('data-visible', 'true');
       }, 500);
-      setTimeout(function () { window.location.href = '/waiver'; }, 2600);
+      setTimeout(function () { window.location.href = WAIVER_URL; }, 2600);
     });
   }
 
