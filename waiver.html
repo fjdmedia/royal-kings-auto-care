@@ -6,27 +6,34 @@
   <title>Service Agreement — Royal Kings Auto Care</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
+    /* v3 display treatment — wide, tight, uppercase, matching the site. */
+    h1, h2, h3 { font-stretch: 108%; letter-spacing: -0.022em; }
+    h1 { text-transform: uppercase; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     :root {
-      --black:        #0A0A0A;
-      --black-soft:   #111111;
-      --black-card:   #161616;
-      --black-border: #1E1E1E;
+      /* Retuned 2026-08-12 to the v3 system palette (assets/rk.css).
+         Names kept so none of this page's 380 lines of CSS or its
+         signature/PDF JavaScript had to change. */
+      --black:        #06070A;
+      --black-soft:   #0A0C11;
+      --black-card:   #141922;
+      --black-border: #222836;
       --gold:         #C9A227;
-      --gold-light:   #E2B93B;
-      --gold-dim:     #8A6E1A;
-      --white:        #FFFFFF;
-      --grey:         #AAAAAA;
-      --grey-dark:    #555555;
+      --gold-light:   #EBD07A;
+      --gold-dim:     #8C6F18;
+      --white:        #EAEBEF;
+      --grey:         #B2B7C2;
+      --grey-dark:    #868C99;
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Archivo', sans-serif;
       background: var(--black);
       color: var(--white);
       line-height: 1.7;
@@ -60,14 +67,14 @@
       background: var(--white); padding: 2px;
     }
     .nav-logo-text {
-      font-family: 'Cinzel', serif; font-size: 1rem;
+      font-family: 'Archivo', sans-serif; font-size: 1rem;
       font-weight: 700; color: var(--gold); letter-spacing: 0.1em; line-height: 1.2;
     }
     .nav-logo-text span {
       display: block; font-size: 0.62rem; font-weight: 400;
       color: var(--grey); letter-spacing: 0.22em; text-transform: uppercase;
     }
-    .nav-back {
+    .nav-back { min-height: 24px; display: inline-flex; align-items: center;
       font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--grey); text-decoration: none;
       transition: color 0.25s; display: flex; align-items: center; gap: 0.4rem;
@@ -92,7 +99,7 @@
     }
     .waiver-header-label::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
     .waiver-header h1 {
-      font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-family: 'Archivo', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       font-weight: 700; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.5rem;
     }
     .waiver-header h1 .gold { color: var(--gold); }
@@ -110,7 +117,7 @@
       margin-bottom: 2.5rem;
     }
     .agreement-section-title {
-      font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700;
+      font-family: 'Archivo', sans-serif; font-size: 0.95rem; font-weight: 700;
       color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
       margin-bottom: 1rem; padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--black-border);
@@ -179,7 +186,7 @@
     }
 
     .sig-form-title {
-      font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700;
+      font-family: 'Archivo', sans-serif; font-size: 1.2rem; font-weight: 700;
       color: var(--white); letter-spacing: 0.06em; margin-bottom: 0.4rem;
     }
     .sig-form-sub {
@@ -189,7 +196,7 @@
     /* ── FORM SECTION LABEL ── */
     .form-section-label {
       font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold-dim);
+      text-transform: uppercase; color: var(--gold);
       margin: 1.5rem 0 0.75rem; padding-bottom: 0.4rem;
       border-bottom: 1px solid var(--black-border);
     }
@@ -204,13 +211,13 @@
     .form-group input, .form-group select {
       background: var(--black-soft); border: 1px solid var(--black-border);
       color: var(--white); padding: 0.85rem 1rem;
-      font-family: 'Montserrat', sans-serif; font-size: 0.88rem;
+      font-family: 'Archivo', sans-serif; font-size: 0.88rem;
       width: 100%; outline: none; appearance: none; transition: border-color 0.25s;
     }
     .form-group input:focus, .form-group select:focus { border-color: var(--gold-dim); }
     .form-group input[readonly] { color: var(--grey-dark); cursor: default; }
     .form-group select option { background: #1a1a1a; color: var(--white); }
-    .form-group select optgroup { color: var(--gold-dim); font-size: 0.75rem; }
+    .form-group select optgroup { color: var(--gold); font-size: 0.75rem; }
 
     /* ── ADD-ONS GRID ── */
     .addons-grid {
@@ -291,7 +298,7 @@
     }
     .btn-clear {
       background: none; border: 1px solid var(--black-border);
-      color: var(--grey-dark); font-family: 'Montserrat', sans-serif;
+      color: var(--grey-dark); font-family: 'Archivo', sans-serif;
       font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; padding: 0.4rem 1rem; cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
@@ -322,7 +329,7 @@
     .sig-submit { text-align: center; margin-top: 1rem; }
     .btn-gold {
       background: var(--gold); color: var(--black);
-      padding: 1rem 3rem; font-family: 'Montserrat', sans-serif;
+      padding: 1rem 3rem; font-family: 'Archivo', sans-serif;
       font-size: 0.82rem; font-weight: 700; letter-spacing: 0.18em;
       text-transform: uppercase; border: none; cursor: pointer;
       transition: background 0.25s, transform 0.2s;
@@ -342,7 +349,7 @@
     .sig-success.visible { display: block; }
     .sig-success-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
     .sig-success h3 {
-      font-family: 'Cinzel', serif; font-size: 1.4rem;
+      font-family: 'Archivo', sans-serif; font-size: 1.4rem;
       color: var(--gold); margin-bottom: 0.75rem;
     }
     .sig-success p { color: var(--grey); font-size: 0.9rem; line-height: 1.7; }
@@ -352,7 +359,7 @@
     .btn-pdf {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: var(--gold); color: var(--black);
-      font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700;
+      font-family: 'Archivo', sans-serif; font-size: 0.78rem; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
       border: none; padding: 0.75rem 1.8rem; cursor: pointer;
       transition: background 0.2s;
@@ -393,11 +400,11 @@
 
   <!-- ── NAV ── -->
   <nav>
-    <a class="nav-logo" href="index.html">
+    <a class="nav-logo" href="/">
       <img src="Logo.jpg" alt="Royal Kings Auto Care" />
       <div class="nav-logo-text">Royal Kings <span>Auto Care</span></div>
     </a>
-    <a class="nav-back" href="index.html">&#8592; Back to Site</a>
+    <a class="nav-back" href="/">&#8592; Back to Site</a>
   </nav>
 
   <!-- ── HEADER ── -->
@@ -748,7 +755,7 @@
         <p>Your PDF copy should have downloaded automatically.<br />Royal Kings Auto Care has your signed agreement on file.<br />We'll be in touch shortly to confirm your appointment.</p>
         <div class="sig-success-actions">
           <button class="btn-pdf" id="downloadPdfBtn">&#8595; Download Again</button>
-          <a class="btn-back" href="index.html">&#8592; Return to Site</a>
+          <a class="btn-back" href="/">&#8592; Return to Site</a>
         </div>
       </div>
     </div>
@@ -907,7 +914,7 @@
         document.getElementById('summaryAddons').innerHTML = addons.map(a => {
           const name = a.split(' (')[0];
           const price = a.match(/\(([^)]+)\)/)?.[1] || '';
-          return name + (price ? '<br><span style="font-weight:400;font-size:0.7rem;color:var(--gold-dim);">' + price + '</span>' : '');
+          return name + (price ? '<br><span style="font-weight:400;font-size:0.7rem;color:var(--gold);">' + price + '</span>' : '');
         }).join('<br>');
       } else {
         addonsRow.style.display = 'none';
