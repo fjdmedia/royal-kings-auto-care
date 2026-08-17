@@ -265,7 +265,7 @@ function rebase(html) {
 }
 
 export function page({ title, description, path, body, schema = [], noindex = false, dock = true }) {
-  body = body.replace(/(<h1[^>]*class="hero-h1"[^>]*>)([\s\S]*?)(<\/h1>)/g,
+  body = body.replace(/(<h1[^>]*class="[^"]*hero-h1[^"]*"[^>]*>)([\s\S]*?)(<\/h1>)/g,
     (_, open, inner, close) => open + accentTail(inner) + close);
   return rebase(`<!DOCTYPE html>
 <html lang="en-CA">

@@ -434,6 +434,19 @@ h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; font-weight: 7
 .br-desk { display: none; }
 @media (min-width: 760px) { .br-desk { display: inline; } }
 
+/* A slogan is a sentence, not a slogan-shaped shout. At 68 characters the
+   uppercase wide treatment becomes a wall of three full-bleed lines, so the
+   homepage H1 drops the caps, eases the tracking and takes a smaller clamp —
+   it still dominates the fold without bellowing. */
+.hero-h1-slogan {
+  text-transform: none;
+  font-stretch: 104%;
+  letter-spacing: -0.022em;
+  line-height: 1.04;
+  font-size: clamp(2.1rem, 1.25rem + 3.5vw, 3.9rem);
+  max-width: 30ch;
+}
+
 /* ── Photo plates ────────────────────────────────────────────────── */
 /* Where real photography goes. Until it lands these render as a dark
    panel with light raking across it — a material, not a placeholder.
