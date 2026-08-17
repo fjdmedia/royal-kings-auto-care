@@ -1,13 +1,15 @@
 import { SITE, CONTACT, TERMS } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, breadcrumbSchema } from '../layout.mjs';
 import { GALLERY } from '../gallery-data.mjs';
-import { beforeAfter, workGrid } from '../components.mjs';
+import { beforeAfterPair, workGrid } from '../components.mjs';
 
 /* Renders entirely from assets/Gallery/. Drop photos in that folder, run
    `node build.mjs`, and this page fills itself, indexes itself and joins
    the nav. While the folder is empty it stays unlisted and says why. */
 
 const { pairs, shots, hasPhotos } = GALLERY;
+const sliders = pairs.filter(p => p.layout === 'slider').length;
+const dips = pairs.length - sliders;
 
 const body = `
 <section class="hero" aria-labelledby="h1">
@@ -21,8 +23,8 @@ const body = `
 
     <div class="hero-row">
       <p class="hero-sub">
-        Real cars from around ${esc(SITE.city)}. Drag the handle across a photo
-        to see what came out of one.
+        Every frame here is a real ${esc(SITE.city)} vehicle, photographed before
+        we started and again when we finished. Nothing is stock.
       </p>
       <div class="hero-act">
         <div class="hero-act-row">
@@ -34,9 +36,9 @@ const body = `
 
     ${hasPhotos ? `
     <div class="spec">
-      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>Same angle, same light</small></p></div>
-      <div class="spec-cell"><span class="spec-k">Finished work</span><p class="spec-v num">${shots.length}<small>Cars we handed back</small></p></div>
-      <div class="spec-cell"><span class="spec-k">All shot in</span><p class="spec-v">${esc(SITE.city)}<small>No stock photography</small></p></div>
+      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>${pairs.length === 1 ? 'Area' : 'Areas of the vehicle'}</small></p></div>
+      <div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">${sliders}<small>${sliders === 1 ? 'Shot from a fixed position' : 'Shot from fixed positions'}</small></p></div>
+      <div class="spec-cell"><span class="spec-k">Shot in</span><p class="spec-v">${esc(SITE.city)}<small>No stock photography</small></p></div>
       <div class="spec-cell"><span class="spec-k">Your car</span><p class="spec-v">We ask first<small>Nothing photographed without permission</small></p></div>
     </div>` : ''}
   </div>
@@ -69,11 +71,11 @@ ${pairs.length ? `
     ${secHead({
       index: '01',
       kicker: 'Before and after',
-      title: '<span id="ba-h">Drag the handle.</span>',
-      meta: `${pairs.length} vehicle${pairs.length === 1 ? '' : 's'}`,
-      lede: 'Each pair is the same vehicle, shot from the same spot before we started and after we finished.',
+      title: '<span id="ba-h">Before, and after.</span>',
+      meta: `${pairs.length} area${pairs.length === 1 ? '' : 's'}`,
+      lede: `${sliders ? 'The engine bay was shot from a fixed position, so you can drag straight across it. ' : ''}${dips ? 'The interior frames are shown side by side, because they were taken from different doors — wiping between two camera positions would just make the car look like it moved.' : ''}`,
     })}
-    <div class="ba-list">${pairs.map(p => beforeAfter(p)).join('')}</div>
+    <div class="ba-list">${pairs.map(p => beforeAfterPair(p)).join('')}</div>
   </div>
 </section>` : ''}
 

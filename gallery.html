@@ -7,7 +7,7 @@
   <title>Our Work — Before and After | Royal Kings</title>
   <meta name="description" content="Before and after photographs of interior and exterior detailing carried out by Royal Kings Auto Care across Winnipeg. Drag the handle to compare each vehicle.">
   <link rel="canonical" href="https://www.royalkingsdetailingwpg.ca/gallery">
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Royal Kings Auto Care">
   <meta property="og:title" content="Our Work — Before and After | Royal Kings">
@@ -48,7 +48,7 @@
       } catch (e) { /* private mode — the default theme needs nothing */ }
     })();
   </script>
-
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.royalkingsdetailingwpg.ca/"},{"@type":"ListItem","position":2,"name":"Our work","item":"https://www.royalkingsdetailingwpg.ca/gallery"}]}</script>
 </head>
 <body>
 <a class="btn btn-ghost vh" href="#main">Skip to content</a>
@@ -61,6 +61,7 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
         <a href="/services">Services</a>
+        <a href="/gallery" aria-current="page">Our work</a>
         <a href="/pricing">Pricing</a>
         <a href="/about">About</a>
         <a href="/faq">FAQ</a>
@@ -84,6 +85,7 @@
   </div>
   <nav aria-label="Menu">
         <a href="/services">Services</a>
+        <a href="/gallery" aria-current="page">Our work</a>
         <a href="/pricing">Pricing</a>
         <a href="/about">About</a>
         <a href="/faq">FAQ</a>
@@ -111,8 +113,8 @@
 
     <div class="hero-row">
       <p class="hero-sub">
-        Real cars from around Winnipeg. Drag the handle across a photo
-        to see what came out of one.
+        Every frame here is a real Winnipeg vehicle, photographed before
+        we started and again when we finished. Nothing is stock.
       </p>
       <div class="hero-act">
         <div class="hero-act-row">
@@ -123,31 +125,77 @@
     </div>
 
     
-  </div>
-</section>
-
-
-<section class="sec" aria-labelledby="hold-h">
-  <div class="wrap">
-    <div class="notice bkt" style="padding:var(--s-7)">
-      <h2 id="hold-h" style="font-size:var(--fs-xl);margin-bottom:var(--s-4)">This page is not published yet</h2>
-      <p style="margin-bottom:var(--s-4)">
-        The slider and the work grid are built and working. They are waiting on
-        real photographs — nothing here is stock and nothing is invented, so the
-        page stays unlisted until there are real cars to put in it.
-      </p>
-      <p>
-        Drop files into <code>assets/Gallery/</code> and run the build. A pair is
-        two files sharing a name, one ending <code>-before</code> and one
-        <code>-after</code>. Everything else in the folder becomes a work shot.
-        The page then indexes itself and joins the navigation.
-        Framing and lighting notes are in <code>PHOTOS.md</code>.
-      </p>
+    <div class="spec">
+      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">4<small>Areas of the vehicle</small></p></div>
+      <div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">1<small>Shot from a fixed position</small></p></div>
+      <div class="spec-cell"><span class="spec-k">Shot in</span><p class="spec-v">Winnipeg<small>No stock photography</small></p></div>
+      <div class="spec-cell"><span class="spec-k">Your car</span><p class="spec-v">We ask first<small>Nothing photographed without permission</small></p></div>
     </div>
   </div>
 </section>
 
 
+
+
+<section class="sec band" aria-labelledby="ba-h">
+  <div class="wrap">
+    
+  <div class="sec-head">
+    <span class="kicker">01 — Before and after</span>
+    <div class="sec-head-row">
+      <h2><span id="ba-h">Before, and after.</span></h2>
+      <span class="sec-head-meta">4 areas</span>
+    </div>
+    <p class="sec-lede">The engine bay was shot from a fixed position, so you can drag straight across it. The interior frames are shown side by side, because they were taken from different doors — wiping between two camera positions would just make the car look like it moved.</p>
+  </div>
+    <div class="ba-list">
+  <figure class="ba-dip">
+    <div class="ba-dip-grid">
+      <div class="ba-dip-half" data-label="Before">
+        <img src="/assets/Gallery/Before%20and%20After/b1.jpg" alt="Driver's side footwell of a blue Nissan Rogue before cleaning, the ribbed rubber mat caked in dried mud and the door sill covered in dirt" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+      <div class="ba-dip-half ba-dip-after" data-label="After">
+        <img src="/assets/Gallery/Before%20and%20After/a1.jpg" alt="The same Nissan Rogue footwell after cleaning, with the mat and sill clean and a protective paper mat laid down" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <figcaption>Driver's footwell · mat, sill and dash</figcaption>
+  </figure>
+  <figure class="ba">
+    <div class="ba-stage" style="aspect-ratio:1.3333">
+      <img class="ba-before" src="/assets/Gallery/Before%20and%20After/b2.jpg" alt="Engine bay of a blue Nissan Rogue before cleaning, with dust and grime settled across the intake cover, battery and surrounding plastics" width="1280" height="960" loading="lazy" decoding="async">
+      <div class="ba-after" style="--pos:50%">
+        <img src="/assets/Gallery/Before%20and%20After/a2.jpg" alt="The same engine bay after degreasing and dressing, the plastics and battery tray clean and the bare metal brightened" width="1280" height="960" loading="lazy" decoding="async">
+      </div>
+      <span class="ba-line" aria-hidden="true"></span><span class="ba-grip" aria-hidden="true"></span>
+      <input class="ba-range" type="range" min="0" max="100" value="50" step="1"
+             aria-label="Reveal the after photo — The same engine bay after degreasing and dressing, the plastics and battery tray clean and the bare metal brightened">
+    </div>
+    <figcaption>Engine bay · degreased and dressed</figcaption>
+  </figure>
+  <figure class="ba-dip">
+    <div class="ba-dip-grid">
+      <div class="ba-dip-half" data-label="Before">
+        <img src="/assets/Gallery/Before%20and%20After/b3.jpg" alt="Passenger footwell of a blue Nissan Rogue before cleaning, with dead leaves and dried mud across the rubber mat and a dusty dash above it" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+      <div class="ba-dip-half ba-dip-after" data-label="After">
+        <img src="/assets/Gallery/Before%20and%20After/a3.jpg" alt="The same Rogue interior after cleaning, dash and centre console wiped down and a protective paper mat on the passenger side" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <figcaption>Passenger side · leaves and dried mud out</figcaption>
+  </figure>
+  <figure class="ba-dip">
+    <div class="ba-dip-grid">
+      <div class="ba-dip-half" data-label="Before">
+        <img src="/assets/Gallery/Before%20and%20After/b4.jpg" alt="Rear bench and rear footwells of a blue Nissan Rogue before cleaning, with crumbs and debris across the cloth seats and mats" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+      <div class="ba-dip-half ba-dip-after" data-label="After">
+        <img src="/assets/Gallery/Before%20and%20After/a4.jpg" alt="The same rear bench after cleaning, the cloth seats vacuumed and the rear mats clear of debris" width="960" height="1280" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <figcaption>Rear bench · seats and rear mats</figcaption>
+  </figure></div>
+  </div>
+</section>
 
 
 
@@ -189,7 +237,7 @@
       <div>
         <h3>Explore</h3>
         <ul class="foot-list">
-          
+          <li><a href="/gallery">Our work</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/faq">FAQ</a></li>

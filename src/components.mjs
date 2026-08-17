@@ -209,7 +209,7 @@ export const callLine = () => `
    is neither. Both photos carry their own true alt text (G51b). */
 export const beforeAfter = p => `
   <figure class="ba">
-    <div class="ba-stage">
+    <div class="ba-stage" style="aspect-ratio:${p.ratio || (16/9)}">
       <img class="ba-before" src="${p.before}" alt="${esc(p.altBefore)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
       <div class="ba-after" style="--pos:50%">
         <img src="${p.after}" alt="${esc(p.altAfter)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
@@ -218,8 +218,31 @@ export const beforeAfter = p => `
       <input class="ba-range" type="range" min="0" max="100" value="50" step="1"
              aria-label="Reveal the after photo — ${esc(p.altAfter)}">
     </div>
-    <figcaption>${esc(p.altAfter)}</figcaption>
+    <figcaption>${esc(p.label || p.altAfter)}</figcaption>
   </figure>`;
+
+/* Side-by-side pair, for photographs that were not shot from a locked
+   position. A wipe between two different camera positions makes the car
+   appear to jump, which reads as a trick; showing them as two labelled
+   frames is what the trade publishes and what the photos can actually
+   support. Portrait phone shots also fill this slot properly instead of
+   being cropped to a letterbox. */
+export const beforeAfterDiptych = p => `
+  <figure class="ba-dip">
+    <div class="ba-dip-grid">
+      <div class="ba-dip-half" data-label="Before">
+        <img src="${p.before}" alt="${esc(p.altBefore)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
+      </div>
+      <div class="ba-dip-half ba-dip-after" data-label="After">
+        <img src="${p.after}" alt="${esc(p.altAfter)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <figcaption>${esc(p.label || p.altAfter)}</figcaption>
+  </figure>`;
+
+/* Picks the treatment the scan decided this pair can actually support. */
+export const beforeAfterPair = p =>
+  p.layout === 'slider' ? beforeAfter(p) : beforeAfterDiptych(p);
 
 /* Work grid — real photographs only; the grid does not exist without them. */
 export const workGrid = shots => `

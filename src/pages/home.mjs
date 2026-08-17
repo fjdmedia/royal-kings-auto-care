@@ -1,9 +1,16 @@
 import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, priceFrom, money, primaryPhone } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
-import { packageBlock, addonMatrix, faqAccordion, beforeAfter } from '../components.mjs';
+import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair } from '../components.mjs';
 import { GALLERY } from '../gallery-data.mjs';
 
 const teaserFaqs = FAQS.slice(0, 4);
+
+/* Lead with a slider pair if one exists — a wipe is the more arresting of the
+   two treatments — then fill up to two. */
+const homePairs = [...GALLERY.pairs]
+  .sort((a, b) => (a.layout === 'slider' ? -1 : 1) - (b.layout === 'slider' ? -1 : 1))
+  .slice(0, 2);
+const hasSlider = homePairs.some(p => p.layout === 'slider');
 
 const body = `
 <!-- ── Hero — five hairline-separated bands, not a headline in space ── -->
@@ -117,12 +124,12 @@ ${GALLERY.pairs.length ? `
     ${secHead({
       index: '03',
       kicker: 'Proof',
-      title: '<span id="ba-h">Same car.<br class="br-desk">Same parking spot.</span>',
-      meta: 'Drag the handle',
-      lede: 'Shot from one spot before we started and after we finished. No staging, no different lighting, no other car.',
+      title: '<span id="ba-h">This is what comes<br class="br-desk">out of a car.</span>',
+      meta: hasSlider ? 'Drag the handle' : 'Before · after',
+      lede: 'One blue Nissan Rogue, photographed before we started and again when we finished — the footwell, the engine bay, the passenger side and the rear bench.',
     })}
-    <div class="ba-list">${GALLERY.pairs.slice(0, 2).map(p => beforeAfter(p)).join('')}</div>
-    ${GALLERY.pairs.length > 2 ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}
+    <div class="ba-list">${homePairs.map(p => beforeAfterPair(p)).join('')}</div>
+    ${GALLERY.pairs.length > homePairs.length ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}
   </div>
 </section>` : ''}
 

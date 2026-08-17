@@ -56,6 +56,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/gallery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.royalkingsdetailingwpg.ca/waiver</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

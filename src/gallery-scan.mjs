@@ -67,14 +67,25 @@ function dimensions(buf) {
   return null;
 }
 
-const listImages = async dir => {
-  try {
-    return (await readdir(dir, { withFileTypes: true }))
-      .filter(e => e.isFile() && IMG.test(e.name))
-      .map(e => e.name)
-      .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
-  } catch { return []; }
+/* Walks the folder AND its subfolders (except Services/, which has its own
+   job). Returns paths relative to the scan root so any organisation works —
+   photos straight in Gallery/, or tidied into "Before and After/". */
+const listImages = async (dir, prefix = '') => {
+  let out = [];
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); } catch { return []; }
+  for (const e of entries) {
+    if (e.isFile() && IMG.test(e.name)) out.push(prefix + e.name);
+    else if (e.isDirectory() && e.name !== 'Services') {
+      out = out.concat(await listImages(join(dir, e.name), prefix + e.name + '/'));
+    }
+  }
+  return out.sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
 };
+
+/* A folder name can contain spaces, so every path that becomes a URL has to
+   be encoded segment by segment — encodeURI would leave the space. */
+const toUrl = rel => '/assets/Gallery/' + rel.split('/').map(encodeURIComponent).join('/');
 
 export async function scanGallery(root) {
   const dir = join(root, 'assets', 'Gallery');
@@ -101,11 +112,25 @@ export async function scanGallery(root) {
   const singles = [];
   for (const f of files) {
     const base = basename(f, extname(f));
-    const m = /^(.*?)[-_ ]?(before|after)$/i.exec(base);
-    if (m) {
-      const stem = m[1].replace(/[-_ ]+$/, '');
+    const dir = f.includes('/') ? f.slice(0, f.lastIndexOf('/') + 1) : '';
+    let stem = null, half = null;
+
+    // 1. explicit: <name>-before / <name>-after
+    let m = /^(.*?)[-_ ]?(before|after)$/i.exec(base);
+    if (m) { stem = dir + m[1].replace(/[-_ ]+$/, ''); half = m[2].toLowerCase(); }
+
+    // 2. shorthand: b1/a1, b_2/a_2 — b is the BEFORE, a is the AFTER.
+    //    Verified against the actual photographs before enabling this, and the
+    //    build prints every assignment so a mistake is visible rather than
+    //    quietly shipping a dirty car as the result.
+    if (!half) {
+      m = /^([ab])[-_ ]?(\d+)$/i.exec(base);
+      if (m) { stem = dir + 'pair-' + m[2]; half = m[1].toLowerCase() === 'b' ? 'before' : 'after'; }
+    }
+
+    if (half) {
       if (!stems.has(stem)) stems.set(stem, {});
-      stems.get(stem)[m[2].toLowerCase()] = f;
+      stems.get(stem)[half] = f;
     } else singles.push(f);
   }
 
@@ -117,20 +142,49 @@ export async function scanGallery(root) {
     }
     const b = await meta(dir, half.before);
     const a = await meta(dir, half.after);
-    if (b.d.w && a.d.w && Math.abs(b.d.w / b.d.h - a.d.w / a.d.h) > 0.06) {
-      notes.push(`  ! "${stem}" before/after are different shapes (${b.d.w}x${b.d.h} vs ${a.d.w}x${a.d.h}) — the slider will crop one.`);
+    const ratio = b.d.h ? b.d.w / b.d.h : 1;
+
+    /* LAYOUT IS DECIDED HERE, and it is the whole reason this is not one
+       component. A wipe slider only tells the truth when both halves were
+       shot from the same spot — otherwise the car appears to jump and the
+       comparison reads as a trick. And a portrait phone photo cannot fill a
+       wide slider stage without being cropped to nothing.
+
+       So: landscape pairs get the slider; portrait pairs get a side-by-side
+       diptych, which is honest about being two separate photographs, is what
+       the trade actually publishes, and looks deliberate rather than
+       shoehorned. */
+    const layout = ratio >= 1.15 ? 'slider' : 'diptych';
+
+    if (b.d.w && a.d.w && Math.abs(ratio - a.d.w / a.d.h) > 0.06) {
+      notes.push(`  ! "${stem}" halves are different shapes (${b.d.w}x${b.d.h} vs ${a.d.w}x${a.d.h})`
+        + (layout === 'slider' ? ' — the slider would crop one.' : ' — fine for a diptych.'));
     }
-    if (Math.min(b.d.w, a.d.w) < 1200) {
-      notes.push(`  ! "${stem}" is only ${Math.min(b.d.w, a.d.w)}px wide — soft in a full-width slider. 2000px+ is the target.`);
+
+    /* The resolution floor depends on the slot the photo actually fills, not
+       on one flat number: a diptych half is about a third of the page width,
+       a slider is the full width. Judging a portrait phone shot against a
+       full-bleed threshold produces a warning nobody can act on. */
+    const floor = layout === 'slider' ? 1200 : 800;
+    const minW = Math.min(b.d.w, a.d.w);
+    if (minW < floor) {
+      notes.push(`  ! "${stem}" is ${minW}px wide; a ${layout} slot wants ${floor}px+.`);
     }
-    pairs.push({ stem, before: `/assets/Gallery/${half.before}`, after: `/assets/Gallery/${half.after}`, w: b.d.w, h: b.d.h });
+
+    notes.push(`    ${layout.padEnd(7)} ${stem}  before=${half.before.split('/').pop()}  after=${half.after.split('/').pop()}`);
+
+    pairs.push({
+      stem, layout, ratio: +ratio.toFixed(4),
+      before: toUrl(half.before), after: toUrl(half.after),
+      w: b.d.w, h: b.d.h,
+    });
   }
 
   /* ── finished-work shots ── */
   const shots = [];
   for (const f of singles) {
     const { d } = await meta(dir, f);
-    shots.push({ stem: basename(f, extname(f)), src: `/assets/Gallery/${f}`, w: d.w, h: d.h });
+    shots.push({ stem: basename(f, extname(f)), src: toUrl(f), w: d.w, h: d.h });
   }
 
   /* ── service headers ── */
@@ -143,7 +197,7 @@ export async function scanGallery(root) {
     if (services[key]) { notes.push(`  ! Services/${f} is a second image for "${key}" — only the first is used.`); continue; }
     const { d } = await meta(svcDir, f);
     if (d.w && d.w < 1600) notes.push(`  ! Services/${f} is ${d.w}px wide; a full-bleed header wants 1600px+.`);
-    services[key] = { stem: basename(f, extname(f)), src: `/assets/Gallery/Services/${f}`, w: d.w, h: d.h };
+    services[key] = { stem: basename(f, extname(f)), src: toUrl('Services/' + f), w: d.w, h: d.h };
   }
 
   /* ── captions: scaffold the file, then require every entry ── */
@@ -162,7 +216,13 @@ export async function scanGallery(root) {
   const missing = needed.filter(k => !String(captions[k] || '').trim());
 
   const alt = k => String(captions[k] || '').trim();
-  pairs.forEach(p => { p.altBefore = alt(`${p.stem}-before`); p.altAfter = alt(`${p.stem}-after`); });
+  pairs.forEach(p => {
+    p.altBefore = alt(`${p.stem}-before`);
+    p.altAfter = alt(`${p.stem}-after`);
+    /* Optional: a short visible caption. Falls back to the after-alt, which
+       is true but reads like alt text, so a label is worth writing. */
+    p.label = alt(`${p.stem}-label`);
+  });
   shots.forEach(s => { s.alt = alt(s.stem); });
   Object.values(services).forEach(s => { s.alt = alt(s.stem); });
 

@@ -620,14 +620,48 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 }
 .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
 .ba-stage:has(.ba-range:focus-visible) .ba-grip { box-shadow: 0 0 0 2px var(--gold); }
-.ba figcaption { margin-top: var(--s-3); font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
+.ba figcaption { margin-top: var(--s-3); font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); max-width: 68ch; }
+.ba-dip figcaption { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
 .ba-stage::before, .ba-stage::after {
   content: 'Before'; position: absolute; top: var(--s-4); left: var(--s-4); z-index: 2;
   font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase;
-  padding: var(--s-1) var(--s-3); background: color-mix(in srgb, var(--void) 78%, transparent); color: var(--text-2);
+  padding: var(--s-1) var(--s-3); background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
   border: var(--stroke); border-radius: var(--r-xs);
 }
 .ba-stage::after { content: 'After'; left: auto; right: var(--s-4); color: var(--gold); border-color: var(--edge-gold); }
+
+/* Side-by-side before/after. The two halves share one hairline seam so the
+   pair reads as a single object rather than two loose photos, and the labels
+   sit in the frame corners the same way the slider's do — the two treatments
+   have to look like siblings or the gallery reads as inconsistent. */
+.ba-dip { display: block; }
+.ba-dip-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: var(--stroke); border-radius: var(--r-xs); overflow: hidden; background: var(--graphite);
+}
+.ba-dip-half { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
+.ba-dip-half + .ba-dip-half { border-left: 1px solid var(--edge); }
+.ba-dip-half img { width: 100%; height: 100%; object-fit: cover; }
+.ba-dip-half::after {
+  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4);
+  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
+  text-transform: uppercase; padding: var(--s-1) var(--s-3);
+  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
+  border: var(--stroke); border-radius: var(--r-xs);
+}
+.ba-dip-after::after { color: var(--gold); border-color: var(--edge-gold); }
+.ba-dip figcaption {
+  margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--text-2);
+  max-width: 68ch;
+}
+/* Portrait halves get very tall side by side on a phone, so they stack and
+   the aspect opens up to something a thumb can actually read. */
+@media (max-width: 620px) {
+  .ba-dip-grid { grid-template-columns: minmax(0, 1fr); }
+  .ba-dip-half { aspect-ratio: 4 / 3; }
+  .ba-dip-half + .ba-dip-half { border-left: 0; border-top: 1px solid var(--edge); }
+}
+.ba figcaption { max-width: 68ch; }
 
 /* Gallery layout */
 .ba-list { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
