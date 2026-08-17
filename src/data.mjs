@@ -262,6 +262,56 @@ export const THEMES = [
     fonts: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap' },
 ];
 
+/* ── Hero copy lifted from the LIVE site ─────────────────────────
+   These H1s, eyebrows and subs are what royalkingsdetailingwpg.ca is
+   serving today — client-approved and already indexed, pulled off their
+   own sitemap rather than rewritten. Do not "improve" them without asking:
+   the last time a hero line here was invented rather than taken from the
+   business, it read as the company's motto and was not.
+
+   The live homepage splits the slogan across two roles — the first half is
+   its own line, the second half opens the sub. Both halves are DERIVED from
+   SITE.tagline below so the motto has one source.                          */
+export const LIVE_HERO = {
+  home: {
+    eyebrow: 'Premium Auto Detailing — Winnipeg',
+    h1Lead: 'Royal Kings',
+    h1Tail: 'Auto Care',
+    subTail: 'Premium auto detailing across Winnipeg — showroom-clean, without leaving your driveway.',
+  },
+  services: {
+    eyebrow: 'Auto Detailing — Winnipeg',
+    h1: 'Car Detailing Services in <em>Winnipeg</em>',
+    sub: "One team, the full range — from a deep interior clean to ceramic coating and paint correction. All of it done at your door, start to finish.",
+  },
+  'interior-car-detailing-winnipeg': {
+    eyebrow: 'Interior Detailing — Winnipeg',
+    h1: 'Interior Car Detailing in <em>Winnipeg</em>',
+    sub: "The part of the car you actually live in — cleaned like it's new. Vacuumed, wiped, fabrics deep-cleaned, odors handled. We pull up to your driveway and hand it back showroom-fresh.",
+  },
+  'ceramic-coating-winnipeg': {
+    eyebrow: 'Paint Protection — Winnipeg',
+    h1: 'Ceramic Coating in <em>Winnipeg</em>',
+    sub: "Lasting gloss and a shield your wash can't wear off. We coat your paint in your own driveway — spray ceramic for quick protection, true ceramic for the long haul. Both done at your door, both done right.",
+  },
+  'paint-correction-winnipeg': {
+    eyebrow: 'Machine Polishing — Winnipeg',
+    h1: 'Paint Correction in <em>Winnipeg</em>',
+    sub: 'Swirls, scratches, and dull, tired paint — cut out with proper machine polishing. We bring the whole setup to your driveway and give the finish back its depth. A full day, one car, done right.',
+  },
+  /* No live equivalent — this page is new. Written to the same pattern
+     rather than invented in a different voice. */
+  'exterior-detailing-winnipeg': {
+    eyebrow: 'Exterior Detailing — Winnipeg',
+    h1: 'Exterior Car Detailing in <em>Winnipeg</em>',
+    sub: 'Decontamination, correction and protection — in the order that actually works. Priced per service, because no two cars need the same steps. All of it done at your door.',
+  },
+};
+
+/* The motto, split the way the live hero splits it. Derived, never retyped. */
+export const taglineLead = SITE.tagline.split('—')[0].trim() + '.';
+export const taglineTail = (t => t.charAt(0).toUpperCase() + t.slice(1))(SITE.tagline.split('—')[1].trim());
+
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbzHEbSavkYrqL3sA9y5oqHXQbK24IQJahz_wYbQODO4rY-LSDJ_w9IyGslmgINtVLLf7g/exec';
 
 /* ── Derived helpers ─────────────────────────────────────────── */

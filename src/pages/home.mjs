@@ -1,16 +1,12 @@
-import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, priceFrom, money, primaryPhone } from '../data.mjs';
+import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, LIVE_HERO, taglineLead, taglineTail, priceFrom, money, primaryPhone } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
 import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair } from '../components.mjs';
 import { GALLERY } from '../gallery-data.mjs';
 
 const teaserFaqs = FAQS.slice(0, 4);
 
-/* The hero headline IS their slogan, rendered from the one place it is
-   defined. Breaking the line AT the em-dash keeps the dash visible — an
-   earlier pass replaced it with the <br> and quietly deleted it from their
-   own motto. */
-const [sloganLead, sloganTail] = SITE.tagline.split('—').map(t => t.trim());
-const sloganH1 = `${esc(sloganLead)} —<br class="br-desk">${esc(sloganTail)}`;
+/* Hero copy is the LIVE site's, pulled off their sitemap — see LIVE_HERO. */
+const H = LIVE_HERO.home;
 
 /* Lead with a slider pair if one exists — a wipe is the more arresting of the
    two treatments — then fill up to two. */
@@ -27,17 +23,18 @@ const body = `
 
     <p class="hero-crumb">
       <span class="dot" aria-hidden="true"></span>
-      ${esc(SITE.serviceTitle)} — ${SITE.city}, ${SITE.region}
+      ${esc(H.eyebrow)}
       <span class="sep" aria-hidden="true">/</span>
       <span>${esc(CONTACT.hours)}</span>
     </p>
 
-    <h1 class="hero-h1 hero-h1-slogan" id="h1">${sloganH1}</h1>
+    <h1 class="hero-h1" id="h1">${esc(H.h1Lead)}<br><em>${esc(H.h1Tail)}</em></h1>
+
+    <p class="hero-tagline">${esc(taglineLead)}</p>
 
     <div class="hero-row">
       <p class="hero-sub">
-        Interior and exterior auto detailing across ${SITE.city} — done where
-        your car is parked. We arrive fully equipped, so you never leave your driveway.
+        ${esc(taglineTail)} ${esc(H.subTail)}
       </p>
       <div class="hero-act">
         <div class="hero-act-row">

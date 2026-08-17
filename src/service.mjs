@@ -1,4 +1,4 @@
-import { SITE, SERVICES, TERMS, CONTACT, money, primaryPhone } from './data.mjs';
+import { SITE, SERVICES, TERMS, CONTACT, LIVE_HERO, money, primaryPhone } from './data.mjs';
 import { icon, esc, breadcrumbSchema, faqSchema } from './layout.mjs';
 
 /* Shared furniture for the four service pages. Structure repeats on
@@ -6,7 +6,14 @@ import { icon, esc, breadcrumbSchema, faqSchema } from './layout.mjs';
    the spec strip and the CTA in the same place every time. The PROSE is
    written per page and shares no skeleton (G40b). */
 
-export const serviceHero = ({ slug, eyebrow, h1, sub, specs }) => `
+export const serviceHero = ({ slug, eyebrow, h1, sub, specs }) => {
+  /* The live site's H1, eyebrow and sub win over anything written here —
+     they are client-approved and already indexed. */
+  const L = LIVE_HERO[slug] || {};
+  const useH1 = L.h1 || h1;
+  const useSub = L.sub || sub;
+  const useEyebrow = L.eyebrow || eyebrow;
+  return `
 <section class="hero" aria-labelledby="h1">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner">
@@ -16,10 +23,11 @@ export const serviceHero = ({ slug, eyebrow, h1, sub, specs }) => `
       <span aria-current="page">${esc(eyebrow)}</span>
     </nav>
 
-    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">${h1}</h1>
+    <span class="kicker" style="margin-top:var(--s-6)">${esc(useEyebrow)}</span>
+    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">${useH1}</h1>
 
     <div class="hero-row">
-      <p class="hero-sub">${sub}</p>
+      <p class="hero-sub">${useSub}</p>
       <div class="hero-act">
         <div class="hero-act-row">
           <a class="btn btn-primary" href="/book">Book a detail ${icon('right')}</a>
@@ -38,6 +46,7 @@ export const serviceHero = ({ slug, eyebrow, h1, sub, specs }) => `
     </div>
   </div>
 </section>`;
+};
 
 export const relatedServices = current => {
   const others = SERVICES.filter(s => s.slug !== current);

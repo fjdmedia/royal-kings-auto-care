@@ -1,4 +1,4 @@
-import { SITE, SERVICES, ADDONS, TERMS, money, priceFrom } from '../data.mjs';
+import { SITE, SERVICES, ADDONS, TERMS, LIVE_HERO, money, priceFrom } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, breadcrumbSchema } from '../layout.mjs';
 import { addonMatrix } from '../components.mjs';
 
@@ -10,13 +10,11 @@ const body = `
       <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Services</span>
     </nav>
 
-    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">Everything we<br class="br-desk">can do to a car.</h1>
+    <span class="kicker" style="margin-top:var(--s-6)">${esc(LIVE_HERO.services.eyebrow)}</span>
+    <h1 class="hero-h1" id="h1" style="font-size:var(--fs-4xl)">${LIVE_HERO.services.h1}</h1>
 
     <div class="hero-row">
-      <p class="hero-sub">
-        Four services and ten add-ons. Interior work is packaged; everything
-        outside the car is priced by what it actually needs.
-      </p>
+      <p class="hero-sub">${esc(LIVE_HERO.services.sub)}</p>
       <div class="hero-act">
         <div class="hero-act-row">
           <a class="btn btn-primary" href="/book">Book a detail ${icon('right')}</a>
