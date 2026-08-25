@@ -6,3 +6,10 @@ appsscript.js
 generate_waiver_pdf.py
 *.py
 Service Agreement - Royal Kings Auto Care.pdf
+
+# Internal working files - never part of the public site.
+Reports/
+src/
+build.mjs
+serve.mjs
+PHOTOS.md

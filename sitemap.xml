@@ -2,32 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.royalkingsdetailingwpg.ca/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.royalkingsdetailingwpg.ca/services/</loc>
+    <loc>https://www.royalkingsdetailingwpg.ca/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.royalkingsdetailingwpg.ca/services/interior-car-detailing-winnipeg.html</loc>
+    <loc>https://www.royalkingsdetailingwpg.ca/pricing</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.royalkingsdetailingwpg.ca/services/ceramic-coating-winnipeg.html</loc>
+    <loc>https://www.royalkingsdetailingwpg.ca/book</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.royalkingsdetailingwpg.ca/services/paint-correction-winnipeg.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.royalkingsdetailingwpg.ca/waiver.html</loc>
+    <loc>https://www.royalkingsdetailingwpg.ca/about</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/services/interior-car-detailing-winnipeg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/services/exterior-detailing-winnipeg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/services/ceramic-coating-winnipeg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/services/paint-correction-winnipeg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/gallery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.royalkingsdetailingwpg.ca/waiver</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

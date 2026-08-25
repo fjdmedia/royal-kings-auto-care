@@ -1,0 +1,194 @@
+/* ════════════════════════════════════════════════════════════════════
+   Royal Kings — WARM theme, derived from the logo
+
+   Every value below was sampled out of the logo art rather than guessed.
+   Source: the logo panel of `Pricing and Style/Main_1.jpg`, upscaled and
+   pixel-sampled per region (crown, car body, wordmark, sub-wordmark).
+
+   WHAT THE LOGO ACTUALLY SAYS
+   ---------------------------
+   1. The ground is PURE BLACK. #000000, measured across all four regions.
+      Not the warm brown-black the old site used — that was the old site's
+      choice, not the mark's.
+   2. There are TWO METALS, not one. "ROYAL KINGS" is a gold gradient;
+      "AUTO CARE" is CHROME. The car is chrome. No theme here used chrome
+      at all before this, which was the biggest thing being left on the
+      table.
+        gold    shadow #94793C · mid #C6A94F · highlight #E2CE8D
+        chrome  shadow #7E7E7E · mid #BFBFBD · highlight #E4E4E2
+        car body runs slightly olive-warm: #868478 · #A7A49B · #C8C7C2
+   3. The gold is never flat — it is always a gradient, light at the top of
+      a letterform and bronze at the foot.
+   4. The type is a HIGH-CONTRAST SERIF in caps: hairline-fine flat serifs
+      against thick stems. That is a Didone/transitional voice, NOT the
+      Roman inscriptional face the classic theme uses — Cinzel has low
+      contrast and chunky serifs, which is a different animal. Playfair
+      Display is the closest robust match on Google Fonts.
+   5. Hierarchy inside the mark is set by METAL and TRACKING, not by size
+      alone: gold + normal tracking for the name, chrome + very wide
+      tracking for the descriptor. That maps directly onto heading vs label.
+   6. The car is not a filled shape — it is EDGE-LIT. Thin bright highlight
+      strokes on black, like a panel catching a light in a dark bay.
+   7. The signature mark is a four-point specular sparkle, so that replaces
+      the v3 bracket notch here.
+
+   Warmth therefore comes from the LIGHT, not the surfaces — black room,
+   gold lamp. That is what the mark does, and it is why this still reads
+   warm next to v3 despite a near-neutral ground.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root[data-theme='warm'] {
+  /* Pure black, opened up with the faintest olive-warm lift measured off
+     the car body so the surfaces are not clinically cool. */
+  --void:       #000000;
+  --carbon:     #060605;
+  --graphite:   #0C0B0A;
+  --graphite-2: #121110;
+  --steel:      #191816;
+  --steel-2:    #22201D;
+  --edge:       #2B2925;
+  --edge-2:     #3A3732;
+  --edge-gold:  rgba(198, 169, 79, 0.32);
+
+  /* Gold — measured. Lighter and more champagne/brass than the #C9A227 the
+     other two themes use, which was the old site's value, not the mark's. */
+  --gold:      #C6A94F;
+  --gold-hi:   #E2CE8D;
+  --gold-lo:   #94793C;
+  --gold-ink:  #000000;
+  --gold-veil: rgba(198, 169, 79, 0.10);
+  --gold-wash: rgba(198, 169, 79, 0.055);
+
+  /* Chrome — the second metal, straight off "AUTO CARE" and the car. */
+  --chrome:    #BFBFBD;
+  --chrome-hi: #E4E4E2;
+  /* The logo's chrome shadow measures #7E7E7E, which clears 4.5:1 on pure
+     black but drops to 4.37:1 on the featured card's lighter surface — the
+     classic "grey tuned for the page bg fails on the panel" trap. Lifted the
+     minimum that clears it everywhere (5.2:1 on --steel, 5.9:1 on black). */
+  --chrome-lo: #8A8A86;
+
+  /* Text follows the chrome ramp: neutral off-white, not cream. The mark's
+     descriptor measures #E4E4E2 — silver, with no warmth in it. */
+  --text:   #E8E8E6;
+  --text-2: #BFBFBD;
+  --text-3: #93938F;
+  --text-4: #6E6E6A;
+
+  --display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* Labels are the "AUTO CARE" role: same serif, chrome, very wide caps. */
+  --mono:    'Playfair Display', Georgia, serif;
+
+  --r-xs: 3px; --r-sm: 6px; --r-md: 12px; --r-pill: 999px;
+
+  --sh-inset: inset 0 1px 0 rgba(228, 228, 226, 0.06);
+  --sh-lift:  0 22px 56px -30px rgba(0, 0, 0, 1);
+  --sh-panel: 0 44px 90px -46px rgba(0, 0, 0, 1);
+}
+
+/* ── Type: high-contrast serif caps ──────────────────────────────────
+   Playfair has real hairlines, so it must not be squeezed — font-stretch
+   goes to normal and the tracking turns positive, the way the wordmark
+   sets it. */
+:root[data-theme='warm'] .hero-h1 {
+  font-stretch: normal;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  line-height: 1.04;
+  font-size: clamp(2.5rem, 1.4rem + 5vw, 5.1rem);
+}
+:root[data-theme='warm'] .sec-head h2,
+:root[data-theme='warm'] .cta h2 {
+  font-stretch: normal;
+  font-weight: 700;
+  letter-spacing: 0.008em;
+  line-height: 1.1;
+  text-transform: none;   /* caps in a hairline serif close up and grey out */
+}
+:root[data-theme='warm'] .cta h2 { font-size: clamp(1.8rem, 1.24rem + 2.35vw, 2.9rem); }
+:root[data-theme='warm'] h2[style*='text-transform'] {
+  text-transform: none !important;
+  font-stretch: normal !important;
+  letter-spacing: 0.008em !important;
+}
+:root[data-theme='warm'] .pq p { font-stretch: normal; letter-spacing: 0.008em; }
+
+/* The gold gradient, exactly as the wordmark renders it: highlight at the
+   cap line, bronze at the baseline. Display sizes only — a hairline serif
+   fading to bronze is unreadable at label sizes. */
+:root[data-theme='warm'] :is(.hero-h1, .sec-head h2, .cta h2, .pq p) em,
+:root[data-theme='warm'] :is(h1, h2) .gold {
+  font-style: normal;
+  background: linear-gradient(176deg, var(--gold-hi) 6%, var(--gold) 52%, var(--gold-lo) 97%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+:root[data-theme='warm'] .gold { color: var(--gold); }
+
+/* Labels = the "AUTO CARE" treatment: chrome, wide-tracked serif caps. */
+:root[data-theme='warm'] :is(.kicker, .sec-head-meta, .spec-k, .pkg-name, .tile-k,
+  .field label, .foot h3, .crumb, .hero-crumb, .foot-bar, .pq cite, .foot-svc) {
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  color: var(--chrome-lo);
+}
+:root[data-theme='warm'] :is(.hero-fine, .seg-note, .mrow-basis, .addon-basis, .pkg-meta) {
+  letter-spacing: 0.14em;
+}
+:root[data-theme='warm'] .btn { font-family: var(--display); font-weight: 700; letter-spacing: 0.2em; }
+:root[data-theme='warm'] .brand-txt b { font-family: var(--display); font-weight: 700; font-stretch: normal; letter-spacing: 0.04em; }
+:root[data-theme='warm'] .brand-txt span { color: var(--chrome-lo); letter-spacing: 0.3em; }
+
+/* Numerals in the serif — Playfair's figures are the point of using it. */
+:root[data-theme='warm'] :is(.pkg-price, .spec-v, .estimate-v, .step-n) {
+  font-stretch: normal; font-weight: 700; letter-spacing: 0.002em;
+}
+:root[data-theme='warm'] .spec-v small,
+:root[data-theme='warm'] .mrow-price,
+:root[data-theme='warm'] .addon-price { font-family: var(--sans); letter-spacing: 0.02em; }
+
+/* ── Surfaces: black room, gold lamp ─────────────────────────────── */
+:root[data-theme='warm'] body {
+  background:
+    radial-gradient(1100px 800px at 50% -8%, rgba(198, 169, 79, 0.07), transparent 62%),
+    linear-gradient(180deg, var(--carbon), var(--void) 46%);
+  background-attachment: fixed;
+  background-color: var(--void);
+}
+:root[data-theme='warm'] .hero-bg {
+  background:
+    radial-gradient(70% 55% at 78% 6%, rgba(198, 169, 79, 0.12), transparent 62%),
+    radial-gradient(54% 42% at 8% 96%, rgba(191, 191, 189, 0.05), transparent 64%),
+    linear-gradient(180deg, var(--carbon) 0%, var(--void) 74%);
+}
+
+/* Edge-lit, like the car: a hard chrome highlight raking a dark panel. */
+:root[data-theme='warm'] .plate {
+  background-image:
+    linear-gradient(114deg, transparent 32%, rgba(228, 228, 226, 0.12) 45%, rgba(228, 228, 226, 0.02) 52%, transparent 68%),
+    radial-gradient(116% 86% at 18% 0%, rgba(198, 169, 79, 0.10), transparent 58%),
+    linear-gradient(168deg, var(--steel) 0%, var(--void) 90%);
+}
+:root[data-theme='warm'] .card,
+:root[data-theme='warm'] .pkg { background: linear-gradient(164deg, var(--graphite-2), var(--void) 76%); }
+:root[data-theme='warm'] .pkg-featured { background: linear-gradient(146deg, var(--steel), var(--graphite) 70%); }
+:root[data-theme='warm'] .seg-btn[aria-pressed='true'] {
+  background: linear-gradient(176deg, var(--gold-hi) 4%, var(--gold) 55%, var(--gold-lo) 100%);
+  color: var(--gold-ink); box-shadow: none; font-weight: 700;
+}
+:root[data-theme='warm'] .seg-btn[aria-pressed='true'] .seg-s { color: var(--gold-ink); }
+
+/* ── Signature: the four-point sparkle off the car's shoulder ─────── */
+:root[data-theme='warm'] .bkt::before,
+:root[data-theme='warm'] .bkt-br::after {
+  width: 22px; height: 22px; border: 0;
+  background: no-repeat center/contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.55 8.1 3.9 11.45 12 12-8.1.55-11.45 3.9-12 12-.55-8.1-3.9-11.45-12-12C8.1 11.45 11.45 8.1 12 0Z' fill='%23E4E4E2'/%3E%3C/svg%3E");
+}
+:root[data-theme='warm'] .bkt::before { top: -4px; left: -4px; }
+:root[data-theme='warm'] .bkt-br::after { right: -4px; bottom: -4px; opacity: 0.5; }
+
+/* The mark sits inside a hairline frame; the grain would grey these
+   surfaces, so it softens. */
+:root[data-theme='warm'] body::after { opacity: 0.03; mix-blend-mode: soft-light; }
