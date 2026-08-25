@@ -37,7 +37,9 @@ const body = `
     ${hasPhotos ? `
     <div class="spec">
       <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>${pairs.length === 1 ? 'Area' : 'Areas of the vehicle'}</small></p></div>
-      <div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">${sliders}<small>${sliders === 1 ? 'Shot from a fixed position' : 'Shot from fixed positions'}</small></p></div>
+      ${sliders
+        ? `<div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">${sliders}<small>${sliders === 1 ? 'Shot from a locked-off position' : 'Shot from locked-off positions'}</small></p></div>`
+        : `<div class="spec-cell"><span class="spec-k">Shown</span><p class="spec-v">Side by side<small>Same area, before and after</small></p></div>`}
       <div class="spec-cell"><span class="spec-k">Shot in</span><p class="spec-v">${esc(SITE.city)}<small>No stock photography</small></p></div>
       <div class="spec-cell"><span class="spec-k">Your car</span><p class="spec-v">We ask first<small>Nothing photographed without permission</small></p></div>
     </div>` : ''}
@@ -73,7 +75,7 @@ ${pairs.length ? `
       kicker: 'Before and after',
       title: '<span id="ba-h">Before, and after.</span>',
       meta: `${pairs.length} area${pairs.length === 1 ? '' : 's'}`,
-      lede: `${sliders ? 'The engine bay was shot from a fixed position, so you can drag straight across it. ' : ''}${dips ? 'The interior frames are shown side by side, because they were taken from different doors — wiping between two camera positions would just make the car look like it moved.' : ''}`,
+      lede: `${sliders ? `${sliders === 1 ? 'One pair was' : `${sliders} pairs were`} shot from a locked-off camera position, so you can drag straight across ${sliders === 1 ? 'it' : 'them'}. ` : ''}${dips ? `${sliders ? 'The rest are' : 'Each pair is'} shown side by side. They were taken by hand, and wiping between two camera positions makes the car look like it moved rather than like it got clean.` : ''}`,
     })}
     <div class="ba-list">${pairs.map(p => beforeAfterPair(p)).join('')}</div>
   </div>

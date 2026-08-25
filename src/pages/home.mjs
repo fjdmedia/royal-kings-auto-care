@@ -1,9 +1,13 @@
 import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, LIVE_HERO, taglineLead, taglineTail, priceFrom, money, primaryPhone } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
-import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair } from '../components.mjs';
+import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair, photoPlate, svcKey } from '../components.mjs';
 import { GALLERY } from '../gallery-data.mjs';
 
 const teaserFaqs = FAQS.slice(0, 4);
+
+/* No team photograph yet. Wire a real file here and the section regains its
+   two-column split; until then it renders as text and reserves no black box. */
+const TEAM_PHOTO = null;
 
 /* Hero copy is the LIVE site's, pulled off their sitemap — see LIVE_HERO. */
 const H = LIVE_HERO.home;
@@ -101,7 +105,7 @@ const body = `
       lede: 'Choose your class and every price on this page updates. No quote request, no callback, no surprise at the end.',
     })}
     ${packageBlock({
-      note: '<strong>Not sure which one?</strong> Most people book The Standard for an annual clean, and Premium after a winter, before a sale, or when something has soaked into the fabric.',
+      note: '<strong>Not sure which one?</strong> The Standard is the annual clean. Premium is the one for after a winter, before a sale, or when something has soaked into the fabric.',
     })}
   </div>
 </section>
@@ -149,10 +153,10 @@ ${GALLERY.pairs.length ? `
     <div class="cols-4">
       ${SERVICES.map(s => `
       <a class="card card-flat" href="/services/${s.slug}">
-        <span class="plate plate-square bkt" aria-hidden="true" style="margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)"></span>
+        ${photoPlate(GALLERY.services[svcKey(s.slug)], { cls: 'plate-square bkt', style: 'margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)' })}
         <h3>${esc(s.title)}</h3>
         <p>${esc(s.short)}</p>
-        <p class="pkg-meta" style="margin-top:var(--s-4)">From ${money(s.from)} · <span class="gold">See the service ${'→'}</span></p>
+        <p class="pkg-meta" style="margin-top:var(--s-4)">From ${money(s.from)} · <span class="gold" style="white-space:nowrap">See the service ${'→'}</span></p>
       </a>`).join('')}
     </div>
   </div>
@@ -180,8 +184,8 @@ ${GALLERY.pairs.length ? `
 
 <!-- ── The two of them ── -->
 <section class="sec pool-r" aria-labelledby="who-h">
-  <div class="wrap split split-story" style="align-items:center">
-    <div class="plate plate-tall bkt bkt-br" role="img" aria-label="Photograph of Patrick and Justin — coming soon"></div>
+  <div class="wrap${TEAM_PHOTO ? ' split split-story' : ''}" style="align-items:center">
+    ${photoPlate(TEAM_PHOTO, { cls: 'plate-tall bkt bkt-br', tag: 'div' })}
     <div>
       ${secHead({
         index: '06',

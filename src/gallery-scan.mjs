@@ -154,7 +154,20 @@ export async function scanGallery(root) {
        diptych, which is honest about being two separate photographs, is what
        the trade actually publishes, and looks deliberate rather than
        shoehorned. */
-    const layout = ratio >= 1.15 ? 'slider' : 'diptych';
+    /* THE WIPE IS OPT-IN, NEVER INFERRED. A slider only tells the truth when
+       both halves came from ONE camera position, and nothing in the files says
+       whether the photographer moved. Matching aspect ratios do NOT say it:
+       Royal Kings' engine-bay pair matched to within 0.06 and the scene still
+       shifted ~6% of frame width between frames, so dragging made the engine
+       appear to move rather than to get clean — and the page said "shot from a
+       fixed position" underneath it. Landscape is a prerequisite, not
+       permission. Mark "<stem>-slider": "yes" in captions.json once you have
+       LOOKED at the two frames and confirmed the camera held still. */
+    const optedIn = /^(y|yes|true|1)$/i.test(String(captions[`${stem}-slider`] || '').trim());
+    const layout = optedIn && ratio >= 1.15 ? 'slider' : 'diptych';
+    if (optedIn && ratio < 1.15) {
+      notes.push(`  ! "${stem}" is marked slider but is portrait (${b.d.w}x${b.d.h}) — kept as a diptych.`);
+    }
 
     if (b.d.w && a.d.w && Math.abs(ratio - a.d.w / a.d.h) > 0.06) {
       notes.push(`  ! "${stem}" halves are different shapes (${b.d.w}x${b.d.h} vs ${a.d.w}x${a.d.h})`

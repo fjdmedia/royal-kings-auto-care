@@ -1,6 +1,7 @@
 import { SITE, SERVICES, ADDONS, TERMS, LIVE_HERO, money, priceFrom } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, breadcrumbSchema } from '../layout.mjs';
-import { addonMatrix } from '../components.mjs';
+import { addonMatrix, photoPlate, svcKey } from '../components.mjs';
+import { GALLERY } from '../gallery-data.mjs';
 
 const body = `
 <section class="hero" aria-labelledby="h1">
@@ -44,10 +45,10 @@ const body = `
     <div class="cols-2">
       ${SERVICES.map(s => `
       <a class="card" href="/services/${s.slug}">
-        <span class="plate plate-wide bkt" aria-hidden="true" style="margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)"></span>
+        ${photoPlate(GALLERY.services[svcKey(s.slug)], { cls: 'plate-wide bkt', style: 'margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)' })}
         <h3 style="font-size:var(--fs-xl)">${esc(s.title)}</h3>
         <p>${esc(s.short)}</p>
-        <p class="pkg-meta" style="margin-top:var(--s-5)">From ${money(s.from)} · <span class="gold">See the service →</span></p>
+        <p class="pkg-meta" style="margin-top:var(--s-5)">From ${money(s.from)} · <span class="gold" style="white-space:nowrap">See the service →</span></p>
       </a>`).join('')}
     </div>
   </div>

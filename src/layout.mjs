@@ -254,6 +254,16 @@ const accentTail = html => {
    threaded through 12 page files: a helper only protects the paths someone
    remembered to wrap, and the ones that get forgotten are the ones that
    break. Absolute URLs, anchors, tel:, mailto: and data: are left alone. */
+/* G22b: a <br> that is display:none at a breakpoint contributes NO whitespace,
+   so the words either side fuse into one unbreakable token ("BOOK IT NOW,NOT
+   NEXT SPRING"). Emitting a literal space after it costs nothing on desktop —
+   browsers collapse leading whitespace at the start of a wrapped line — and is
+   the word gap on mobile. Applied over the finished HTML for the same reason
+   rebase() is: a helper only protects the breaks someone remembered to wrap. */
+function spaceBreaks(html) {
+  return html.replace(/<br class="br-desk">(?! )/g, '<br class="br-desk"> ');
+}
+
 function rebase(html) {
   const b = BASE.prefix;
   if (!b) return html;
@@ -267,7 +277,7 @@ function rebase(html) {
 export function page({ title, description, path, body, schema = [], noindex = false, dock = true }) {
   body = body.replace(/(<h1[^>]*class="[^"]*hero-h1[^"]*"[^>]*>)([\s\S]*?)(<\/h1>)/g,
     (_, open, inner, close) => open + accentTail(inner) + close);
-  return rebase(`<!DOCTYPE html>
+  return spaceBreaks(rebase(`<!DOCTYPE html>
 <html lang="en-CA">
 <head>
 ${head({ title, description, path, schema, noindex })}
@@ -284,7 +294,7 @@ ${dock ? dockMarkup() : ''}
 <script src="/assets/rk.js" defer></script>
 </body>
 </html>
-`);
+`));
 }
 
 /* ── Shared section helpers ──────────────────────────────────────── */

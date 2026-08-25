@@ -1,5 +1,11 @@
 import { SITE, CONTACT, TERMS, PROCESS, money, priceFrom } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, breadcrumbSchema } from '../layout.mjs';
+import { photoPlate } from '../components.mjs';
+
+/* No portraits and no social still yet — see photoPlate: a missing photo
+   removes its plate rather than shipping a black rectangle. Wire real files
+   here (and CONTACT.people[].photo) when they land. */
+const SOCIAL_PHOTO = null;
 
 /* The honesty page. Everything here is verifiable: two named operators,
    two real phone numbers, a real Instagram. Nothing about founding years,
@@ -63,7 +69,7 @@ const body = `
     <div class="cols-2" style="margin-top:var(--s-8)">
       ${CONTACT.people.map(p => `
       <article class="card">
-        <span class="plate plate-wide bkt" aria-hidden="true" style="margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)"></span>
+        ${photoPlate(p.photo, { cls: 'plate-wide bkt', style: 'margin:calc(var(--s-6) * -1) calc(var(--s-6) * -1) var(--s-5)' })}
         <h3>${esc(p.name)}</h3>
         <p class="pkg-meta" style="margin-bottom:var(--s-3)">Owner · Detailer</p>
         <a class="hero-call" href="tel:${p.tel}">${icon('phone')} ${p.phone}</a>
@@ -115,7 +121,7 @@ const body = `
 </section>
 
 <section class="sec band" aria-labelledby="see-h">
-  <div class="wrap split split-offer" style="align-items:center">
+  <div class="wrap${SOCIAL_PHOTO ? ' split split-offer' : ''}" style="align-items:center">
     <div>
       ${secHead({ index: '04', kicker: 'See the work', title: '<span id="see-h">Fresh jobs go up<br>on Instagram.</span>' })}
       <p class="prose">
@@ -123,11 +129,11 @@ const body = `
         carpet that day. It updates faster than this website does.
       </p>
       <div class="hero-act-row" style="margin-top:var(--s-6)">
-        <a class="btn btn-ghost" href="${CONTACT.instagram.url}" target="_blank" rel="noopener">${icon('ig')} ${esc(CONTACT.instagram.handle)}</a>
+        <a class="hero-call" href="${CONTACT.instagram.url}" target="_blank" rel="noopener">${icon('ig')} ${esc(CONTACT.instagram.handle)}</a>
         <a class="hero-call" href="${CONTACT.tiktok.url}" target="_blank" rel="noopener">${icon('tiktok')} ${esc(CONTACT.tiktok.handle)}</a>
       </div>
     </div>
-    <div class="plate plate-wide bkt bkt-br" role="img" aria-label="Recent detailing work — photographs coming soon"></div>
+    ${photoPlate(SOCIAL_PHOTO, { cls: 'plate-wide bkt bkt-br', tag: 'div' })}
   </div>
 </section>
 

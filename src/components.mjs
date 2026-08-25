@@ -244,6 +244,22 @@ export const beforeAfterDiptych = p => `
 export const beforeAfterPair = p =>
   p.layout === 'slider' ? beforeAfter(p) : beforeAfterDiptych(p);
 
+/* A plate renders ONLY when there is a photograph for it.
+
+   An empty plate is a black rectangle, and a visitor reads a black rectangle as
+   a broken image, not as a slot awaiting content. On a client preview that is
+   survivable; on the live site it says "unfinished" on every scroll. So a
+   missing photo REMOVES the element rather than reserving space for it, and the
+   card degrades to a deliberate text layout until the file lands. Same stance
+   the gallery page already takes by unlisting itself when the folder is empty. */
+export const photoPlate = (photo, { cls = '', style = '', tag = 'span' } = {}) =>
+  photo
+    ? `<${tag} class="plate ${cls}"${style ? ` style="${style}"` : ''}><img src="${photo.src}" alt="${esc(photo.alt)}" width="${photo.w}" height="${photo.h}" loading="lazy" decoding="async"></${tag}>`
+    : '';
+
+/* Slug -> the key gallery-scan files service headers under. */
+export const svcKey = slug => ['interior', 'exterior', 'ceramic', 'paint'].find(k => slug.includes(k));
+
 /* Work grid — real photographs only; the grid does not exist without them. */
 export const workGrid = shots => `
   <div class="work-grid">

@@ -26,28 +26,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
 
-  <link rel="stylesheet" href="/assets/rk-warm.css">
-  <link rel="stylesheet" href="/assets/rk-classic.css">
-  <script>
-    /* Runs before first paint — no flash of the other theme.
-       Generated from THEMES in src/data.mjs: every theme's stylesheet is
-       already loaded and inert, so applying one is a single attribute; only
-       a theme that needs extra fonts requests them, and only when active. */
-    (function () {
-      var FONTS = {"warm":"https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap","classic":"https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"};
-      try {
-        var t = localStorage.getItem('rk_theme');
-        if (!t || t === 'modern' || !["modern","warm","classic"].includes(t)) return;
-        document.documentElement.setAttribute('data-theme', t);
-        if (FONTS[t]) {
-          var l = document.createElement('link');
-          l.rel = 'stylesheet'; l.href = FONTS[t];
-          l.setAttribute('data-theme-fonts', t);
-          document.head.appendChild(l);
-        }
-      } catch (e) { /* private mode — the default theme needs nothing */ }
-    })();
-  </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Interior Car Detailing Winnipeg","description":"Interior car detailing in Winnipeg — vacuum, hot-water extraction, fabric and leather care, hard surfaces, glass and odor treatment, performed at the customer’s location.","serviceType":"Interior Car Detailing","url":"https://www.royalkingsdetailingwpg.ca/services/interior-car-detailing-winnipeg","provider":{"@id":"https://www.royalkingsdetailingwpg.ca/#business"},"areaServed":{"@type":"City","name":"Winnipeg"},"offers":{"@type":"Offer","priceCurrency":"CAD","availability":"https://schema.org/InStock","priceSpecification":{"@type":"PriceSpecification","minPrice":110,"priceCurrency":"CAD"}}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.royalkingsdetailingwpg.ca/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.royalkingsdetailingwpg.ca/services"},{"@type":"ListItem","position":3,"name":"Interior Detailing","item":"https://www.royalkingsdetailingwpg.ca/services/interior-car-detailing-winnipeg"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between a car wash vacuum and interior detailing?","acceptedAnswer":{"@type":"Answer","text":"A vacuum lifts what is loose on top. Detailing gets what has bonded to the fibre — salt that has dried into the carpet, grit worked into the seat foam, and the film on every hard surface. We use extraction, not suction alone."}},{"@type":"Question","name":"Can you get salt stains out of carpets and mats?","acceptedAnswer":{"@type":"Answer","text":"Usually, yes. Dried road salt leaves a white bloom that re-appears after a surface clean because the salt is still in the fibre. Hot-water extraction pulls it out rather than redistributing it. Badly set-in salt on light carpet can leave a faint shadow — we will tell you before we start if we think that is the case."}},{"@type":"Question","name":"Do you clean the trunk and the third row?","acceptedAnswer":{"@type":"Answer","text":"Yes. Trunk and every row of seating are part of the interior on all three packages. Vehicle class pricing exists because a 7-seater is genuinely more work than a Civic, not as a surcharge for the sake of one."}},{"@type":"Question","name":"How long should I leave the car after an interior detail?","acceptedAnswer":{"@type":"Answer","text":"Give fabric a few hours with the windows cracked if the weather allows. Extraction leaves the material damp, not wet. In winter we will run it dry as far as we can before we finish."}}]}</script>
@@ -69,9 +47,6 @@
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
       
-    <div class="theme-sw " role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" data-theme-fonts="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap" title="Derived from the logo — Playfair, gold gradient + chrome, pure black">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
-    </div>
       <a class="btn btn-primary nav-cta" href="/book">Book a detail</a>
     </nav>
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="drawer">
@@ -95,9 +70,6 @@
   </nav>
   <div class="drawer-foot">
     
-    <div class="theme-sw theme-sw-wide" role="group" aria-label="Preview theme">
-      <button type="button" class="theme-sw-btn" data-theme-set="modern" title="Archivo · cool graphite · hard edges">V3</button><button type="button" class="theme-sw-btn" data-theme-set="warm" data-theme-fonts="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap" title="Derived from the logo — Playfair, gold gradient + chrome, pure black">Warm</button><button type="button" class="theme-sw-btn" data-theme-set="classic" data-theme-fonts="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" title="Cinzel · warm palette · soft edges">Classic</button>
-    </div>
     <a class="btn btn-primary" href="/book">Book a detail <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
     <a class="drawer-call" href="tel:+14313349577"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13.9v2.3a1.5 1.5 0 0 1-1.6 1.5 15 15 0 0 1-6.5-2.3 14.7 14.7 0 0 1-4.5-4.5A15 15 0 0 1 2 4.3 1.5 1.5 0 0 1 3.5 2.7h2.3a1.5 1.5 0 0 1 1.5 1.3c.1.7.3 1.4.5 2.1a1.5 1.5 0 0 1-.3 1.6l-1 1a12 12 0 0 0 4.5 4.5l1-1a1.5 1.5 0 0 1 1.6-.3c.7.2 1.4.4 2.1.5a1.5 1.5 0 0 1 1.3 1.5z"/></svg> (431) 334-9577 — Patrick</a>
   </div>
@@ -270,7 +242,7 @@
       </a>
     </article>
     <article class="pkg pkg-featured bkt">
-      <span class="pkg-badge">Most booked</span>
+      <span class="pkg-badge">Best Value</span>
       <div>
         <span class="pkg-name">Premium</span>
         <p class="pkg-price num"><span class="cur">$</span><span class="price-val" data-base="195">195</span></p>
@@ -364,7 +336,7 @@
 <section class="sec cta" aria-labelledby="cta-h">
   <div class="wrap cta-inner">
     <div>
-      <h2 id="cta-h">Get the salt out.<br class="br-desk"><em>And the smell.</em></h2>
+      <h2 id="cta-h">Get the salt out.<br class="br-desk"> <em>And the smell.</em></h2>
       <p>Pick a tier, pick a day, and we come to you. $50–$100 holds the slot and comes off the total.</p>
     </div>
     <div class="cta-act">

@@ -94,7 +94,7 @@ export const PACKAGES = [
     price: 195,
     duration: 'Half day',
     featured: true,
-    badge: 'Most booked',
+    badge: 'Best Value',   // their own live wording. NOT 'Most booked' — that asserts a sales mix nobody has measured.
     line: 'The full interior. Fabric, odor, stains, and protection that holds.',
     forWho: 'A deep clean before you sell it, after you buy it, or when it is just time.',
     includes: [
@@ -246,7 +246,7 @@ export const NAV = [
    Set this to false and rebuild — the toggle disappears from all 13
    pages, the classic stylesheet stops loading, and nothing else in the
    markup changes. Do that before merging to main.                     */
-export const THEME_SWITCHER = true;
+export const THEME_SWITCHER = false;
 
 /* Three points on one line, coolest to warmest. `sheet` is loaded on every
    page and stays inert until its attribute is set; `fonts` is requested only
