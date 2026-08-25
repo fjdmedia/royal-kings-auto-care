@@ -7,6 +7,16 @@
    Run:  node build.mjs
 */
 import { writeFile, mkdir, readFile, cp } from 'node:fs/promises';
+
+/* A generator must never half-finish and report success. Piping this build to
+   `head` closes stdout early; the very next console.log throws EPIPE, the
+   process dies partway through the page loop, and the PIPELINE still exits 0 —
+   so the build "passes" while leaving pages on disk from a previous run. That
+   is how a stale page ships. Swallowing the stdout error lets the writes finish
+   even when nobody is reading the log. (Found 2026-08-25: `node build.mjs |
+   head -8` left gallery.html eight hours stale, pointing at a renamed folder —
+   it would have shipped 8 broken images to the live site.) */
+process.stdout.on('error', e => { if (e.code !== 'EPIPE') throw e; });
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, SERVICES } from './src/data.mjs';

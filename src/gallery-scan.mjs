@@ -193,12 +193,40 @@ export async function scanGallery(root) {
     });
   }
 
+  /* NEWEST JOB FIRST. Folders are date-prefixed (YYYY-MM-DD vehicle-colour), so
+     sorting the folder segment DESCENDING puts the most recent visit at the top
+     of /gallery and into the homepage's two featured slots. Without this the
+     folders sort ascending and the site leads with its oldest work.
+
+     Within one job the pairs keep their natural order (pair-1, pair-2, …) —
+     that is the order they were shot in, and reversing it tells the story
+     backwards. Pairs sitting loose in Gallery/ carry no date to sort on, so
+     they fall to the end rather than jumping the queue. */
+  const jobOf = stem => (stem.includes('/') ? stem.slice(0, stem.lastIndexOf('/')) : '');
+  const byJob = (x, y) => {
+    const a = jobOf(x.stem), b = jobOf(y.stem);
+    if (a !== b) {
+      if (!a) return 1;
+      if (!b) return -1;
+      return b.localeCompare(a, 'en', { numeric: true });
+    }
+    return x.stem.localeCompare(y.stem, 'en', { numeric: true });
+  };
+  pairs.sort(byJob);
+
   /* ── finished-work shots ── */
   const shots = [];
   for (const f of singles) {
     const { d } = await meta(dir, f);
-    shots.push({ stem: basename(f, extname(f)), src: toUrl(f), w: d.w, h: d.h });
+    /* Folder-prefixed, exactly like a pair's stem. The basename alone is not
+       unique once photos live in per-job folders — two jobs each with a
+       "main.jpg" would silently share one caption, and the second would be
+       described by the first one's words. */
+    const dir = f.includes('/') ? f.slice(0, f.lastIndexOf('/') + 1) : '';
+    shots.push({ stem: dir + basename(f, extname(f)), src: toUrl(f), w: d.w, h: d.h });
   }
+
+  shots.sort(byJob);
 
   /* ── service headers ── */
   const KEYS = ['interior', 'exterior', 'ceramic', 'paint'];
