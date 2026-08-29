@@ -692,6 +692,41 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
    is that a three-frame strip must not overflow a narrow screen, which the
    height clamp handles: at 390px each frame lands near 105px wide, three of
    them plus borders inside the gutter. */
+/* ── The lead comparison is BIG; the rest is on demand ─────────────
+   Tiling fixed desktop and quietly wrecked mobile: frames landed at 111x148px,
+   which is a postage stamp — proof you cannot read at arm's length still costs
+   scroll but stops persuading. And the page was only 33% photographs; the rest
+   was scaffolding. So one comparison per vehicle gets real size, and the other
+   areas sit behind a <details> rather than being shrunk further. */
+.ba-list-lead .ba-frame { height: clamp(232px, 30vw, 340px); }
+
+.ba-more { margin-top: var(--s-5); }
+.ba-more > summary {
+  cursor: pointer; list-style: none;
+  display: inline-flex; align-items: center; gap: var(--s-3);
+  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
+  text-transform: uppercase; color: var(--text-2);
+  padding: var(--s-3) var(--s-4); border: var(--stroke); border-radius: var(--r-xs);
+  transition: color var(--dur-fast) var(--ease-std), border-color var(--dur-fast) var(--ease-std);
+}
+.ba-more > summary::-webkit-details-marker { display: none; }
+.ba-more > summary::after {
+  content: ''; width: 7px; height: 7px; flex: none;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform var(--dur-base) var(--ease-std);
+}
+.ba-more[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.ba-more > summary:hover { color: var(--gold); border-color: var(--edge-gold); }
+.ba-more > summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.ba-more .ba-list { margin-top: var(--s-5); }
+
+/* The count is the affordance: "4 areas · 8 photos" says more exists before
+   anyone has to guess from a chevron. */
+.ba-job-n { color: var(--text-3); letter-spacing: var(--tr-mono); }
+.ba-job-h { gap: var(--s-4); }
+.ba-job-h::after { order: 3; }
+
 /* Grouped by vehicle. Seven comparisons in a row read as seven unrelated
    things; three headed groups read as three cars, which is what a customer is
    actually counting. The heading is a quiet mono rule, not a section header —
@@ -951,7 +986,15 @@ a.tile:hover { border-color: var(--edge-gold); background: var(--graphite-2); }
 .foot { border-top: var(--stroke); background: var(--carbon); padding-block: var(--s-9) var(--s-6); }
 .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.15fr; gap: clamp(2rem, 4vw, 4rem); }
 @media (max-width: 900px) { .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 540px) { .foot-grid { grid-template-columns: minmax(0, 1fr); } }
+/* The footer stacked to ONE column below 540px, which cost 1,369px — 1.75
+   screens — on every page of the site. The two link lists are short and narrow;
+   they sit side by side happily. Only the brand block (which carries prose) and
+   the contact block (which carries names and numbers) need the full width. */
+@media (max-width: 540px) {
+  .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7) var(--s-6); }
+  .foot-grid > :first-child,
+  .foot-grid > :last-child { grid-column: 1 / -1; }
+}
 .foot h3 { font-family: var(--mono); font-size: var(--fs-mono); font-weight: 500; letter-spacing: var(--tr-mono-wide); text-transform: uppercase; color: var(--text-3); margin-bottom: var(--s-5); }
 .foot-brand b { display: block; font-family: var(--display); font-size: var(--fs-lg); font-weight: 800; letter-spacing: -0.015em; font-stretch: 110%; text-transform: uppercase; }
 .foot-brand p { color: var(--text-2); font-size: var(--fs-sm); margin-top: var(--s-4); max-width: 34ch; }

@@ -1,6 +1,6 @@
-import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, LIVE_HERO, taglineLead, taglineTail, priceFrom, money, primaryPhone } from '../data.mjs';
+import { SITE, CONTACT, TERMS, PACKAGES, ADDONS, SERVICES, PROCESS, FAQS, LIVE_HERO, taglineLead, taglineTail, priceFrom, money, primaryPhone } from '../data.mjs';
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
-import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair, photoPlate, svcKey } from '../components.mjs';
+import { packageBlock, faqAccordion, beforeAfterPair, photoPlate, svcKey } from '../components.mjs';
 import { GALLERY } from '../gallery-data.mjs';
 import { countWord } from '../components.mjs';
 
@@ -95,11 +95,30 @@ const body = `
   </div>
 </section>
 
+<!-- ── Before / after — only rendered when real pairs exist ── -->
+${GALLERY.pairs.length ? `
+<section class="sec band" aria-labelledby="ba-h">
+  <div class="wrap">
+    ${secHead({
+      index: '01',
+      kicker: 'Proof',
+      title: '<span id="ba-h">This is what comes<br class="br-desk">out of a car.</span>',
+      meta: hasSlider ? 'Drag the handle' : 'Before · after',
+      /* Derived, never typed. This sentence named "One blue Nissan Rogue" and
+         stayed on the page after a second and third car were photographed —
+         true when written, false the moment the folder grew. */
+      lede: `${countWord(GALLERY.jobs.length)} vehicle${GALLERY.jobs.length === 1 ? '' : 's'}, photographed before we started and again when we finished. Every frame is a real car we were paid to clean.`,
+    })}
+    <div class="ba-list">${homePairs.map(p => beforeAfterPair(p)).join('')}</div>
+    ${GALLERY.pairs.length > homePairs.length ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}
+  </div>
+</section>` : ''}
+
 <!-- ── Packages ── -->
 <section class="sec" id="packages" aria-labelledby="pkg-h">
   <div class="wrap">
     ${secHead({
-      index: '01',
+      index: '02',
       kicker: 'Interior packages',
       title: '<span id="pkg-h">Pick the tier,<br>the price is the price.</span>',
       meta: 'Fixed per vehicle class.',
@@ -115,35 +134,24 @@ const body = `
 <section class="sec band" aria-labelledby="add-h">
   <div class="wrap">
     ${secHead({
-      index: '02',
+      index: '03',
       kicker: 'Add-ons',
       title: '<span id="add-h">Everything else<br>we can do to it.</span>',
       meta: `${'Priced per vehicle'}`,
       lede: 'Add any of these to a package or book one on its own. Ranges are honest — where the price moves, it moves with the size of the vehicle or the state it is in.',
     })}
-    ${addonMatrix()}
-    <p class="hero-fine" style="margin-top:var(--s-5)">Final price is confirmed with you before any work starts.</p>
+    <p class="prose" style="max-width:60ch">
+      ${ADDONS.length} of them, from ${money(Math.min(...ADDONS.map(a => a.min)))} to ${money(Math.max(...ADDONS.map(a => a.max || a.min)))} —
+      ${esc(ADDONS.slice(0, 6).map(a => a.name.replace(/\s*\(.*\)$/, '').toLowerCase()).join(', '))},
+      and ${ADDONS.length - 6} more. Where a price is a range it moves with the size of the
+      vehicle or the state it arrives in, and the final number is confirmed with you before
+      any work starts.
+    </p>
+    <div class="hero-act-row" style="margin-top:var(--s-6)">
+      <a class="btn btn-ghost" href="/pricing#addons">Every add-on and its price ${icon('right')}</a>
+    </div>
   </div>
 </section>
-
-<!-- ── Before / after — only rendered when real pairs exist ── -->
-${GALLERY.pairs.length ? `
-<section class="sec band" aria-labelledby="ba-h">
-  <div class="wrap">
-    ${secHead({
-      index: '03',
-      kicker: 'Proof',
-      title: '<span id="ba-h">This is what comes<br class="br-desk">out of a car.</span>',
-      meta: hasSlider ? 'Drag the handle' : 'Before · after',
-      /* Derived, never typed. This sentence named "One blue Nissan Rogue" and
-         stayed on the page after a second and third car were photographed —
-         true when written, false the moment the folder grew. */
-      lede: `${countWord(GALLERY.jobs.length)} vehicle${GALLERY.jobs.length === 1 ? '' : 's'}, photographed before we started and again when we finished. Every frame is a real car we were paid to clean.`,
-    })}
-    <div class="ba-list">${homePairs.map(p => beforeAfterPair(p)).join('')}</div>
-    ${GALLERY.pairs.length > homePairs.length ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}
-  </div>
-</section>` : ''}
 
 <!-- ── Services ── -->
 <section class="sec" aria-labelledby="svc-h">

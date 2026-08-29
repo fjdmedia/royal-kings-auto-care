@@ -24,7 +24,10 @@ const body = `
     <div class="hero-row">
       <p class="hero-sub">
         Every frame here is a real ${esc(SITE.city)} vehicle, photographed before
-        we started and again when we finished. Nothing is stock.
+        we started and again when we finished. Nothing is stock. They are shown
+        side by side rather than as a drag-across wipe — the frames were taken by
+        hand, and wiping between two camera positions makes the car look like it
+        moved rather than like it got clean.
       </p>
       <div class="hero-act">
         <div class="hero-act-row">
@@ -35,14 +38,7 @@ const body = `
     </div>
 
     ${hasPhotos ? `
-    <div class="spec">
-      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>${pairs.length === 1 ? 'Area' : `Areas across ${GALLERY.jobs.length} vehicle${GALLERY.jobs.length === 1 ? '' : 's'}`}</small></p></div>
-      ${sliders
-        ? `<div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">${sliders}<small>${sliders === 1 ? 'Shot from a locked-off position' : 'Shot from locked-off positions'}</small></p></div>`
-        : `<div class="spec-cell"><span class="spec-k">Shown</span><p class="spec-v">Side by side<small>Same area, before and after</small></p></div>`}
-      <div class="spec-cell"><span class="spec-k">Shot in</span><p class="spec-v">${esc(SITE.city)}<small>No stock photography</small></p></div>
-      <div class="spec-cell"><span class="spec-k">Your car</span><p class="spec-v">We ask first<small>Nothing photographed without permission</small></p></div>
-    </div>` : ''}
+    <p class="hero-fine" style="margin-top:var(--s-5)">${pairs.length} area${pairs.length === 1 ? '' : 's'} across ${GALLERY.jobs.length} vehicle${GALLERY.jobs.length === 1 ? '' : 's'} · shot in ${esc(SITE.city)}, nothing stock · we ask before photographing anyone's car</p>` : ''}
   </div>
 </section>
 
@@ -68,20 +64,23 @@ ${!hasPhotos ? `
 </section>` : ''}
 
 ${pairs.length ? `
-<section class="sec band" aria-labelledby="ba-h">
+<section class="sec band" aria-label="Before and after, by vehicle">
   <div class="wrap">
-    ${secHead({
-      index: '01',
-      kicker: 'Before and after',
-      title: '<span id="ba-h">Before, and after.</span>',
-      meta: `${pairs.length} area${pairs.length === 1 ? '' : 's'}`,
-      lede: `${sliders ? `${sliders === 1 ? 'One pair was' : `${sliders} pairs were`} shot from a locked-off camera position, so you can drag straight across ${sliders === 1 ? 'it' : 'them'}. ` : ''}${dips ? `${sliders ? 'The rest are' : 'Each comparison is'} shown side by side. They were taken by hand, and wiping between two camera positions makes the car look like it moved rather than like it got clean.` : ''}`,
-    })}
-    ${GALLERY.jobs.map(job => `
+    ${GALLERY.jobs.map(job => {
+      const mine = pairs.filter(p => p.stem.startsWith(job + '/'));
+      const [lead, ...rest] = mine;
+      const photos = mine.reduce((n, p) => n + p.befores.length + p.afters.length, 0);
+      return `
     <div class="ba-job">
-      <h3 class="ba-job-h">${esc(GALLERY.jobLabels[job] || job)}</h3>
-      <div class="ba-list">${pairs.filter(p => p.stem.startsWith(job + '/')).map(p => beforeAfterPair(p)).join('')}</div>
-    </div>`).join('')}
+      <h3 class="ba-job-h">${esc(GALLERY.jobLabels[job] || job)}<span class="ba-job-n">${mine.length} area${mine.length === 1 ? '' : 's'} · ${photos} photo${photos === 1 ? '' : 's'}</span></h3>
+      <div class="ba-list ba-list-lead">${beforeAfterPair(lead)}</div>
+      ${rest.length ? `
+      <details class="ba-more">
+        <summary>${rest.length === 1 ? 'See the other area' : `See the other ${rest.length} areas`}</summary>
+        <div class="ba-list">${rest.map(p => beforeAfterPair(p)).join('')}</div>
+      </details>` : ''}
+    </div>`;
+    }).join('')}
   </div>
 </section>` : ''}
 
