@@ -661,12 +661,19 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
    --n is the frame count, --ar the aspect the photographs actually are, so a
    consistent shoot is never cropped at all. */
 .ba-strip {
-  display: grid;
-  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  display: flex;
   gap: 1px; background: var(--edge);
   border: var(--stroke); border-radius: var(--r-xs); overflow: hidden;
+  max-width: 100%;
 }
-.ba-frame { position: relative; aspect-ratio: var(--ar, 3 / 4); overflow: hidden; background: var(--graphite); }
+/* Height fixed, width derived. An extra frame makes the strip wider — it never
+   makes the frames shorter, and it never changes the row height. */
+.ba-frame {
+  position: relative; overflow: hidden; background: var(--graphite);
+  height: clamp(148px, 17.5vw, 250px);
+  aspect-ratio: var(--ar, 3 / 4);
+  flex: none;
+}
 .ba-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ba-frame::after {
   content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4);
@@ -680,23 +687,28 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .ba-frame[data-label='After']::after { color: var(--gold); border-color: var(--edge-gold); }
 .ba-seam { box-shadow: inset 2px 0 0 0 var(--gold); }
 
-/* Portrait frames get unreadably narrow three-across on a phone. Two columns
-   keeps each frame a thumb-sized picture, and the seam moves to the top edge
-   when the after set wraps onto a new row. */
-/* Portrait frames get unreadably narrow three-across on a phone, so the strip
-   drops to two columns — which orphans an odd frame count into a half-empty
-   row (G32b, counted in CELLS: 3 frames in 2 columns is 2 + 1). The odd LAST
-   frame spans the row instead. It is always an AFTER frame, so the fix reads
-   as emphasis on the result rather than as a patch, and it keeps its own
-   aspect ratio so nothing is cropped to fill the space. */
-@media (max-width: 760px) {
-  .ba-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ba-frame:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* A flex strip cannot orphan a row — it has no columns to leave half empty —
+   so the old grid breakpoint rules are gone with the grid. What is still true
+   is that a three-frame strip must not overflow a narrow screen, which the
+   height clamp handles: at 390px each frame lands near 105px wide, three of
+   them plus borders inside the gutter. */
+/* Grouped by vehicle. Seven comparisons in a row read as seven unrelated
+   things; three headed groups read as three cars, which is what a customer is
+   actually counting. The heading is a quiet mono rule, not a section header —
+   it organises the strip without competing with the page's own headings. */
+.ba-job + .ba-job { margin-top: clamp(2rem, 4vw, 3.25rem); }
+.ba-job-h {
+  font-family: var(--mono); font-size: var(--fs-mono); font-weight: 600;
+  letter-spacing: var(--tr-mono-wide); text-transform: uppercase;
+  color: var(--text-3); margin-bottom: var(--s-5);
+  display: flex; align-items: center; gap: var(--s-4);
 }
-@media (max-width: 420px) {
-  .ba-strip { grid-template-columns: minmax(0, 1fr); }
-  .ba-seam { box-shadow: inset 0 2px 0 0 var(--gold); }
+.ba-job-h::after {
+  content: ''; flex: 1; height: 1px; background: var(--edge);
 }
+
+.ba-strip-fig { flex: 0 1 auto; max-width: 100%; min-width: 0; }
+.ba-strip-fig figcaption { max-width: 46ch; }
 
 .ba-dip figcaption { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
 .ba-stage::before, .ba-stage::after {
@@ -772,7 +784,20 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .ba figcaption { max-width: 68ch; }
 
 /* Gallery layout */
-.ba-list { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+/* The gallery was one comparison per row at full container width, so every
+   comparison cost a whole screen: 8 screens on desktop and 14 on a phone for
+   three cars, growing linearly with every job. Nobody scrolls fourteen screens
+   of someone else's floor mats.
+
+   The fix is to stop letting WIDTH drive the frames. The frame's HEIGHT is now
+   the fixed dimension and its width follows from the photo's own aspect, so a
+   comparison hugs its content instead of stretching to fill a row — and every
+   comparison ends up the same height whether it holds two frames or three,
+   which is what lets them tile into clean rows. */
+.ba-list {
+  display: flex; flex-wrap: wrap; align-items: flex-start;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+}
 .work-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
 @media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .work-grid { grid-template-columns: minmax(0, 1fr); } }

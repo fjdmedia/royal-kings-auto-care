@@ -318,5 +318,17 @@ export async function scanGallery(root) {
      update cannot go stale. */
   const jobs = [...new Set(pairs.map(p => jobOf(p.stem)).filter(Boolean))];
 
-  return { pairs, shots, services, jobs, notes, missing, capPath, hasPhotos: pairs.length > 0 || shots.length > 0 };
+  /* A human name per job, so the gallery can group by vehicle instead of being
+     an undifferentiated stack. The folder is "YYYY-MM-DD vehicle-colour", which
+     is a filing convention and not a sentence — so a caption entry keyed by the
+     FOLDER overrides it, and the fallback only tidies what is already there
+     rather than inventing a make and model nobody wrote down. */
+  const jobLabels = {};
+  for (const j of jobs) {
+    const written = alt(j);
+    const slug = j.replace(/^\d{4}-\d{2}-\d{2}\s*/, '').replace(/[-_]+/g, ' ').trim();
+    jobLabels[j] = written || slug.replace(/(^|[ -])(\w)/g, (m, a, c) => a + c.toUpperCase());
+  }
+
+  return { pairs, shots, services, jobs, jobLabels, notes, missing, capPath, hasPhotos: pairs.length > 0 || shots.length > 0 };
 }

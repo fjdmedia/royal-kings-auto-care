@@ -77,7 +77,11 @@ ${pairs.length ? `
       meta: `${pairs.length} area${pairs.length === 1 ? '' : 's'}`,
       lede: `${sliders ? `${sliders === 1 ? 'One pair was' : `${sliders} pairs were`} shot from a locked-off camera position, so you can drag straight across ${sliders === 1 ? 'it' : 'them'}. ` : ''}${dips ? `${sliders ? 'The rest are' : 'Each comparison is'} shown side by side. They were taken by hand, and wiping between two camera positions makes the car look like it moved rather than like it got clean.` : ''}`,
     })}
-    <div class="ba-list">${pairs.map(p => beforeAfterPair(p)).join('')}</div>
+    ${GALLERY.jobs.map(job => `
+    <div class="ba-job">
+      <h3 class="ba-job-h">${esc(GALLERY.jobLabels[job] || job)}</h3>
+      <div class="ba-list">${pairs.filter(p => p.stem.startsWith(job + '/')).map(p => beforeAfterPair(p)).join('')}</div>
+    </div>`).join('')}
   </div>
 </section>` : ''}
 
