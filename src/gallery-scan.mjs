@@ -107,53 +107,74 @@ export async function scanGallery(root) {
     return { d, bytes };
   };
 
-  /* ── before / after pairs ── */
-  const stems = new Map();
+  /* ── before / after GROUPS ──
+
+     A group is one AREA of one job, holding any number of "before" frames and
+     any number of "after" frames. It is deliberately not 1:1, because the real
+     photographs are not: the 4Runner's rear needed TWO before frames (footwell
+     and bench) against a single wider after that shows both, and the MKX cargo
+     needed one before against two afters. Forcing those into pairs means
+     either dropping a real photograph or duplicating one to fill a slot, and
+     both are worse than showing what was actually shot. */
+  const groups = new Map();
   const singles = [];
+  const addTo = (stem, half, file) => {
+    if (!groups.has(stem)) groups.set(stem, { before: [], after: [] });
+    groups.get(stem)[half].push(file);
+  };
+
   for (const f of files) {
     const base = basename(f, extname(f));
-    const dir = f.includes('/') ? f.slice(0, f.lastIndexOf('/') + 1) : '';
+    const sub = f.includes('/') ? f.slice(0, f.lastIndexOf('/') + 1) : '';
     let stem = null, half = null;
 
     // 1. explicit: <name>-before / <name>-after
     let m = /^(.*?)[-_ ]?(before|after)$/i.exec(base);
-    if (m) { stem = dir + m[1].replace(/[-_ ]+$/, ''); half = m[2].toLowerCase(); }
+    if (m) { stem = sub + m[1].replace(/[-_ ]+$/, ''); half = m[2].toLowerCase(); }
 
-    // 2. shorthand: b1/a1, b_2/a_2 — b is the BEFORE, a is the AFTER.
-    //    Verified against the actual photographs before enabling this, and the
-    //    build prints every assignment so a mistake is visible rather than
-    //    quietly shipping a dirty car as the result.
+    // 2. area shorthand: <area>-b1 / <area>-a2. The area names the part of the
+    //    car, so every frame of that area groups together however many there
+    //    are — "rear-b1", "rear-b2" and "rear-a1" are one comparison.
     if (!half) {
-      m = /^([ab])[-_ ]?(\d+)$/i.exec(base);
-      if (m) { stem = dir + 'pair-' + m[2]; half = m[1].toLowerCase() === 'b' ? 'before' : 'after'; }
+      m = /^(.+?)[-_ ]([ab])[-_ ]?(\d+)$/i.exec(base);
+      if (m) { stem = sub + m[1]; half = m[2].toLowerCase() === 'b' ? 'before' : 'after'; }
     }
 
-    if (half) {
-      if (!stems.has(stem)) stems.set(stem, {});
-      stems.get(stem)[half] = f;
-    } else singles.push(f);
+    // 3. bare shorthand: b1/a1 — the original convention, one comparison per
+    //    number. Kept so existing folders keep working untouched.
+    if (!half) {
+      m = /^([ab])[-_ ]?(\d+)$/i.exec(base);
+      if (m) { stem = sub + 'pair-' + m[2]; half = m[1].toLowerCase() === 'b' ? 'before' : 'after'; }
+    }
+
+    if (half) addTo(stem, half, f); else singles.push(f);
   }
 
   const pairs = [];
-  for (const [stem, half] of stems) {
-    if (!half.before || !half.after) {
-      notes.push(`  ! "${stem}" has only the ${half.before ? 'before' : 'after'} half — skipped. A pair needs both.`);
+  const byName = (x, y) => x.localeCompare(y, 'en', { numeric: true });
+
+  for (const [stem, g] of groups) {
+    if (!g.before.length || !g.after.length) {
+      notes.push(`  ! "${stem}" has only ${g.before.length ? 'before' : 'after'} frame(s) — skipped. A comparison needs both sides.`);
       continue;
     }
-    const b = await meta(dir, half.before);
-    const a = await meta(dir, half.after);
+    g.before.sort(byName);
+    g.after.sort(byName);
+
+    const read = async list => {
+      const out = [];
+      for (const file of list) out.push({ file, ...(await meta(dir, file)) });
+      return out;
+    };
+    const bs = await read(g.before);
+    const as = await read(g.after);
+    const b = bs[0], a = as[0];
     const ratio = b.d.h ? b.d.w / b.d.h : 1;
 
-    /* LAYOUT IS DECIDED HERE, and it is the whole reason this is not one
-       component. A wipe slider only tells the truth when both halves were
-       shot from the same spot — otherwise the car appears to jump and the
-       comparison reads as a trick. And a portrait phone photo cannot fill a
-       wide slider stage without being cropped to nothing.
+    /* A wipe needs exactly one frame each side — there is nothing to wipe
+       between when a group holds three photographs. */
+    const oneToOne = bs.length === 1 && as.length === 1;
 
-       So: landscape pairs get the slider; portrait pairs get a side-by-side
-       diptych, which is honest about being two separate photographs, is what
-       the trade actually publishes, and looks deliberate rather than
-       shoehorned. */
     /* THE WIPE IS OPT-IN, NEVER INFERRED. A slider only tells the truth when
        both halves came from ONE camera position, and nothing in the files says
        whether the photographer moved. Matching aspect ratios do NOT say it:
@@ -164,12 +185,15 @@ export async function scanGallery(root) {
        permission. Mark "<stem>-slider": "yes" in captions.json once you have
        LOOKED at the two frames and confirmed the camera held still. */
     const optedIn = /^(y|yes|true|1)$/i.test(String(captions[`${stem}-slider`] || '').trim());
-    const layout = optedIn && ratio >= 1.15 ? 'slider' : 'diptych';
-    if (optedIn && ratio < 1.15) {
+    const layout = !oneToOne ? 'group' : (optedIn && ratio >= 1.15 ? 'slider' : 'diptych');
+
+    if (optedIn && !oneToOne) {
+      notes.push(`  ! "${stem}" is marked slider but holds ${bs.length} before / ${as.length} after — a wipe needs exactly one of each. Shown as a group.`);
+    } else if (optedIn && ratio < 1.15) {
       notes.push(`  ! "${stem}" is marked slider but is portrait (${b.d.w}x${b.d.h}) — kept as a diptych.`);
     }
 
-    if (b.d.w && a.d.w && Math.abs(ratio - a.d.w / a.d.h) > 0.06) {
+    if (oneToOne && b.d.w && a.d.w && Math.abs(ratio - a.d.w / a.d.h) > 0.06) {
       notes.push(`  ! "${stem}" halves are different shapes (${b.d.w}x${b.d.h} vs ${a.d.w}x${a.d.h})`
         + (layout === 'slider' ? ' — the slider would crop one.' : ' — fine for a diptych.'));
     }
@@ -179,29 +203,41 @@ export async function scanGallery(root) {
        a slider is the full width. Judging a portrait phone shot against a
        full-bleed threshold produces a warning nobody can act on. */
     const floor = layout === 'slider' ? 1200 : 800;
-    const minW = Math.min(b.d.w, a.d.w);
-    if (minW < floor) {
+    const minW = Math.min(...bs.map(x => x.d.w), ...as.map(x => x.d.w));
+    if (minW && minW < floor) {
       notes.push(`  ! "${stem}" is ${minW}px wide; a ${layout} slot wants ${floor}px+.`);
     }
 
-    notes.push(`    ${layout.padEnd(7)} ${stem}  before=${half.before.split('/').pop()}  after=${half.after.split('/').pop()}`);
+    notes.push(`    ${layout.padEnd(7)} ${stem}  ${bs.length} before / ${as.length} after`);
+
+    /* Each frame carries its OWN caption key — its path without the extension.
+       Alt text describes one photograph, so it cannot be shared across a group
+       the way a single "-before" key was when every group had exactly one. */
+    const shape = x => ({
+      src: toUrl(x.file),
+      w: x.d.w, h: x.d.h,
+      cap: x.file.replace(/\.[^.]+$/, ''),
+    });
 
     pairs.push({
       stem, layout, ratio: +ratio.toFixed(4),
-      before: toUrl(half.before), after: toUrl(half.after),
+      befores: bs.map(shape),
+      afters: as.map(shape),
+      /* 1:1 convenience, so the slider and diptych renderers stay unchanged. */
+      before: toUrl(b.file), after: toUrl(a.file),
       w: b.d.w, h: b.d.h,
     });
   }
 
-  /* NEWEST JOB FIRST. Folders are date-prefixed (YYYY-MM-DD vehicle-colour), so
-     sorting the folder segment DESCENDING puts the most recent visit at the top
-     of /gallery and into the homepage's two featured slots. Without this the
+  /* NEWEST JOB FIRST. Job folders are date-prefixed (YYYY-MM-DD vehicle-colour),
+     so sorting the folder segment DESCENDING puts the most recent visit at the
+     top of /gallery and into the homepage's featured slots. Without this the
      folders sort ascending and the site leads with its oldest work.
 
-     Within one job the pairs keep their natural order (pair-1, pair-2, …) —
-     that is the order they were shot in, and reversing it tells the story
-     backwards. Pairs sitting loose in Gallery/ carry no date to sort on, so
-     they fall to the end rather than jumping the queue. */
+     Within one job the areas keep their natural order — that is the order they
+     were shot in, and reversing it tells the story backwards. Comparisons
+     sitting loose in Gallery/ carry no date to sort on, so they fall to the end
+     rather than jumping the queue. */
   const jobOf = stem => (stem.includes('/') ? stem.slice(0, stem.lastIndexOf('/')) : '');
   const byJob = (x, y) => {
     const a = jobOf(x.stem), b = jobOf(y.stem);
@@ -242,8 +278,12 @@ export async function scanGallery(root) {
   }
 
   /* ── captions: scaffold the file, then require every entry ── */
+  /* One caption key PER PHOTOGRAPH, not per comparison. Alt text describes a
+     single frame, so a group holding two before shots needs two descriptions —
+     the old "<stem>-before" key could only ever hold one, which silently made
+     the second photo inherit the first one's words. */
   const needed = [
-    ...pairs.flatMap(p => [`${p.stem}-before`, `${p.stem}-after`]),
+    ...pairs.flatMap(p => [...p.befores, ...p.afters].map(i => i.cap)),
     ...shots.map(s => s.stem),
     ...Object.values(services).map(s => s.stem),
   ];
@@ -258,14 +298,25 @@ export async function scanGallery(root) {
 
   const alt = k => String(captions[k] || '').trim();
   pairs.forEach(p => {
-    p.altBefore = alt(`${p.stem}-before`);
-    p.altAfter = alt(`${p.stem}-after`);
-    /* Optional: a short visible caption. Falls back to the after-alt, which
-       is true but reads like alt text, so a label is worth writing. */
+    p.befores.forEach(i => { i.alt = alt(i.cap); });
+    p.afters.forEach(i => { i.alt = alt(i.cap); });
+    /* 1:1 convenience for the slider and diptych renderers. */
+    p.altBefore = p.befores[0].alt;
+    p.altAfter = p.afters[0].alt;
+    /* Optional: a short visible caption for the whole comparison. Falls back to
+       the after-alt, which is true but reads like alt text, so a label is
+       worth writing. Keyed by STEM because it describes the group, not a frame. */
     p.label = alt(`${p.stem}-label`);
   });
   shots.forEach(s => { s.alt = alt(s.stem); });
   Object.values(services).forEach(s => { s.alt = alt(s.stem); });
 
-  return { pairs, shots, services, notes, missing, capPath, hasPhotos: pairs.length > 0 || shots.length > 0 };
+  /* Distinct JOBS in the gallery — one per dated folder. Copy that counts
+     vehicles has to derive from this: the homepage said "One blue Nissan
+     Rogue" for as long as there was one car, and the sentence quietly became
+     false the moment a second job landed. A count nobody has to remember to
+     update cannot go stale. */
+  const jobs = [...new Set(pairs.map(p => jobOf(p.stem)).filter(Boolean))];
+
+  return { pairs, shots, services, jobs, notes, missing, capPath, hasPhotos: pairs.length > 0 || shots.length > 0 };
 }

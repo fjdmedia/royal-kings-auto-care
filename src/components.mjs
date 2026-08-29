@@ -240,9 +240,42 @@ export const beforeAfterDiptych = p => `
     <figcaption>${esc(p.label || p.altAfter)}</figcaption>
   </figure>`;
 
-/* Picks the treatment the scan decided this pair can actually support. */
+/* Small counts read better spelled out in prose; anything larger stays a
+   numeral rather than inventing words nobody says out loud. */
+export const countWord = n =>
+  ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][n] || String(n);
+
+/* A GROUP: any number of before frames against any number of after frames.
+
+   Real jobs are not always 1:1. The 4Runner's rear needed two before frames --
+   the footwell and the bench -- against one wider after that shows both, and
+   the MKX cargo needed one before against two afters. A diptych can only ever
+   render the FIRST of each side, so routing these through it would silently
+   drop the other photographs while still looking finished. Every frame gets
+   rendered and each keeps its own alt text, because each shows something
+   different.
+
+   Columns stay BEFORE-left / AFTER-right however many frames sit in each, so
+   the reading order never changes between blocks. */
+const baStack = (items, label, cls) => `
+      <div class="ba-col ${cls}" data-label="${label}">
+        ${items.map(i => `<img src="${i.src}" alt="${esc(i.alt)}" width="${i.w}" height="${i.h}" loading="lazy" decoding="async">`).join(String.fromCharCode(10))}
+      </div>`;
+
+export const beforeAfterGroup = p => `
+  <figure class="ba-dip ba-group">
+    <div class="ba-dip-grid">
+      ${baStack(p.befores, 'Before', 'ba-col-before')}
+      ${baStack(p.afters, 'After', 'ba-col-after')}
+    </div>
+    <figcaption>${esc(p.label || p.afters[0].alt)}</figcaption>
+  </figure>`;
+
+/* Picks the treatment the scan decided this comparison can actually support. */
 export const beforeAfterPair = p =>
-  p.layout === 'slider' ? beforeAfter(p) : beforeAfterDiptych(p);
+  p.layout === 'slider' ? beforeAfter(p)
+  : p.layout === 'group' ? beforeAfterGroup(p)
+  : beforeAfterDiptych(p);
 
 /* A plate renders ONLY when there is a photograph for it.
 

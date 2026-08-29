@@ -36,7 +36,7 @@ const body = `
 
     ${hasPhotos ? `
     <div class="spec">
-      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>${pairs.length === 1 ? 'Area' : 'Areas of the vehicle'}</small></p></div>
+      <div class="spec-cell bkt"><span class="spec-k">Before / after</span><p class="spec-v num">${pairs.length}<small>${pairs.length === 1 ? 'Area' : `Areas across ${GALLERY.jobs.length} vehicle${GALLERY.jobs.length === 1 ? '' : 's'}`}</small></p></div>
       ${sliders
         ? `<div class="spec-cell"><span class="spec-k">Draggable</span><p class="spec-v num">${sliders}<small>${sliders === 1 ? 'Shot from a locked-off position' : 'Shot from locked-off positions'}</small></p></div>`
         : `<div class="spec-cell"><span class="spec-k">Shown</span><p class="spec-v">Side by side<small>Same area, before and after</small></p></div>`}
@@ -75,7 +75,7 @@ ${pairs.length ? `
       kicker: 'Before and after',
       title: '<span id="ba-h">Before, and after.</span>',
       meta: `${pairs.length} area${pairs.length === 1 ? '' : 's'}`,
-      lede: `${sliders ? `${sliders === 1 ? 'One pair was' : `${sliders} pairs were`} shot from a locked-off camera position, so you can drag straight across ${sliders === 1 ? 'it' : 'them'}. ` : ''}${dips ? `${sliders ? 'The rest are' : 'Each pair is'} shown side by side. They were taken by hand, and wiping between two camera positions makes the car look like it moved rather than like it got clean.` : ''}`,
+      lede: `${sliders ? `${sliders === 1 ? 'One pair was' : `${sliders} pairs were`} shot from a locked-off camera position, so you can drag straight across ${sliders === 1 ? 'it' : 'them'}. ` : ''}${dips ? `${sliders ? 'The rest are' : 'Each comparison is'} shown side by side. They were taken by hand, and wiping between two camera positions makes the car look like it moved rather than like it got clean.` : ''}`,
     })}
     <div class="ba-list">${pairs.map(p => beforeAfterPair(p)).join('')}</div>
   </div>

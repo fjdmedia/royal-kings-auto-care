@@ -651,6 +651,37 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
 .ba-stage:has(.ba-range:focus-visible) .ba-grip { box-shadow: 0 0 0 2px var(--gold); }
 .ba figcaption { margin-top: var(--s-3); font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); max-width: 68ch; }
+/* ── A GROUP: N before frames against M after frames ──────────────
+   Not every job photographs 1:1. The rear of a truck can need two before
+   frames — footwell and bench — against one wider after that shows both.
+   The column is the unit, not the photograph: BEFORE always left, AFTER
+   always right, however many frames sit inside each, so the reading order
+   never changes from block to block. Frames within a column share the
+   height evenly, which keeps two befores next to one after balanced instead
+   of leaving a hole. */
+.ba-col {
+  position: relative; display: grid; gap: 1px;
+  background: var(--edge); overflow: hidden;
+}
+.ba-col + .ba-col { border-left: 1px solid var(--edge); }
+.ba-col img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 0; }
+.ba-col::after {
+  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4); z-index: 1;
+  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
+  text-transform: uppercase; padding: var(--s-1) var(--s-3);
+  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
+  border: var(--stroke); border-radius: var(--r-xs);
+}
+.ba-col-after::after { color: var(--gold); border-color: var(--edge-gold); }
+/* The grid rows are driven by the taller column, so a single after frame
+   stretches to meet two stacked befores rather than floating half-height. */
+.ba-group .ba-dip-grid { align-items: stretch; }
+.ba-group .ba-col { aspect-ratio: 3 / 4; }
+@media (max-width: 620px) {
+  .ba-group .ba-col { aspect-ratio: auto; }
+  .ba-col + .ba-col { border-left: 0; border-top: 1px solid var(--edge); }
+}
+
 .ba-dip figcaption { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
 .ba-stage::before, .ba-stage::after {
   content: 'Before'; position: absolute; top: var(--s-4); left: var(--s-4); z-index: 2;
@@ -680,6 +711,37 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
   border: var(--stroke); border-radius: var(--r-xs);
 }
 .ba-dip-after::after { color: var(--gold); border-color: var(--edge-gold); }
+/* ── A GROUP: N before frames against M after frames ──────────────
+   Not every job photographs 1:1. The rear of a truck can need two before
+   frames — footwell and bench — against one wider after that shows both.
+   The column is the unit, not the photograph: BEFORE always left, AFTER
+   always right, however many frames sit inside each, so the reading order
+   never changes from block to block. Frames within a column share the
+   height evenly, which keeps two befores next to one after balanced instead
+   of leaving a hole. */
+.ba-col {
+  position: relative; display: grid; gap: 1px;
+  background: var(--edge); overflow: hidden;
+}
+.ba-col + .ba-col { border-left: 1px solid var(--edge); }
+.ba-col img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 0; }
+.ba-col::after {
+  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4); z-index: 1;
+  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
+  text-transform: uppercase; padding: var(--s-1) var(--s-3);
+  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
+  border: var(--stroke); border-radius: var(--r-xs);
+}
+.ba-col-after::after { color: var(--gold); border-color: var(--edge-gold); }
+/* The grid rows are driven by the taller column, so a single after frame
+   stretches to meet two stacked befores rather than floating half-height. */
+.ba-group .ba-dip-grid { align-items: stretch; }
+.ba-group .ba-col { aspect-ratio: 3 / 4; }
+@media (max-width: 620px) {
+  .ba-group .ba-col { aspect-ratio: auto; }
+  .ba-col + .ba-col { border-left: 0; border-top: 1px solid var(--edge); }
+}
+
 .ba-dip figcaption {
   margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--text-2);
   max-width: 68ch;

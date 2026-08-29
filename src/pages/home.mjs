@@ -2,6 +2,7 @@ import { SITE, CONTACT, TERMS, PACKAGES, SERVICES, PROCESS, FAQS, LIVE_HERO, tag
 import { page, secHead, ctaBand, icon, esc, localBusinessSchema, faqSchema } from '../layout.mjs';
 import { packageBlock, addonMatrix, faqAccordion, beforeAfterPair, photoPlate, svcKey } from '../components.mjs';
 import { GALLERY } from '../gallery-data.mjs';
+import { countWord } from '../components.mjs';
 
 const teaserFaqs = FAQS.slice(0, 4);
 
@@ -134,7 +135,10 @@ ${GALLERY.pairs.length ? `
       kicker: 'Proof',
       title: '<span id="ba-h">This is what comes<br class="br-desk">out of a car.</span>',
       meta: hasSlider ? 'Drag the handle' : 'Before · after',
-      lede: 'One blue Nissan Rogue, photographed before we started and again when we finished — the footwell, the engine bay, the passenger side and the rear bench.',
+      /* Derived, never typed. This sentence named "One blue Nissan Rogue" and
+         stayed on the page after a second and third car were photographed —
+         true when written, false the moment the folder grew. */
+      lede: `${countWord(GALLERY.jobs.length)} vehicle${GALLERY.jobs.length === 1 ? '' : 's'}, photographed before we started and again when we finished. Every frame is a real car we were paid to clean.`,
     })}
     <div class="ba-list">${homePairs.map(p => beforeAfterPair(p)).join('')}</div>
     ${GALLERY.pairs.length > homePairs.length ? `<div style="margin-top:var(--s-6)"><a class="btn btn-ghost" href="/gallery">See all ${GALLERY.pairs.length} ${icon('right')}</a></div>` : ''}

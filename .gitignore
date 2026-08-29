@@ -11,3 +11,8 @@ localhost-*.png
 # Internal FJMedia working files. These must never reach the repo: anything
 # committed here is publicly fetchable off the Vercel deployment.
 Reports/
+
+# Unredacted originals. This repo is PUBLIC and a removal commit does NOT
+# unpublish a blob — it stays fetchable at the old SHA forever. Anything with a
+# license plate, a face, or an address stays local and never enters history.
+assets/_originals/
