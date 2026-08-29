@@ -120,38 +120,51 @@ export const VEHICLE_CLASSES = [
    stain-extraction, addon_odor → odor-removal, addon_ceramic_coat
    → true-ceramic). Renaming a field silently breaks the prefill. */
 export const ADDONS = [
-  { field: 'addon_clay_bar',       name: 'Clay Bar Treatment',        min: 50,  max: 100,  basis: 'Based on vehicle class',
+  { field: 'addon_clay_bar', waiverKey: 'clay-bar',       name: 'Clay Bar Treatment',        min: 50,  max: 100,  basis: 'Based on vehicle class',
     value: 'Clay Bar Treatment ($50-$100)',
     what: 'Pulls bonded tar, overspray and road grit off the paint that washing leaves behind.' },
-  { field: 'addon_iron_remover',   name: 'Iron Remover',              min: 50,  max: 50,   basis: 'Flat rate',
+  { field: 'addon_iron_remover', waiverKey: 'iron-remover',   name: 'Iron Remover',              min: 50,  max: 50,   basis: 'Flat rate',
     value: 'Iron Remover ($50)',
     what: 'Dissolves the brake dust and rail dust embedded in your clear coat.' },
-  { field: 'addon_engine_bay',     name: 'Engine Bay Cleaning',       min: 50,  max: 150,  basis: 'Based on vehicle class',
+  { field: 'addon_engine_bay', waiverKey: 'engine-bay',     name: 'Engine Bay Cleaning',       min: 50,  max: 150,  basis: 'Based on vehicle class',
     value: 'Engine Bay Cleaning ($50-$150)',
     what: 'Degreased and dressed. Worth it before a sale or a safety.' },
-  { field: 'addon_headlight',      name: 'Headlight Restoration',     min: 60,  max: 120,  basis: 'Based on vehicle class',
+  { field: 'addon_headlight', waiverKey: 'headlight',      name: 'Headlight Restoration',     min: 60,  max: 120,  basis: 'Based on vehicle class',
     value: 'Headlight Restoration ($60-$120)',
     what: 'Cuts the yellow haze back off. You get the light output back too.' },
-  { field: 'addon_pet_hair',       name: 'Pet Hair Removal',          min: 30,  max: 80,   basis: 'Based on vehicle class',
+  { field: 'addon_pet_hair', waiverKey: 'pet-hair',       name: 'Pet Hair Removal',          min: 30,  max: 80,   basis: 'Based on vehicle class',
     value: 'Pet Hair Removal ($30-$80)',
     what: 'The hair a vacuum will not lift. Woven out of the carpet and upholstery.' },
-  { field: 'addon_stain',          name: 'Stain Extraction',          min: 50,  max: 150,  basis: 'Based on vehicle class',
+  { field: 'addon_stain', waiverKey: 'stain-extraction',          name: 'Stain Extraction',          min: 50,  max: 150,  basis: 'Based on vehicle class',
     value: 'Stain Extraction ($50-$150)',
     what: 'Hot-water extraction on coffee, salt, grease and whatever the kids did.' },
-  { field: 'addon_odor',           name: 'Odor Removal',              min: 50,  max: 100,  basis: 'Based on vehicle class',
+  { field: 'addon_odor', waiverKey: 'odor-removal',           name: 'Odor Removal',              min: 50,  max: 100,  basis: 'Based on vehicle class',
     value: 'Odor Removal ($50-$100)',
     what: 'Treats the source, not the smell. Smoke, pets, spilled milk.' },
-  { field: 'addon_spray_ceramic',  name: 'Spray Ceramic Coating',     min: 100, max: 150,  basis: 'Based on vehicle class',
+  { field: 'addon_spray_ceramic', waiverKey: 'spray-ceramic',  name: 'Spray Ceramic Coating',     min: 100, max: 150,  basis: 'Based on vehicle class',
     value: 'Spray Ceramic Coating ($100-$150)',
     what: 'Months of gloss and water beading. The affordable protection layer.' },
-  { field: 'addon_ceramic_coat',   name: 'True Ceramic Coating',      min: 400, max: 1000, basis: 'Based on protection tier & vehicle class',
+  { field: 'addon_ceramic_coat', waiverKey: 'true-ceramic',   name: 'True Ceramic Coating',      min: 400, max: 1000, basis: 'Based on protection tier & vehicle class',
     priceLabel: '$400 – $1,000+',
     value: 'True Ceramic Coating ($400-$1,000+)',
     what: 'Years, not months. Bonded to prepped paint and quoted per vehicle.' },
-  { field: 'addon_buffing',        name: 'Paint Correction (Buffing)', min: 150, max: 600, basis: 'Based on correction steps & vehicle class',
+  { field: 'addon_buffing', waiverKey: 'paint-correction',        name: 'Paint Correction (Buffing)', min: 150, max: 600, basis: 'Based on correction steps & vehicle class',
     value: 'Paint Correction / Buffing ($150-$600)',
     note: 'Full-day service — exclusive booking required',
     what: 'Machine-polished to cut swirls, wash marks and light scratches out of the clear coat.' },
+];
+
+/* Paint-correction tiers — WAIVER ONLY.
+
+   Patrick's contract lists three price bands; the site sells Paint Correction
+   as a single quoted add-on ($150-$600) whose range is exactly their envelope.
+   Both are true, at different levels of detail. Names and prices here are HIS
+   contract's, and the per-tier legal terms stay in waiver.html where the rest
+   of his contract text lives — this file holds facts, never his wording. */
+export const CORRECTION_TIERS = [
+  { id: 'polish-1step',     name: '1-Step Polish',           price: '$150–$220' },
+  { id: 'correction-2step', name: '2-Step Paint Correction', price: '$250–$350' },
+  { id: 'correction-3step', name: '3-Step Paint Correction', price: '$400–$600' },
 ];
 
 export const TIME_SLOTS = [

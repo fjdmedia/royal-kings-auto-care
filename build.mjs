@@ -19,8 +19,9 @@ import { writeFile, mkdir, readFile, cp, rm, readdir } from 'node:fs/promises';
 process.stdout.on('error', e => { if (e.code !== 'EPIPE') throw e; });
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, SERVICES, THEMES, ADDONS } from './src/data.mjs';
+import { SITE, SERVICES, THEMES, ADDONS, PACKAGES } from './src/data.mjs';
 import { scanGallery } from './src/gallery-scan.mjs';
+import { reconcileWaiver } from './src/waiver-gen.mjs';
 import { setGallery, GALLERY } from './src/gallery-data.mjs';
 import { setBase } from './src/site-base.mjs';
 
@@ -181,38 +182,16 @@ async function run() {
   }
   let count = 0;
   const problems = [];
-  /* BOOKING <-> WAIVER PARITY.
-
-     The booking form is generated from ADDONS; the waiver is hand-maintained
-     HTML with its own tiles. Two descriptions of one business, maintained
-     separately, WILL drift — and the drift is invisible, because both forms
-     look complete on their own. It shipped exactly that way: the booking
-     offered 10 add-ons, the waiver had 9 tiles, and Paint Correction (the most
-     expensive one) silently failed to reach the document the customer signs.
-
-     Nothing about that is visible on either page. It is only visible by
-     comparing them, so the build does it on every run. Until the waiver is
-     generated from data.mjs too, this assertion IS the single source of truth.
-
-     Checks both directions: every add-on has a tile, and every tile is
-     reachable from the booking form via the handoff map. */
+  /* One source for the booking↔waiver DATA. Generates only the key map;
+     asserts every price and every add-on; never touches Patrick's wording.
+     See src/waiver-gen.mjs for why it deliberately generates so little. */
   {
-    const w = await readFile(join(ROOT, 'waiver.html'), 'utf8');
-    const tiles = [...w.matchAll(/data-key="([a-z0-9-]+)"/g)].map(m => m[1]);
-    const mapped = [...w.matchAll(/(addon_[a-z_]+):[ ]*'([a-z0-9-]+)'/g)]
-      .reduce((acc, m) => (acc[m[1]] = m[2], acc), {});
-    for (const a of ADDONS) {
-      const target = mapped[a.field];
-      if (!target) {
-        problems.push(`waiver: add-on "${a.name}" (${a.field}) has no entry in the booking->waiver map, so choosing it on the booking form is lost at the waiver`);
-      } else if (!tiles.includes(target)) {
-        problems.push(`waiver: "${a.name}" maps to tile "${target}", which does not exist on the waiver`);
-      }
-    }
-    for (const t of tiles) {
-      if (!Object.values(mapped).includes(t)) {
-        problems.push(`waiver: tile "${t}" is unreachable from the booking form — no add-on maps to it`);
-      }
+    const wPath = join(ROOT, 'waiver.html');
+    const wBefore = await readFile(wPath, 'utf8');
+    const wAfter = reconcileWaiver(wBefore, { ADDONS, PACKAGES }, problems);
+    if (wAfter !== wBefore) {
+      await writeFile(wPath, wAfter, 'utf8');
+      console.log('  waiver.html                                  → add-on map regenerated from data.mjs');
     }
   }
 

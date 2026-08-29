@@ -1491,17 +1491,20 @@
       }
 
       // Carry over the add-ons they picked on the booking form (names differ slightly between forms)
+      /* GEN:addon-map — generated from ADDONS in src/data.mjs. Do not hand-edit. */
       const ADDON_MAP = {
-        addon_clay_bar: 'clay-bar', addon_iron_remover: 'iron-remover',
-        addon_engine_bay: 'engine-bay', addon_headlight: 'headlight',
-        addon_pet_hair: 'pet-hair', addon_stain: 'stain-extraction',
-        addon_odor: 'odor-removal', addon_spray_ceramic: 'spray-ceramic',
+        addon_clay_bar: 'clay-bar',
+        addon_iron_remover: 'iron-remover',
+        addon_engine_bay: 'engine-bay',
+        addon_headlight: 'headlight',
+        addon_pet_hair: 'pet-hair',
+        addon_stain: 'stain-extraction',
+        addon_odor: 'odor-removal',
+        addon_spray_ceramic: 'spray-ceramic',
         addon_ceramic_coat: 'true-ceramic',
-        /* Was missing: the booking form offers 10 add-ons and the waiver had 9
-           tiles, so Paint Correction — the most expensive of them — silently
-           failed to carry into the document the customer signs. */
-        addon_buffing: 'paint-correction'
+        addon_buffing: 'paint-correction',
       };
+      /* /GEN:addon-map */
       if (Array.isArray(b.addons)) {
         b.addons.forEach(nm => {
           const key = ADDON_MAP[nm];
