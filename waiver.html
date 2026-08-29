@@ -768,6 +768,14 @@
               <div class="addon-price">$400 – $1,000+</div>
             </div>
           </label>
+          <label class="addon-item" data-key="paint-correction">
+            <input type="checkbox" name="addon_paint_correction" value="Paint Correction / Buffing ($150–$600)" />
+            <div class="addon-check"></div>
+            <div class="addon-info">
+              <div class="addon-name">Paint Correction / Buffing</div>
+              <div class="addon-price">$150 – $600</div>
+            </div>
+          </label>
         </div>
 
         <!-- ── SERVICE SUMMARY ── -->
@@ -1488,7 +1496,11 @@
         addon_engine_bay: 'engine-bay', addon_headlight: 'headlight',
         addon_pet_hair: 'pet-hair', addon_stain: 'stain-extraction',
         addon_odor: 'odor-removal', addon_spray_ceramic: 'spray-ceramic',
-        addon_ceramic_coat: 'true-ceramic'
+        addon_ceramic_coat: 'true-ceramic',
+        /* Was missing: the booking form offers 10 add-ons and the waiver had 9
+           tiles, so Paint Correction — the most expensive of them — silently
+           failed to carry into the document the customer signs. */
+        addon_buffing: 'paint-correction'
       };
       if (Array.isArray(b.addons)) {
         b.addons.forEach(nm => {
