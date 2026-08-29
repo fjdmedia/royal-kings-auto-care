@@ -32,7 +32,7 @@ const body = `
       <span>${esc(CONTACT.hours)}</span>
     </p>
 
-    <h1 class="hero-h1" id="h1">${esc(H.h1Lead)}<br><em>${esc(H.h1Tail)}</em></h1>
+    <h1 class="hero-h1" id="h1"><span class="wm-a">${esc(H.h1Lead)}</span><br><em class="wm-b">${esc(H.h1Tail)}</em></h1>
 
     <p class="hero-tagline">${esc(taglineLead)}</p>
 

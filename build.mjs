@@ -6,7 +6,7 @@
 
    Run:  node build.mjs
 */
-import { writeFile, mkdir, readFile, cp } from 'node:fs/promises';
+import { writeFile, mkdir, readFile, cp, rm, readdir } from 'node:fs/promises';
 
 /* A generator must never half-finish and report success. Piping this build to
    `head` closes stdout early; the very next console.log throws EPIPE, the
@@ -19,7 +19,7 @@ import { writeFile, mkdir, readFile, cp } from 'node:fs/promises';
 process.stdout.on('error', e => { if (e.code !== 'EPIPE') throw e; });
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, SERVICES } from './src/data.mjs';
+import { SITE, SERVICES, THEMES } from './src/data.mjs';
 import { scanGallery } from './src/gallery-scan.mjs';
 import { setGallery, GALLERY } from './src/gallery-data.mjs';
 import { setBase } from './src/site-base.mjs';
@@ -204,11 +204,37 @@ async function run() {
      assets carried across too — HTML alone renders as unstyled text, which is
      exactly the failure the deploy playbook says a 200 will happily hide. */
   if (BASE_PREFIX) {
+    /* Clear first: copying is not syncing. A theme removed from THEMES, or a
+       photo deleted from the source, stays served on the preview forever if we
+       only ever copy ON TOP of the last stage. */
+    await rm(join(OUT, 'assets'), { recursive: true, force: true });
     await mkdir(join(OUT, 'assets'), { recursive: true });
-    for (const f of ['rk.css', 'rk.js', 'rk-warm.css', 'rk-classic.css']) {
+    /* Derived from THEMES, never hand-listed. A hardcoded list silently drops
+       any theme added later: the page still returns 200 and its stylesheet
+       404s, which renders as unstyled text and is exactly the failure a status
+       check cannot see. (Caught 2026-08-28 — rk-sign.css was missing from a
+       staged preview for precisely this reason.) */
+    const themeSheets = THEMES.map(t => t.sheet).filter(Boolean).map(p => p.replace('/assets/', ''));
+    for (const f of ['rk.css', 'rk.js', ...new Set(themeSheets)]) {
       await cp(join(ROOT, 'assets', f), join(OUT, 'assets', f));
     }
     await cp(join(ROOT, 'assets', 'Gallery'), join(OUT, 'assets', 'Gallery'), { recursive: true });
+
+    /* The Gallery copy carries build INPUTS as well as runtime assets, and a
+       preview is a public URL. captions.json is the alt-text source — harmless
+       but not something the page needs, and the staging rule is allowlist, not
+       "delete what looks bad". Empty directories go too: a filtered copy still
+       creates the folder, and a folder NAME alone discloses how a client files
+       their work. Both checks are in fjmedia-deploy; this makes them automatic
+       rather than something to remember at stage time. */
+    await rm(join(OUT, 'assets', 'Gallery', 'captions.json'), { force: true });
+    const pruneEmpty = async dir => {
+      let entries = [];
+      try { entries = await readdir(dir, { withFileTypes: true }); } catch { return; }
+      for (const e of entries) if (e.isDirectory()) await pruneEmpty(join(dir, e.name));
+      try { if (!(await readdir(dir)).length) await rm(dir, { recursive: true, force: true }); } catch {}
+    };
+    await pruneEmpty(join(OUT, 'assets'));
     await cp(join(ROOT, 'Logo.jpg'), join(OUT, 'Logo.jpg'));
 
     /* waiver.html is hand-maintained rather than generated, so it gets the

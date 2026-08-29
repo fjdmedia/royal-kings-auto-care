@@ -1,5 +1,12 @@
-import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, primaryPhone, priceFrom, money } from './data.mjs';
+import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, DEFAULT_THEME, primaryPhone, priceFrom, money } from './data.mjs';
 import { GALLERY } from './gallery-data.mjs';
+
+/* The theme this build SHIPS with, applied statically. null when the build is
+   plain v3 (DEFAULT_THEME 'modern') or when the switcher is on and JS owns the
+   attribute instead. */
+const SHIPPED_THEME = (!THEME_SWITCHER && DEFAULT_THEME !== 'modern')
+  ? THEMES.find(t => t.id === DEFAULT_THEME) || null
+  : null;
 import { BASE } from './site-base.mjs';
 
 /* Inline SVG only. No icon CDN — a whole library downloaded to draw
@@ -43,13 +50,15 @@ const head = ({ title, description, path, schema = [], noindex = false }) => `
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${SITE.origin}${SITE.logo}">
-  <meta name="theme-color" content="#06070A">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306070A'/%3E%3Cpath d='M5 20.5 L7 10 L12.5 15 L16 7 L19.5 15 L25 10 L27 20.5 Z' fill='%23C9A227'/%3E%3Crect x='5' y='22.5' width='22' height='3' fill='%23C9A227'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="${SHIPPED_THEME ? '#000000' : '#06070A'}">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='${SHIPPED_THEME ? '%23000000' : '%2306070A'}'/%3E%3Cpath d='M5 20.5 L7 10 L12.5 15 L16 7 L19.5 15 L25 10 L27 20.5 Z' fill='${SHIPPED_THEME ? '%23C6A94F' : '%23C9A227'}'/%3E%3Crect x='5' y='22.5' width='22' height='3' fill='${SHIPPED_THEME ? '%23C6A94F' : '%23C9A227'}'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="${SITE.logo}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/assets/rk.css">
+${SHIPPED_THEME && SHIPPED_THEME.fonts ? `  <link rel="stylesheet" href="${SHIPPED_THEME.fonts}">
+` : ''}${SHIPPED_THEME && SHIPPED_THEME.sheet ? `  <link rel="stylesheet" href="${SHIPPED_THEME.sheet}">` : ''}
 ${THEME_SWITCHER ? `
 ${THEMES.filter(t => t.sheet).map(t => `  <link rel="stylesheet" href="${t.sheet}">`).join('\n')}
   <script>
@@ -60,7 +69,9 @@ ${THEMES.filter(t => t.sheet).map(t => `  <link rel="stylesheet" href="${t.sheet
     (function () {
       var FONTS = ${JSON.stringify(Object.fromEntries(THEMES.filter(t => t.fonts).map(t => [t.id, t.fonts])))};
       try {
-        var t = localStorage.getItem('rk_theme');
+        /* A preview built to show a candidate skin opens ON it; a stored
+           choice still wins, so toggling back to v3 sticks. */
+        var t = localStorage.getItem('rk_theme') || ${JSON.stringify(DEFAULT_THEME)};
         if (!t || t === 'modern' || !${JSON.stringify(THEMES.map(x => x.id))}.includes(t)) return;
         document.documentElement.setAttribute('data-theme', t);
         if (FONTS[t]) {
@@ -278,7 +289,7 @@ export function page({ title, description, path, body, schema = [], noindex = fa
   body = body.replace(/(<h1[^>]*class="[^"]*hero-h1[^"]*"[^>]*>)([\s\S]*?)(<\/h1>)/g,
     (_, open, inner, close) => open + accentTail(inner) + close);
   return spaceBreaks(rebase(`<!DOCTYPE html>
-<html lang="en-CA">
+<html lang="en-CA"${SHIPPED_THEME ? ` data-theme="${SHIPPED_THEME.id}"` : ''}>
 <head>
 ${head({ title, description, path, schema, noindex })}
 </head>
