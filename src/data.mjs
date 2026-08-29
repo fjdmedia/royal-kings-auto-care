@@ -246,7 +246,13 @@ export const NAV = [
    Set this to false and rebuild — the toggle disappears from all 13
    pages, the classic stylesheet stops loading, and nothing else in the
    markup changes. Do that before merging to main.                     */
-export const THEME_SWITCHER = false;
+export const THEME_SWITCHER = process.env.RK_THEMES === '1';
+
+/* Which theme a first-time visitor lands on. 'modern' (v3) is what ships live.
+   A preview built to show a CANDIDATE skin sets RK_DEFAULT_THEME so the page
+   opens on the thing being reviewed instead of on the theme James has already
+   seen — the switcher is then for comparing back, not for finding the point. */
+export const DEFAULT_THEME = process.env.RK_DEFAULT_THEME || 'modern';
 
 /* Three points on one line, coolest to warmest. `sheet` is loaded on every
    page and stays inert until its attribute is set; `fonts` is requested only
@@ -254,12 +260,9 @@ export const THEME_SWITCHER = false;
    `modern` is the default and needs neither. */
 export const THEMES = [
   { id: 'modern',  label: 'V3',      note: 'Archivo · cool graphite · hard edges' },
-  { id: 'warm',    label: 'Warm',    note: 'Derived from the logo — Playfair, gold gradient + chrome, pure black',
-    sheet: '/assets/rk-warm.css',
+  { id: 'sign',    label: 'Sign',    note: 'Derived from the A-frame sign + tri-fold brochure — gold name, chrome descriptor, filled gold bars, hairline frames',
+    sheet: '/assets/rk-sign.css',
     fonts: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap' },
-  { id: 'classic', label: 'Classic', note: 'Cinzel · warm palette · soft edges',
-    sheet: '/assets/rk-classic.css',
-    fonts: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap' },
 ];
 
 /* ── Hero copy lifted from the LIVE site ─────────────────────────

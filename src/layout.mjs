@@ -1,4 +1,4 @@
-import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, primaryPhone, priceFrom, money } from './data.mjs';
+import { SITE, CONTACT, NAV, TERMS, SERVICES, THEMES, THEME_SWITCHER, DEFAULT_THEME, primaryPhone, priceFrom, money } from './data.mjs';
 import { GALLERY } from './gallery-data.mjs';
 import { BASE } from './site-base.mjs';
 
@@ -60,7 +60,9 @@ ${THEMES.filter(t => t.sheet).map(t => `  <link rel="stylesheet" href="${t.sheet
     (function () {
       var FONTS = ${JSON.stringify(Object.fromEntries(THEMES.filter(t => t.fonts).map(t => [t.id, t.fonts])))};
       try {
-        var t = localStorage.getItem('rk_theme');
+        /* A preview built to show a candidate skin opens ON it; a stored
+           choice still wins, so toggling back to v3 sticks. */
+        var t = localStorage.getItem('rk_theme') || ${JSON.stringify(DEFAULT_THEME)};
         if (!t || t === 'modern' || !${JSON.stringify(THEMES.map(x => x.id))}.includes(t)) return;
         document.documentElement.setAttribute('data-theme', t);
         if (FONTS[t]) {
