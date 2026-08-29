@@ -252,7 +252,7 @@ export const THEME_SWITCHER = process.env.RK_THEMES === '1';
    A preview built to show a CANDIDATE skin sets RK_DEFAULT_THEME so the page
    opens on the thing being reviewed instead of on the theme James has already
    seen — the switcher is then for comparing back, not for finding the point. */
-export const DEFAULT_THEME = process.env.RK_DEFAULT_THEME || 'modern';
+export const DEFAULT_THEME = process.env.RK_DEFAULT_THEME || 'sign';
 
 /* Three points on one line, coolest to warmest. `sheet` is loaded on every
    page and stays inert until its attribute is set; `fonts` is requested only
