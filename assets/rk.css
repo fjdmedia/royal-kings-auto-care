@@ -651,81 +651,67 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
 .ba-stage:has(.ba-range:focus-visible) .ba-grip { box-shadow: 0 0 0 2px var(--gold); }
 .ba figcaption { margin-top: var(--s-3); font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); max-width: 68ch; }
-/* ── THE STRIP: every before/after comparison that is not a slider ─────
-   The FRAME is the sized unit, never the column. A column with a fixed
-   aspect-ratio divides its height among however many frames it holds, which
-   silently crushed two portrait photos to landscape next to a single portrait
-   one — half of each image thrown away by object-fit. Here an extra frame makes
-   the strip WIDER; it never makes the others shorter.
+/* ── THE STAGE: before and after in one box ───────────────────────
+   Side-by-side only compares when both frames hold the same view, and these do
+   not — the pairs are hand-held, framed differently. Swapping in place keeps
+   the frame still so only the contents change, which is what lets the eye do
+   the differencing. It also halves the footprint.
 
-   --n is the frame count, --ar the aspect the photographs actually are, so a
-   consistent shoot is never cropped at all. */
-.ba-strip {
-  display: flex;
-  gap: 1px; background: var(--edge);
-  border: var(--stroke); border-radius: var(--r-xs); overflow: hidden;
+   Radios drive it, so there is no JavaScript: labels are natively focusable,
+   arrow keys move between them, and it works with JS off. */
+.ba-fig { flex: 0 1 auto; max-width: 100%; min-width: 0; }
+.ba-radio { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+
+/* NOT .ba-stage — that class belongs to the drag-slider, whose CSS absolutely
+   positions every image inside it. Reusing the name silently pulled my grid
+   items out of flow and stacked them on top of each other. */
+.ba-box {
+  position: relative;
+  height: clamp(232px, 30vw, 340px);
+  aspect-ratio: calc(var(--ar, 0.75) * var(--cols, 1));
   max-width: 100%;
+  border: var(--stroke); border-radius: var(--r-xs); overflow: hidden;
+  background: var(--graphite);
 }
-/* Height fixed, width derived. An extra frame makes the strip wider — it never
-   makes the frames shorter, and it never changes the row height. */
-.ba-frame {
-  position: relative; overflow: hidden; background: var(--graphite);
-  height: clamp(148px, 17.5vw, 250px);
-  aspect-ratio: var(--ar, 3 / 4);
-  flex: none;
+.ba-state {
+  position: absolute; inset: 0;
+  display: flex; justify-content: center; align-items: stretch;
+  gap: 1px; background: transparent;
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease-std);
 }
-.ba-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ba-frame::after {
-  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4);
+.ba-state img { height: 100%; width: auto; max-width: 100%; aspect-ratio: var(--ar, 3 / 4); object-fit: cover; display: block; }
+
+/* The checked radio picks the state. Two rules, no script. */
+.ba-radio:nth-of-type(1):checked ~ .ba-box .is-a,
+.ba-radio:nth-of-type(2):checked ~ .ba-box .is-b { opacity: 1; visibility: visible; }
+
+/* The tabs are the site's own segmented control, so the gallery speaks the same
+   language as the vehicle-class picker on /pricing. */
+.ba-tabs { display: inline-flex; margin-top: var(--s-4); border: var(--stroke); border-radius: var(--r-xs); overflow: hidden; }
+.ba-tab {
+  cursor: pointer; padding: var(--s-3) var(--s-5);
   font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
-  text-transform: uppercase; padding: var(--s-1) var(--s-3);
-  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
-  border: var(--stroke); border-radius: var(--r-xs);
+  text-transform: uppercase; color: var(--text-2); background: var(--graphite);
+  transition: color var(--dur-fast) var(--ease-std), background-color var(--dur-fast) var(--ease-std);
 }
-/* The AFTER set is marked by its label and by the seam, so the boundary no
-   longer has to be carried by the layout. */
-.ba-frame[data-label='After']::after { color: var(--gold); border-color: var(--edge-gold); }
-.ba-seam { box-shadow: inset 2px 0 0 0 var(--gold); }
-
-/* A flex strip cannot orphan a row — it has no columns to leave half empty —
-   so the old grid breakpoint rules are gone with the grid. What is still true
-   is that a three-frame strip must not overflow a narrow screen, which the
-   height clamp handles: at 390px each frame lands near 105px wide, three of
-   them plus borders inside the gutter. */
-/* ── The lead comparison is BIG; the rest is on demand ─────────────
-   Tiling fixed desktop and quietly wrecked mobile: frames landed at 111x148px,
-   which is a postage stamp — proof you cannot read at arm's length still costs
-   scroll but stops persuading. And the page was only 33% photographs; the rest
-   was scaffolding. So one comparison per vehicle gets real size, and the other
-   areas sit behind a <details> rather than being shrunk further. */
-.ba-list-lead .ba-frame { height: clamp(232px, 30vw, 340px); }
-
-.ba-more { margin-top: var(--s-5); }
-.ba-more > summary {
-  cursor: pointer; list-style: none;
-  display: inline-flex; align-items: center; gap: var(--s-3);
-  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
-  text-transform: uppercase; color: var(--text-2);
-  padding: var(--s-3) var(--s-4); border: var(--stroke); border-radius: var(--r-xs);
-  transition: color var(--dur-fast) var(--ease-std), border-color var(--dur-fast) var(--ease-std);
+.ba-tab + .ba-tab { border-left: 1px solid var(--edge); }
+.ba-tab:hover { color: var(--text); background: var(--steel); }
+.ba-radio:nth-of-type(2):checked ~ .ba-tabs .ba-tab:first-child,
+.ba-radio:nth-of-type(1):checked ~ .ba-tabs .ba-tab:last-child {
+  background: var(--gold); color: var(--on-gold); font-weight: 700;
 }
-.ba-more > summary::-webkit-details-marker { display: none; }
-.ba-more > summary::after {
-  content: ''; width: 7px; height: 7px; flex: none;
-  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translate(-1px, -1px);
-  transition: transform var(--dur-base) var(--ease-std);
-}
-.ba-more[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
-.ba-more > summary:hover { color: var(--gold); border-color: var(--edge-gold); }
-.ba-more > summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.ba-more .ba-list { margin-top: var(--s-5); }
+/* The focus ring has to land on the LABEL, because the input it controls is
+   visually hidden — without this the control is keyboard-operable but invisible
+   to a keyboard user, which is the same as not being operable. */
+.ba-radio:focus-visible ~ .ba-tabs .ba-tab { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-/* The count is the affordance: "4 areas · 8 photos" says more exists before
-   anyone has to guess from a chevron. */
-.ba-job-n { color: var(--text-3); letter-spacing: var(--tr-mono); }
-.ba-job-h { gap: var(--s-4); }
-.ba-job-h::after { order: 3; }
+.ba-fig figcaption {
+  margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--text-2); max-width: 46ch;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ba-state { transition-duration: 0.01ms; }
+}
 
 /* Grouped by vehicle. Seven comparisons in a row read as seven unrelated
    things; three headed groups read as three cars, which is what a customer is
@@ -745,7 +731,6 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
 .ba-strip-fig { flex: 0 1 auto; max-width: 100%; min-width: 0; }
 .ba-strip-fig figcaption { max-width: 46ch; }
 
-.ba-dip figcaption { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--text-3); }
 .ba-stage::before, .ba-stage::after {
   content: 'Before'; position: absolute; top: var(--s-4); left: var(--s-4); z-index: 2;
   font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono); text-transform: uppercase;
@@ -758,22 +743,6 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
    pair reads as a single object rather than two loose photos, and the labels
    sit in the frame corners the same way the slider's do — the two treatments
    have to look like siblings or the gallery reads as inconsistent. */
-.ba-dip { display: block; }
-.ba-dip-grid {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  border: var(--stroke); border-radius: var(--r-xs); overflow: hidden; background: var(--graphite);
-}
-.ba-dip-half { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
-.ba-dip-half + .ba-dip-half { border-left: 1px solid var(--edge); }
-.ba-dip-half img { width: 100%; height: 100%; object-fit: cover; }
-.ba-dip-half::after {
-  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4);
-  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
-  text-transform: uppercase; padding: var(--s-1) var(--s-3);
-  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
-  border: var(--stroke); border-radius: var(--r-xs);
-}
-.ba-dip-after::after { color: var(--gold); border-color: var(--edge-gold); }
 /* ── A GROUP: N before frames against M after frames ──────────────
    Not every job photographs 1:1. The rear of a truck can need two before
    frames — footwell and bench — against one wider after that shows both.
@@ -782,39 +751,15 @@ a.card:hover, .card-hover:hover { border-color: var(--edge-gold); }
    never changes from block to block. Frames within a column share the
    height evenly, which keeps two befores next to one after balanced instead
    of leaving a hole. */
-.ba-col {
-  position: relative; display: grid; gap: 1px;
-  background: var(--edge); overflow: hidden;
-}
-.ba-col + .ba-col { border-left: 1px solid var(--edge); }
-.ba-col img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 0; }
-.ba-col::after {
-  content: attr(data-label); position: absolute; top: var(--s-4); left: var(--s-4); z-index: 1;
-  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: var(--tr-mono);
-  text-transform: uppercase; padding: var(--s-1) var(--s-3);
-  background: color-mix(in srgb, var(--void) 92%, transparent); color: var(--text);
-  border: var(--stroke); border-radius: var(--r-xs);
-}
-.ba-col-after::after { color: var(--gold); border-color: var(--edge-gold); }
 /* The grid rows are driven by the taller column, so a single after frame
    stretches to meet two stacked befores rather than floating half-height. */
 .ba-group .ba-dip-grid { align-items: stretch; }
-.ba-group .ba-col { aspect-ratio: 3 / 4; }
 @media (max-width: 620px) {
-  .ba-group .ba-col { aspect-ratio: auto; }
-  .ba-col + .ba-col { border-left: 0; border-top: 1px solid var(--edge); }
 }
 
-.ba-dip figcaption {
-  margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--text-2);
-  max-width: 68ch;
-}
 /* Portrait halves get very tall side by side on a phone, so they stack and
    the aspect opens up to something a thumb can actually read. */
 @media (max-width: 620px) {
-  .ba-dip-grid { grid-template-columns: minmax(0, 1fr); }
-  .ba-dip-half { aspect-ratio: 4 / 3; }
-  .ba-dip-half + .ba-dip-half { border-left: 0; border-top: 1px solid var(--edge); }
 }
 .ba figcaption { max-width: 68ch; }
 

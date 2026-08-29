@@ -245,39 +245,50 @@ export const beforeAfterDiptych = p => `
 export const countWord = n =>
   ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][n] || String(n);
 
-/* THE STRIP — one component for every before/after comparison that is not a
-   drag slider, whatever the counts are.
+/* THE STAGE — before and after in the SAME BOX, not side by side.
 
-   It replaced a two-column layout that put `aspect-ratio` on the COLUMN. That
-   looked fine at 1:1 and quietly destroyed anything else: a column holding two
-   frames gave each one HALF the height, so two portrait photos rendered at 1.5
-   landscape next to a single portrait at 0.75 and lost about half their image
-   to `object-fit: cover`. One side read as a photograph, the other as two
-   letterbox slices — and the crop was real, not just ugly.
+   Side-by-side only compares when both frames hold the same view. These do not:
+   the MKX "before" is a wide shot from further back, the "after" is closer and
+   higher. Put two differently-framed photographs next to each other and the eye
+   has to re-find the tailgate, the sill, the carpet before it can judge
+   anything — so it reads as two pictures of a trunk rather than as one trunk
+   that changed. The comparison quietly stops being a comparison.
 
-   So the FRAME is the unit, never the column. Every frame in a group shares one
-   aspect ratio taken from the photographs themselves, so nothing is cropped
-   when a shoot is consistent, and adding a third frame makes the strip wider
-   rather than squashing the other two. BEFORE frames come first, AFTER frames
-   follow, and the seam between them carries a gold rule — the set boundary is
-   shown by a mark, not by a column, which is what let the counts distort the
-   images in the first place. */
-const baFrame = (i, label, seam) => `
-        <div class="ba-frame${seam ? ' ba-seam' : ''}" data-label="${label}">
-          <img src="${i.src}" alt="${esc(i.alt)}" width="${i.w}" height="${i.h}" loading="lazy" decoding="async">
+   Swapping them IN PLACE fixes that. The frame stays put, only the contents
+   change, and the brain does the differencing for free. It is also the honest
+   treatment for hand-held pairs: a drag-wipe would claim the camera never moved,
+   which is exactly the lie we refused earlier — a swap claims nothing.
+
+   And it halves the footprint, because one comparison now occupies one frame
+   instead of two or three.
+
+   BUILT ON RADIOS, DELIBERATELY. No JavaScript: the tabs are <label>s driving
+   hidden radio inputs, so it works with JS off, the labels are natively
+   keyboard-focusable, arrow keys move between them because that is what radio
+   groups do, and every photograph stays in the DOM with its own alt text.
+   The stage is sized by the taller state, so switching never shifts the page. */
+const baState = (items, cls) => `
+        <div class="ba-state ${cls}">
+          ${items.map(i => `<img src="${i.src}" alt="${esc(i.alt)}" width="${i.w}" height="${i.h}" loading="lazy" decoding="async">`).join('')}
         </div>`;
 
-export const beforeAfterStrip = p => {
-  const frames = [
-    ...p.befores.map((i, n) => baFrame(i, 'Before', false)),
-    ...p.afters.map((i, n) => baFrame(i, 'After', n === 0)),
-  ].join('');
-  /* Derived from the photographs, not assumed: a landscape shoot gets a
-     landscape strip instead of being cropped into a portrait slot. */
+let baId = 0;
+export const beforeAfterStage = p => {
+  const id = 'cmp' + (++baId);
   const ar = p.w && p.h ? (p.w / p.h).toFixed(4) : '0.75';
+  /* The widest state sets the box, so neither state is cropped to fit the other. */
+  const cols = Math.max(p.befores.length, p.afters.length);
   return `
-  <figure class="ba-dip ba-strip-fig">
-    <div class="ba-strip" style="--n:${p.befores.length + p.afters.length};--ar:${ar}">${frames}
+  <figure class="ba-fig" style="--ar:${ar};--cols:${cols}">
+    <input type="radio" name="${id}" id="${id}-a" class="ba-radio" checked>
+    <input type="radio" name="${id}" id="${id}-b" class="ba-radio">
+    <div class="ba-box">
+      ${baState(p.afters, 'is-a')}
+      ${baState(p.befores, 'is-b')}
+    </div>
+    <div class="ba-tabs" role="group" aria-label="Show before or after">
+      <label for="${id}-b" class="ba-tab">Before${p.befores.length > 1 ? ` (${p.befores.length})` : ''}</label>
+      <label for="${id}-a" class="ba-tab">After${p.afters.length > 1 ? ` (${p.afters.length})` : ''}</label>
     </div>
     <figcaption>${esc(p.label || p.afters[0].alt)}</figcaption>
   </figure>`;
@@ -286,7 +297,7 @@ export const beforeAfterStrip = p => {
 /* Picks the treatment the scan decided this comparison can actually support.
    The wipe is the only special case; everything else is one strip. */
 export const beforeAfterPair = p =>
-  p.layout === 'slider' ? beforeAfter(p) : beforeAfterStrip(p);
+  p.layout === 'slider' ? beforeAfter(p) : beforeAfterStage(p);
 
 /* A plate renders ONLY when there is a photograph for it.
 
