@@ -8,6 +8,7 @@ const SHIPPED_THEME = (!THEME_SWITCHER && DEFAULT_THEME !== 'modern')
   ? THEMES.find(t => t.id === DEFAULT_THEME) || null
   : null;
 import { BASE } from './site-base.mjs';
+import { v } from './asset-version.mjs';
 
 /* Inline SVG only. No icon CDN — a whole library downloaded to draw
    twelve glyphs is a render-blocking dependency and a FOUC source. */
@@ -56,9 +57,9 @@ const head = ({ title, description, path, schema = [], noindex = false }) => `
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="/assets/rk.css">
+  <link rel="stylesheet" href="${v('/assets/rk.css')}">
 ${SHIPPED_THEME && SHIPPED_THEME.fonts ? `  <link rel="stylesheet" href="${SHIPPED_THEME.fonts}">
-` : ''}${SHIPPED_THEME && SHIPPED_THEME.sheet ? `  <link rel="stylesheet" href="${SHIPPED_THEME.sheet}">` : ''}
+` : ''}${SHIPPED_THEME && SHIPPED_THEME.sheet ? `  <link rel="stylesheet" href="${v(SHIPPED_THEME.sheet)}">` : ''}
 ${THEME_SWITCHER ? `
 ${THEMES.filter(t => t.sheet).map(t => `  <link rel="stylesheet" href="${t.sheet}">`).join('\n')}
   <script>
@@ -302,7 +303,7 @@ ${body}
 ${footerMarkup()}
 ${dock ? dockMarkup() : ''}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="/assets/rk.js" defer></script>
+<script src="${v('/assets/rk.js')}" defer></script>
 </body>
 </html>
 `));

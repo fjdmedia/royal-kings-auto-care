@@ -72,7 +72,7 @@ ${pairs.length ? `
       const photos = mine.reduce((n, p) => n + p.befores.length + p.afters.length, 0);
       return `
     <div class="ba-job">
-      <h3 class="ba-job-h">${esc(GALLERY.jobLabels[job] || job)}<span class="ba-job-n">${mine.length} area${mine.length === 1 ? '' : 's'} · ${photos} photo${photos === 1 ? '' : 's'}</span></h3>
+      <h3 class="ba-job-h">${esc(GALLERY.jobLabels[job] || job)}<span class="ba-job-n"><span class="vh"> — </span>${mine.length} area${mine.length === 1 ? '' : 's'} · ${photos} photo${photos === 1 ? '' : 's'}</span></h3>
       <div class="ba-list ba-list-lead">${beforeAfterPair(lead)}</div>
       ${rest.length ? `
       <details class="ba-more">

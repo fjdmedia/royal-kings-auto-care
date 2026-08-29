@@ -24,6 +24,7 @@ import { scanGallery } from './src/gallery-scan.mjs';
 import { reconcileWaiver } from './src/waiver-gen.mjs';
 import { setGallery, GALLERY } from './src/gallery-data.mjs';
 import { setBase } from './src/site-base.mjs';
+import { loadAssetVersions } from './src/asset-version.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 
@@ -181,6 +182,10 @@ async function run() {
       'Alt text has to be true, not just present — that is the whole point of the file.');
   }
   let count = 0;
+  /* Hash the linked assets BEFORE any page renders, so every emitted URL
+     carries the version of the bytes actually being shipped. */
+  await loadAssetVersions(ROOT, ['rk.css', 'rk.js', ...THEMES.map(t => t.sheet).filter(Boolean).map(x => x.replace('/assets/', ''))]);
+
   const problems = [];
   /* One source for the booking↔waiver DATA. Generates only the key map;
      asserts every price and every add-on; never touches Patrick's wording.
