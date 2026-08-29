@@ -23,7 +23,7 @@ const hasSlider = homePairs.some(p => p.layout === 'slider');
 const body = `
 <!-- ── Hero — five hairline-separated bands, not a headline in space ── -->
 <section class="hero" aria-labelledby="h1">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true" style="--hero-img:url('/assets/Gallery/2026-08-17%20rogue-blue/a2.jpg');--hero-pos:center 42%"></div>
   <div class="wrap hero-inner">
 
     <p class="hero-crumb">

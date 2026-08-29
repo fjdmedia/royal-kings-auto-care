@@ -13,7 +13,7 @@ const SOCIAL_PHOTO = null;
 
 const body = `
 <section class="hero" aria-labelledby="h1">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true" style="--hero-img:url('/assets/Gallery/2026-08-17%20rogue-blue/a3.jpg');--hero-pos:center 44%"></div>
   <div class="wrap hero-inner">
     <nav class="crumb" aria-label="Breadcrumb" style="padding-bottom:var(--s-5);border-bottom:var(--stroke)">
       <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">About</span>

@@ -13,7 +13,7 @@ const dips = pairs.length - sliders;
 
 const body = `
 <section class="hero" aria-labelledby="h1">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true" style="--hero-img:url('/assets/Gallery/2026-08-28%20mkx-white/cargo-a2.jpg');--hero-pos:center 52%"></div>
   <div class="wrap hero-inner">
     <nav class="crumb" aria-label="Breadcrumb" style="padding-bottom:var(--s-5);border-bottom:var(--stroke)">
       <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Our work</span>
