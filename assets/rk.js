@@ -231,9 +231,104 @@
   if (form) {
     var GAS_URL = form.getAttribute('data-endpoint');
     var sent = $('#formSent');
+    /* ── VALIDATION ─────────────────────────────────────────────────
+       The form shipped with `novalidate` and no JS validation, so an empty
+       submit POSTed eight blank fields and then showed "Booking request sent".
+       That is the worst failure a booking form has: it is silent on BOTH ends.
+       The customer believes they are booked and stops trying; the shop never
+       sees a lead to chase. A form that rejects you is a minor annoyance; a
+       form that lies to you costs the job.
+
+       The presentation layer for this already existed and was simply never
+       wired — every field ships a `.help` span with `min-height: 1lh`, so an
+       error message costs no layout shift, and `.help[data-error]` already
+       carries the red treatment and the `!` glyph. */
+    var FIELD_MSG = {
+      name:               'We need a name for the booking.',
+      email:              'We need an email to send the confirmation to.',
+      phone:              'We need a number to confirm the appointment on.',
+      service:            'Pick a package.',
+      vehicle_make_model: 'Tell us the year, make and model.',
+      vehicle_size:       'Pick a vehicle class — it sets the price.',
+      preferred_date:     'Pick a day.',
+      preferred_time:     'Pick a time window.'
+    };
+
+    function fieldError(el) {
+      var v = (el.value || '').trim();
+      if (!v) return FIELD_MSG[el.name] || 'This one is required.';
+      /* Shape checks only where getting it wrong means we cannot reach them.
+         Deliberately loose: a validator that rejects a real address is worse
+         than one that lets a typo through, because the customer cannot argue
+         with it. */
+      if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+        return 'That email looks incomplete — check for a typo.';
+      }
+      if (el.type === 'tel' && v.replace(/\D/g, '').length < 10) {
+        return 'That number looks too short — we need all 10 digits.';
+      }
+      return '';
+    }
+
+    function showError(el, msg) {
+      var help = el.parentElement ? el.parentElement.querySelector('.help') : null;
+      if (msg) {
+        el.setAttribute('aria-invalid', 'true');
+        if (help) { help.setAttribute('data-error', ''); help.textContent = msg; }
+      } else {
+        el.removeAttribute('aria-invalid');
+        if (help) {
+          help.removeAttribute('data-error');
+          help.textContent = help.getAttribute('data-hint') || '';
+        }
+      }
+    }
+
+    function validateForm() {
+      var bad = [];
+      [].forEach.call(form.querySelectorAll('[required]'), function (el) {
+        var msg = fieldError(el);
+        showError(el, msg);
+        if (msg) bad.push(el);
+      });
+      return bad;
+    }
+
+    /* Blur-after-touch: nobody wants to be told a field is wrong while they are
+       still typing it, but everybody wants to know before they press submit. */
+    [].forEach.call(form.querySelectorAll('[required]'), function (el) {
+      el.addEventListener('blur', function () {
+        if (el.getAttribute('data-touched')) showError(el, fieldError(el));
+      });
+      el.addEventListener('input', function () {
+        el.setAttribute('data-touched', '1');
+        if (el.getAttribute('aria-invalid')) showError(el, fieldError(el));
+      });
+      el.addEventListener('change', function () {
+        el.setAttribute('data-touched', '1');
+        showError(el, fieldError(el));
+      });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
+
+      var bad = validateForm();
+      if (bad.length) {
+        /* Every field is "touched" once they have tried to submit, so the rest
+           of the form now corrects itself live instead of one error at a time. */
+        [].forEach.call(form.querySelectorAll('[required]'), function (el) {
+          el.setAttribute('data-touched', '1');
+        });
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        bad[0].focus({ preventScroll: true });
+        bad[0].scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        var st = form.querySelector('[data-form-status]');
+        if (st) st.textContent = bad.length + (bad.length === 1 ? ' field needs' : ' fields need') + ' filling in before we can send this.';
+        return;
+      }
+
       if (btn) { btn.setAttribute('data-state', 'loading'); btn.disabled = true; }
 
       /* Roll the checked add-ons into one field for the sheet + email. */
