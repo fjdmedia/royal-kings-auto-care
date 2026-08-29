@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="sign">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Service Agreement — Royal Kings Auto Care</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script>
-    /* Follows the theme chosen elsewhere on the site. Runs before paint. */
-    (function () {
-      try {
-        if (localStorage.getItem('rk_theme') === 'classic') {
-          document.documentElement.setAttribute('data-theme', 'classic');
-          var l = document.createElement('link');
-          l.rel = 'stylesheet';
-          l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap';
-          document.head.appendChild(l);
-        }
-      } catch (e) { /* private mode */ }
-    })();
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    /* v3 display treatment — wide, tight, uppercase, matching the site. */
-    h1, h2, h3 { font-stretch: 108%; letter-spacing: -0.022em; }
-    h1 { text-transform: uppercase; }
+    /* Sign treatment. Playfair carries real hairlines, so it must not be
+       squeezed or negatively tracked the way the v3 grotesque was, and caps at
+       display size fill the counters in — hence sentence case. */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-stretch: normal; font-weight: 700;
+      letter-spacing: 0.006em; text-transform: none; line-height: 1.08;
+    }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -34,44 +25,19 @@
       /* Retuned 2026-08-12 to the v3 system palette (assets/rk.css).
          Names kept so none of this page's 380 lines of CSS or its
          signature/PDF JavaScript had to change. */
-      --black:        #06070A;
-      --black-soft:   #0A0C11;
-      --black-card:   #141922;
-      --black-border: #222836;
-      --gold:         #C9A227;
-      --gold-light:   #EBD07A;
-      --gold-dim:     #8C6F18;
-      --white:        #EAEBEF;
-      --grey:         #B2B7C2;
-      --grey-dark:    #868C99;
-    }
-
-    /* ── Classic theme ──────────────────────────────────────────────
-       Restores the pre-v3 values. Token NAMES are unchanged, so none of
-       this page's 380 lines of CSS and none of its signature/PDF
-       JavaScript had to know a theme exists. ── */
-    :root[data-theme='classic'] {
-      --black:        #0A0A0A;
-      --black-soft:   #111111;
-      --black-card:   #161616;
-      --black-border: #1E1E1E;
-      --gold-light:   #E2B93B;
-      --white:        #FFFFFF;
-      --grey:         #AAAAAA;
-      /* was #555 in the original and measured 3.0:1 — held at the v3 value,
-         which is the accessible one. Never regress a fix to match a look. */
-      --grey-dark:    #868C99;
-    }
-    :root[data-theme='classic'] body,
-    :root[data-theme='classic'] input,
-    :root[data-theme='classic'] select,
-    :root[data-theme='classic'] textarea,
-    :root[data-theme='classic'] button { font-family: 'Montserrat', sans-serif; }
-    :root[data-theme='classic'] h1,
-    :root[data-theme='classic'] h2,
-    :root[data-theme='classic'] h3 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-stretch: normal; letter-spacing: 0.012em; text-transform: none;
+      --black:        #000000;
+      --black-soft:   #060605;
+      --black-card:   #121110;
+      --black-border: #2B2925;
+      --gold:         #C6A94F;
+      --gold-light:   #E2CE8D;
+      --gold-dim:     #94793C;
+      --white:        #E8E8E6;
+      --grey:         #BFBFBD;
+      /* Chrome, the mark's second metal. Held at a value that clears 4.5:1 on
+         every surface on this page — never regress an accessibility fix to
+         match a look (the original #555 measured 3.0:1). */
+      --grey-dark:    #8A8A86;
     }
 
     body {
@@ -141,10 +107,17 @@
     }
     .waiver-header-label::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
     .waiver-header h1 {
-      font-family: 'Archivo', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 700; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+      font-weight: 700; color: var(--white); letter-spacing: 0.006em; margin-bottom: 0.5rem;
     }
-    .waiver-header h1 .gold { color: var(--gold); }
+    /* No flat colour here — the gradient rule below owns the accent, the way
+       the wordmark does on every other page. */
+    .waiver-header h1 .gold {
+      background: linear-gradient(176deg, var(--gold-light) 6%, var(--gold) 52%, var(--gold-dim) 97%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .waiver-header p {
       font-size: 0.85rem; color: var(--grey); max-width: 500px; margin: 0 auto;
     }
@@ -246,9 +219,13 @@
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
+    /* Chrome, not gold. In the mark, gold is the NAME and chrome is
+       everything subordinate to it — a field label is subordinate. Gold here
+       put three golds in one viewport (section bar, every label, the submit
+       button) all competing for the same emphasis. */
     .form-group label {
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--gold);
+      text-transform: uppercase; color: var(--grey);
     }
     .form-group input, .form-group select {
       background: var(--black-soft); border: 1px solid var(--black-border);
@@ -436,6 +413,79 @@
     @media (max-width: 480px) {
       .addons-grid { grid-template-columns: 1fr; }
     }
+
+    /* ════════════════════════════════════════════════════════════════
+       SIGN SYSTEM — the same three moves the site makes, so a customer
+       who books and lands here does not think they changed companies.
+
+       Nothing below touches a word of the agreement, a field name, the
+       signature canvas, or the booking prefill. Presentation only.
+       ════════════════════════════════════════════════════════════════ */
+
+    /* THE SIGNATURE: the filled gold bar, straight off the brochure's
+       BASIC / STANDARD / PREMIUM labels and the sign's service chips. Here it
+       carries the section titles — the same detail in a third role. */
+    .agreement-section-title,
+    .sig-pad-label,
+    .form-section-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: linear-gradient(176deg, var(--gold-light) 4%, var(--gold) 56%, var(--gold-dim) 100%);
+      color: #000;
+      border-bottom: 0;
+      padding: 0.34em 1.05em 0.3em;
+      letter-spacing: 0.2em;
+    }
+    /* The title is a flex row for its icon; the bar has to hug the text
+       rather than stretch the width of the section. */
+    .agreement-section-title { align-self: flex-start; width: auto; }
+
+    /* THE HAIRLINE FRAME: inset, chrome at low alpha, exactly as printed. */
+    .service-item {
+      position: relative;
+    }
+    .service-item::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(228, 228, 226, 0.09);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    /* THE SECOND METAL: chrome, wide-tracked, for anything doing the
+       "AUTO CARE" job — descriptors and meta, never headings. */
+    .waiver-header-label,
+    .service-item-desc {
+      color: var(--grey-dark);
+      letter-spacing: 0.16em;
+    }
+
+    /* Figures in the serif — Playfair's numerals are half the reason to
+       use it, and a price is the number people actually read here. */
+    .service-item-price {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0.002em;
+    }
+
+    /* The gold accent inside the H1 takes the wordmark's gradient rather
+       than flat gold, matching the site's hero. */
+    h1 .gold {
+      background: linear-gradient(176deg, var(--gold-light) 6%, var(--gold) 52%, var(--gold-dim) 97%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hints sit below their bar, in chrome on the page ground — never inside
+       the fill, where the second metal collides with the first. */
+    .form-section-hint {
+      color: var(--grey-dark);
+      font-size: 0.78rem;
+      letter-spacing: 0;
+      margin: 0.5rem 0 0.75rem;
+    }
+
   </style>
 </head>
 <body>
@@ -643,7 +693,8 @@
         </div>
 
         <!-- ── ADD-ONS ── -->
-        <div class="form-section-label">Add-On Services <span style="color:var(--grey-dark);font-weight:400;text-transform:none;letter-spacing:0;">(optional — select all that apply)</span></div>
+        <div class="form-section-label">Add-On Services</div>
+        <p class="form-section-hint">(optional — select all that apply)</p>
         <div class="addons-grid">
           <label class="addon-item" data-key="clay-bar">
             <input type="checkbox" name="addon_clay_bar" value="Clay Bar Treatment ($50–$100)" />
